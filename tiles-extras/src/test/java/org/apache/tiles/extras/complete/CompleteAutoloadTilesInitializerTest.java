@@ -21,22 +21,22 @@
 
 package org.apache.tiles.extras.complete;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import javax.servlet.ServletContext;
 
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.servlet.wildcard.WildcardServletApplicationContext;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author antonio
  *
  * @version $Rev$ $Date$
  */
-public class CompleteAutoloadTilesInitializerTest {
+class CompleteAutoloadTilesInitializerTest {
 
     /**
      * The object to test.
@@ -46,8 +46,8 @@ public class CompleteAutoloadTilesInitializerTest {
     /**
      * Sets up the object to test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         initializer = new CompleteAutoloadTilesInitializer();
     }
 
@@ -55,15 +55,15 @@ public class CompleteAutoloadTilesInitializerTest {
      * Test method for {@link CompleteAutoloadTilesInitializer#createTilesApplicationContext(ApplicationContext)}.
      */
     @Test
-    public void testCreateTilesApplicationContext() {
+    void testCreateTilesApplicationContext() {
         ApplicationContext preliminaryContext = createMock(ApplicationContext.class);
         ServletContext servletContext = createMock(ServletContext.class);
 
         expect(preliminaryContext.getContext()).andReturn(servletContext);
 
         replay(preliminaryContext, servletContext);
-        assertTrue(initializer
-                .createTilesApplicationContext(preliminaryContext) instanceof WildcardServletApplicationContext);
+        assertInstanceOf(WildcardServletApplicationContext.class, initializer
+                .createTilesApplicationContext(preliminaryContext));
         verify(preliminaryContext, servletContext);
     }
 
@@ -75,7 +75,7 @@ public class CompleteAutoloadTilesInitializerTest {
         ApplicationContext context = createMock(ApplicationContext.class);
 
         replay(context);
-        assertTrue(initializer.createContainerFactory(context) instanceof CompleteAutoloadTilesContainerFactory);
+        assertInstanceOf(CompleteAutoloadTilesContainerFactory.class, initializer.createContainerFactory(context));
         verify(context);
     }
 }

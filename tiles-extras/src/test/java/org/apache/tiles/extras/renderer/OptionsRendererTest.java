@@ -21,7 +21,8 @@
 package org.apache.tiles.extras.renderer;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,14 +41,14 @@ import org.apache.tiles.request.ApplicationResource;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.locale.PostfixedApplicationResource;
 import org.apache.tiles.request.render.StringRenderer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link OptionsRenderer}.
  *
  * @version $Rev$ $Date$
  */
-public final class OptionsRendererTest {
+final class OptionsRendererTest {
 
     private final BasicTilesContainer container = new BasicTilesContainer();
 
@@ -102,7 +103,7 @@ public final class OptionsRendererTest {
      * @throws IOException If something goes wrong during rendition.
      */
     @Test
-    public void testWrite() throws IOException {
+    void testWrite() throws IOException {
         StringWriter writer = new StringWriter();
         Request request = createMock(Request.class);
 
@@ -122,7 +123,7 @@ public final class OptionsRendererTest {
         OptionsRenderer renderer = new OptionsRenderer(context, new StringRenderer());
         renderer.render("{options[test-fallback]}", request);
         writer.close();
-        assertEquals("Not written 'Result'", "Result", writer.toString());
+        assertEquals("Result", writer.toString(), "Not written 'Result'");
         verify(request);
     }
 
@@ -131,7 +132,7 @@ public final class OptionsRendererTest {
      * {@link OptionsRenderer#isRenderable(String, Request)}.
      */
     @Test
-    public void testIsRenderable() {
+    void testIsRenderable() {
         Request requestContext = createMock(Request.class);
         OptionsRenderer renderer = new OptionsRenderer(context, new StringRenderer());
         assertTrue(renderer.isRenderable("any-string", requestContext));

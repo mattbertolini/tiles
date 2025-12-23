@@ -22,7 +22,11 @@
 package org.apache.tiles.extras.complete;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -60,15 +64,15 @@ import org.apache.tiles.request.render.StringRenderer;
 import org.apache.tiles.request.servlet.ServletApplicationContext;
 import org.apache.tiles.request.velocity.render.VelocityRenderer;
 import org.apache.velocity.tools.view.VelocityView;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link CompleteAutoloadTilesContainerFactory}.
  *
  * @version $Rev$ $Date$
  */
-public class CompleteAutoloadTilesContainerFactoryTest {
+class CompleteAutoloadTilesContainerFactoryTest {
 
     /**
      * The object to test.
@@ -78,8 +82,8 @@ public class CompleteAutoloadTilesContainerFactoryTest {
     /**
      * Initializes the object.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         factory = new CompleteAutoloadTilesContainerFactory();
     }
 
@@ -89,7 +93,7 @@ public class CompleteAutoloadTilesContainerFactoryTest {
      * .
      */
     @Test
-    public void testCreateDecoratedContainer() {
+    void testCreateDecoratedContainer() {
         ApplicationContext applicationContext = createMock(ServletApplicationContext.class);
         TilesContainer wrapped = createMock(TilesContainer.class);
 
@@ -109,7 +113,7 @@ public class CompleteAutoloadTilesContainerFactoryTest {
      */
     @SuppressWarnings("deprecation")
     @Test
-    public void testRegisterAttributeRenderers() {
+    void testRegisterAttributeRenderers() {
         BasicRendererFactory rendererFactory = createMock(BasicRendererFactory.class);
         ServletApplicationContext applicationContext = createMock(ServletApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
@@ -149,7 +153,7 @@ public class CompleteAutoloadTilesContainerFactoryTest {
      * ApplicationContext, TilesContainer, AttributeEvaluatorFactory)}.
      */
     @Test
-    public void testCreateDefaultAttributeRenderer() {
+    void testCreateDefaultAttributeRenderer() {
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
         AttributeEvaluatorFactory attributeEvaluatorFactory = createMock(AttributeEvaluatorFactory.class);
@@ -171,7 +175,7 @@ public class CompleteAutoloadTilesContainerFactoryTest {
         replay(container, attributeEvaluatorFactory, rendererFactory, applicationContext);
         Renderer renderer = factory.createDefaultAttributeRenderer(rendererFactory, applicationContext, container,
                 attributeEvaluatorFactory);
-        assertTrue("The default renderer class is not correct", renderer instanceof ChainedDelegateRenderer);
+        assertInstanceOf(ChainedDelegateRenderer.class, renderer, "The default renderer class is not correct");
         verify(container, attributeEvaluatorFactory, rendererFactory, applicationContext);
     }
 
@@ -182,7 +186,7 @@ public class CompleteAutoloadTilesContainerFactoryTest {
      * .
      */
     @Test
-    public void testCreateAttributeEvaluatorFactory() {
+    void testCreateAttributeEvaluatorFactory() {
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
         LocaleResolver resolver = createMock(LocaleResolver.class);
         ServletContext servletContext = createMock(ServletContext.class);
@@ -198,7 +202,7 @@ public class CompleteAutoloadTilesContainerFactoryTest {
         JspFactory.setDefaultFactory(jspFactory);
         AttributeEvaluatorFactory attributeEvaluatorFactory = factory.createAttributeEvaluatorFactory(
                 applicationContext, resolver);
-        assertTrue(attributeEvaluatorFactory instanceof BasicAttributeEvaluatorFactory);
+        assertInstanceOf(BasicAttributeEvaluatorFactory.class, attributeEvaluatorFactory);
         assertNotNull(attributeEvaluatorFactory.getAttributeEvaluator("EL"));
         assertNotNull(attributeEvaluatorFactory.getAttributeEvaluator("MVEL"));
         assertNotNull(attributeEvaluatorFactory.getAttributeEvaluator("OGNL"));
@@ -211,9 +215,9 @@ public class CompleteAutoloadTilesContainerFactoryTest {
      * .
      */
     @Test
-    public void testCreatePatternDefinitionResolver() {
+    void testCreatePatternDefinitionResolver() {
         PatternDefinitionResolver<Integer> resolver = factory.createPatternDefinitionResolver(Integer.class);
-        assertTrue(resolver instanceof PrefixedPatternDefinitionResolver);
+        assertInstanceOf(PrefixedPatternDefinitionResolver.class, resolver);
         Definition definitionWildcard = new Definition("WILDCARD:blah*", (Attribute) null, null);
         Definition definitionRegexp = new Definition("REGEXP:what(.*)", (Attribute) null, null);
         Map<String, Definition> definitionMap = new HashMap<String, Definition>();
@@ -233,7 +237,7 @@ public class CompleteAutoloadTilesContainerFactoryTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testGetSources() throws IOException {
+    void testGetSources() throws IOException {
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
 
         ApplicationResource resource1 = createMock(ApplicationResource.class);
@@ -267,7 +271,7 @@ public class CompleteAutoloadTilesContainerFactoryTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testTILES484first() throws IOException {
+    void testTILES484first() throws IOException {
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
 
         ApplicationResource resource = createMock(ApplicationResource.class);
@@ -292,7 +296,7 @@ public class CompleteAutoloadTilesContainerFactoryTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testTILES484second() throws IOException {
+    void testTILES484second() throws IOException {
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
 
         ApplicationResource resource1 = createMock(ApplicationResource.class);
@@ -321,11 +325,11 @@ public class CompleteAutoloadTilesContainerFactoryTest {
      * .
      */
     @Test
-    public void testCreateDefinitionsReader() {
+    void testCreateDefinitionsReader() {
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
 
         replay(applicationContext);
-        assertTrue(factory.createDefinitionsReader(applicationContext) instanceof CompatibilityDigesterDefinitionsReader);
+        assertInstanceOf(CompatibilityDigesterDefinitionsReader.class, factory.createDefinitionsReader(applicationContext));
         verify(applicationContext);
     }
 

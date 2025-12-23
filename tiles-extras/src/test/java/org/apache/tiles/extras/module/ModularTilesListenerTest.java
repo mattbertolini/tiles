@@ -21,16 +21,16 @@
 
 package org.apache.tiles.extras.module;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests {@link ModularTilesListener}.
  *
  * @version $Rev$ $Date$
  */
-public class ModularTilesListenerTest {
+class ModularTilesListenerTest {
 
     /**
      * Test method for
@@ -38,7 +38,7 @@ public class ModularTilesListenerTest {
      * .
      */
     @Test
-    public void testCreateTilesInitializer() {
+    void testCreateTilesInitializer() {
         ModularTilesListener listener = new ModularTilesListener();
         assertTrue(listener.createTilesInitializer() instanceof ModularTilesInitializer);
     }

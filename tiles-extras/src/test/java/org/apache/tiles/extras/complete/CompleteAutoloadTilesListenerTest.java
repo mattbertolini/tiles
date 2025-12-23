@@ -21,16 +21,16 @@
 
 package org.apache.tiles.extras.complete;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 /**
  * Tests {@link CompleteAutoloadTilesListener}.
  *
  * @version $Rev$ $Date$
  */
-public class CompleteAutoloadTilesListenerTest {
+class CompleteAutoloadTilesListenerTest {
 
     /**
      * Test method for
@@ -38,8 +38,8 @@ public class CompleteAutoloadTilesListenerTest {
      * .
      */
     @Test
-    public void testCreateTilesInitializer() {
+    void testCreateTilesInitializer() {
         CompleteAutoloadTilesListener listener = new CompleteAutoloadTilesListener();
-        assertTrue(listener.createTilesInitializer() instanceof CompleteAutoloadTilesInitializer);
+        assertInstanceOf(CompleteAutoloadTilesInitializer.class, listener.createTilesInitializer());
     }
 }
