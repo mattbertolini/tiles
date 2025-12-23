@@ -21,22 +21,22 @@
 
 package org.apache.tiles.preparer;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link PreparerException}.
  *
  * @version $Rev$ $Date$
  */
-public class PreparerExceptionTest {
+class PreparerExceptionTest {
 
     /**
      * Test method for {@link PreparerException#PreparerException()}.
      */
     @Test
-    public void testPreparerException() {
+    void testPreparerException() {
         PreparerException exception = new PreparerException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +46,7 @@ public class PreparerExceptionTest {
      * Test method for {@link PreparerException#PreparerException(java.lang.String)}.
      */
     @Test
-    public void testPreparerExceptionString() {
+    void testPreparerExceptionString() {
         PreparerException exception = new PreparerException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +56,7 @@ public class PreparerExceptionTest {
      * Test method for {@link PreparerException#PreparerException(java.lang.Throwable)}.
      */
     @Test
-    public void testPreparerExceptionThrowable() {
+    void testPreparerExceptionThrowable() {
         Throwable cause = new Throwable();
         PreparerException exception = new PreparerException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +67,7 @@ public class PreparerExceptionTest {
      * Test method for {@link PreparerException#PreparerException(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testPreparerExceptionStringThrowable() {
+    void testPreparerExceptionStringThrowable() {
         Throwable cause = new Throwable();
         PreparerException exception = new PreparerException("my message", cause);
         assertEquals("my message", exception.getMessage());

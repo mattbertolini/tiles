@@ -21,22 +21,21 @@
 
 package org.apache.tiles;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link NoSuchContainerException}.
  *
  * @version $Rev$ $Date$
  */
-public class NoSuchContainerExceptionTest {
+class NoSuchContainerExceptionTest {
 
     /**
      * Test method for {@link org.apache.tiles.NoSuchContainerException#NoSuchContainerException()}.
      */
     @Test
-    public void testNoSuchContainerException() {
+    void testNoSuchContainerException() {
         NoSuchContainerException exception = new NoSuchContainerException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +45,7 @@ public class NoSuchContainerExceptionTest {
      * Test method for {@link org.apache.tiles.NoSuchContainerException#NoSuchContainerException(java.lang.String)}.
      */
     @Test
-    public void testNoSuchContainerExceptionString() {
+    void testNoSuchContainerExceptionString() {
         NoSuchContainerException exception = new NoSuchContainerException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +55,7 @@ public class NoSuchContainerExceptionTest {
      * Test method for {@link org.apache.tiles.NoSuchContainerException#NoSuchContainerException(java.lang.Throwable)}.
      */
     @Test
-    public void testNoSuchContainerExceptionThrowable() {
+    void testNoSuchContainerExceptionThrowable() {
         Throwable cause = new Throwable();
         NoSuchContainerException exception = new NoSuchContainerException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +66,7 @@ public class NoSuchContainerExceptionTest {
      * Test method for {@link org.apache.tiles.NoSuchContainerException#NoSuchContainerException(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testNoSuchContainerExceptionStringThrowable() {
+    void testNoSuchContainerExceptionStringThrowable() {
         Throwable cause = new Throwable();
         NoSuchContainerException exception = new NoSuchContainerException("my message", cause);
         assertEquals("my message", exception.getMessage());

@@ -21,16 +21,16 @@
 
 package org.apache.tiles;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link CompareUtil}.
  *
  * @version $Rev$ $Date$
  */
-public class CompareUtilTest {
+class CompareUtilTest {
 
     /**
      * A test value.
@@ -41,7 +41,7 @@ public class CompareUtilTest {
      * Test method for {@link org.apache.tiles.CompareUtil#nullSafeEquals(java.lang.Object, java.lang.Object)}.
      */
     @Test
-    public void testNullSafeEquals() {
+    void testNullSafeEquals() {
         assertTrue(CompareUtil.nullSafeEquals(1, 1));
         assertFalse(CompareUtil.nullSafeEquals(1, 2));
         assertFalse(CompareUtil.nullSafeEquals(1, null));
@@ -53,7 +53,7 @@ public class CompareUtilTest {
      * Test method for {@link org.apache.tiles.CompareUtil#nullSafeHashCode(java.lang.Object)}.
      */
     @Test
-    public void testNullSafeHashCode() {
+    void testNullSafeHashCode() {
         assertEquals(TEST_VALUE.hashCode(), CompareUtil.nullSafeHashCode(TEST_VALUE));
         assertEquals(0, CompareUtil.nullSafeHashCode(null));
     }

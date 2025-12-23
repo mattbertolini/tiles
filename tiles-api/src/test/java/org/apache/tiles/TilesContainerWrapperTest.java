@@ -21,21 +21,21 @@
 package org.apache.tiles;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link TilesContainerWrapper}.
  *
  * @version $Rev$ $Date$
  */
-public class TilesContainerWrapperTest {
+class TilesContainerWrapperTest {
 
     /**
      * The container.
@@ -50,8 +50,8 @@ public class TilesContainerWrapperTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         container = createMock(TilesContainer.class);
         wrapper = new TilesContainerWrapper(container);
     }
@@ -59,16 +59,16 @@ public class TilesContainerWrapperTest {
     /**
      * Tests {@link TilesContainerWrapper#TilesContainerWrapper(TilesContainer)}.
      */
-    @Test(expected = NullPointerException.class)
-    public void testTilesContainerWrapperNPE() {
-        new TilesContainerWrapper(null);
+    @Test
+    void testTilesContainerWrapperNPE() {
+        assertThrows(NullPointerException.class, () -> new TilesContainerWrapper(null));
     }
 
     /**
      * Test method for {@link org.apache.tiles.TilesContainerWrapper#getWrappedContainer()}.
      */
     @Test
-    public void testGetWrappedContainer() {
+    void testGetWrappedContainer() {
         replay(container);
         assertSame(container, wrapper.getWrappedContainer());
         verify(container);
@@ -78,7 +78,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link org.apache.tiles.TilesContainerWrapper#endContext(org.apache.tiles.request.Request)}.
      */
     @Test
-    public void testEndContext() {
+    void testEndContext() {
         Request request = createMock(Request.class);
 
         container.endContext(request);
@@ -92,7 +92,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link TilesContainerWrapper#evaluate(Attribute, Request)}.
      */
     @Test
-    public void testEvaluate() {
+    void testEvaluate() {
         Request request = createMock(Request.class);
         Attribute attribute = createMock(Attribute.class);
 
@@ -107,7 +107,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link org.apache.tiles.TilesContainerWrapper#getApplicationContext()}.
      */
     @Test
-    public void testGetApplicationContext() {
+    void testGetApplicationContext() {
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
 
         expect(container.getApplicationContext()).andReturn(applicationContext);
@@ -121,7 +121,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link TilesContainerWrapper#getAttributeContext(Request)}.
      */
     @Test
-    public void testGetAttributeContext() {
+    void testGetAttributeContext() {
         Request request = createMock(Request.class);
         AttributeContext attribute = createMock(AttributeContext.class);
 
@@ -136,7 +136,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link TilesContainerWrapper#getDefinition(String, Request)}.
      */
     @Test
-    public void testGetDefinition() {
+    void testGetDefinition() {
         Request request = createMock(Request.class);
         Definition definition = createMock(Definition.class);
 
@@ -151,7 +151,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link TilesContainerWrapper#isValidDefinition(String, Request)}.
      */
     @Test
-    public void testIsValidDefinition() {
+    void testIsValidDefinition() {
         Request request = createMock(Request.class);
 
         expect(container.isValidDefinition("definition", request)).andReturn(true);
@@ -165,7 +165,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link TilesContainerWrapper#prepare(String, Request)}.
      */
     @Test
-    public void testPrepare() {
+    void testPrepare() {
         Request request = createMock(Request.class);
 
         container.prepare("preparer", request);
@@ -179,7 +179,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link TilesContainerWrapper#render(String, Request)}.
      */
     @Test
-    public void testRenderStringRequest() {
+    void testRenderStringRequest() {
         Request request = createMock(Request.class);
 
         container.render("definition", request);
@@ -193,7 +193,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link TilesContainerWrapper#render(Definition, Request)}.
      */
     @Test
-    public void testRenderDefinitionRequest() {
+    void testRenderDefinitionRequest() {
         Request request = createMock(Request.class);
         Definition definition = createMock(Definition.class);
 
@@ -209,7 +209,7 @@ public class TilesContainerWrapperTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testRenderAttributeRequest() throws IOException {
+    void testRenderAttributeRequest() throws IOException {
         Request request = createMock(Request.class);
         Attribute attribute = createMock(Attribute.class);
 
@@ -224,7 +224,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link org.apache.tiles.TilesContainerWrapper#renderContext(org.apache.tiles.request.Request)}.
      */
     @Test
-    public void testRenderContext() {
+    void testRenderContext() {
         Request request = createMock(Request.class);
 
         container.renderContext(request);
@@ -238,7 +238,7 @@ public class TilesContainerWrapperTest {
      * Test method for {@link org.apache.tiles.TilesContainerWrapper#startContext(org.apache.tiles.request.Request)}.
      */
     @Test
-    public void testStartContext() {
+    void testStartContext() {
         Request request = createMock(Request.class);
         AttributeContext attribute = createMock(AttributeContext.class);
 
