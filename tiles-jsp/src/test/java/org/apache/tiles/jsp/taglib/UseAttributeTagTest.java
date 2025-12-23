@@ -21,7 +21,8 @@
 package org.apache.tiles.jsp.taglib;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.Map;
@@ -42,15 +43,15 @@ import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.request.ApplicationAccess;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.jsp.JspRequest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link UseAttributeTag}.
  *
  * @version $Rev$ $Date$
  */
-public class UseAttributeTagTest {
+class UseAttributeTagTest {
 
     /**
      * The tag to test.
@@ -60,8 +61,8 @@ public class UseAttributeTagTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         tag = new UseAttributeTag();
     }
 
@@ -71,7 +72,7 @@ public class UseAttributeTagTest {
      * @throws JspException
      */
     @Test
-    public void testExecute() throws JspException, IOException {
+    void testExecute() throws JspException, IOException {
         JspFragment jspBody = createMock(JspFragment.class);
         PageContext pageContext = createMock(PageContext.class);
         JspTag parent = createMock(JspTag.class);
@@ -114,7 +115,7 @@ public class UseAttributeTagTest {
      * Test method for {@link org.apache.tiles.jsp.taglib.UseAttributeTag#setId(java.lang.String)}.
      */
     @Test
-    public void testSetId() {
+    void testSetId() {
         tag.setId("id");
         assertEquals("id", tag.getId());
     }
@@ -123,7 +124,7 @@ public class UseAttributeTagTest {
      * Test method for {@link org.apache.tiles.jsp.taglib.UseAttributeTag#getScope()}.
      */
     @Test
-    public void testGetScope() {
+    void testGetScope() {
         tag.setScope("scope");
         assertEquals("scope", tag.getScope());
     }
@@ -132,7 +133,7 @@ public class UseAttributeTagTest {
      * Test method for {@link org.apache.tiles.jsp.taglib.UseAttributeTag#setName(java.lang.String)}.
      */
     @Test
-    public void testSetName() {
+    void testSetName() {
         tag.setName("name");
         assertEquals("name", tag.getName());
     }
@@ -141,7 +142,7 @@ public class UseAttributeTagTest {
      * Test method for {@link org.apache.tiles.jsp.taglib.UseAttributeTag#setIgnore(boolean)}.
      */
     @Test
-    public void testSetIgnore() {
+    void testSetIgnore() {
         tag.setIgnore(true);
         assertTrue(tag.isIgnore());
     }
@@ -150,7 +151,7 @@ public class UseAttributeTagTest {
      * Test method for {@link org.apache.tiles.jsp.taglib.UseAttributeTag#setClassname(java.lang.String)}.
      */
     @Test
-    public void testSetClassname() {
+    void testSetClassname() {
         tag.setClassname("classname");
         assertEquals("classname", tag.getClassname());
     }
@@ -159,7 +160,7 @@ public class UseAttributeTagTest {
      * Test method for {@link org.apache.tiles.jsp.taglib.UseAttributeTag#getScriptingVariable()}.
      */
     @Test
-    public void testGetScriptingVariable() {
+    void testGetScriptingVariable() {
         tag.setName("name");
         assertEquals("name", tag.getScriptingVariable());
         tag.setId("id");
@@ -170,7 +171,7 @@ public class UseAttributeTagTest {
      * Tests {@link UseAttributeTag.Tei}.
      */
     @Test
-    public void testTei() {
+    void testTei() {
         TagData tagData = createMock(TagData.class);
 
         expect(tagData.getAttributeString("classname")).andReturn("my.Clazz");
@@ -192,7 +193,7 @@ public class UseAttributeTagTest {
      * Tests {@link UseAttributeTag.Tei}.
      */
     @Test
-    public void testTeiDefaults() {
+    void testTeiDefaults() {
         TagData tagData = createMock(TagData.class);
 
         expect(tagData.getAttributeString("classname")).andReturn(null);
