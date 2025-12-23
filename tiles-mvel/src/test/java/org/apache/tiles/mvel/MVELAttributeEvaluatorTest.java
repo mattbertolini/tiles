@@ -21,7 +21,7 @@
 package org.apache.tiles.mvel;
 
 import java.util.Arrays;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;

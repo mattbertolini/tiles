@@ -21,7 +21,6 @@
 package org.apache.tiles.jsp.taglib;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.IOException;

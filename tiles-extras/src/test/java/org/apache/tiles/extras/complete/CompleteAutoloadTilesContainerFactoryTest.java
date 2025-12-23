@@ -22,7 +22,6 @@
 package org.apache.tiles.extras.complete;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.IOException;

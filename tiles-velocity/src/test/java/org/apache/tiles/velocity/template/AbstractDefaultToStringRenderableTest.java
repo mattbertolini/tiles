@@ -22,7 +22,7 @@
 package org.apache.tiles.velocity.template;
 
 import static org.junit.Assert.*;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
 
 import java.io.IOException;
 import java.io.StringWriter;

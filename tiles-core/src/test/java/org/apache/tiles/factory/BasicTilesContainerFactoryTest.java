@@ -21,7 +21,6 @@
 package org.apache.tiles.factory;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 
 import java.util.List;
 

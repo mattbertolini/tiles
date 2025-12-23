@@ -20,7 +20,7 @@
  */
 package org.apache.tiles.web.startup;
 
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
 
 import java.util.Enumeration;
 

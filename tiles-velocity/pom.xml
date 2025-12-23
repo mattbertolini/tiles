@@ -112,11 +112,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.easymock</groupId>
-      <artifactId>easymockclassextension</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
         <groupId>org.apache.tiles</groupId>
         <artifactId>tiles-request-velocity</artifactId>
         <version>${tiles.request.version}</version>

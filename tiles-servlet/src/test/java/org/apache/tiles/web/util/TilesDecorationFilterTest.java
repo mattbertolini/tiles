@@ -21,7 +21,6 @@
 package org.apache.tiles.web.util;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 
 import java.io.IOException;
 import java.util.Enumeration;

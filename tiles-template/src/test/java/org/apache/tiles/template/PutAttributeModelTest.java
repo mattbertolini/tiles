@@ -22,7 +22,6 @@
 package org.apache.tiles.template;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 
 import java.io.IOException;
 import java.util.ArrayDeque;

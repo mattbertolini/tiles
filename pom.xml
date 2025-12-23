@@ -210,12 +210,6 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.easymock</groupId>
-                <artifactId>easymockclassextension</artifactId>
-                <version>3.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
             	<groupId>org.slf4j</groupId>
             	<artifactId>slf4j-api</artifactId>
             	<version>1.7.6</version>
