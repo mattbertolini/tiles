@@ -21,22 +21,22 @@
 
 package org.apache.tiles.definition;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DefinitionsFactoryException}.
  *
  * @version $Rev$ $Date$
  */
-public class DefinitionsFactoryExceptionTest {
+class DefinitionsFactoryExceptionTest {
 
     /**
      * Test method for {@link DefinitionsFactoryException#DefinitionsFactoryException()}.
      */
     @Test
-    public void testDefinitionsFactoryException() {
+    void testDefinitionsFactoryException() {
         DefinitionsFactoryException exception = new DefinitionsFactoryException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +46,7 @@ public class DefinitionsFactoryExceptionTest {
      * Test method for {@link DefinitionsFactoryException#DefinitionsFactoryException(java.lang.String)}.
      */
     @Test
-    public void testDefinitionsFactoryExceptionString() {
+    void testDefinitionsFactoryExceptionString() {
         DefinitionsFactoryException exception = new DefinitionsFactoryException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +56,7 @@ public class DefinitionsFactoryExceptionTest {
      * Test method for {@link DefinitionsFactoryException#DefinitionsFactoryException(java.lang.Throwable)}.
      */
     @Test
-    public void testDefinitionsFactoryExceptionThrowable() {
+    void testDefinitionsFactoryExceptionThrowable() {
         Throwable cause = new Throwable();
         DefinitionsFactoryException exception = new DefinitionsFactoryException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +67,7 @@ public class DefinitionsFactoryExceptionTest {
      * Test method for {@link DefinitionsFactoryException#DefinitionsFactoryException(String, Throwable)}.
      */
     @Test
-    public void testDefinitionsFactoryExceptionStringThrowable() {
+    void testDefinitionsFactoryExceptionStringThrowable() {
         Throwable cause = new Throwable();
         DefinitionsFactoryException exception = new DefinitionsFactoryException("my message", cause);
         assertEquals("my message", exception.getMessage());

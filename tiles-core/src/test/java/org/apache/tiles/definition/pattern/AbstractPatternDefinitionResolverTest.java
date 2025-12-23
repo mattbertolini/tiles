@@ -21,7 +21,7 @@
 
 package org.apache.tiles.definition.pattern;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.easymock.EasyMock.*;
 
 import java.util.HashMap;
@@ -31,14 +31,14 @@ import java.util.Map;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link AbstractPatternDefinitionResolver}.
  *
  * @version $Rev$ $Date$
  */
-public class AbstractPatternDefinitionResolverTest {
+class AbstractPatternDefinitionResolverTest {
 
     private DefinitionPatternMatcher firstMatcher;
     private DefinitionPatternMatcher thirdMatcher;
@@ -67,7 +67,7 @@ public class AbstractPatternDefinitionResolverTest {
      * {@link BasicPatternDefinitionResolver#resolveDefinition(String, Object)}.
      */
     @Test
-    public void testResolveDefinition() {
+    void testResolveDefinition() {
         testResolveDefinitionImpl();
     }
 
@@ -76,10 +76,10 @@ public class AbstractPatternDefinitionResolverTest {
      * {@link BasicPatternDefinitionResolver#clearPatternPaths(Object)}.
      */
     @Test
-    public void testClearPatternPaths() {
+    void testClearPatternPaths() {
         testResolveDefinitionImpl();
-        resolver.clearPatternPaths(1);
-        resolver.clearPatternPaths(2);
+        resolver.clearPatternPaths(Integer.valueOf(1));
+        resolver.clearPatternPaths(Integer.valueOf(2));
         testResolveDefinitionImpl();
     }
 
@@ -108,19 +108,19 @@ public class AbstractPatternDefinitionResolverTest {
         localeDefsMap.put("first", firstDefinition);
         localeDefsMap.put("second", secondDefinition);
         localeDefsMap.put("third", thirdDefinition);
-        resolver.storeDefinitionPatterns(localeDefsMap, 1);
+        resolver.storeDefinitionPatterns(localeDefsMap, Integer.valueOf(1));
         localeDefsMap = new LinkedHashMap<String, Definition>();
         localeDefsMap.put("third", thirdDefinition);
-        resolver.storeDefinitionPatterns(localeDefsMap, 2);
+        resolver.storeDefinitionPatterns(localeDefsMap, Integer.valueOf(2));
         assertEquals(firstTransformedDefinition, resolver.resolveDefinition(
-                "firstTransformed", 1));
-        assertNull(resolver.resolveDefinition("secondTransformed", 1));
+                "firstTransformed", Integer.valueOf(1)));
+        assertNull(resolver.resolveDefinition("secondTransformed", Integer.valueOf(1)));
         assertEquals(thirdTransformedDefinition, resolver.resolveDefinition(
-                "thirdTransformed", 1));
-        assertNull(resolver.resolveDefinition("firstTransformed", 2));
-        assertNull(resolver.resolveDefinition("secondTransformed", 2));
+                "thirdTransformed", Integer.valueOf(1)));
+        assertNull(resolver.resolveDefinition("firstTransformed", Integer.valueOf(2)));
+        assertNull(resolver.resolveDefinition("secondTransformed", Integer.valueOf(2)));
         assertEquals(thirdTransformedDefinition, resolver.resolveDefinition(
-                "thirdTransformed", 2));
+                "thirdTransformed", Integer.valueOf(2)));
         verify(firstMatcher, thirdMatcher);
     }
 }

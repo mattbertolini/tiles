@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URL;
 
-import junit.framework.TestCase;
-
 import org.apache.tiles.Attribute;
 import org.apache.tiles.factory.AbstractTilesContainerFactory;
 import org.apache.tiles.factory.BasicTilesContainerFactory;
@@ -34,14 +32,18 @@ import org.apache.tiles.request.Request;
 import org.apache.tiles.request.locale.URLApplicationResource;
 import org.apache.tiles.request.render.CannotRenderException;
 import org.easymock.EasyMock;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
  * @version $Rev$ $Date$
  */
-public class BasicTilesContainerTest extends TestCase {
+class BasicTilesContainerTest {
 
     /**
      * The logging object.
@@ -59,9 +61,9 @@ public class BasicTilesContainerTest extends TestCase {
      */
     private BasicTilesContainer container;
 
-    /** {@inheritDoc} */
-    @Override
-    public void setUp() {
+    /** Sets up the test. */
+    @BeforeEach
+    void setUp() {
         ApplicationContext context = EasyMock
                 .createMock(ApplicationContext.class);
         URL url = getClass().getResource("/org/apache/tiles/factory/test-defs.xml");
@@ -77,7 +79,8 @@ public class BasicTilesContainerTest extends TestCase {
     /**
      * Tests basic Tiles container initialization.
      */
-    public void testInitialization() {
+    @Test
+    void testInitialization() {
         assertNotNull(container);
         assertNotNull(container.getPreparerFactory());
         assertNotNull(container.getDefinitionsFactory());
@@ -89,22 +92,14 @@ public class BasicTilesContainerTest extends TestCase {
      * @throws IOException If something goes wrong, but it's not a Tiles
      * exception.
      */
-    public void testObjectAttribute() throws IOException {
+    @Test
+    void testObjectAttribute() throws IOException {
         Attribute attribute = new Attribute();
         Request request = EasyMock.createMock(Request.class);
         EasyMock.replay(request);
-        boolean exceptionFound = false;
 
-        attribute.setValue(new Integer(SAMPLE_INT)); // A simple object
-        try {
-            container.render(attribute, request);
-        } catch (CannotRenderException e) {
-            log.debug("Intercepted a TilesException, it is correct", e);
-            exceptionFound = true;
-        }
-
-        assertTrue("An attribute of 'object' type cannot be rendered",
-                exceptionFound);
+        attribute.setValue(Integer.valueOf(SAMPLE_INT)); // A simple object
+        assertThrows(CannotRenderException.class, () -> container.render(attribute, request));
     }
 
     /**
@@ -112,7 +107,8 @@ public class BasicTilesContainerTest extends TestCase {
      *
      * @throws IOException If a problem arises during rendering or writing in the writer.
      */
-    public void testAttributeCredentials() throws IOException {
+    @Test
+    void testAttributeCredentials() throws IOException {
         Request request = EasyMock.createMock(Request.class);
         EasyMock.expect(request.isUserInRole("myrole")).andReturn(Boolean.TRUE);
         StringWriter writer = new StringWriter();
@@ -122,8 +118,8 @@ public class BasicTilesContainerTest extends TestCase {
         attribute.setRenderer("string");
         container.render(attribute, request);
         writer.close();
-        assertEquals("The attribute should have been rendered",
-                "This is the value", writer.toString());
+        assertEquals("This is the value", writer.toString(),
+                "The attribute should have been rendered");
         EasyMock.reset(request);
         request = EasyMock.createMock(Request.class);
         EasyMock.expect(request.isUserInRole("myrole")).andReturn(Boolean.FALSE);
@@ -131,19 +127,20 @@ public class BasicTilesContainerTest extends TestCase {
         writer = new StringWriter();
         container.render(attribute, request);
         writer.close();
-        assertNotSame("The attribute should have not been rendered",
-                "This is the value", writer);
+        assertNotSame("This is the value", writer.toString(),
+                "The attribute should have not been rendered");
     }
 
     /**
      * Tests {@link BasicTilesContainer#evaluate(Attribute, Request)}.
      */
-    public void testEvaluate() {
+    @Test
+    void testEvaluate() {
         Request request = EasyMock.createMock(Request.class);
         EasyMock.replay(request);
         Attribute attribute = new Attribute("This is the value");
         Object value = container.evaluate(attribute, request);
-        assertEquals("The attribute has not been evaluated correctly",
-                "This is the value", value);
+        assertEquals("This is the value", value,
+                "The attribute has not been evaluated correctly");
     }
 }

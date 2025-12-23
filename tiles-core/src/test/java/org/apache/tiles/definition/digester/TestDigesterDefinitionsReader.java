@@ -21,7 +21,7 @@
 
 package org.apache.tiles.definition.digester;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,8 +33,8 @@ import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
 import org.apache.tiles.ListAttribute;
 import org.apache.tiles.definition.DefinitionsFactoryException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  *
  * @version $Rev$ $Date$
  */
-public class TestDigesterDefinitionsReader {
+class TestDigesterDefinitionsReader {
 
     /**
      * The logging object.
@@ -58,11 +58,9 @@ public class TestDigesterDefinitionsReader {
 
     /**
      * Sets up the test.
-     *
-     * @throws Exception
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         reader = new DigesterDefinitionsReader();
     }
 
@@ -71,39 +69,34 @@ public class TestDigesterDefinitionsReader {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testRead() throws IOException {
+    void testRead() throws IOException {
         URL configFile = this.getClass().getClassLoader().getResource(
                 "org/apache/tiles/config/tiles-defs.xml");
-        assertNotNull("Config file not found", configFile);
+        assertNotNull(configFile, "Config file not found");
 
         InputStream source = configFile.openStream();
         Map<String, Definition> definitions = reader.read(source);
 
-        assertNotNull("Definitions not returned.", definitions);
-        assertNotNull("Couldn't find doc.mainLayout tile.",
-                definitions.get("doc.mainLayout"));
-        assertNotNull("Couldn't Find title attribute.", definitions.get(
-                "doc.mainLayout").getAttribute("title").getValue());
-        assertEquals("Incorrect Find title attribute.",
-                "Tiles Library Documentation", definitions.get(
-                        "doc.mainLayout").getAttribute("title").getValue());
+        assertNotNull(definitions, "Definitions not returned.");
+        assertNotNull(definitions.get("doc.mainLayout"), "Couldn't find doc.mainLayout tile.");
+        assertNotNull(definitions.get(
+                "doc.mainLayout").getAttribute("title").getValue(), "Couldn't Find title attribute.");
+        assertEquals("Tiles Library Documentation", definitions.get(
+                        "doc.mainLayout").getAttribute("title").getValue(), "Incorrect Find title attribute.");
 
         Definition def = definitions.get("doc.role.test");
-        assertNotNull("Couldn't find doc.role.test tile.", def);
+        assertNotNull(def, "Couldn't find doc.role.test tile.");
         Attribute attribute = def.getAttribute("title");
-        assertNotNull("Couldn't Find title attribute.", attribute
-                .getValue());
-        assertEquals("Role 'myrole' expected", attribute.getRole(),
-                "myrole");
+        assertNotNull(attribute
+                .getValue(), "Couldn't Find title attribute.");
+        assertEquals("myrole", attribute.getRole(), "Role 'myrole' expected");
 
         def = definitions.get("doc.listattribute.test");
-        assertNotNull("Couldn't find doc.listattribute.test tile.", def);
+        assertNotNull(def, "Couldn't find doc.listattribute.test tile.");
         attribute = def.getAttribute("items");
-        assertNotNull("Couldn't Find items attribute.", attribute);
-        assertTrue("The class of the attribute is not right",
-                attribute instanceof ListAttribute);
-        assertTrue("The class of value of the attribute is not right",
-                attribute.getValue() instanceof List);
+        assertNotNull(attribute, "Couldn't Find items attribute.");
+        assertInstanceOf(ListAttribute.class, attribute, "The class of the attribute is not right");
+        assertInstanceOf(List.class, attribute.getValue(), "The class of value of the attribute is not right");
     }
 
 
@@ -113,83 +106,80 @@ public class TestDigesterDefinitionsReader {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testRead21Version() throws IOException {
+    void testRead21Version() throws IOException {
         URL configFile = this.getClass().getClassLoader().getResource(
                 "org/apache/tiles/config/tiles-defs-2.1.xml");
-        assertNotNull("Config file not found", configFile);
+        assertNotNull(configFile, "Config file not found");
 
         InputStream source = configFile.openStream();
         Map<String, Definition> definitions = reader.read(source);
 
-        assertNotNull("Definitions not returned.", definitions);
+        assertNotNull(definitions, "Definitions not returned.");
         Definition def = definitions.get("doc.cascaded.test");
 
-        assertNotNull("Couldn't find doc.role.test tile.", def);
+        assertNotNull(def, "Couldn't find doc.role.test tile.");
         Attribute attribute = def.getLocalAttribute("title");
-        assertNotNull("Couldn't Find title local attribute.", attribute);
+        assertNotNull(attribute, "Couldn't Find title local attribute.");
         attribute = def.getCascadedAttribute("title2");
-        assertNotNull("Couldn't Find title2 cascaded attribute.", attribute);
+        assertNotNull(attribute, "Couldn't Find title2 cascaded attribute.");
         attribute = def.getLocalAttribute("items1");
-        assertNotNull("Couldn't Find items1 local attribute.", attribute);
+        assertNotNull(attribute, "Couldn't Find items1 local attribute.");
         attribute = def.getCascadedAttribute("items2");
-        assertNotNull("Couldn't Find items2 cascaded attribute.", attribute);
+        assertNotNull(attribute, "Couldn't Find items2 cascaded attribute.");
 
         def = definitions.get("test.nesting.definitions");
-        assertNotNull("Couldn't find test.nesting.definitions tile.", def);
+        assertNotNull(def, "Couldn't find test.nesting.definitions tile.");
         assertEquals("/layout.jsp", def.getTemplateAttribute().getValue());
         assertEquals("template", def.getTemplateAttribute().getRenderer());
         attribute = def.getAttribute("body");
-        assertNotNull("Couldn't Find body attribute.", attribute);
-        assertEquals("Attribute not of 'definition' type", "definition",
-                attribute.getRenderer());
-        assertNotNull("Attribute value null", attribute.getValue());
+        assertNotNull(attribute, "Couldn't Find body attribute.");
+        assertEquals("definition",
+                attribute.getRenderer(), "Attribute not of 'definition' type");
+        assertNotNull(attribute.getValue(), "Attribute value null");
         String defName = attribute.getValue().toString();
         def = definitions.get(defName);
-        assertNotNull("Couldn't find " + defName + " tile.", def);
+        assertNotNull(def, "Couldn't find " + defName + " tile.");
 
         def = definitions.get("test.nesting.list.definitions");
-        assertNotNull("Couldn't find test.nesting.list.definitions tile.",
-                def);
+        assertNotNull(
+                def, "Couldn't find test.nesting.list.definitions tile.");
         attribute = def.getAttribute("list");
-        assertNotNull("Couldn't Find list attribute.", attribute);
-        assertTrue("Attribute not of valid type",
-                attribute instanceof ListAttribute);
+        assertNotNull(attribute, "Couldn't Find list attribute.");
+        assertInstanceOf(ListAttribute.class, attribute, "Attribute not of valid type");
         ListAttribute listAttribute = (ListAttribute) attribute;
         List<Attribute> list = listAttribute.getValue();
-        assertEquals("The list is not of correct size", 1, list.size());
+        assertEquals(1, list.size(), "The list is not of correct size");
         attribute = list.get(0);
-        assertNotNull("Couldn't Find element attribute.", attribute);
-        assertEquals("Attribute not of 'definition' type", "definition",
-                attribute.getRenderer());
-        assertNotNull("Attribute value null", attribute.getValue());
+        assertNotNull(attribute, "Couldn't Find element attribute.");
+        assertEquals("definition",
+                attribute.getRenderer(), "Attribute not of 'definition' type");
+        assertNotNull(attribute.getValue(), "Attribute value null");
         defName = attribute.getValue().toString();
         def = definitions.get(defName);
-        assertNotNull("Couldn't find " + defName + " tile.", def);
+        assertNotNull(def, "Couldn't find " + defName + " tile.");
 
         defName = "test.inherit.list.base";
         def = definitions.get(defName);
-        assertNotNull("Couldn't find " + defName + " tile.", def);
+        assertNotNull(def, "Couldn't find " + defName + " tile.");
         defName = "test.inherit.list";
         def = definitions.get(defName);
-        assertNotNull("Couldn't find " + defName + " tile.", def);
+        assertNotNull(def, "Couldn't find " + defName + " tile.");
         listAttribute = (ListAttribute) def.getAttribute("list");
-        assertEquals("This definition does not inherit its list attribute",
-                true, listAttribute.isInherit());
+        assertTrue(listAttribute.isInherit(), "This definition does not inherit its list attribute");
         defName = "test.noinherit.list";
         def = definitions.get(defName);
         listAttribute = (ListAttribute) def.getAttribute("list");
-        assertEquals("This definition inherits its list attribute",
-                false, listAttribute.isInherit());
+        assertFalse(listAttribute.isInherit(), "This definition inherits its list attribute");
 
         defName = "test.new.attributes";
         def = definitions.get(defName);
-        assertNotNull("Couldn't find " + defName + " tile.", def);
+        assertNotNull(def, "Couldn't find " + defName + " tile.");
         Attribute templateAttribute = def.getTemplateAttribute();
-        assertEquals(templateAttribute.getExpressionObject().getExpression(),
-                "${my.expression}");
+        assertEquals("${my.expression}",
+                templateAttribute.getExpressionObject().getExpression());
         assertEquals("mytype", templateAttribute.getRenderer());
         attribute = def.getAttribute("body");
-        assertNotNull("Couldn't Find body attribute.", attribute);
+        assertNotNull(attribute, "Couldn't Find body attribute.");
         assertEquals("${my.attribute.expression}", attribute
                 .getExpressionObject().getExpression());
     }
@@ -198,10 +188,10 @@ public class TestDigesterDefinitionsReader {
      * Tests read with bad input source.
      */
     @Test
-    public void testBadSource() {
+    void testBadSource() {
         try {
             // Read definitions.
-            reader.read(new String("Bad Input"));
+            reader.read("Bad Input");
             fail("Should've thrown an exception.");
         } catch (DefinitionsFactoryException e) {
             // correct.
@@ -217,11 +207,11 @@ public class TestDigesterDefinitionsReader {
      * Tests read with bad XML source.
      */
     @Test
-    public void testBadXml() {
+    void testBadXml() {
         try {
             URL configFile = this.getClass().getClassLoader().getResource(
                     "org/apache/tiles/config/malformed-defs.xml");
-            assertNotNull("Config file not found", configFile);
+            assertNotNull(configFile, "Config file not found");
 
             InputStream source = configFile.openStream();
             reader.read(source);
@@ -243,12 +233,12 @@ public class TestDigesterDefinitionsReader {
      * configuration file with invalid XML.
      */
     @Test
-    public void testValidatingParameter() {
+    void testValidatingParameter() {
         // Testing with default (validation ON).
         try {
             URL configFile = this.getClass().getClassLoader().getResource(
                     "org/apache/tiles/config/invalid-defs.xml");
-            assertNotNull("Config file not found", configFile);
+            assertNotNull(configFile, "Config file not found");
 
             InputStream source = configFile.openStream();
             reader.setValidating(true);
@@ -268,7 +258,7 @@ public class TestDigesterDefinitionsReader {
             setUp();
             URL configFile = this.getClass().getClassLoader().getResource(
                     "org/apache/tiles/config/invalid-defs.xml");
-            assertNotNull("Config file not found", configFile);
+            assertNotNull(configFile, "Config file not found");
 
             InputStream source = configFile.openStream();
             reader.read(source);
@@ -285,10 +275,10 @@ public class TestDigesterDefinitionsReader {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testRegressionTiles352() throws IOException {
+    void testRegressionTiles352() throws IOException {
         URL configFile = this.getClass().getClassLoader().getResource(
                 "org/apache/tiles/config/defs_regression_TILES-352.xml");
-        assertNotNull("Config file not found", configFile);
+        assertNotNull(configFile, "Config file not found");
 
         InputStream source = configFile.openStream();
         Map<String, Definition> name2defs = reader.read(source);
@@ -298,23 +288,23 @@ public class TestDigesterDefinitionsReader {
         Definition child = name2defs.get(attribute.getValue());
         ListAttribute listAttribute = (ListAttribute) child.getAttribute("list");
         List<Attribute> list = listAttribute.getValue();
-        assertEquals((list.get(0)).getValue(), "This is a value");
+        assertEquals("This is a value", (list.get(0)).getValue());
     }
 
     /**
      * Tests {@link DigesterDefinitionsReader#read(Object)}.
      */
     @Test
-    public void testReadNoSource() {
+    void testReadNoSource() {
         assertNull(reader.read(null));
     }
 
     /**
      * Tests {@link DigesterDefinitionsReader#addDefinition(Definition)}.
      */
-    @Test(expected = DigesterDefinitionsReaderException.class)
-    public void testAddDefinitionNoName() {
+    @Test
+    void testAddDefinitionNoName() {
         Definition def = new Definition();
-        reader.addDefinition(def);
+        assertThrows(DigesterDefinitionsReaderException.class, () -> reader.addDefinition(def));
     }
 }

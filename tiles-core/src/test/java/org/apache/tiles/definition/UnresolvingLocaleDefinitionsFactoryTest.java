@@ -22,7 +22,7 @@
 package org.apache.tiles.definition;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Locale;
 
@@ -30,21 +30,21 @@ import org.apache.tiles.Definition;
 import org.apache.tiles.definition.dao.DefinitionDAO;
 import org.apache.tiles.locale.LocaleResolver;
 import org.apache.tiles.request.Request;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link UnresolvingLocaleDefinitionsFactory}.
  *
  * @version $Rev$ $Date$
  */
-public class UnresolvingLocaleDefinitionsFactoryTest {
+class UnresolvingLocaleDefinitionsFactoryTest {
 
     /**
      * Test method for {@link UnresolvingLocaleDefinitionsFactory#getDefinition(String, Request)}.
      */
     @SuppressWarnings("unchecked")
     @Test
-    public void testGetDefinition() {
+    void testGetDefinition() {
         DefinitionDAO<Locale> dao = createMock(DefinitionDAO.class);
         LocaleResolver localeResolver = createMock(LocaleResolver.class);
         UnresolvingLocaleDefinitionsFactory factory = new UnresolvingLocaleDefinitionsFactory();

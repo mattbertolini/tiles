@@ -21,22 +21,22 @@
 
 package org.apache.tiles.definition;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link FactoryNotFoundException}.
  *
  * @version $Rev$ $Date$
  */
-public class FactoryNotFoundExceptitonTest {
+class FactoryNotFoundExceptitonTest {
 
     /**
      * Test method for {@link FactoryNotFoundException#FactoryNotFoundException()}.
      */
     @Test
-    public void testFactoryNotFoundException() {
+    void testFactoryNotFoundException() {
         FactoryNotFoundException exception = new FactoryNotFoundException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +46,7 @@ public class FactoryNotFoundExceptitonTest {
      * Test method for {@link FactoryNotFoundException#FactoryNotFoundException(java.lang.String)}.
      */
     @Test
-    public void testFactoryNotFoundExceptionString() {
+    void testFactoryNotFoundExceptionString() {
         FactoryNotFoundException exception = new FactoryNotFoundException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +56,7 @@ public class FactoryNotFoundExceptitonTest {
      * Test method for {@link FactoryNotFoundException#FactoryNotFoundException(java.lang.Throwable)}.
      */
     @Test
-    public void testFactoryNotFoundExceptionThrowable() {
+    void testFactoryNotFoundExceptionThrowable() {
         Throwable cause = new Throwable();
         FactoryNotFoundException exception = new FactoryNotFoundException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +67,7 @@ public class FactoryNotFoundExceptitonTest {
      * Test method for {@link FactoryNotFoundException#FactoryNotFoundException(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testFactoryNotFoundExceptionStringThrowable() {
+    void testFactoryNotFoundExceptionStringThrowable() {
         Throwable cause = new Throwable();
         FactoryNotFoundException exception = new FactoryNotFoundException("my message", cause);
         assertEquals("my message", exception.getMessage());

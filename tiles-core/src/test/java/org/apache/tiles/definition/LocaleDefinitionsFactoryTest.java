@@ -22,7 +22,7 @@
 package org.apache.tiles.definition;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -33,21 +33,21 @@ import org.apache.tiles.Definition;
 import org.apache.tiles.definition.dao.DefinitionDAO;
 import org.apache.tiles.locale.LocaleResolver;
 import org.apache.tiles.request.Request;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link LocaleDefinitionsFactory}.
  *
  * @version $Rev$ $Date$
  */
-public class LocaleDefinitionsFactoryTest {
+class LocaleDefinitionsFactoryTest {
 
     /**
      * Test method for {@link LocaleDefinitionsFactory#getDefinition(String, Request)}.
      */
     @SuppressWarnings("unchecked")
     @Test
-    public void testGetDefinition() {
+    void testGetDefinition() {
         DefinitionDAO<Locale> dao = createMock(DefinitionDAO.class);
         LocaleResolver localeResolver = createMock(LocaleResolver.class);
         Request request = createMock(Request.class);
@@ -78,8 +78,8 @@ public class LocaleDefinitionsFactoryTest {
      * Test method for {@link LocaleDefinitionsFactory#getDefinition(String, Request)}.
      */
     @SuppressWarnings("unchecked")
-    @Test(expected = NoSuchDefinitionException.class)
-    public void testGetDefinitionNoParent() {
+    @Test
+    void testGetDefinitionNoParent() {
         DefinitionDAO<Locale> dao = createMock(DefinitionDAO.class);
         LocaleResolver localeResolver = createMock(LocaleResolver.class);
         Request request = createMock(Request.class);
@@ -99,7 +99,7 @@ public class LocaleDefinitionsFactoryTest {
         try {
             factory.setDefinitionDAO(dao);
             factory.setLocaleResolver(localeResolver);
-            factory.getDefinition("myDefinition", request);
+            assertThrows(NoSuchDefinitionException.class, () -> factory.getDefinition("myDefinition", request));
         } finally {
             verify(dao, localeResolver, request);
         }

@@ -21,22 +21,22 @@
 
 package org.apache.tiles.definition;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link NoSuchDefinitionException}.
  *
  * @version $Rev$ $Date$
  */
-public class NoSuchDefinitionExceptionTest {
+class NoSuchDefinitionExceptionTest {
 
     /**
      * Test method for {@link NoSuchDefinitionException#NoSuchDefinitionException()}.
      */
     @Test
-    public void testNoSuchDefinitionException() {
+    void testNoSuchDefinitionException() {
         NoSuchDefinitionException exception = new NoSuchDefinitionException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +46,7 @@ public class NoSuchDefinitionExceptionTest {
      * Test method for {@link NoSuchDefinitionException#NoSuchDefinitionException(java.lang.String)}.
      */
     @Test
-    public void testNoSuchDefinitionExceptionString() {
+    void testNoSuchDefinitionExceptionString() {
         NoSuchDefinitionException exception = new NoSuchDefinitionException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +56,7 @@ public class NoSuchDefinitionExceptionTest {
      * Test method for {@link NoSuchDefinitionException#NoSuchDefinitionException(java.lang.Throwable)}.
      */
     @Test
-    public void testNoSuchDefinitionExceptionThrowable() {
+    void testNoSuchDefinitionExceptionThrowable() {
         Throwable cause = new Throwable();
         NoSuchDefinitionException exception = new NoSuchDefinitionException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +67,7 @@ public class NoSuchDefinitionExceptionTest {
      * Test method for {@link NoSuchDefinitionException#NoSuchDefinitionException(String, Throwable)}.
      */
     @Test
-    public void testNoSuchDefinitionExceptionStringThrowable() {
+    void testNoSuchDefinitionExceptionStringThrowable() {
         Throwable cause = new Throwable();
         NoSuchDefinitionException exception = new NoSuchDefinitionException("my message", cause);
         assertEquals("my message", exception.getMessage());
