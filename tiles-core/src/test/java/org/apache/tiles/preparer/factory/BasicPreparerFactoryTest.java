@@ -24,14 +24,19 @@ import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.ViewPreparer;
 import org.apache.tiles.request.Request;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests the basic preparer factory.
  *
  * @version $Rev$ $Date$
  */
-public class BasicPreparerFactoryTest extends TestCase {
+class BasicPreparerFactoryTest {
 
     /**
      * The preparer factory.
@@ -39,19 +44,20 @@ public class BasicPreparerFactoryTest extends TestCase {
     private BasicPreparerFactory factory;
 
     /** {@inheritDoc} */
-    @Override
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         factory = new BasicPreparerFactory();
     }
 
     /**
      * Tests getting a preparer.
      */
-    public void testGetPreparer() {
+    @Test
+    void testGetPreparer() {
         String name = MockViewPreparer.class.getName();
         ViewPreparer p = factory.getPreparer(name, null);
         assertNotNull(p);
-        assertTrue(p instanceof MockViewPreparer);
+        assertInstanceOf(MockViewPreparer.class, p);
 
         name = "org.doesnotexist.Class";
         p = factory.getPreparer(name, null);
