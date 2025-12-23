@@ -21,11 +21,12 @@
 
 package org.apache.tiles.context;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.apache.tiles.request.Request;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * Tests {@link TilesRequestContextHolderTest}.

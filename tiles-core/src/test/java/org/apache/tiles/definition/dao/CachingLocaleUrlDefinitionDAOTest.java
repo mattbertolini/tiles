@@ -22,6 +22,9 @@
 package org.apache.tiles.definition.dao;
 
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,8 +34,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import junit.framework.TestCase;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
@@ -46,13 +47,15 @@ import org.apache.tiles.definition.pattern.wildcard.WildcardDefinitionPatternMat
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.ApplicationResource;
 import org.apache.tiles.request.locale.URLApplicationResource;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link CachingLocaleUrlDefinitionDAO}.
  *
  * @version $Rev$ $Date$
  */
-public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
+public class CachingLocaleUrlDefinitionDAOTest {
 
     /**
      * The object to test.
@@ -74,7 +77,7 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
     private ApplicationResource setupUrl(String filename, Locale... locales) throws IOException {
         ApplicationResource url = new URLApplicationResource("org/apache/tiles/config/" + filename + ".xml", this
                 .getClass().getClassLoader().getResource("org/apache/tiles/config/" + filename + ".xml"));
-        assertNotNull("Could not load " + filename + " file.", url);
+        assertNotNull(url, "Could not load " + filename + " file.");
         expect(applicationContext.getResource(url.getLocalePath())).andReturn(url).anyTimes();
         expect(applicationContext.getResource(url, Locale.ROOT)).andReturn(url).anyTimes();
         Map<Locale, ApplicationResource> localeResources = new HashMap<Locale, ApplicationResource>();
@@ -82,7 +85,7 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
             ApplicationResource urlLocale = new URLApplicationResource("org/apache/tiles/config/" + filename + "_"
                     + locale.toString() + ".xml", this.getClass().getClassLoader()
                     .getResource("org/apache/tiles/config/" + filename + "_" + locale.toString() + ".xml"));
-            assertNotNull("Could not load " + filename + "_" + locale.toString() + " file.", urlLocale);
+            assertNotNull(urlLocale, "Could not load " + filename + "_" + locale.toString() + " file.");
             localeResources.put(locale, urlLocale);
         }
         for (Locale locale : new Locale[] { Locale.CANADA_FRENCH, Locale.FRENCH, Locale.US, Locale.ENGLISH,
@@ -94,9 +97,8 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
     }
 
     /** {@inheritDoc} */
-    @Override
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
         applicationContext = createMock(ApplicationContext.class);
         url1 = setupUrl("defs1", Locale.FRENCH, Locale.CANADA_FRENCH, Locale.US);
         url2 = setupUrl("defs2");
@@ -116,6 +118,7 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
     /**
      * Tests {@link LocaleUrlDefinitionDAO#getDefinition(String, Locale)}.
      */
+    @Test
     public void testGetDefinition() {
         List<ApplicationResource> sourceURLs = new ArrayList<ApplicationResource>();
         sourceURLs.add(url1);
@@ -125,67 +128,62 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
         DefinitionsReader reader = new DigesterDefinitionsReader();
         definitionDao.setReader(reader);
 
-        assertNotNull("test.def1 definition not found.", definitionDao
-                .getDefinition("test.def1", null));
-        assertNotNull("test.def2 definition not found.", definitionDao
-                .getDefinition("test.def2", null));
-        assertNotNull("test.def3 definition not found.", definitionDao
-                .getDefinition("test.def3", null));
-        assertNotNull("test.common definition not found.", definitionDao
-                .getDefinition("test.common", null));
-        assertNotNull("test.common definition in US locale not found.",
-                definitionDao.getDefinition("test.common", Locale.US));
-        assertNotNull("test.common definition in FRENCH locale not found.",
-                definitionDao.getDefinition("test.common", Locale.FRENCH));
-        assertNotNull("test.common definition in CHINA locale not found.",
-                definitionDao.getDefinition("test.common", Locale.CHINA));
+        assertNotNull(definitionDao
+                .getDefinition("test.def1", null), "test.def1 definition not found.");
+        assertNotNull(definitionDao
+                .getDefinition("test.def2", null), "test.def2 definition not found.");
+        assertNotNull(definitionDao
+                .getDefinition("test.def3", null), "test.def3 definition not found.");
+        assertNotNull(definitionDao
+                .getDefinition("test.common", null), "test.common definition not found.");
+        assertNotNull(definitionDao.getDefinition("test.common", Locale.US), "test.common definition in US locale not found.");
+        assertNotNull(definitionDao.getDefinition("test.common", Locale.FRENCH), "test.common definition in FRENCH locale not found.");
         assertNotNull(
-                "test.common.french definition in FRENCH locale not found.",
+                definitionDao.getDefinition("test.common", Locale.CHINA), "test.common definition in CHINA locale not found.");
+        assertNotNull(
                 definitionDao.getDefinition("test.common.french",
-                        Locale.FRENCH));
+                        Locale.FRENCH), "test.common.french definition in FRENCH locale not found.");
         assertNotNull(
-                "test.common.french definition in CANADA_FRENCH locale not found.",
                 definitionDao.getDefinition("test.common.french",
-                        Locale.CANADA_FRENCH));
-        assertNotNull("test.def.toextend definition not found.", definitionDao
-                .getDefinition("test.def.toextend", null));
-        assertNotNull("test.def.overridden definition not found.",
-                definitionDao.getDefinition("test.def.overridden", null));
+                        Locale.CANADA_FRENCH), "test.common.french definition in CANADA_FRENCH locale not found.");
+        assertNotNull(definitionDao
+                .getDefinition("test.def.toextend", null), "test.def.toextend definition not found.");
+        assertNotNull(definitionDao.getDefinition("test.def.overridden", null), "test.def.overridden definition not found.");
         assertNotNull(
-                "test.def.overridden definition in FRENCH locale not found.",
                 definitionDao.getDefinition("test.def.overridden",
-                        Locale.FRENCH));
+                        Locale.FRENCH), "test.def.overridden definition in FRENCH locale not found.");
 
-        assertEquals("Incorrect default country value", "default",
+        assertEquals("default",
                 definitionDao.getDefinition("test.def1", null).getAttribute(
-                        "country").getValue());
-        assertEquals("Incorrect US country value", "US", definitionDao
+                        "country").getValue(), "Incorrect default country value");
+        assertEquals("US", definitionDao
                 .getDefinition("test.def1", Locale.US).getAttribute("country")
-                .getValue());
-        assertEquals("Incorrect France country value", "France", definitionDao
+                .getValue(), "Incorrect US country value");
+        assertEquals("France", definitionDao
                 .getDefinition("test.def1", Locale.FRENCH).getAttribute(
-                        "country").getValue());
-        assertEquals("Incorrect Chinese country value (should be default)",
+                        "country").getValue(), "Incorrect France country value");
+        assertEquals(
                 "default", definitionDao.getDefinition("test.def1",
-                        Locale.CHINA).getAttribute("country").getValue());
-        assertEquals("Incorrect default country value", "default",
+                        Locale.CHINA).getAttribute("country").getValue(), "Incorrect Chinese country value (should be default)");
+        assertEquals("default",
                 definitionDao.getDefinition("test.def.overridden", null)
-                        .getAttribute("country").getValue());
-        assertEquals("Incorrect default title value",
+                        .getAttribute("country").getValue(), "Incorrect default country value");
+        assertEquals(
                 "Definition to be overridden", definitionDao.getDefinition(
                         "test.def.overridden", null).getAttribute("title")
-                        .getValue());
-        assertEquals("Incorrect France country value", "France", definitionDao
+                        .getValue(), "Incorrect default title value");
+        assertEquals("France", definitionDao
                 .getDefinition("test.def.overridden", Locale.FRENCH)
-                .getAttribute("country").getValue());
-        assertNull("Definition in French not found", definitionDao
+                .getAttribute("country").getValue(), "Incorrect France country value");
+        assertNull(definitionDao
                 .getDefinition("test.def.overridden", Locale.FRENCH)
-                .getAttribute("title"));
+                .getAttribute("title"), "Definition in French not found");
     }
 
     /**
      * Tests {@link LocaleUrlDefinitionDAO#getDefinitions(Locale)}.
      */
+    @Test
     public void testGetDefinitions() {
         List<ApplicationResource> sourceURLs = new ArrayList<ApplicationResource>();
         sourceURLs.add(url1);
@@ -206,79 +204,78 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
         Map<String, Definition> canadaFrenchDefinitions = definitionDao
                 .getDefinitions(Locale.CANADA_FRENCH);
 
-        assertNotNull("test.def1 definition not found.", defaultDefinitions
-                .get("test.def1"));
-        assertNotNull("test.def2 definition not found.", defaultDefinitions
-                .get("test.def2"));
-        assertNotNull("test.def3 definition not found.", defaultDefinitions
-                .get("test.def3"));
-        assertNotNull("test.common definition not found.", defaultDefinitions
-                .get("test.common"));
-        assertNotNull("test.common definition in US locale not found.",
-                usDefinitions.get("test.common"));
-        assertNotNull("test.common definition in FRENCH locale not found.",
-                frenchDefinitions.get("test.common"));
-        assertNotNull("test.common definition in CHINA locale not found.",
-                chinaDefinitions.get("test.common"));
+        assertNotNull(defaultDefinitions
+                .get("test.def1"), "test.def1 definition not found.");
+        assertNotNull(defaultDefinitions
+                .get("test.def2"), "test.def2 definition not found.");
+        assertNotNull(defaultDefinitions
+                .get("test.def3"), "test.def3 definition not found.");
+        assertNotNull(defaultDefinitions
+                .get("test.common"), "test.common definition not found.");
         assertNotNull(
-                "test.common.french definition in FRENCH locale not found.",
-                frenchDefinitions.get("test.common.french"));
+                usDefinitions.get("test.common"), "test.common definition in US locale not found.");
         assertNotNull(
-                "test.common.french definition in CANADA_FRENCH locale not found.",
-                canadaFrenchDefinitions.get("test.common.french"));
-        assertNotNull("test.def.toextend definition not found.",
-                defaultDefinitions.get("test.def.toextend"));
-        assertNotNull("test.def.overridden definition not found.",
-                defaultDefinitions.get("test.def.overridden"));
+                frenchDefinitions.get("test.common"), "test.common definition in FRENCH locale not found.");
         assertNotNull(
-                "test.def.overridden definition in FRENCH locale not found.",
-                frenchDefinitions.get("test.def.overridden"));
+                chinaDefinitions.get("test.common"), "test.common definition in CHINA locale not found.");
+        assertNotNull(
+                frenchDefinitions.get("test.common.french"), "test.common.french definition in FRENCH locale not found.");
+        assertNotNull(
+                canadaFrenchDefinitions.get("test.common.french"), "test.common.french definition in CANADA_FRENCH locale not found.");
+        assertNotNull(
+                defaultDefinitions.get("test.def.toextend"), "test.def.toextend definition not found.");
+        assertNotNull(
+                defaultDefinitions.get("test.def.overridden"), "test.def.overridden definition not found.");
+        assertNotNull(
+                frenchDefinitions.get("test.def.overridden"), "test.def.overridden definition in FRENCH locale not found.");
 
-        assertEquals("Incorrect default country value", "default",
+        assertEquals("default",
                 defaultDefinitions.get("test.def1").getAttribute("country")
-                        .getValue());
-        assertEquals("Incorrect US country value", "US", usDefinitions.get(
-                "test.def1").getAttribute("country").getValue());
-        assertEquals("Incorrect France country value", "France",
+                        .getValue(), "Incorrect default country value");
+        assertEquals("US", usDefinitions.get(
+                "test.def1").getAttribute("country").getValue(), "Incorrect US country value");
+        assertEquals("France",
                 frenchDefinitions.get("test.def1").getAttribute("country")
-                        .getValue());
-        assertEquals("Incorrect Chinese country value (should be default)",
+                        .getValue(), "Incorrect France country value");
+        assertEquals(
                 "default", chinaDefinitions.get("test.def1").getAttribute(
-                        "country").getValue());
-        assertEquals("Incorrect default country value", "default",
+                        "country").getValue(), "Incorrect Chinese country value (should be default)");
+        assertEquals("default",
                 defaultDefinitions.get("test.def.overridden").getAttribute(
-                        "country").getValue());
-        assertEquals("Incorrect default title value",
+                        "country").getValue(), "Incorrect default country value");
+        assertEquals(
                 "Definition to be overridden", defaultDefinitions.get(
-                        "test.def.overridden").getAttribute("title").getValue());
-        assertEquals("Incorrect France country value", "France",
+                        "test.def.overridden").getAttribute("title").getValue(), "Incorrect default title value");
+        assertEquals("France",
                 frenchDefinitions.get("test.def.overridden").getAttribute(
-                        "country").getValue());
-        assertNull("Definition in French not found", frenchDefinitions.get(
-                "test.def.overridden").getAttribute("title"));
+                        "country").getValue(), "Incorrect France country value");
+        assertNull(frenchDefinitions.get(
+                "test.def.overridden").getAttribute("title"), "Definition in French not found");
     }
 
     /**
      * Tests {@link LocaleUrlDefinitionDAO#setSources(List)}.
      */
+    @Test
     public void testSetSourceURLs() {
         List<ApplicationResource> sourceURLs = new ArrayList<ApplicationResource>();
         sourceURLs.add(url1);
         sourceURLs.add(url2);
         sourceURLs.add(url3);
         definitionDao.setSources(sourceURLs);
-        assertEquals("The source URLs are not set correctly", sourceURLs,
-                definitionDao.sources);
+        assertEquals(sourceURLs,
+                definitionDao.sources, "The source URLs are not set correctly");
     }
 
     /**
      * Tests {@link LocaleUrlDefinitionDAO#setReader(DefinitionsReader)}.
      */
+    @Test
     public void testSetReader() {
         DefinitionsReader reader = createMock(DefinitionsReader.class);
         definitionDao.setReader(reader);
-        assertEquals("There reader has not been set correctly", reader,
-                definitionDao.reader);
+        assertEquals(reader,
+                definitionDao.reader, "There reader has not been set correctly");
     }
 
     /**
@@ -286,6 +283,7 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
      *
      * @throws IOException If something goes wrong.
      */
+    @Test
     public void testInit() throws IOException {
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
         Set<ApplicationResource> urlSet = new HashSet<ApplicationResource>();
@@ -298,28 +296,29 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
         List<ApplicationResource> sourceURLs = new ArrayList<ApplicationResource>();
         sourceURLs.add(url1);
         definitionDao.setSources(sourceURLs);
-        assertEquals("The reader is not of the correct class",
+        assertEquals(
                 DigesterDefinitionsReader.class, definitionDao.reader
-                        .getClass());
-        assertEquals("The source URLs are not correct", sourceURLs,
-                definitionDao.sources);
+                        .getClass(), "The reader is not of the correct class");
+        assertEquals(sourceURLs,
+                definitionDao.sources, "The source URLs are not correct");
         reset(applicationContext);
 
         definitionDao.setReader(new MockDefinitionsReader());
-        assertEquals("The reader is not of the correct class",
-                MockDefinitionsReader.class, definitionDao.reader.getClass());
+        assertEquals(
+                MockDefinitionsReader.class, definitionDao.reader.getClass(), "The reader is not of the correct class");
         sourceURLs = new ArrayList<ApplicationResource>();
         sourceURLs.add(url1);
         sourceURLs.add(url2);
         sourceURLs.add(url3);
         definitionDao.setSources(sourceURLs);
-        assertEquals("The source URLs are not correct", sourceURLs,
-                definitionDao.sources);
+        assertEquals(sourceURLs,
+                definitionDao.sources, "The source URLs are not correct");
     }
 
     /**
      * Tests wildcard mappings.
      */
+    @Test
     public void testWildcardMapping() {
         List<ApplicationResource> urls = new ArrayList<ApplicationResource>();
         urls.add(urlWildcard);
@@ -327,28 +326,28 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
         definitionDao.setReader(new DigesterDefinitionsReader());
 
         Definition definition = definitionDao.getDefinition("test.defName.subLayered", Locale.ITALY);
-        assertEquals("The template is not correct", "/testName.jsp", definition
-                .getTemplateAttribute().getValue());
-        assertEquals("The header attribute is not correct",
+        assertEquals("/testName.jsp", definition
+                .getTemplateAttribute().getValue(), "The template is not correct");
+        assertEquals(
                 "/common/headerLayered.jsp", definition.getAttribute("header")
-                        .getValue());
+                        .getValue(), "The header attribute is not correct");
         definition = definitionDao.getDefinition("test.defName.subLayered", Locale.ITALIAN);
-        assertEquals("The template is not correct", "/testName.jsp", definition
-                .getTemplateAttribute().getValue());
-        assertEquals("The header attribute is not correct",
+        assertEquals("/testName.jsp", definition
+                .getTemplateAttribute().getValue(), "The template is not correct");
+        assertEquals(
                 "/common/headerLayered.jsp", definition.getAttribute("header")
-                        .getValue());
+                        .getValue(), "The header attribute is not correct");
         definition = definitionDao.getDefinition("test.defName.subLayered", null);
-        assertEquals("The template is not correct", "/testName.jsp", definition
-                .getTemplateAttribute().getValue());
-        assertEquals("The header attribute is not correct",
+        assertEquals("/testName.jsp", definition
+                .getTemplateAttribute().getValue(), "The template is not correct");
+        assertEquals(
                 "/common/headerLayered.jsp", definition.getAttribute("header")
-                        .getValue());
+                        .getValue(), "The header attribute is not correct");
         definition = definitionDao.getDefinition("test.defName.noAttribute", null);
         assertEquals("/testName.jsp", definition.getTemplateAttribute().getValue());
-        assertEquals(null, definition.getLocalAttributeNames());
+        assertNull(definition.getLocalAttributeNames());
         definition = definitionDao.getDefinition("test.def3", null);
-        assertNotNull("The simple definition is null", definition);
+        assertNotNull(definition, "The simple definition is null");
 
         definition = definitionDao.getDefinition("test.extended.defName.subLayered", null);
         assertEquals("test.defName.subLayered", definition.getExtends());
@@ -362,6 +361,7 @@ public class CachingLocaleUrlDefinitionDAOTest extends TestCase {
      * {@link ResolvingLocaleUrlDefinitionDAO#getDefinition(String, Locale)}
      * when loading multiple files for a locale.
      */
+    @Test
     public void testListAttributeLocaleInheritance() {
         List<ApplicationResource> urls = new ArrayList<ApplicationResource>();
         urls.add(url21);
