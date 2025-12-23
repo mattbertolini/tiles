@@ -48,7 +48,6 @@ import org.apache.tiles.request.ApplicationResource;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.locale.PostfixedApplicationResource;
 import org.apache.tiles.request.locale.URLApplicationResource;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +56,7 @@ import org.junit.jupiter.api.Test;
  *
  * @version $Rev$ $Date$
  */
-public class BaseLocaleUrlDefinitionDAOTest {
+class BaseLocaleUrlDefinitionDAOTest {
 
     private static final class MutableApplicationResource extends PostfixedApplicationResource {
         private long lastModified = System.currentTimeMillis();

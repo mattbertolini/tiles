@@ -55,7 +55,7 @@ import org.junit.jupiter.api.Test;
  *
  * @version $Rev$ $Date$
  */
-public class CachingLocaleUrlDefinitionDAOTest {
+class CachingLocaleUrlDefinitionDAOTest {
 
     /**
      * The object to test.
@@ -98,7 +98,7 @@ public class CachingLocaleUrlDefinitionDAOTest {
 
     /** {@inheritDoc} */
     @BeforeEach
-    protected void setUp() throws Exception {
+    void setUp() throws Exception {
         applicationContext = createMock(ApplicationContext.class);
         url1 = setupUrl("defs1", Locale.FRENCH, Locale.CANADA_FRENCH, Locale.US);
         url2 = setupUrl("defs2");
@@ -119,7 +119,7 @@ public class CachingLocaleUrlDefinitionDAOTest {
      * Tests {@link LocaleUrlDefinitionDAO#getDefinition(String, Locale)}.
      */
     @Test
-    public void testGetDefinition() {
+    void testGetDefinition() {
         List<ApplicationResource> sourceURLs = new ArrayList<ApplicationResource>();
         sourceURLs.add(url1);
         sourceURLs.add(url2);
@@ -184,7 +184,7 @@ public class CachingLocaleUrlDefinitionDAOTest {
      * Tests {@link LocaleUrlDefinitionDAO#getDefinitions(Locale)}.
      */
     @Test
-    public void testGetDefinitions() {
+    void testGetDefinitions() {
         List<ApplicationResource> sourceURLs = new ArrayList<ApplicationResource>();
         sourceURLs.add(url1);
         sourceURLs.add(url2);
@@ -257,7 +257,7 @@ public class CachingLocaleUrlDefinitionDAOTest {
      * Tests {@link LocaleUrlDefinitionDAO#setSources(List)}.
      */
     @Test
-    public void testSetSourceURLs() {
+    void testSetSourceURLs() {
         List<ApplicationResource> sourceURLs = new ArrayList<ApplicationResource>();
         sourceURLs.add(url1);
         sourceURLs.add(url2);
@@ -271,7 +271,7 @@ public class CachingLocaleUrlDefinitionDAOTest {
      * Tests {@link LocaleUrlDefinitionDAO#setReader(DefinitionsReader)}.
      */
     @Test
-    public void testSetReader() {
+    void testSetReader() {
         DefinitionsReader reader = createMock(DefinitionsReader.class);
         definitionDao.setReader(reader);
         assertEquals(reader,
@@ -284,7 +284,7 @@ public class CachingLocaleUrlDefinitionDAOTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testInit() throws IOException {
+    void testInit() throws IOException {
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
         Set<ApplicationResource> urlSet = new HashSet<ApplicationResource>();
         urlSet.add(url1);
@@ -319,7 +319,7 @@ public class CachingLocaleUrlDefinitionDAOTest {
      * Tests wildcard mappings.
      */
     @Test
-    public void testWildcardMapping() {
+    void testWildcardMapping() {
         List<ApplicationResource> urls = new ArrayList<ApplicationResource>();
         urls.add(urlWildcard);
         definitionDao.setSources(urls);
@@ -362,7 +362,7 @@ public class CachingLocaleUrlDefinitionDAOTest {
      * when loading multiple files for a locale.
      */
     @Test
-    public void testListAttributeLocaleInheritance() {
+    void testListAttributeLocaleInheritance() {
         List<ApplicationResource> urls = new ArrayList<ApplicationResource>();
         urls.add(url21);
         definitionDao.setSources(urls);

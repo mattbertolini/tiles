@@ -34,13 +34,13 @@ import org.junit.jupiter.api.Test;
  * @version $Rev$ $Date$
  * @since 2.2.0
  */
-public class TilesRequestContextHolderTest {
+class TilesRequestContextHolderTest {
 
     /**
      * Test method for {@link TilesRequestContextHolder#setTilesRequestContext(Request)}.
      */
     @Test
-    public void testSetTilesRequestContext() {
+    void testSetTilesRequestContext() {
         Request request = createMock(Request.class);
 
         replay(request);
