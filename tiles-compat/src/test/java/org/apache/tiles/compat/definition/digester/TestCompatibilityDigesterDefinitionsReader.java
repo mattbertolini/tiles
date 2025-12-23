@@ -26,23 +26,25 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
 import org.apache.tiles.definition.DefinitionsFactoryException;
 import org.apache.tiles.definition.DefinitionsReader;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests the <code>org.apache.tiles.definition.digester.DigesterDefinitionsReader</code> class.
  *
  * @version $Rev$ $Date$
  */
-public class TestCompatibilityDigesterDefinitionsReader extends TestCase {
+class TestCompatibilityDigesterDefinitionsReader {
 
     /**
      * The logging object.
@@ -55,27 +57,9 @@ public class TestCompatibilityDigesterDefinitionsReader extends TestCase {
      */
     private DefinitionsReader reader;
 
-    /**
-     * Creates a new instance of TestDigesterDefinitionsReader.
-     *
-     * @param name The name of the test.
-     */
-    public TestCompatibilityDigesterDefinitionsReader(String name) {
-        super(name);
-    }
-
-    /**
-     * @return a test suite (<code>TestSuite</code>) that includes all methods
-     *         starting with "test"
-     */
-    public static Test suite() {
-        return new TestSuite(TestCompatibilityDigesterDefinitionsReader.class);
-    }
-
     /** {@inheritDoc} */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @BeforeEach
+    void setUp() {
         reader = new CompatibilityDigesterDefinitionsReader();
     }
 
@@ -85,22 +69,21 @@ public class TestCompatibilityDigesterDefinitionsReader extends TestCase {
      * @throws DefinitionsFactoryException If the definitions factory fails.
      * @throws IOException If an I/O exception happens.
      */
-    public void testReadOldFormat() throws IOException {
+    @Test
+    void testReadOldFormat() throws IOException {
         URL configFile = this.getClass().getClassLoader().getResource(
                 "org/apache/tiles/config/tiles-defs-1.1.xml");
-        assertNotNull("Config file not found", configFile);
+        assertNotNull(configFile, "Config file not found");
 
         InputStream source = configFile.openStream();
         Map<String, Definition> definitions = reader.read(source);
 
-        assertNotNull("Definitions not returned.", definitions);
-        assertNotNull("Couldn't find doc.mainLayout tile.",
-                definitions.get("doc.mainLayout"));
-        assertNotNull("Couldn't Find title attribute.", definitions.get(
-                "doc.mainLayout").getAttribute("title").getValue());
-        assertEquals("Incorrect Find title attribute.",
-                "Tiles Library Documentation", definitions.get(
-                        "doc.mainLayout").getAttribute("title").getValue());
+        assertNotNull(definitions, "Definitions not returned.");
+        assertNotNull(definitions.get("doc.mainLayout"), "Couldn't find doc.mainLayout tile.");
+        assertNotNull(definitions.get(
+                "doc.mainLayout").getAttribute("title").getValue(), "Couldn't Find title attribute.");
+        assertEquals("Tiles Library Documentation", definitions.get(
+                        "doc.mainLayout").getAttribute("title").getValue(), "Incorrect Find title attribute.");
     }
 
     /**
@@ -108,49 +91,49 @@ public class TestCompatibilityDigesterDefinitionsReader extends TestCase {
      *
      * @throws IOException If an I/O exception happens.
      */
-    public void testReadNewFormat() throws IOException {
+    @Test
+    void testReadNewFormat() throws IOException {
         URL configFile = this.getClass().getClassLoader().getResource(
                 "org/apache/tiles/config/tiles-defs-2.0.xml");
-        assertNotNull("Config file not found", configFile);
+        assertNotNull(configFile, "Config file not found");
 
         InputStream source = configFile.openStream();
         Map<String, Definition> definitions = reader.read(source);
 
-        assertNotNull("Definitions not returned.", definitions);
-        assertNotNull("Couldn't find doc.mainLayout tile.",
-                definitions.get("doc.mainLayout"));
-        assertNotNull("Couldn't Find title attribute.", definitions.get(
-                "doc.mainLayout").getAttribute("title").getValue());
-        assertEquals("Incorrect Find title attribute.",
-                "Tiles Library Documentation", definitions.get(
-                        "doc.mainLayout").getAttribute("title").getValue());
+        assertNotNull(definitions, "Definitions not returned.");
+        assertNotNull(definitions.get("doc.mainLayout"), "Couldn't find doc.mainLayout tile.");
+        assertNotNull(definitions.get(
+                "doc.mainLayout").getAttribute("title").getValue(), "Couldn't Find title attribute.");
+        assertEquals("Tiles Library Documentation", definitions.get(
+                        "doc.mainLayout").getAttribute("title").getValue(), "Incorrect Find title attribute.");
     }
 
     /**
      * Tests the read method under normal conditions for the new features in 2.1
      * version of the DTD.
      */
-    public void testRead21Version() {
+    @Test
+    void testRead21Version() {
         try {
             URL configFile = this.getClass().getClassLoader().getResource(
                     "org/apache/tiles/config/tiles-defs-2.1.xml");
-            assertNotNull("Config file not found", configFile);
+            assertNotNull(configFile, "Config file not found");
 
             InputStream source = configFile.openStream();
             Map<String, Definition> definitions = reader.read(source);
 
-            assertNotNull("Definitions not returned.", definitions);
+            assertNotNull(definitions, "Definitions not returned.");
             Definition def = definitions.get("doc.cascaded.test");
 
-            assertNotNull("Couldn't find doc.role.test tile.", def);
+            assertNotNull(def, "Couldn't find doc.role.test tile.");
             Attribute attribute = def.getLocalAttribute("title");
-            assertNotNull("Couldn't Find title local attribute.", attribute);
+            assertNotNull(attribute, "Couldn't Find title local attribute.");
             attribute = def.getCascadedAttribute("title2");
-            assertNotNull("Couldn't Find title2 cascaded attribute.", attribute);
+            assertNotNull(attribute, "Couldn't Find title2 cascaded attribute.");
             attribute = def.getLocalAttribute("items1");
-            assertNotNull("Couldn't Find items1 local attribute.", attribute);
+            assertNotNull(attribute, "Couldn't Find items1 local attribute.");
             attribute = def.getCascadedAttribute("items2");
-            assertNotNull("Couldn't Find items2 cascaded attribute.", attribute);
+            assertNotNull(attribute, "Couldn't Find items2 cascaded attribute.");
         } catch (Exception e) {
             fail("Exception reading configuration." + e);
         }
@@ -159,7 +142,8 @@ public class TestCompatibilityDigesterDefinitionsReader extends TestCase {
     /**
      * Tests read with bad input source.
      */
-    public void testBadSource() {
+    @Test
+    void testBadSource() {
         try {
             // Read definitions.
             reader.read(new String("Bad Input"));

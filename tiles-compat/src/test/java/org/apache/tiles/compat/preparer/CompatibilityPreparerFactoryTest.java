@@ -21,18 +21,20 @@
 
 package org.apache.tiles.compat.preparer;
 
-import junit.framework.TestCase;
-
 import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.ViewPreparer;
 import org.apache.tiles.request.Request;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 /**
  * Tests {@link CompatibilityPreparerFactory}.
  *
  * @version $Rev$ $Date$
  */
-public class CompatibilityPreparerFactoryTest extends TestCase {
+class CompatibilityPreparerFactoryTest {
 
     /**
      * The factory to test.
@@ -40,7 +42,7 @@ public class CompatibilityPreparerFactoryTest extends TestCase {
     private CompatibilityPreparerFactory factory;
 
     /** {@inheritDoc} */
-    @Override
+    @BeforeEach
     protected void setUp() {
         factory = new CompatibilityPreparerFactory();
     }
@@ -50,13 +52,12 @@ public class CompatibilityPreparerFactoryTest extends TestCase {
      * {@link org.apache.tiles.compat.preparer.CompatibilityPreparerFactory#createPreparer(java.lang.String)}
      * .
      */
-    public void testCreatePreparer() {
+    @Test
+    void testCreatePreparer() {
         ViewPreparer preparer = factory.createPreparer("/my/url.do");
-        assertTrue("The preparer is not an UrlPreparer",
-                preparer instanceof UrlPreparer);
+        assertInstanceOf(UrlPreparer.class, preparer, "The preparer is not an UrlPreparer");
         preparer = factory.createPreparer(MockViewPreparer.class.getName());
-        assertTrue("The preparer is not an class ViewPreparer",
-                preparer instanceof MockViewPreparer);
+        assertInstanceOf(MockViewPreparer.class, preparer, "The preparer is not an class ViewPreparer");
     }
 
     /**
