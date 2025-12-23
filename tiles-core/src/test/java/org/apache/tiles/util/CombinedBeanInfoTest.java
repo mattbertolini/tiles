@@ -20,8 +20,6 @@
  */
 package org.apache.tiles.util;
 
-import static org.junit.Assert.*;
-
 import java.beans.FeatureDescriptor;
 import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
@@ -32,15 +30,17 @@ import java.util.Map;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.reflect.ClassUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests {@link CombinedBeanInfo}.
  *
  * @version $Rev$ $Date$
  */
-public class CombinedBeanInfoTest {
+class CombinedBeanInfoTest {
 
     /**
      * The bean info to test.
@@ -65,8 +65,8 @@ public class CombinedBeanInfoTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         beanInfo = new CombinedBeanInfo(Request.class, ApplicationContext.class);
         requestMap = new LinkedHashMap<String, PropertyDescriptor>();
         ClassUtil.collectBeanInfo(Request.class, requestMap);
@@ -81,7 +81,7 @@ public class CombinedBeanInfoTest {
      * Test method for {@link org.apache.tiles.util.CombinedBeanInfo#getDescriptors()}.
      */
     @Test
-    public void testGetDescriptors() {
+    void testGetDescriptors() {
         assertEquals(descriptors, beanInfo.getDescriptors());
     }
 
@@ -89,7 +89,7 @@ public class CombinedBeanInfoTest {
      * Test method for {@link org.apache.tiles.util.CombinedBeanInfo#getMappedDescriptors(java.lang.Class)}.
      */
     @Test
-    public void testGetMappedDescriptors() {
+    void testGetMappedDescriptors() {
         assertEquals(requestMap, beanInfo.getMappedDescriptors(Request.class));
         assertEquals(applicationMap, beanInfo.getMappedDescriptors(ApplicationContext.class));
     }
@@ -98,7 +98,7 @@ public class CombinedBeanInfoTest {
      * Test method for {@link org.apache.tiles.util.CombinedBeanInfo#getProperties(java.lang.Class)}.
      */
     @Test
-    public void testGetProperties() {
+    void testGetProperties() {
         assertEquals(requestMap.keySet(), beanInfo.getProperties(Request.class));
         assertEquals(applicationMap.keySet(), beanInfo.getProperties(ApplicationContext.class));
     }
