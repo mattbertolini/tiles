@@ -22,7 +22,7 @@
 package org.apache.tiles.startup;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import org.apache.tiles.factory.BasicTilesContainerFactory;
 import org.apache.tiles.request.ApplicationContext;
@@ -44,7 +44,7 @@ class DefaultTilesInitializerTest {
 
         replay(context);
         DefaultTilesInitializer initializer = new DefaultTilesInitializer();
-        assertTrue(initializer.createContainerFactory(context) instanceof BasicTilesContainerFactory);
+        assertInstanceOf(BasicTilesContainerFactory.class, initializer.createContainerFactory(context));
         verify(context);
     }
 }
