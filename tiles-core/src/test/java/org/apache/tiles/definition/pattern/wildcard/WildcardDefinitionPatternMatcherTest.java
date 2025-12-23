@@ -21,13 +21,13 @@
 
 package org.apache.tiles.definition.pattern.wildcard;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
 import org.apache.tiles.definition.pattern.DefinitionPatternMatcher;
 import org.apache.tiles.util.WildcardHelper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link WildcardDefinitionPatternMatcher}.
@@ -35,13 +35,13 @@ import org.junit.Test;
  * @version $Rev$ $Date$
  * @since 2.2.0
  */
-public class WildcardDefinitionPatternMatcherTest {
+class WildcardDefinitionPatternMatcherTest {
 
     /**
      * Test method for {@link WildcardDefinitionPatternMatcher#createDefinition(String)}.
      */
     @Test
-    public void testResolveDefinition() {
+    void testResolveDefinition() {
         Definition def = new Definition();
         def.setName("testDef*.message*");
         def.setTemplateAttribute(Attribute.createTemplateAttribute("/test{1}.jsp"));

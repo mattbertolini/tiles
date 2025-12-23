@@ -21,7 +21,7 @@
 
 package org.apache.tiles.definition.pattern;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,7 +33,7 @@ import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
 import org.apache.tiles.Expression;
 import org.apache.tiles.ListAttribute;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link PatternUtil}.
@@ -41,7 +41,7 @@ import org.junit.Test;
  * @version $Rev$ $Date$
  * @since 2.2.0
  */
-public class PatternUtilTest {
+class PatternUtilTest {
 
     /**
      * The size of the list in the main list attribute.
@@ -53,7 +53,7 @@ public class PatternUtilTest {
      * {@link PatternUtil#replacePlaceholders(Definition, String, Object[])}.
      */
     @Test
-    public void testReplacePlaceholders() {
+    void testReplacePlaceholders() {
         Map<String, Attribute> attributes = new HashMap<String, Attribute>();
         attributes.put("attrib1", new Attribute("value{2}"));
         attributes.put("attrib2", new Attribute("value{2}{3}"));
@@ -83,7 +83,7 @@ public class PatternUtilTest {
      * {@link PatternUtil#replacePlaceholders(Definition, String, Object[])}.
      */
     @Test
-    public void testReplacePlaceholdersNullTemplate() {
+    void testReplacePlaceholdersNullTemplate() {
         Map<String, Attribute> attributes = new HashMap<String, Attribute>();
         attributes.put("attrib1", new Attribute("value{2}"));
         attributes.put("attrib2", new Attribute("value{2}{3}"));
@@ -103,7 +103,7 @@ public class PatternUtilTest {
      * {@link PatternUtil#replacePlaceholders(Definition, String, Object[])}.
      */
     @Test
-    public void testReplacePlaceholdersCascadedAttributes() {
+    void testReplacePlaceholdersCascadedAttributes() {
         Definition definition = new Definition("definitionName", new Attribute(
                 "template{1}"), null);
         definition.putAttribute("attrib1", new Attribute("value{2}"), true);
@@ -124,7 +124,7 @@ public class PatternUtilTest {
      * {@link PatternUtil#replacePlaceholders(Definition, String, Object[])}.
      */
     @Test
-    public void testReplacePlaceholdersListAttribute() {
+    void testReplacePlaceholdersListAttribute() {
         Map<String, Attribute> attributes = new HashMap<String, Attribute>();
         ListAttribute listAttribute = new ListAttribute();
         ListAttribute internalListAttribute = new ListAttribute();
@@ -165,7 +165,7 @@ public class PatternUtilTest {
      * Tests {@link PatternUtil#createExtractedMap(Map, java.util.Set)}.
      */
     @Test
-    public void testCreateExtractedMap() {
+    void testCreateExtractedMap() {
         Map<Integer, String> map = new HashMap<Integer, String>();
         map.put(0, "value0");
         map.put(1, "value1");
@@ -185,7 +185,7 @@ public class PatternUtilTest {
      * See TILES-502
      */
     @Test
-    public void testReplacePlaceholdersEL_0() {
+    void testReplacePlaceholdersEL_0() {
         Map<String, Attribute> attributes = new HashMap<String, Attribute>();
         Attribute attribute = new Attribute("some-{1}-${requestScope.someVariable}.jsp");
         attribute.setExpressionObject(new Expression((String)attribute.getValue()));
@@ -209,7 +209,7 @@ public class PatternUtilTest {
      * See TILES-574
      */
     @Test
-    public void testReplacePlaceholdersEL_1() {
+    void testReplacePlaceholdersEL_1() {
         Map<String, Attribute> attributes = new HashMap<String, Attribute>();
         Attribute attribute = new Attribute("some-{1}-${requestScope.someVariable}-other-{2}.jsp");
         attribute.setExpressionObject(new Expression((String)attribute.getValue()));
@@ -233,7 +233,7 @@ public class PatternUtilTest {
      * See TILES-574
      */
     @Test
-    public void testReplacePlaceholdersEL_2() {
+    void testReplacePlaceholdersEL_2() {
         Map<String, Attribute> attributes = new HashMap<String, Attribute>();
         Attribute attribute = new Attribute("some-${requestScope.someVariable}-other-{1}-${requestScope.someOtherVariable}.jsp");
         attribute.setExpressionObject(new Expression((String)attribute.getValue()));
@@ -256,7 +256,7 @@ public class PatternUtilTest {
      * {@link PatternUtil#replacePlaceholders(Definition, String, Object[])}.
      */
     @Test
-    public void testReplacePlaceholdersEL_conditional() {
+    void testReplacePlaceholdersEL_conditional() {
         Map<String, Attribute> attributes = new HashMap<String, Attribute>();
         Attribute attribute = new Attribute("{1}/some-other-{2}-${requestScope.someBoolean ? 'a' : 'b'}.jsp");
         attribute.setExpressionObject(new Expression((String)attribute.getValue()));
@@ -279,7 +279,7 @@ public class PatternUtilTest {
      * {@link PatternUtil#replacePlaceholders(Definition, String, Object[])}.
      */
     @Test
-    public void testReplacePlaceholdersEL_twice() {
+    void testReplacePlaceholdersEL_twice() {
         Map<String, Attribute> attributes = new HashMap<String, Attribute>();
         Attribute attribute = new Attribute("some-${requestScope.firstVariable}-${requestScope.secondVariable}.jsp");
         attribute.setExpressionObject(new Expression((String)attribute.getValue()));
@@ -302,7 +302,7 @@ public class PatternUtilTest {
      * {@link PatternUtil#replacePlaceholders(Definition, String, Object[])}.
      */
     @Test
-    public void testReplacePlaceholdersEL_options() {
+    void testReplacePlaceholdersEL_options() {
         Map<String, Attribute> attributes = new HashMap<String, Attribute>();
         Attribute attribute = new Attribute("{1}/{options[my_fallback}}/some-other-{2}-${requestScope.someVariable}.jsp");
         attribute.setExpressionObject(new Expression((String)attribute.getValue()));

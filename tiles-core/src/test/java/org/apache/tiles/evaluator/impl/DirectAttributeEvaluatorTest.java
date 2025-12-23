@@ -20,19 +20,19 @@
  */
 package org.apache.tiles.evaluator.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Expression;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DirectAttributeEvaluator}.
  *
  * @version $Rev$ $Date$
  */
-public class DirectAttributeEvaluatorTest {
+class DirectAttributeEvaluatorTest {
 
     /**
      * The evaluator to test.
@@ -42,8 +42,8 @@ public class DirectAttributeEvaluatorTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         evaluator = new DirectAttributeEvaluator();
     }
 
@@ -52,27 +52,25 @@ public class DirectAttributeEvaluatorTest {
      * {@link DirectAttributeEvaluator#evaluate(Attribute, org.apache.tiles.request.Request)}.
      */
     @Test
-    public void testEvaluate() {
+    void testEvaluate() {
         String expression = "This is an expression";
         Attribute attribute = new Attribute(null, Expression.createExpression(
                 expression, null), null, (String) null);
         Object result = evaluator.evaluate(attribute, null);
-        assertEquals("The expression has not been evaluated correctly", result,
-                expression);
+        assertEquals(expression, result, "The expression has not been evaluated correctly");
         expression = "${attributeName}";
         attribute.setExpressionObject(new Expression(expression));
         result = evaluator.evaluate(attribute, null);
-        assertEquals("The expression has not been evaluated correctly", result,
-                expression);
+        assertEquals(expression, result, "The expression has not been evaluated correctly");
     }
 
     /**
      * Tests
      * {@link DirectAttributeEvaluator#evaluate(Attribute, org.apache.tiles.request.Request)}.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void testEvaluateNullAttribute() {
-        evaluator.evaluate((Attribute) null, null);
+    @Test
+    void testEvaluateNullAttribute() {
+        assertThrows(IllegalArgumentException.class, () -> evaluator.evaluate((Attribute) null, null));
     }
 
     /**
@@ -80,14 +78,12 @@ public class DirectAttributeEvaluatorTest {
      * {@link DirectAttributeEvaluator#evaluate(String, org.apache.tiles.request.Request)}.
      */
     @Test
-    public void testEvaluateString() {
+    void testEvaluateString() {
         String expression = "This is an expression";
         Object result = evaluator.evaluate(expression, null);
-        assertEquals("The expression has not been evaluated correctly", result,
-                expression);
+        assertEquals(expression, result, "The expression has not been evaluated correctly");
         expression = "${attributeName}";
         result = evaluator.evaluate(expression, null);
-        assertEquals("The expression has not been evaluated correctly", result,
-                expression);
+        assertEquals(expression, result, "The expression has not been evaluated correctly");
     }
 }

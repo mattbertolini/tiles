@@ -21,7 +21,7 @@
 package org.apache.tiles.impl;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.util.Deque;
@@ -45,15 +45,15 @@ import org.apache.tiles.request.render.CannotRenderException;
 import org.apache.tiles.request.render.NoSuchRendererException;
 import org.apache.tiles.request.render.Renderer;
 import org.apache.tiles.request.render.RendererFactory;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link BasicTilesContainer}.
  *
  * @version $Rev$ $Date$
  */
-public class BasicTilesContainerUnitTest {
+class BasicTilesContainerUnitTest {
 
     /**
      * Name used to store attribute context stack.
@@ -94,8 +94,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         applicationContext = createMock(ApplicationContext.class);
         definitionsFactory = createMock(DefinitionsFactory.class);
         preparerFactory = createMock(PreparerFactory.class);
@@ -112,9 +112,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#startContext(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testStartContext() {
+    void testStartContext() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -130,7 +129,7 @@ public class BasicTilesContainerUnitTest {
         replay(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 requestScope, deque, attributeContext);
-        assertTrue(container.startContext(request) instanceof BasicAttributeContext);
+        assertInstanceOf(BasicAttributeContext.class, container.startContext(request));
         verify(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 requestScope, deque, attributeContext);
@@ -139,9 +138,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#endContext(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testEndContext() {
+    void testEndContext() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -164,9 +162,8 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#renderContext(Request)}.
      * @throws IOException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testRenderContext() throws IOException {
+    void testRenderContext() throws IOException {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -202,7 +199,7 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#getApplicationContext()}.
      */
     @Test
-    public void testGetApplicationContext() {
+    void testGetApplicationContext() {
         replay(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory);
         assertEquals(applicationContext, container.getApplicationContext());
@@ -213,9 +210,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#getAttributeContext(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetAttributeContext() {
+    void testGetAttributeContext() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -238,9 +234,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#getAttributeContext(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetAttributeContextNew() {
+    void testGetAttributeContextNew() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -254,7 +249,7 @@ public class BasicTilesContainerUnitTest {
         replay(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 requestScope, deque, attributeContext);
-        assertTrue(container.getAttributeContext(request) instanceof BasicAttributeContext);
+        assertInstanceOf(BasicAttributeContext.class, container.getAttributeContext(request));
         verify(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 requestScope, deque, attributeContext);
@@ -264,7 +259,7 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#getDefinitionsFactory()}.
      */
     @Test
-    public void testGetDefinitionsFactory() {
+    void testGetDefinitionsFactory() {
         replay(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory);
         assertEquals(definitionsFactory, container.getDefinitionsFactory());
@@ -276,7 +271,7 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#getPreparerFactory()}.
      */
     @Test
-    public void testGetPreparerFactory() {
+    void testGetPreparerFactory() {
         replay(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory);
         assertEquals(preparerFactory, container.getPreparerFactory());
@@ -287,9 +282,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#prepare(java.lang.String, Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testPrepare() {
+    void testPrepare() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -315,9 +309,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#prepare(java.lang.String, Request)}.
      */
-    @SuppressWarnings("unchecked")
-    @Test(expected = NoSuchPreparerException.class)
-    public void testPrepareException() {
+    @Test
+    void testPrepareException() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -329,7 +322,7 @@ public class BasicTilesContainerUnitTest {
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 requestScope, deque, attributeContext);
         try {
-            container.prepare("preparer", request);
+            assertThrows(NoSuchPreparerException.class, () -> container.prepare("preparer", request));
         } finally {
             verify(applicationContext, attributeEvaluatorFactory,
                     definitionsFactory, preparerFactory, rendererFactory,
@@ -338,12 +331,11 @@ public class BasicTilesContainerUnitTest {
     }
 
     /**
-     * Test method for {@link BasicTilesContainer#render(Request, java.lang.String)}.
+     * Test method for {@link BasicTilesContainer#render(java.lang.String, Request)}.
      * @throws IOException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testRenderStringRequest() throws IOException {
+    void testRenderStringRequest() throws IOException {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -382,10 +374,10 @@ public class BasicTilesContainerUnitTest {
     }
 
     /**
-     * Test method for {@link BasicTilesContainer#render(Request, java.lang.String)}.
+     * Test method for {@link BasicTilesContainer#render(java.lang.String, Request)}.
      */
-    @Test(expected = NoSuchDefinitionException.class)
-    public void testRenderStringRequestException() {
+    @Test
+    void testRenderStringRequestException() {
         Request request = createMock(Request.class);
 
         expect(definitionsFactory.getDefinition("definition", request)).andReturn(null);
@@ -393,7 +385,7 @@ public class BasicTilesContainerUnitTest {
         replay(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request);
         try {
-            container.render("definition", request);
+            assertThrows(NoSuchDefinitionException.class, () -> container.render("definition", request));
         } finally {
             verify(applicationContext, attributeEvaluatorFactory,
                     definitionsFactory, preparerFactory, rendererFactory);
@@ -401,11 +393,11 @@ public class BasicTilesContainerUnitTest {
     }
 
     /**
-     * Test method for {@link BasicTilesContainer#render(Request, org.apache.tiles.Attribute)}.
+     * Test method for {@link BasicTilesContainer#render(org.apache.tiles.Attribute, Request)}.
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testRenderAttributeRequest() throws IOException {
+    void testRenderAttributeRequest() throws IOException {
         Request request = createMock(Request.class);
         Attribute templateAttribute = createMock(Attribute.class);
         Renderer renderer = createMock(Renderer.class);
@@ -428,17 +420,17 @@ public class BasicTilesContainerUnitTest {
     }
 
     /**
-     * Test method for {@link BasicTilesContainer#render(Request, org.apache.tiles.Attribute)}.
+     * Test method for {@link BasicTilesContainer#render(org.apache.tiles.Attribute, Request)}.
      * @throws IOException If something goes wrong.
      */
-    @Test(expected = CannotRenderException.class)
-    public void testRenderAttributeRequestException1() throws IOException {
+    @Test
+    void testRenderAttributeRequestException1() throws IOException {
         Request request = createMock(Request.class);
 
         replay(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request);
         try {
-            container.render((Attribute) null, request);
+            assertThrows(CannotRenderException.class, () -> container.render((Attribute) null, request));
         } finally {
             verify(applicationContext, attributeEvaluatorFactory,
                     definitionsFactory, preparerFactory, rendererFactory,
@@ -447,11 +439,11 @@ public class BasicTilesContainerUnitTest {
     }
 
     /**
-     * Test method for {@link BasicTilesContainer#render(Request, org.apache.tiles.Attribute)}.
+     * Test method for {@link BasicTilesContainer#render(org.apache.tiles.Attribute, Request)}.
      * @throws IOException If something goes wrong.
      */
-    @Test(expected = NoSuchRendererException.class)
-    public void testRenderAttributeRequestException2() throws IOException {
+    @Test
+    void testRenderAttributeRequestException2() throws IOException {
         Request request = createMock(Request.class);
         Attribute templateAttribute = createMock(Attribute.class);
         AttributeEvaluator evaluator = createMock(AttributeEvaluator.class);
@@ -464,7 +456,7 @@ public class BasicTilesContainerUnitTest {
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 templateAttribute);
         try {
-            container.render(templateAttribute, request);
+            assertThrows(NoSuchRendererException.class, () -> container.render(templateAttribute, request));
         } finally {
             verify(applicationContext, attributeEvaluatorFactory, evaluator,
                     definitionsFactory, preparerFactory, rendererFactory,
@@ -473,11 +465,11 @@ public class BasicTilesContainerUnitTest {
     }
 
     /**
-     * Test method for {@link BasicTilesContainer#render(Request, org.apache.tiles.Attribute)}.
+     * Test method for {@link BasicTilesContainer#render(org.apache.tiles.Attribute, Request)}.
      * @throws IOException If something goes wrong.
      */
-    @Test(expected = CannotRenderException.class)
-    public void testRenderAttributeRequestException3() throws IOException {
+    @Test
+    void testRenderAttributeRequestException3() throws IOException {
         Request request = createMock(Request.class);
         Attribute templateAttribute = createMock(Attribute.class);
         AttributeEvaluator evaluator = createMock(AttributeEvaluator.class);
@@ -487,13 +479,13 @@ public class BasicTilesContainerUnitTest {
         expect(templateAttribute.isPermitted(request)).andReturn(true);
         expect(rendererFactory.getRenderer("renderer")).andReturn(renderer);
         expect(attributeEvaluatorFactory.getAttributeEvaluator(templateAttribute)).andReturn(evaluator);
-        expect(evaluator.evaluate(templateAttribute, request)).andReturn(new Integer(1));
+        expect(evaluator.evaluate(templateAttribute, request)).andReturn(1);
 
         replay(applicationContext, attributeEvaluatorFactory, evaluator,
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 templateAttribute);
         try {
-            container.render(templateAttribute, request);
+            assertThrows(CannotRenderException.class, () -> container.render(templateAttribute, request));
         } finally {
             verify(applicationContext, attributeEvaluatorFactory, evaluator,
                     definitionsFactory, preparerFactory, rendererFactory,
@@ -502,11 +494,11 @@ public class BasicTilesContainerUnitTest {
     }
 
     /**
-     * Test method for {@link BasicTilesContainer#render(Request, org.apache.tiles.Attribute)}.
+     * Test method for {@link BasicTilesContainer#render(org.apache.tiles.Attribute, Request)}.
      * @throws IOException If something goes wrong.
      */
-    @Test(expected = NoSuchRendererException.class)
-    public void testRenderAttributeRequestException() throws IOException {
+    @Test
+    void testRenderAttributeRequestException() throws IOException {
         Request request = createMock(Request.class);
         Attribute templateAttribute = createMock(Attribute.class);
         AttributeEvaluator evaluator = createMock(AttributeEvaluator.class);
@@ -519,7 +511,7 @@ public class BasicTilesContainerUnitTest {
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 templateAttribute);
         try {
-            container.render(templateAttribute, request);
+            assertThrows(NoSuchRendererException.class, () -> container.render(templateAttribute, request));
         } finally {
             verify(applicationContext, attributeEvaluatorFactory, evaluator,
                     definitionsFactory, preparerFactory, rendererFactory,
@@ -531,18 +523,18 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#evaluate(org.apache.tiles.Attribute, Request)}.
      */
     @Test
-    public void testEvaluate() {
+    void testEvaluate() {
         Request request = createMock(Request.class);
         AttributeEvaluator evaluator = createMock(AttributeEvaluator.class);
         Attribute templateAttribute = createMock(Attribute.class);
 
         expect(attributeEvaluatorFactory.getAttributeEvaluator(templateAttribute)).andReturn(evaluator);
-        expect(evaluator.evaluate(templateAttribute, request)).andReturn(new Integer(1));
+        expect(evaluator.evaluate(templateAttribute, request)).andReturn(1);
 
         replay(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 templateAttribute, evaluator);
-        assertEquals(new Integer(1), container.evaluate(templateAttribute, request));
+        assertEquals(1, container.evaluate(templateAttribute, request));
         verify(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 templateAttribute, evaluator);
@@ -552,7 +544,7 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#isValidDefinition(java.lang.String, Request)}.
      */
     @Test
-    public void testIsValidDefinition() {
+    void testIsValidDefinition() {
         Request request = createMock(Request.class);
         Definition definition = createMock(Definition.class);
 
@@ -569,7 +561,7 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#isValidDefinition(java.lang.String, Request)}.
      */
     @Test
-    public void testIsValidDefinitionNull() {
+    void testIsValidDefinitionNull() {
         Request request = createMock(Request.class);
 
         expect(definitionsFactory.getDefinition("definition", request)).andReturn(null);
@@ -585,7 +577,7 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#isValidDefinition(java.lang.String, Request)}.
      */
     @Test
-    public void testIsValidDefinitionException() {
+    void testIsValidDefinitionException() {
         Request request = createMock(Request.class);
 
         expect(definitionsFactory.getDefinition("definition", request))
@@ -602,7 +594,7 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#getDefinition(java.lang.String, Request)}.
      */
     @Test
-    public void testGetDefinition() {
+    void testGetDefinition() {
         Request request = createMock(Request.class);
         Definition definition = createMock(Definition.class);
 
@@ -618,9 +610,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#getContextStack(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetContextStack() {
+    void testGetContextStack() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -640,9 +631,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#getContextStack(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetContextStackNew() {
+    void testGetContextStackNew() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
 
@@ -653,7 +643,7 @@ public class BasicTilesContainerUnitTest {
         replay(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 requestScope);
-        assertTrue(container.getContextStack(request) instanceof LinkedList);
+        assertInstanceOf(LinkedList.class, container.getContextStack(request));
         verify(applicationContext, attributeEvaluatorFactory,
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 requestScope);
@@ -662,9 +652,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#pushContext(org.apache.tiles.AttributeContext, Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testPushContext() {
+    void testPushContext() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -686,9 +675,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#popContext(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testPopContext() {
+    void testPopContext() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -710,9 +698,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#getContext(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetContext() {
+    void testGetContext() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -735,9 +722,8 @@ public class BasicTilesContainerUnitTest {
     /**
      * Test method for {@link BasicTilesContainer#getContext(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetContextNull() {
+    void testGetContextNull() {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -759,7 +745,6 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#render(org.apache.tiles.Definition, Request)}.
      * @throws IOException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
     public void testRenderRequestDefinition() throws IOException {
         Request request = createMock(Request.class);
@@ -802,9 +787,8 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#render(org.apache.tiles.Definition, Request)}.
      * @throws IOException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
-    @Test(expected = CannotRenderException.class)
-    public void testRenderRequestDefinitionException() throws IOException {
+    @Test
+    void testRenderRequestDefinitionException() throws IOException {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -837,7 +821,7 @@ public class BasicTilesContainerUnitTest {
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 requestScope, deque, attributeContext, preparer, renderer, definition);
         try {
-            container.render(definition, request);
+            assertThrows(CannotRenderException.class, () -> container.render(definition, request));
         } finally {
             verify(applicationContext, attributeEvaluatorFactory, evaluator,
                     definitionsFactory, preparerFactory, rendererFactory,
@@ -850,7 +834,6 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#render(Request, org.apache.tiles.AttributeContext)}.
      * @throws IOException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
     public void testRenderRequestAttributeContext() throws IOException {
         Request request = createMock(Request.class);
@@ -884,9 +867,8 @@ public class BasicTilesContainerUnitTest {
      * Test method for {@link BasicTilesContainer#render(Request, org.apache.tiles.AttributeContext)}.
      * @throws IOException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
-    @Test(expected = CannotRenderException.class)
-    public void testRenderRequestAttributeContextException() throws IOException {
+    @Test
+    void testRenderRequestAttributeContextException() throws IOException {
         Request request = createMock(Request.class);
         Map<String, Object> requestScope = createMock(Map.class);
         Deque<AttributeContext> deque = createMock(Deque.class);
@@ -910,7 +892,7 @@ public class BasicTilesContainerUnitTest {
                 definitionsFactory, preparerFactory, rendererFactory, request,
                 requestScope, deque, attributeContext, templateAttribute, renderer);
         try {
-            container.render(request, attributeContext);
+            assertThrows(CannotRenderException.class, () -> container.render(request, attributeContext));
         } finally {
             verify(applicationContext, attributeEvaluatorFactory, evaluator,
                     definitionsFactory, preparerFactory, rendererFactory,
