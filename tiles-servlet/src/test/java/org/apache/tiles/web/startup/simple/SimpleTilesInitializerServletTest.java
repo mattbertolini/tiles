@@ -20,25 +20,25 @@
  */
 package org.apache.tiles.web.startup.simple;
 
-import static org.junit.Assert.*;
-
 import org.apache.tiles.startup.DefaultTilesInitializer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 /**
  * Tests {@link SimpleTilesInitializerServlet}.
  *
  * @version $Rev$ $Date$
  */
-public class SimpleTilesInitializerServletTest {
+class SimpleTilesInitializerServletTest {
 
     /**
      * Test method for {@link SimpleTilesInitializerServlet#createTilesInitializer()}.
      */
     @Test
-    public void testCreateTilesInitializer() {
+    void testCreateTilesInitializer() {
         SimpleTilesInitializerServlet servlet = new SimpleTilesInitializerServlet();
-        assertTrue(servlet.createTilesInitializer() instanceof DefaultTilesInitializer);
+        assertInstanceOf(DefaultTilesInitializer.class, servlet.createTilesInitializer());
     }
 
 }
