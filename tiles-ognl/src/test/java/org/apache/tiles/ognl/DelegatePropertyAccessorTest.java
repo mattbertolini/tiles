@@ -21,29 +21,27 @@
 
 package org.apache.tiles.ognl;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map;
 
 import ognl.OgnlContext;
 import ognl.OgnlException;
 import ognl.PropertyAccessor;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DelegatePropertyAccessor}.
  *
  * @version $Rev$ $Date$
  */
-public class DelegatePropertyAccessorTest {
+class DelegatePropertyAccessorTest {
 
     /**
      * Test method for {@link DelegatePropertyAccessor#getProperty(java.util.Map, Object, Object)}.
      * @throws OgnlException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
     public void testGetProperty() throws OgnlException {
         PropertyAccessorDelegateFactory<Integer> factory = createMock(PropertyAccessorDelegateFactory.class);
@@ -62,9 +60,8 @@ public class DelegatePropertyAccessorTest {
      * Test method for {@link DelegatePropertyAccessor#setProperty(java.util.Map, Object, Object, Object)}.
      * @throws OgnlException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testSetProperty() throws OgnlException {
+    void testSetProperty() throws OgnlException {
         PropertyAccessorDelegateFactory<Integer> factory = createMock(PropertyAccessorDelegateFactory.class);
         PropertyAccessor mockAccessor = createMock(PropertyAccessor.class);
         Map<String, Object> context = createMock(Map.class);
@@ -80,9 +77,8 @@ public class DelegatePropertyAccessorTest {
     /**
      * Test method for {@link DelegatePropertyAccessor#getSourceAccessor(ognl.OgnlContext, Object, Object)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetSourceAccessor() {
+    void testGetSourceAccessor() {
         PropertyAccessorDelegateFactory<Integer> factory = createMock(PropertyAccessorDelegateFactory.class);
         PropertyAccessor mockAccessor = createMock(PropertyAccessor.class);
         OgnlContext context = createMock(OgnlContext.class);
@@ -98,9 +94,8 @@ public class DelegatePropertyAccessorTest {
     /**
      * Test method for {@link DelegatePropertyAccessor#getSourceSetter(ognl.OgnlContext, Object, Object)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetSourceSetter() {
+    void testGetSourceSetter() {
         PropertyAccessorDelegateFactory<Integer> factory = createMock(PropertyAccessorDelegateFactory.class);
         PropertyAccessor mockAccessor = createMock(PropertyAccessor.class);
         OgnlContext context = createMock(OgnlContext.class);

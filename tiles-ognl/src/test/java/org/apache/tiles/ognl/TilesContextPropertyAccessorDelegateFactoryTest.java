@@ -21,8 +21,8 @@
 
 package org.apache.tiles.ognl;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,14 +31,14 @@ import ognl.PropertyAccessor;
 
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link TilesContextPropertyAccessorDelegateFactory}.
  *
  * @version $Rev$ $Date$
  */
-public class TilesContextPropertyAccessorDelegateFactoryTest {
+class TilesContextPropertyAccessorDelegateFactoryTest {
 
     /**
      * Test method for
@@ -46,7 +46,7 @@ public class TilesContextPropertyAccessorDelegateFactoryTest {
      * .
      */
     @Test
-    public void testGetPropertyAccessorRequest() {
+    void testGetPropertyAccessorRequest() {
         PropertyAccessor objectPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor applicationContextPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor requestScopePropertyAccessor = createMock(PropertyAccessor.class);
@@ -71,7 +71,7 @@ public class TilesContextPropertyAccessorDelegateFactoryTest {
      * .
      */
     @Test
-    public void testGetPropertyAccessorApplication() {
+    void testGetPropertyAccessorApplication() {
         PropertyAccessor objectPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor applicationContextPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor requestScopePropertyAccessor = createMock(PropertyAccessor.class);
@@ -96,7 +96,7 @@ public class TilesContextPropertyAccessorDelegateFactoryTest {
      * .
      */
     @Test
-    public void testGetPropertyAccessorRequestScope() {
+    void testGetPropertyAccessorRequestScope() {
         PropertyAccessor objectPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor applicationContextPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor requestScopePropertyAccessor = createMock(PropertyAccessor.class);
@@ -123,7 +123,7 @@ public class TilesContextPropertyAccessorDelegateFactoryTest {
      * .
      */
     @Test
-    public void testGetPropertyAccessorSessionScope() {
+    void testGetPropertyAccessorSessionScope() {
         PropertyAccessor objectPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor applicationContextPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor requestScopePropertyAccessor = createMock(PropertyAccessor.class);
@@ -150,7 +150,7 @@ public class TilesContextPropertyAccessorDelegateFactoryTest {
      * .
      */
     @Test
-    public void testGetPropertyAccessorApplicationScope() {
+    void testGetPropertyAccessorApplicationScope() {
         PropertyAccessor objectPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor applicationContextPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor requestScopePropertyAccessor = createMock(PropertyAccessor.class);
@@ -178,7 +178,7 @@ public class TilesContextPropertyAccessorDelegateFactoryTest {
      * .
      */
     @Test
-    public void testGetPropertyAccessorRequestScopeDefault() {
+    void testGetPropertyAccessorRequestScopeDefault() {
         PropertyAccessor objectPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor applicationContextPropertyAccessor = createMock(PropertyAccessor.class);
         PropertyAccessor requestScopePropertyAccessor = createMock(PropertyAccessor.class);

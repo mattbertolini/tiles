@@ -21,31 +21,29 @@
 
 package org.apache.tiles.ognl;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map;
 
 import ognl.OgnlContext;
 import ognl.OgnlException;
 import ognl.PropertyAccessor;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link NestedObjectDelegatePropertyAccessor}.
  *
  * @version $Rev$ $Date$
  */
-public class NestedObjectDelegatePropertyAccessorTest {
+class NestedObjectDelegatePropertyAccessorTest {
 
     /**
      * Test method for {@link NestedObjectDelegatePropertyAccessor#getProperty(java.util.Map, Object, Object)}.
      * @throws OgnlException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetProperty() throws OgnlException {
+    void testGetProperty() throws OgnlException {
         NestedObjectExtractor<Integer> nestedObjectExtractor = createMock(NestedObjectExtractor.class);
         PropertyAccessor propertyAccessor = createMock(PropertyAccessor.class);
         Map<String, Object> context = createMock(Map.class);
@@ -63,9 +61,8 @@ public class NestedObjectDelegatePropertyAccessorTest {
      * Test method for {@link NestedObjectDelegatePropertyAccessor#setProperty(java.util.Map, Object, Object, Object)}.
      * @throws OgnlException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testSetProperty() throws OgnlException {
+    void testSetProperty() throws OgnlException {
         NestedObjectExtractor<Integer> nestedObjectExtractor = createMock(NestedObjectExtractor.class);
         PropertyAccessor propertyAccessor = createMock(PropertyAccessor.class);
         Map<String, Object> context = createMock(Map.class);
@@ -82,9 +79,8 @@ public class NestedObjectDelegatePropertyAccessorTest {
     /**
      * Test method for {@link NestedObjectDelegatePropertyAccessor#getSourceAccessor(ognl.OgnlContext, Object, Object)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetSourceAccessor() {
+    void testGetSourceAccessor() {
         NestedObjectExtractor<Integer> nestedObjectExtractor = createMock(NestedObjectExtractor.class);
         PropertyAccessor propertyAccessor = createMock(PropertyAccessor.class);
         OgnlContext context = createMock(OgnlContext.class);
@@ -101,9 +97,8 @@ public class NestedObjectDelegatePropertyAccessorTest {
     /**
      * Test method for {@link NestedObjectDelegatePropertyAccessor#getSourceSetter(ognl.OgnlContext, Object, Object)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetSourceSetter() {
+    void testGetSourceSetter() {
         NestedObjectExtractor<Integer> nestedObjectExtractor = createMock(NestedObjectExtractor.class);
         PropertyAccessor propertyAccessor = createMock(PropertyAccessor.class);
         OgnlContext context = createMock(OgnlContext.class);
