@@ -22,7 +22,9 @@ package org.apache.tiles.mvel;
 
 import java.util.Arrays;
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +32,8 @@ import java.util.Map;
 import org.apache.tiles.context.TilesRequestContextHolder;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mvel2.integration.VariableResolver;
 
 
@@ -40,7 +42,7 @@ import org.mvel2.integration.VariableResolver;
  *
  * @version $Rev$ $Date$
  */
-public class ScopeVariableResolverFactoryTest {
+class ScopeVariableResolverFactoryTest {
 
     /**
      * The Tiles request.
@@ -60,8 +62,8 @@ public class ScopeVariableResolverFactoryTest {
     /**
      * Sets up the object.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         request = createMock(Request.class);
         expect(request.getAvailableScopes()).andReturn(
                 Arrays.asList(new String[]{"request", "session", "application"})).anyTimes();
@@ -75,7 +77,7 @@ public class ScopeVariableResolverFactoryTest {
      * Test method for {@link ScopeVariableResolverFactory#isTarget(String)}.
      */
     @Test
-    public void testIsTarget() {
+    void testIsTarget() {
         replay(request, applicationContext);
         assertFalse(factory.isTarget("header"));
         assertTrue(factory.isTarget("requestScope"));
@@ -88,7 +90,7 @@ public class ScopeVariableResolverFactoryTest {
      * Test method for {@link ScopeVariableResolverFactory#createVariableResolver(String)}.
      */
     @Test
-    public void testCreateVariableResolver() {
+    void testCreateVariableResolver() {
         Map<String, Object> requestScope = new HashMap<String, Object>();
         requestScope.put("one", 1);
         expect(request.getContext("request")).andReturn(requestScope).times(2);

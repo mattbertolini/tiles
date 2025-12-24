@@ -21,8 +21,10 @@
 
 package org.apache.tiles.mvel;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,9 +32,9 @@ import java.util.Map;
 import org.apache.tiles.context.TilesRequestContextHolder;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mvel2.integration.VariableResolver;
 
 /**
@@ -40,7 +42,7 @@ import org.mvel2.integration.VariableResolver;
  *
  * @version $Rev$ $Date$
  */
-public class TilesContextVariableResolverFactoryTest {
+class TilesContextVariableResolverFactoryTest {
 
     /**
      * The Tiles request.
@@ -60,8 +62,8 @@ public class TilesContextVariableResolverFactoryTest {
     /**
      * Sets up the object.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         request = createMock(Request.class);
         TilesRequestContextHolder holder = new TilesRequestContextHolder();
         holder.setTilesRequestContext(request);
@@ -72,8 +74,8 @@ public class TilesContextVariableResolverFactoryTest {
     /**
      * Tears down the object.
      */
-    @After
-    public void tearDown() {
+    @AfterEach
+    void tearDown() {
         verify(request, applicationContext);
     }
 
@@ -81,7 +83,7 @@ public class TilesContextVariableResolverFactoryTest {
      * Test method for {@link TilesContextVariableResolverFactory#isTarget(String)}.
      */
     @Test
-    public void testIsTarget() {
+    void testIsTarget() {
         replay(request, applicationContext);
         assertTrue(factory.isTarget("header"));
         assertFalse(factory.isTarget("requestScope"));
@@ -92,9 +94,8 @@ public class TilesContextVariableResolverFactoryTest {
     /**
      * Test method for {@link TilesContextVariableResolverFactory#createVariableResolver(String)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testCreateVariableResolver() {
+    void testCreateVariableResolver() {
         Map<String, String> header = createMock(Map.class);
         Map<String, Object> requestScope = new HashMap<String, Object>();
         requestScope.put("one", 1);

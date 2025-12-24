@@ -21,18 +21,19 @@
 package org.apache.tiles.mvel;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.tiles.mvel.ReadOnlyVariableResolverFactory.ReadOnlyVariableResolver;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link ReadOnlyVariableResolver}.
  *
  * @version $Rev$ $Date$
  */
-public class ReadOnlyVariableResolverTest {
+class ReadOnlyVariableResolverTest {
 
     /**
      * The resolver to test.
@@ -42,8 +43,8 @@ public class ReadOnlyVariableResolverTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         resolver = createMockBuilder(ReadOnlyVariableResolver.class).withConstructor("name").createMock();
     }
 
@@ -51,7 +52,7 @@ public class ReadOnlyVariableResolverTest {
      * Test method for {@link ReadOnlyVariableResolverFactory.ReadOnlyVariableResolver#getFlags()}.
      */
     @Test
-    public void testGetFlags() {
+    void testGetFlags() {
         replay(resolver);
         assertEquals(0, resolver.getFlags());
         verify(resolver);
@@ -61,7 +62,7 @@ public class ReadOnlyVariableResolverTest {
      * Test method for {@link ReadOnlyVariableResolverFactory.ReadOnlyVariableResolver#getName()}.
      */
     @Test
-    public void testGetName() {
+    void testGetName() {
         replay(resolver);
         assertEquals("name", resolver.getName());
         verify(resolver);
@@ -71,7 +72,7 @@ public class ReadOnlyVariableResolverTest {
      * Test method for {@link ReadOnlyVariableResolverFactory.ReadOnlyVariableResolver#setStaticType(java.lang.Class)}.
      */
     @Test
-    public void testSetStaticType() {
+    void testSetStaticType() {
         replay(resolver);
         resolver.setStaticType(Object.class);
         verify(resolver);
@@ -80,10 +81,10 @@ public class ReadOnlyVariableResolverTest {
     /**
      * Test method for {@link ReadOnlyVariableResolverFactory.ReadOnlyVariableResolver#setValue(java.lang.Object)}.
      */
-    @Test(expected = UnsupportedOperationException.class)
-    public void testSetValue() {
+    @Test
+    void testSetValue() {
         replay(resolver);
-        resolver.setValue("whatever");
+        assertThrows(UnsupportedOperationException.class, () -> resolver.setValue("whatever"));
         verify(resolver);
     }
 
