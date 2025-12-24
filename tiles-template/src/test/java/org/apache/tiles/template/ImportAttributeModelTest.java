@@ -21,8 +21,9 @@
 
 package org.apache.tiles.template;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,15 +36,15 @@ import org.apache.tiles.TilesContainer;
 import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link ImportAttributeModel}.
  *
  * @version $Rev$ $Date$
  */
-public class ImportAttributeModelTest {
+class ImportAttributeModelTest {
 
     /**
      * The size of the attributes collection.
@@ -58,8 +59,8 @@ public class ImportAttributeModelTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         model = new ImportAttributeModel();
     }
 
@@ -68,7 +69,7 @@ public class ImportAttributeModelTest {
      * #execute(String, String, String, boolean, Request).
      */
     @Test
-    public void testExecuteSingle() {
+    void testExecuteSingle() {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         Attribute attribute = new Attribute();
@@ -96,7 +97,7 @@ public class ImportAttributeModelTest {
      * #execute(String, String, String, boolean, Request).
      */
     @Test
-    public void testExecuteSingleToName() {
+    void testExecuteSingleToName() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
@@ -124,7 +125,7 @@ public class ImportAttributeModelTest {
      * #execute(String, String, String, boolean, Request).
      */
     @Test
-    public void testExecuteAll() {
+    void testExecuteAll() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
@@ -167,8 +168,8 @@ public class ImportAttributeModelTest {
      * Test method for {@link org.apache.tiles.template.ImportAttributeModel
      * #execute(String, String, String, boolean, Request).
      */
-    @Test(expected = NoSuchAttributeException.class)
-    public void testExecuteSingleNullAttributeException() {
+    @Test
+    void testExecuteSingleNullAttributeException() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
@@ -183,7 +184,7 @@ public class ImportAttributeModelTest {
 
         replay(container, attributeContext, request, applicationContext);
         try {
-            model.execute("myName", "request", null, false, request);
+            assertThrows(NoSuchAttributeException.class, () -> model.execute("myName", "request", null, false, request));
         } finally {
             verify(container, attributeContext, request, applicationContext);
         }
@@ -193,8 +194,8 @@ public class ImportAttributeModelTest {
      * Test method for {@link org.apache.tiles.template.ImportAttributeModel
      * #execute(String, String, String, boolean, Request).
      */
-    @Test(expected = NoSuchAttributeException.class)
-    public void testExecuteSingleNullAttributeValueException() {
+    @Test
+    void testExecuteSingleNullAttributeValueException() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
@@ -211,7 +212,7 @@ public class ImportAttributeModelTest {
 
         replay(container, attributeContext, request, applicationContext);
         try {
-            model.execute("myName", "request", null, false, request);
+            assertThrows(NoSuchAttributeException.class, () -> model.execute("myName", "request", null, false, request));
         } finally {
             verify(container, attributeContext, request, applicationContext);
         }
@@ -221,7 +222,7 @@ public class ImportAttributeModelTest {
      * Test method for {@link org.apache.tiles.template.ImportAttributeModel
      * #execute(String, String, String, boolean, Request).
      */
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testExecuteSingleRuntimeException() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
@@ -239,7 +240,7 @@ public class ImportAttributeModelTest {
 
         replay(container, attributeContext, request, applicationContext);
         try {
-            model.execute("myName", "request", null, false, request);
+            assertThrows(RuntimeException.class, () -> model.execute("myName", "request", null, false, request));
         } finally {
             verify(container, attributeContext, request, applicationContext);
         }
@@ -250,7 +251,7 @@ public class ImportAttributeModelTest {
      * #execute(String, String, String, boolean, Request).
      */
     @Test
-    public void testExecuteSingleNullAttributeIgnore() {
+    void testExecuteSingleNullAttributeIgnore() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
@@ -273,7 +274,7 @@ public class ImportAttributeModelTest {
      * #execute(String, String, String, boolean, Request).
      */
     @Test
-    public void testExecuteSingleNullAttributeValueIgnore() {
+    void testExecuteSingleNullAttributeValueIgnore() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
@@ -298,7 +299,7 @@ public class ImportAttributeModelTest {
      * #execute(String, String, String, boolean, Request).
      */
     @Test
-    public void testExecuteSingleRuntimeIgnore() {
+    void testExecuteSingleRuntimeIgnore() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);

@@ -22,7 +22,6 @@
 package org.apache.tiles.template;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -37,15 +36,16 @@ import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link PutListAttributeModel}.
  *
  * @version $Rev$ $Date$
  */
-public class PutListAttributeModelTest {
+class PutListAttributeModelTest {
 
     /**
      * The model to test.
@@ -55,8 +55,8 @@ public class PutListAttributeModelTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         model = new PutListAttributeModel();
     }
 
@@ -66,7 +66,7 @@ public class PutListAttributeModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecute() throws IOException {
+    void testExecute() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         Request request = createMock(Request.class);
@@ -85,7 +85,7 @@ public class PutListAttributeModelTest {
 
         replay(container, attributeContext, request, modelBody);
         model.execute("myName", "myRole", false, false, request, modelBody);
-        assertEquals(0, composeStack.size());
+        Assertions.assertEquals(0, composeStack.size());
         verify(container, attributeContext, request, modelBody);
     }
 

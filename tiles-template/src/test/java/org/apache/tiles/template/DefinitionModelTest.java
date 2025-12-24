@@ -22,7 +22,7 @@
 package org.apache.tiles.template;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -37,15 +37,15 @@ import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.mgmt.MutableTilesContainer;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DefinitionModel}.
  *
  * @version $Rev$ $Date$
  */
-public class DefinitionModelTest {
+class DefinitionModelTest {
 
     /**
      * The model to test.
@@ -55,8 +55,8 @@ public class DefinitionModelTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         model = new DefinitionModel();
     }
 
@@ -67,7 +67,7 @@ public class DefinitionModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecute() throws IOException {
+    void testExecute() throws IOException {
         MutableTilesContainer container = createMock(MutableTilesContainer.class);
         Request request = createMock(Request.class);
         Deque<Object> composeStack = new ArrayDeque<Object>();

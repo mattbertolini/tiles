@@ -37,15 +37,15 @@ import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link PutAttributeModel}.
  *
  * @version $Rev$ $Date$
  */
-public class PutAttributeModelTest {
+class PutAttributeModelTest {
 
     /**
      * The model to test.
@@ -53,8 +53,8 @@ public class PutAttributeModelTest {
     private PutAttributeModel model;
 
     /** Sets up the test. */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         model = new PutAttributeModel();
     }
 
@@ -65,7 +65,7 @@ public class PutAttributeModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecuteListAttribute() throws IOException {
+    void testExecuteListAttribute() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         ModelBody modelBody = createMock(ModelBody.class);

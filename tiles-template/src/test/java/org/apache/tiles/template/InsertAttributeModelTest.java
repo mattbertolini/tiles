@@ -36,15 +36,15 @@ import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link InsertAttributeModel}.
  *
  * @version $Rev$ $Date$
  */
-public class InsertAttributeModelTest {
+class InsertAttributeModelTest {
 
     /**
      * The mock resolver.
@@ -59,8 +59,8 @@ public class InsertAttributeModelTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         resolver = createMock(AttributeResolver.class);
         model = new InsertAttributeModel(resolver);
     }
@@ -72,7 +72,7 @@ public class InsertAttributeModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecute() throws IOException {
+    void testExecute() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         Attribute attribute = new Attribute("myValue");
@@ -106,7 +106,7 @@ public class InsertAttributeModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecuteIgnore() throws IOException {
+    void testExecuteIgnore() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);

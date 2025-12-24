@@ -21,7 +21,8 @@
 package org.apache.tiles.template;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,20 +32,20 @@ import org.apache.tiles.TilesContainer;
 import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link SetCurrentContainerModel}.
  *
  * @version $Rev$ $Date$
  */
-public class SetCurrentContainerModelTest {
+class SetCurrentContainerModelTest {
 
     /**
      * Test method for {@link SetCurrentContainerModel#execute(String, Request)}.
      */
     @Test
-    public void testSetCurrentContainer() {
+    void testSetCurrentContainer() {
         Request request = createMock(Request.class);
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
@@ -65,8 +66,8 @@ public class SetCurrentContainerModelTest {
     /**
      * Test method for {@link SetCurrentContainerModel#execute(String, Request)}.
      */
-    @Test(expected = NoSuchContainerException.class)
-    public void testSetCurrentContainerException() {
+    @Test
+    void testSetCurrentContainerException() {
         Request request = createMock(Request.class);
         ApplicationContext context = createMock(ApplicationContext.class);
         Map<String, Object> attribs = new HashMap<String, Object>();
@@ -76,7 +77,7 @@ public class SetCurrentContainerModelTest {
         replay(request, context);
         try {
             SetCurrentContainerModel model = new SetCurrentContainerModel();
-            model.execute("myKey", request);
+            assertThrows(NoSuchContainerException.class, () -> model.execute("myKey", request));
         } finally {
             verify(request, context);
         }

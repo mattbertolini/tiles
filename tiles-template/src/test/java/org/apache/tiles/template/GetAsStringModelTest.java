@@ -37,15 +37,15 @@ import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link GetAsStringModel}.
  *
  * @version $Rev$ $Date$
  */
-public class GetAsStringModelTest {
+class GetAsStringModelTest {
 
     /**
      * The mock resolver.
@@ -60,8 +60,8 @@ public class GetAsStringModelTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         resolver = createMock(AttributeResolver.class);
         model = new GetAsStringModel(resolver);
     }
@@ -74,7 +74,7 @@ public class GetAsStringModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecute() throws IOException {
+    void testExecute() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         Attribute attribute = createMock(Attribute.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
@@ -113,7 +113,7 @@ public class GetAsStringModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecuteIgnore() throws IOException {
+    void testExecuteIgnore() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         Request request = createMock(Request.class);
