@@ -21,7 +21,10 @@
 package org.apache.tiles.el;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.beans.FeatureDescriptor;
 import java.beans.PropertyDescriptor;
@@ -35,15 +38,16 @@ import javax.el.ELResolver;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.reflect.ClassUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link TilesContextELResolver}.
  *
  * @version $Rev$ $Date$
  */
-public class TilesContextELResolverTest {
+class TilesContextELResolverTest {
 
     /**
      * The bean resolver.
@@ -58,8 +62,8 @@ public class TilesContextELResolverTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         beanElResolver = createMock(ELResolver.class);
         resolver = new TilesContextELResolver(beanElResolver);
     }
@@ -69,12 +73,12 @@ public class TilesContextELResolverTest {
      * {@link TilesContextELResolver#getCommonPropertyType(javax.el.ELContext, java.lang.Object)}.
      */
     @Test
-    public void testGetCommonPropertyTypeELContextObject() {
+    void testGetCommonPropertyTypeELContextObject() {
         replay(beanElResolver);
         Class<?> clazz = resolver.getCommonPropertyType(null, null);
-        assertEquals("The class is not correct", String.class, clazz);
+        assertEquals(String.class, clazz, "The class is not correct");
         clazz = resolver.getCommonPropertyType(null, "Base object");
-        assertNull("The class for non root objects must be null", clazz);
+        assertNull(clazz, "The class for non root objects must be null");
         verify(beanElResolver);
     }
 
@@ -83,7 +87,7 @@ public class TilesContextELResolverTest {
      * {@link TilesContextELResolver#getFeatureDescriptors(javax.el.ELContext, java.lang.Object)}.
      */
     @Test
-    public void testGetFeatureDescriptorsELContextObject() {
+    void testGetFeatureDescriptorsELContextObject() {
         replay(beanElResolver);
         assertNull(resolver.getFeatureDescriptors(null, new Integer(1)));
         Map<String, PropertyDescriptor> expected = new LinkedHashMap<String, PropertyDescriptor>();
@@ -93,20 +97,18 @@ public class TilesContextELResolverTest {
                 null, null);
         Iterator<? extends FeatureDescriptor> expectedIt = expected.values().iterator();
         while (featureIt.hasNext() && expectedIt.hasNext()) {
-            assertEquals("The feature is not the same", expectedIt.next(),
-                    featureIt.next());
+            assertEquals(expectedIt.next(), featureIt.next(), "The feature is not the same");
         }
-        assertTrue("The feature descriptors are not of the same size",
-                !featureIt.hasNext() && !expectedIt.hasNext());
+        assertTrue(!featureIt.hasNext() && !expectedIt.hasNext(), "The feature descriptors are not of the same size");
         verify(beanElResolver);
     }
 
     /**
      * Tests {@link TilesContextBeanELResolver#getType(ELContext, Object, Object)}.
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings("rawtypes")
     @Test
-    public void testGetType() {
+    void testGetType() {
         ELContext elContext = createMock(ELContext.class);
         Request request = createMock(Request.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
@@ -129,7 +131,7 @@ public class TilesContextELResolverTest {
      * Tests {@link TilesContextBeanELResolver#getValue(ELContext, Object, Object)}.
      */
     @Test
-    public void testGetValue() {
+    void testGetValue() {
         ELContext elContext = createMock(ELContext.class);
         Request request = createMock(Request.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
@@ -155,11 +157,11 @@ public class TilesContextELResolverTest {
      * {@link TilesContextELResolver#isReadOnly(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
-    public void testIsReadOnly() {
+    void testIsReadOnly() {
         replay(beanElResolver);
         ELContext context = new ELContextImpl(resolver);
-        assertTrue("The value is not read only", resolver.isReadOnly(context,
-                null, null));
+        assertTrue(resolver.isReadOnly(context,
+                null, null), "The value is not read only");
         verify(beanElResolver);
     }
 
@@ -167,11 +169,11 @@ public class TilesContextELResolverTest {
      * Test method for
      * {@link TilesContextELResolver#isReadOnly(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
-    @Test(expected = NullPointerException.class)
-    public void testIsReadOnlyNPE() {
+    @Test
+    void testIsReadOnlyNPE() {
         replay(beanElResolver);
         try {
-            resolver.isReadOnly(null, null, null);
+            assertThrows(NullPointerException.class, () -> resolver.isReadOnly(null, null, null));
         } finally {
             verify(beanElResolver);
         }
@@ -181,7 +183,7 @@ public class TilesContextELResolverTest {
      * Tests {@link TilesContextELResolver#setValue(ELContext, Object, Object, Object)}.
      */
     @Test
-    public void testSetValue() {
+    void testSetValue() {
         // Just to complete code coverage!
         resolver.setValue(null, null, null, null);
     }

@@ -21,22 +21,23 @@
 package org.apache.tiles.el;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import javax.el.ELResolver;
 import javax.el.FunctionMapper;
 import javax.el.ValueExpression;
 import javax.el.VariableMapper;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link ELContextImpl}.
  *
  * @version $Rev$ $Date$
  */
-public class ELContextImplTest {
+class ELContextImplTest {
 
     /**
      * The EL context to test.
@@ -51,8 +52,8 @@ public class ELContextImplTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         resolver = createMock(ELResolver.class);
         context = new ELContextImpl(resolver);
     }
@@ -61,7 +62,7 @@ public class ELContextImplTest {
      * Test method for {@link org.apache.tiles.el.ELContextImpl#getELResolver()}.
      */
     @Test
-    public void testGetELResolver() {
+    void testGetELResolver() {
         replay(resolver);
         assertEquals(resolver, context.getELResolver());
         verify(resolver);
@@ -71,7 +72,7 @@ public class ELContextImplTest {
      * Test method for {@link org.apache.tiles.el.ELContextImpl#setFunctionMapper(javax.el.FunctionMapper)}.
      */
     @Test
-    public void testSetFunctionMapper() {
+    void testSetFunctionMapper() {
         FunctionMapper functionMapper = createMock(FunctionMapper.class);
 
         replay(resolver, functionMapper);
@@ -84,7 +85,7 @@ public class ELContextImplTest {
      * Test method for {@link org.apache.tiles.el.ELContextImpl#setVariableMapper(javax.el.VariableMapper)}.
      */
     @Test
-    public void testSetVariableMapper() {
+    void testSetVariableMapper() {
         VariableMapper variableMapper = createMock(VariableMapper.class);
 
         replay(resolver, variableMapper);
@@ -97,7 +98,7 @@ public class ELContextImplTest {
      * Tests {@link ELContextImpl#getFunctionMapper()}.
      */
     @Test
-    public void testNullFunctionMapper() {
+    void testNullFunctionMapper() {
         replay(resolver);
         FunctionMapper functionMapper = context.getFunctionMapper();
         assertNull(functionMapper.resolveFunction("whatever", "it_IT"));
@@ -108,7 +109,7 @@ public class ELContextImplTest {
      * Tests {@link ELContextImpl#getVariableMapper()}.
      */
     @Test
-    public void testVariableMapperImpl() {
+    void testVariableMapperImpl() {
         ValueExpression expression = createMock(ValueExpression.class);
 
         replay(resolver, expression);
