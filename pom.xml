@@ -25,7 +25,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.tiles</groupId>
     <artifactId>tiles-parent</artifactId>
-    <version>4.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Tiles 3</name>
     <description>Tiles 3: A framework for page composition.</description>
@@ -53,6 +53,7 @@
         <module>tiles-extras</module>
         <module>assembly</module>
         <module>tiles-test-pom</module>
+        <module>tiles-spring</module>
     </modules>
 
     <issueManagement>
