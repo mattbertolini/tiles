@@ -21,27 +21,26 @@
 package org.apache.tiles.web.startup;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
 import org.apache.tiles.request.servlet.ServletApplicationContext;
 import org.apache.tiles.startup.TilesInitializer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link AbstractTilesListener}.
  *
  * @version $Rev$ $Date$
  */
-public class AbstractTilesListenerTest {
+class AbstractTilesListenerTest {
 
     /**
      * Test method for {@link AbstractTilesListener#contextInitialized(ServletContextEvent)}.
      */
     @Test
-    public void testContextInitialized() {
+    void testContextInitialized() {
         AbstractTilesListener listener = createMockBuilder(AbstractTilesListener.class).createMock();
         ServletContextEvent event = createMock(ServletContextEvent.class);
         ServletContext servletContext = createMock(ServletContext.class);

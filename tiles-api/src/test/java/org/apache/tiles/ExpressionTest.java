@@ -21,22 +21,21 @@
 
 package org.apache.tiles;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link Expression}.
  *
  * @version $Rev$ $Date$
  */
-public class ExpressionTest {
+class ExpressionTest {
 
     /**
      * Test method for {@link org.apache.tiles.Expression#hashCode()}.
      */
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         Expression expression = new Expression("hello", "there");
         assertEquals("hello".hashCode() + "there".hashCode(), expression.hashCode());
     }
@@ -45,7 +44,7 @@ public class ExpressionTest {
      * Test method for {@link org.apache.tiles.Expression#Expression(java.lang.String, java.lang.String)}.
      */
     @Test
-    public void testExpressionStringString() {
+    void testExpressionStringString() {
         Expression expression = new Expression("hello", "there");
         assertEquals("hello", expression.getExpression());
         assertEquals("there", expression.getLanguage());
@@ -55,7 +54,7 @@ public class ExpressionTest {
      * Test method for {@link org.apache.tiles.Expression#Expression(java.lang.String)}.
      */
     @Test
-    public void testExpressionString() {
+    void testExpressionString() {
         Expression expression = new Expression("hello");
         assertEquals("hello", expression.getExpression());
         assertNull(expression.getLanguage());
@@ -65,7 +64,7 @@ public class ExpressionTest {
      * Test method for {@link org.apache.tiles.Expression#Expression(org.apache.tiles.Expression)}.
      */
     @Test
-    public void testExpressionExpression() {
+    void testExpressionExpression() {
         Expression expression = new Expression("hello", "there");
         Expression expression2 = new Expression(expression);
         assertEquals("hello", expression2.getExpression());
@@ -76,7 +75,7 @@ public class ExpressionTest {
      * Test method for {@link org.apache.tiles.Expression#createExpressionFromDescribedExpression(java.lang.String)}.
      */
     @Test
-    public void testCreateExpressionFromDescribedExpression() {
+    void testCreateExpressionFromDescribedExpression() {
         Expression expression = Expression.createExpressionFromDescribedExpression("hello");
         assertEquals("hello", expression.getExpression());
         assertNull(expression.getLanguage());
@@ -93,7 +92,7 @@ public class ExpressionTest {
      * Test method for {@link org.apache.tiles.Expression#createExpression(java.lang.String, java.lang.String)}.
      */
     @Test
-    public void testCreateExpression() {
+    void testCreateExpression() {
         Expression expression = Expression.createExpression("hello", "there");
         assertEquals("hello", expression.getExpression());
         assertEquals("there", expression.getLanguage());
@@ -108,14 +107,14 @@ public class ExpressionTest {
      * Test method for {@link org.apache.tiles.Expression#equals(java.lang.Object)}.
      */
     @Test
-    public void testEqualsObject() {
+    void testEqualsObject() {
         Expression expression = new Expression("hello", "there");
         Expression expression2 = new Expression("hello", "there");
         assertEquals(expression, expression2);
         expression2 = new Expression("hello", "there2");
-        assertFalse(expression.equals(expression2));
+        assertNotEquals(expression, expression2);
         expression2 = new Expression("hello");
-        assertFalse(expression.equals(expression2));
+        assertNotEquals(expression, expression2);
         expression = new Expression("hello");
         assertEquals(expression, expression2);
     }
@@ -124,7 +123,7 @@ public class ExpressionTest {
      * Test method for {@link org.apache.tiles.Expression#toString()}.
      */
     @Test
-    public void testToString() {
+    void testToString() {
         Expression expression = new Expression("hello", "there");
         assertEquals("there:hello", expression.toString());
         expression = new Expression("hello");

@@ -21,22 +21,23 @@
 
 package org.apache.tiles.impl;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests {@link InvalidTemplateException}.
  *
  * @version $Rev$ $Date$
  */
-public class InvalidTemplateExceptionTest {
+class InvalidTemplateExceptionTest {
 
     /**
      * Test method for {@link InvalidTemplateException#InvalidTemplateException()}.
      */
     @Test
-    public void testInvalidTemplateException() {
+    void testInvalidTemplateException() {
         InvalidTemplateException exception = new InvalidTemplateException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +47,7 @@ public class InvalidTemplateExceptionTest {
      * Test method for {@link InvalidTemplateException#InvalidTemplateException(java.lang.String)}.
      */
     @Test
-    public void testInvalidTemplateExceptionString() {
+    void testInvalidTemplateExceptionString() {
         InvalidTemplateException exception = new InvalidTemplateException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +57,7 @@ public class InvalidTemplateExceptionTest {
      * Test method for {@link InvalidTemplateException#InvalidTemplateException(java.lang.Throwable)}.
      */
     @Test
-    public void testInvalidTemplateExceptionThrowable() {
+    void testInvalidTemplateExceptionThrowable() {
         Throwable cause = new Throwable();
         InvalidTemplateException exception = new InvalidTemplateException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +68,7 @@ public class InvalidTemplateExceptionTest {
      * Test method for {@link InvalidTemplateException#InvalidTemplateException(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testInvalidTemplateExceptionStringThrowable() {
+    void testInvalidTemplateExceptionStringThrowable() {
         Throwable cause = new Throwable();
         InvalidTemplateException exception = new InvalidTemplateException("my message", cause);
         assertEquals("my message", exception.getMessage());

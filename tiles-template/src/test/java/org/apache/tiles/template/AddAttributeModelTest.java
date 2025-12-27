@@ -22,8 +22,7 @@
 package org.apache.tiles.template;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -36,15 +35,15 @@ import org.apache.tiles.Attribute;
 import org.apache.tiles.ListAttribute;
 import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link AddAttributeModel}.
  *
  * @version $Rev$ $Date$
  */
-public class AddAttributeModelTest {
+class AddAttributeModelTest {
 
     /**
      * The model to test.
@@ -52,7 +51,7 @@ public class AddAttributeModelTest {
     private AddAttributeModel model;
 
     /** Sets up the test. */
-    @Before
+    @BeforeEach
     public void setUp() {
         model = new AddAttributeModel();
     }
@@ -64,7 +63,7 @@ public class AddAttributeModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecute() throws IOException {
+    void testExecute() throws IOException {
         Request request = createMock(Request.class);
         ModelBody modelBody = createMock(ModelBody.class);
         Deque<Object> composeStack = new ArrayDeque<Object>();

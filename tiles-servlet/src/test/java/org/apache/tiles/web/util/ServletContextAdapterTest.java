@@ -20,9 +20,13 @@
  */
 package org.apache.tiles.web.util;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -37,16 +41,12 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 /**
  * Tests {@link ServletContextAdapter}.
  *
  * @version $Rev$ $Date$
  */
-public class ServletContextAdapterTest {
+class ServletContextAdapterTest {
 
     /**
      * The servlet configuration.
@@ -71,9 +71,8 @@ public class ServletContextAdapterTest {
     /**
      * Sets up the test.
      */
-    @SuppressWarnings("unchecked")
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         config = createMock(ServletConfig.class);
         servletContext = createMock(ServletContext.class);
         names1 = createMock(Enumeration.class);
@@ -103,8 +102,8 @@ public class ServletContextAdapterTest {
     /**
      * Tears down the test.
      */
-    @After
-    public void tearDown() {
+    @AfterEach
+    void tearDown() {
         verify(config, servletContext, names1, names2);
     }
 
@@ -112,7 +111,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getContext(java.lang.String)}.
      */
     @Test
-    public void testGetContext() {
+    void testGetContext() {
         ServletContext otherContext = createMock(ServletContext.class);
         expect(servletContext.getContext("whatever")).andReturn(otherContext);
 
@@ -126,7 +125,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getMajorVersion()}.
      */
     @Test
-    public void testGetMajorVersion() {
+    void testGetMajorVersion() {
         expect(servletContext.getMajorVersion()).andReturn(2);
 
         replay(servletContext, config);
@@ -138,7 +137,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getMinorVersion()}.
      */
     @Test
-    public void testGetMinorVersion() {
+    void testGetMinorVersion() {
         expect(servletContext.getMinorVersion()).andReturn(5);
 
         replay(servletContext, config);
@@ -150,7 +149,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getMimeType(java.lang.String)}.
      */
     @Test
-    public void testGetMimeType() {
+    void testGetMimeType() {
         expect(servletContext.getMimeType("whatever")).andReturn("mymime");
 
         replay(servletContext, config);
@@ -161,9 +160,8 @@ public class ServletContextAdapterTest {
     /**
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getResourcePaths(java.lang.String)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetResourcePaths() {
+    void testGetResourcePaths() {
         Set<URL> urls = createMock(Set.class);
 
         expect(servletContext.getResourcePaths("whatever")).andReturn(urls);
@@ -179,7 +177,7 @@ public class ServletContextAdapterTest {
      * @throws MalformedURLException If something goes wrong.
      */
     @Test
-    public void testGetResource() throws MalformedURLException {
+    void testGetResource() throws MalformedURLException {
         URL url = new URL("file:///temporary");
 
         expect(servletContext.getResource("whatever")).andReturn(url);
@@ -193,7 +191,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getResourceAsStream(java.lang.String)}.
      */
     @Test
-    public void testGetResourceAsStream() {
+    void testGetResourceAsStream() {
         InputStream is = createMock(InputStream.class);
 
         expect(servletContext.getResourceAsStream("whatever")).andReturn(is);
@@ -208,7 +206,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getRequestDispatcher(java.lang.String)}.
      */
     @Test
-    public void testGetRequestDispatcher() {
+    void testGetRequestDispatcher() {
         RequestDispatcher is = createMock(RequestDispatcher.class);
 
         expect(servletContext.getRequestDispatcher("whatever")).andReturn(is);
@@ -223,7 +221,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getNamedDispatcher(java.lang.String)}.
      */
     @Test
-    public void testGetNamedDispatcher() {
+    void testGetNamedDispatcher() {
         RequestDispatcher is = createMock(RequestDispatcher.class);
 
         expect(servletContext.getNamedDispatcher("whatever")).andReturn(is);
@@ -240,7 +238,7 @@ public class ServletContextAdapterTest {
      */
     @SuppressWarnings("deprecation")
     @Test
-    public void testGetServlet() throws ServletException {
+    void testGetServlet() throws ServletException {
         Servlet is = createMock(Servlet.class);
 
         expect(servletContext.getServlet("whatever")).andReturn(is);
@@ -254,9 +252,9 @@ public class ServletContextAdapterTest {
     /**
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getServlets()}.
      */
-    @SuppressWarnings({ "deprecation", "unchecked" })
+    @SuppressWarnings("deprecation")
     @Test
-    public void testGetServlets() {
+    void testGetServlets() {
         Enumeration<Servlet> is = createMock(Enumeration.class);
 
         expect(servletContext.getServlets()).andReturn(is);
@@ -270,9 +268,9 @@ public class ServletContextAdapterTest {
     /**
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getServletNames()}.
      */
-    @SuppressWarnings({ "deprecation", "unchecked" })
+    @SuppressWarnings("deprecation")
     @Test
-    public void testGetServletNames() {
+    void testGetServletNames() {
         Enumeration<String> is = createMock(Enumeration.class);
 
         expect(servletContext.getServletNames()).andReturn(is);
@@ -287,7 +285,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#log(java.lang.String)}.
      */
     @Test
-    public void testLogString() {
+    void testLogString() {
         servletContext.log("whatever");
 
         replay(servletContext, config);
@@ -300,7 +298,7 @@ public class ServletContextAdapterTest {
      */
     @SuppressWarnings("deprecation")
     @Test
-    public void testLogExceptionString() {
+    void testLogExceptionString() {
         Exception e = new Exception("It does not matter");
         servletContext.log(e, "whatever");
 
@@ -313,7 +311,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link ServletContextAdapter#log(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testLogStringThrowable() {
+    void testLogStringThrowable() {
         Throwable e = new Throwable("It does not matter");
         servletContext.log("whatever", e);
 
@@ -326,7 +324,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getRealPath(java.lang.String)}.
      */
     @Test
-    public void testGetRealPath() {
+    void testGetRealPath() {
         expect(servletContext.getRealPath("whatever")).andReturn("mypath");
 
         replay(servletContext, config);
@@ -338,7 +336,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getServerInfo()}.
      */
     @Test
-    public void testGetServerInfo() {
+    void testGetServerInfo() {
         expect(servletContext.getServerInfo()).andReturn("info");
 
         replay(servletContext, config);
@@ -350,7 +348,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getInitParameter(java.lang.String)}.
      */
     @Test
-    public void testGetInitParameter() {
+    void testGetInitParameter() {
         replay(servletContext, config);
         ServletContextAdapter adapter = new ServletContextAdapter(config);
         assertEquals("value1", adapter.getInitParameter("one"));
@@ -363,7 +361,7 @@ public class ServletContextAdapterTest {
      */
     @SuppressWarnings("unchecked")
     @Test
-    public void testGetInitParameterNames() {
+    void testGetInitParameterNames() {
         replay(servletContext, config);
         ServletContextAdapter adapter = new ServletContextAdapter(config);
         Set<String> names = new HashSet<String>();
@@ -381,7 +379,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getAttribute(java.lang.String)}.
      */
     @Test
-    public void testGetAttribute() {
+    void testGetAttribute() {
         expect(servletContext.getAttribute("whatever")).andReturn("value");
 
         replay(servletContext, config);
@@ -392,9 +390,8 @@ public class ServletContextAdapterTest {
     /**
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getAttributeNames()}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetAttributeNames() {
+    void testGetAttributeNames() {
         Enumeration<String> is = createMock(Enumeration.class);
 
         expect(servletContext.getAttributeNames()).andReturn(is);
@@ -409,7 +406,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link ServletContextAdapter#setAttribute(java.lang.String, java.lang.Object)}.
      */
     @Test
-    public void testSetAttribute() {
+    void testSetAttribute() {
         servletContext.setAttribute("whatever", "value");
 
         replay(servletContext, config);
@@ -421,7 +418,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#removeAttribute(java.lang.String)}.
      */
     @Test
-    public void testRemoveAttribute() {
+    void testRemoveAttribute() {
         servletContext.removeAttribute("whatever");
 
         replay(servletContext, config);
@@ -433,7 +430,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getServletContextName()}.
      */
     @Test
-    public void testGetServletContextName() {
+    void testGetServletContextName() {
         expect(servletContext.getServletContextName()).andReturn("value");
 
         replay(servletContext, config);
@@ -445,7 +442,7 @@ public class ServletContextAdapterTest {
      * Test method for {@link org.apache.tiles.web.util.ServletContextAdapter#getContextPath()}.
      */
     @Test
-    public void testGetContextPath() {
+    void testGetContextPath() {
         expect(servletContext.getContextPath()).andReturn("value");
 
         replay(servletContext, config);

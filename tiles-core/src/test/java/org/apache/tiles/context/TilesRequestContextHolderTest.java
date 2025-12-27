@@ -21,11 +21,12 @@
 
 package org.apache.tiles.context;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.apache.tiles.request.Request;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * Tests {@link TilesRequestContextHolderTest}.
@@ -33,13 +34,13 @@ import org.junit.Test;
  * @version $Rev$ $Date$
  * @since 2.2.0
  */
-public class TilesRequestContextHolderTest {
+class TilesRequestContextHolderTest {
 
     /**
      * Test method for {@link TilesRequestContextHolder#setTilesRequestContext(Request)}.
      */
     @Test
-    public void testSetTilesRequestContext() {
+    void testSetTilesRequestContext() {
         Request request = createMock(Request.class);
 
         replay(request);

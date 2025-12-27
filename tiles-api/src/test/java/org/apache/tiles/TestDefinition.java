@@ -21,25 +21,25 @@
 
 package org.apache.tiles;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the Definition class.
  *
  * @version $Rev$ $Date$
  */
-public class TestDefinition {
+class TestDefinition {
 
     /**
      * Tests {@link Definition#Definition(Definition)}.
      */
     @Test
-    public void testDefinitionCopy() {
+    void testDefinitionCopy() {
         Definition definition = new Definition();
         definition.setName("myDefinition");
         definition.setExtends("myExtends");
@@ -58,7 +58,7 @@ public class TestDefinition {
      * Tests {@link Definition#Definition(Definition)}.
      */
     @Test
-    public void testDefinitionComplete() {
+    void testDefinitionComplete() {
         Map<String, Attribute> attributeMap = new HashMap<String, Attribute>();
         Attribute attribute1 = new Attribute("value1");
         Attribute attribute2 = new Attribute("value2");
@@ -79,7 +79,7 @@ public class TestDefinition {
      * Attributes are added or replaced in the definition.
      */
     @Test
-    public void testPutAttribute() {
+    void testPutAttribute() {
         Definition def = new Definition();
         def.setName("test1");
         def.setTemplateAttribute(Attribute
@@ -89,16 +89,15 @@ public class TestDefinition {
         def.putAttribute("attr1",  attr1);
 
         attr1 = def.getAttribute("attr1");
-        assertNotNull("Null attribute.", attr1);
-        assertTrue("Wrong attribute type", "definition".equals(attr1
-                .getRenderer()));
+        assertNotNull(attr1, "Null attribute.");
+        assertEquals("definition", attr1.getRenderer(), "Wrong attribute type");
     }
 
     /**
      * Tests the {@link Definition#inherit(BasicAttributeContext)} method.
      */
     @Test
-    public void testInherit() {
+    void testInherit() {
         Definition toCopy = new Definition();
         toCopy.putAttribute("name1", new Attribute("value1"), true);
         toCopy.putAttribute("name2", new Attribute("value2"), true);
@@ -109,21 +108,17 @@ public class TestDefinition {
         toCopy.putAttribute("name3", new Attribute("newValue3"), false);
         context.inherit(toCopy);
         Attribute attribute = context.getCascadedAttribute("name1");
-        assertNotNull("Attribute name1 not found", attribute);
-        assertEquals("Attribute name1 has not been set correctly", "newValue1",
-                attribute.getValue());
+        assertNotNull(attribute, "Attribute name1 not found");
+        assertEquals("newValue1", attribute.getValue(), "Attribute name1 has not been set correctly");
         attribute = context.getCascadedAttribute("name2");
-        assertNotNull("Attribute name2 not found", attribute);
-        assertEquals("Attribute name2 has not been set correctly", "value2",
-                attribute.getValue());
+        assertNotNull(attribute, "Attribute name2 not found");
+        assertEquals("value2", attribute.getValue(), "Attribute name2 has not been set correctly");
         attribute = context.getLocalAttribute("name3");
-        assertNotNull("Attribute name3 not found", attribute);
-        assertEquals("Attribute name3 has not been set correctly", "newValue3",
-                attribute.getValue());
+        assertNotNull(attribute, "Attribute name3 not found");
+        assertEquals("newValue3", attribute.getValue(), "Attribute name3 has not been set correctly");
         attribute = context.getLocalAttribute("name4");
-        assertNotNull("Attribute name4 not found", attribute);
-        assertEquals("Attribute name4 has not been set correctly", "value4",
-                attribute.getValue());
+        assertNotNull(attribute, "Attribute name4 not found");
+        assertEquals("value4", attribute.getValue(), "Attribute name4 has not been set correctly");
 
         toCopy = new Definition();
         toCopy.setPreparer("ExtendedPreparer");
@@ -133,51 +128,48 @@ public class TestDefinition {
         toCopy.setTemplateAttribute(templateAttribute);
         context = new Definition();
         context.inherit(toCopy);
-        assertEquals("Preparer not inherited", "ExtendedPreparer", context
-                .getPreparer());
-        assertNotNull("Roles not inherited", context.getTemplateAttribute()
-                .getRoles());
-        assertEquals("Roles not inherited", context.getTemplateAttribute()
-                .getRoles().size(), 1);
-        assertTrue("Roles not inherited", context.getTemplateAttribute()
+        assertEquals("ExtendedPreparer", context
+                .getPreparer(), "Preparer not inherited");
+        assertNotNull(context.getTemplateAttribute()
+                .getRoles(), "Roles not inherited");
+        assertEquals(1, context.getTemplateAttribute()
+                .getRoles().size(), "Roles not inherited");
+        assertTrue(context.getTemplateAttribute()
                 .getRoles().contains(
-                "extendedRole"));
-        assertEquals("Template not inherited", "extendedTemplate.jsp", context
-                .getTemplateAttribute().getValue());
-        assertEquals("Template expression not inherited", "expression", context
-                .getTemplateAttribute().getExpressionObject().getExpression());
-        assertEquals("Template expression language not inherited", "language",
-                context.getTemplateAttribute().getExpressionObject()
-                        .getLanguage());
+                "extendedRole"), "Roles not inherited");
+        assertEquals("extendedTemplate.jsp", context
+                .getTemplateAttribute().getValue(), "Template not inherited");
+        assertEquals("expression", context
+                .getTemplateAttribute().getExpressionObject().getExpression(), "Template expression not inherited");
+        assertEquals("language", context.getTemplateAttribute().getExpressionObject()
+                        .getLanguage(), "Template expression language not inherited");
         context = new Definition();
         context.setPreparer("LocalPreparer");
         templateAttribute = new Attribute("localTemplate.jsp", Expression
                 .createExpression("localExpression", "localLanguage"),
                 "localRole", "template");
         context.setTemplateAttribute(templateAttribute);
-        assertEquals("Preparer inherited", "LocalPreparer", context
-                .getPreparer());
-        assertNotNull("Roles not correct", context.getTemplateAttribute()
-                .getRoles());
-        assertEquals("Roles not correct", context.getTemplateAttribute()
-                .getRoles().size(), 1);
-        assertTrue("Roles inherited", context.getTemplateAttribute().getRoles()
-                .contains("localRole"));
-        assertEquals("Template inherited", "localTemplate.jsp", context
-                .getTemplateAttribute().getValue());
-        assertEquals("Template expression inherited", "localExpression",
-                context.getTemplateAttribute().getExpressionObject()
-                        .getExpression());
-        assertEquals("Template expression language not inherited",
-                "localLanguage", context.getTemplateAttribute()
-                        .getExpressionObject().getLanguage());
+        assertEquals("LocalPreparer", context
+                .getPreparer(), "Preparer inherited");
+        assertNotNull(context.getTemplateAttribute()
+                .getRoles(), "Roles not correct");
+        assertEquals(context.getTemplateAttribute()
+                .getRoles().size(), 1, "Roles not correct");
+        assertTrue(context.getTemplateAttribute().getRoles()
+                .contains("localRole"), "Roles inherited");
+        assertEquals("localTemplate.jsp", context
+                .getTemplateAttribute().getValue(), "Template inherited");
+        assertEquals("localExpression", context.getTemplateAttribute().getExpressionObject()
+                        .getExpression(), "Template expression inherited");
+        assertEquals("localLanguage", context.getTemplateAttribute()
+                        .getExpressionObject().getLanguage(), "Template expression language not inherited");
     }
 
     /**
      * Tests {@link Definition#toString()}.
      */
     @Test
-    public void testToString() {
+    void testToString() {
         Definition definition = new Definition();
         definition.setName("myDefinitionName");
         assertEquals(
@@ -198,7 +190,7 @@ public class TestDefinition {
      * Tests {@link Definition#equals(Object)}.
      */
     @Test
-    public void testEquals() {
+    void testEquals() {
         Definition definition = new Definition();
         definition.setName("myDefinition");
         definition.setExtends("myExtends");
@@ -223,7 +215,7 @@ public class TestDefinition {
      * Tests {@link Definition#hashCode()}.
      */
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         Definition definition = new Definition();
         definition.setName("myDefinition");
         definition.setExtends("myExtends");
@@ -242,7 +234,7 @@ public class TestDefinition {
      * Tests {@link Definition#isExtending()}.
      */
     @Test
-    public void testIsExtending() {
+    void testIsExtending() {
         Definition definition = new Definition();
         definition.setName("myDefinition");
         assertFalse(definition.isExtending());

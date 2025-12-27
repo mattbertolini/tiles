@@ -21,21 +21,22 @@
 package org.apache.tiles.ognl;
 
 import java.util.Arrays;
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Map;
 
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link AnyScopePropertyAccessor}.
  *
  * @version $Rev$ $Date$
  */
-public class AnyScopePropertyAccessorTest {
+class AnyScopePropertyAccessorTest {
 
     /**
      * The accessor to test.
@@ -45,17 +46,16 @@ public class AnyScopePropertyAccessorTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         accessor = new AnyScopePropertyAccessor();
     }
 
     /**
      * Test method for {@link AnyScopePropertyAccessor#getProperty(java.util.Map, java.lang.Object, java.lang.Object)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetProperty() {
+    void testGetProperty() {
         Request request = createMock(Request.class);
         Map<String, Object> oneScope = createMock(Map.class);
         Map<String, Object> twoScope = createMock(Map.class);
@@ -81,9 +81,8 @@ public class AnyScopePropertyAccessorTest {
     /**
      * Test method for {@link AnyScopePropertyAccessor#getSourceAccessor(OgnlContext, Object, Object)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetSourceAccessor() {
+    void testGetSourceAccessor() {
         Request request = createMock(Request.class);
         Map<String, Object> oneScope = createMock(Map.class);
         Map<String, Object> twoScope = createMock(Map.class);
@@ -107,9 +106,8 @@ public class AnyScopePropertyAccessorTest {
     /**
      * Test method for {@link AnyScopePropertyAccessor#getSourceSetter(OgnlContext, Object, Object)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetSourceSetter() {
+    void testGetSourceSetter() {
         Request request = createMock(Request.class);
         Map<String, Object> oneScope = createMock(Map.class);
         Map<String, Object> twoScope = createMock(Map.class);
@@ -133,9 +131,8 @@ public class AnyScopePropertyAccessorTest {
     /**
      * Test method for {@link AnyScopePropertyAccessor#setProperty(Map, Object, Object, Object)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testSetProperty() {
+    void testSetProperty() {
         Request request = createMock(Request.class);
         Map<String, Object> oneScope = createMock(Map.class);
         Map<String, Object> twoScope = createMock(Map.class);
@@ -158,5 +155,4 @@ public class AnyScopePropertyAccessorTest {
         accessor.setProperty(null, request, "name3", "otherValue3");
         verify(request, oneScope, twoScope);
     }
-
 }

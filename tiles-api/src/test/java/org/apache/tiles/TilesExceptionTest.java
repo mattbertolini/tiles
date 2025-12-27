@@ -21,22 +21,22 @@
 
 package org.apache.tiles;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link TilesException}.
  *
  * @version $Rev$ $Date$
  */
-public class TilesExceptionTest {
+class TilesExceptionTest {
 
     /**
      * Test method for {@link org.apache.tiles.TilesException#TilesException()}.
      */
     @Test
-    public void testTilesException() {
+    void testTilesException() {
         TilesException exception = new TilesException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +46,7 @@ public class TilesExceptionTest {
      * Test method for {@link org.apache.tiles.TilesException#TilesException(java.lang.String)}.
      */
     @Test
-    public void testTilesExceptionString() {
+    void testTilesExceptionString() {
         TilesException exception = new TilesException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +56,7 @@ public class TilesExceptionTest {
      * Test method for {@link org.apache.tiles.TilesException#TilesException(java.lang.Throwable)}.
      */
     @Test
-    public void testTilesExceptionThrowable() {
+    void testTilesExceptionThrowable() {
         Throwable cause = new Throwable();
         TilesException exception = new TilesException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +67,7 @@ public class TilesExceptionTest {
      * Test method for {@link org.apache.tiles.TilesException#TilesException(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testTilesExceptionStringThrowable() {
+    void testTilesExceptionStringThrowable() {
         Throwable cause = new Throwable();
         TilesException exception = new TilesException("my message", cause);
         assertEquals("my message", exception.getMessage());

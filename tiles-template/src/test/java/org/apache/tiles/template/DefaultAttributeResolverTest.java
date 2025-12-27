@@ -21,23 +21,25 @@
 
 package org.apache.tiles.template;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.AttributeContext;
 import org.apache.tiles.Expression;
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DefaultAttributeResolver}.
  *
  * @version $Rev$ $Date$
  */
-public class DefaultAttributeResolverTest {
+class DefaultAttributeResolverTest {
 
     /**
      * The resolver to test.
@@ -47,8 +49,8 @@ public class DefaultAttributeResolverTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         resolver = new DefaultAttributeResolver();
     }
 
@@ -59,7 +61,7 @@ public class DefaultAttributeResolverTest {
      * java.lang.String, Request)}.
      */
     @Test
-    public void testComputeAttributeInContext() {
+    void testComputeAttributeInContext() {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         Request request = createMock(Request.class);
@@ -82,7 +84,7 @@ public class DefaultAttributeResolverTest {
      * java.lang.String, Request)}.
      */
     @Test
-    public void testComputeAttributeInCall() {
+    void testComputeAttributeInCall() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         Attribute attribute = new Attribute("myValue", Expression
@@ -101,7 +103,7 @@ public class DefaultAttributeResolverTest {
      * java.lang.String, Request)}.
      */
     @Test
-    public void testComputeAttributeDefault() {
+    void testComputeAttributeDefault() {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
@@ -125,8 +127,8 @@ public class DefaultAttributeResolverTest {
      * java.lang.String, java.lang.String, boolean, java.lang.Object, java.lang.String,
      * java.lang.String, Request)}.
      */
-    @Test(expected = NoSuchAttributeException.class)
-    public void testComputeAttributeException() {
+    @Test
+    void testComputeAttributeException() {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         Request request = createMock(Request.class);
@@ -135,8 +137,8 @@ public class DefaultAttributeResolverTest {
         expect(attributeContext.getAttribute("myName")).andReturn(null);
 
         replay(container, attributeContext, request);
-        resolver.computeAttribute(container, null, "myName", null, false, null,
-                "defaultRole", "defaultType", request);
+        assertThrows(NoSuchAttributeException.class, () -> resolver.computeAttribute(container, null, "myName", null, false, null,
+                "defaultRole", "defaultType", request));
         verify(container, attributeContext, request);
     }
 
@@ -147,7 +149,7 @@ public class DefaultAttributeResolverTest {
      * java.lang.String, Request)}.
      */
     @Test
-    public void testComputeAttributeIgnore() {
+    void testComputeAttributeIgnore() {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         Request request = createMock(Request.class);

@@ -21,30 +21,30 @@
 
 package org.apache.tiles.startup;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import org.apache.tiles.factory.BasicTilesContainerFactory;
 import org.apache.tiles.request.ApplicationContext;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DefaultTilesInitializer}.
  *
  * @version $Rev$ $Date$
  */
-public class DefaultTilesInitializerTest {
+class DefaultTilesInitializerTest {
 
     /**
      * Test method for {@link DefaultTilesInitializer#createContainerFactory(ApplicationContext)}.
      */
     @Test
-    public void testCreateContainerFactory() {
+    void testCreateContainerFactory() {
         ApplicationContext context = createMock(ApplicationContext.class);
 
         replay(context);
         DefaultTilesInitializer initializer = new DefaultTilesInitializer();
-        assertTrue(initializer.createContainerFactory(context) instanceof BasicTilesContainerFactory);
+        assertInstanceOf(BasicTilesContainerFactory.class, initializer.createContainerFactory(context));
         verify(context);
     }
 }

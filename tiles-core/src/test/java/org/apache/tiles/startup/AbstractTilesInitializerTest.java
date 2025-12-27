@@ -21,8 +21,9 @@
 
 package org.apache.tiles.startup;
 
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Map;
 
@@ -31,15 +32,15 @@ import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.factory.AbstractTilesContainerFactory;
 import org.apache.tiles.request.ApplicationAccess;
 import org.apache.tiles.request.ApplicationContext;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link AbstractTilesInitializer}.
  *
  * @version $Rev$ $Date$
  */
-public class AbstractTilesInitializerTest {
+class AbstractTilesInitializerTest {
 
     /**
      * A mock Tiles container factory.
@@ -54,8 +55,8 @@ public class AbstractTilesInitializerTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         containerFactory = createMock(AbstractTilesContainerFactory.class);
         initializer = new AbstractTilesInitializer() {
 
@@ -70,9 +71,8 @@ public class AbstractTilesInitializerTest {
     /**
      * Test method for {@link AbstractTilesInitializer#initialize(ApplicationContext)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testInitialize() {
+    void testInitialize() {
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -94,7 +94,7 @@ public class AbstractTilesInitializerTest {
      * Test method for {@link AbstractTilesInitializer#createTilesApplicationContext(ApplicationContext)}.
      */
     @Test
-    public void testCreateTilesApplicationContext() {
+    void testCreateTilesApplicationContext() {
         ApplicationContext context = createMock(ApplicationContext.class);
         replay(containerFactory, context);
         assertEquals(context, initializer.createTilesApplicationContext(context));
@@ -105,7 +105,7 @@ public class AbstractTilesInitializerTest {
      * Test method for {@link AbstractTilesInitializer#getContainerKey(ApplicationContext)}.
      */
     @Test
-    public void testGetContainerKey() {
+    void testGetContainerKey() {
         ApplicationContext context = createMock(ApplicationContext.class);
         replay(containerFactory, context);
         assertNull(initializer.getContainerKey(context));
@@ -116,7 +116,7 @@ public class AbstractTilesInitializerTest {
      * Test method for {@link AbstractTilesInitializer#createContainer(ApplicationContext)}.
      */
     @Test
-    public void testCreateContainer() {
+    void testCreateContainer() {
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
 

@@ -22,7 +22,6 @@
 package org.apache.tiles.template;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,15 +34,15 @@ import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link InsertDefinitionModel}.
  *
  * @version $Rev$ $Date$
  */
-public class InsertDefinitionModelTest {
+class InsertDefinitionModelTest {
 
     /**
      * The model to test.
@@ -53,8 +52,8 @@ public class InsertDefinitionModelTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         model = new InsertDefinitionModel();
     }
 
@@ -65,7 +64,7 @@ public class InsertDefinitionModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecute() throws IOException {
+    void testExecute() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);

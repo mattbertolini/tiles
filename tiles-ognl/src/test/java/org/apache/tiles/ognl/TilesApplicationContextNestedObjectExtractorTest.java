@@ -21,25 +21,25 @@
 
 package org.apache.tiles.ognl;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link TilesApplicationContextNestedObjectExtractor}.
  *
  * @version $Rev$ $Date$
  */
-public class TilesApplicationContextNestedObjectExtractorTest {
+class TilesApplicationContextNestedObjectExtractorTest {
 
     /**
      * Tests {@link TilesApplicationContextNestedObjectExtractor#getNestedObject(Request)}.
      */
     @Test
-    public void testGetNestedObject() {
+    void testGetNestedObject() {
         Request request = createMock(Request.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
         expect(request.getApplicationContext()).andReturn(applicationContext);

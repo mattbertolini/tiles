@@ -34,15 +34,15 @@ import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link InsertTemplateModel}.
  *
  * @version $Rev$ $Date$
  */
-public class InsertTemplateModelTest {
+class InsertTemplateModelTest {
 
     /**
      * The model to test.
@@ -52,7 +52,7 @@ public class InsertTemplateModelTest {
     /**
      * Sets up the test.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         model = new InsertTemplateModel();
     }
@@ -63,7 +63,7 @@ public class InsertTemplateModelTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecute() throws IOException {
+    void testExecute() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);

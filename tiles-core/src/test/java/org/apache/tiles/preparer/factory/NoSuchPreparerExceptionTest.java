@@ -21,22 +21,23 @@
 
 package org.apache.tiles.preparer.factory;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests {@link NoSuchPreparerException}.
  *
  * @version $Rev$ $Date$
  */
-public class NoSuchPreparerExceptionTest {
+class NoSuchPreparerExceptionTest {
 
     /**
      * Test method for {@link NoSuchPreparerException#NoSuchPreparerException()}.
      */
     @Test
-    public void testNoSuchPreparerException() {
+    void testNoSuchPreparerException() {
         NoSuchPreparerException exception = new NoSuchPreparerException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +47,7 @@ public class NoSuchPreparerExceptionTest {
      * Test method for {@link NoSuchPreparerException#NoSuchPreparerException(java.lang.String)}.
      */
     @Test
-    public void testNoSuchPreparerExceptionString() {
+    void testNoSuchPreparerExceptionString() {
         NoSuchPreparerException exception = new NoSuchPreparerException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +57,7 @@ public class NoSuchPreparerExceptionTest {
      * Test method for {@link NoSuchPreparerException#NoSuchPreparerException(java.lang.Throwable)}.
      */
     @Test
-    public void testNoSuchPreparerExceptionThrowable() {
+    void testNoSuchPreparerExceptionThrowable() {
         Throwable cause = new Throwable();
         NoSuchPreparerException exception = new NoSuchPreparerException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +68,7 @@ public class NoSuchPreparerExceptionTest {
      * Test method for {@link NoSuchPreparerException#NoSuchPreparerException(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testNoSuchPreparerExceptionStringThrowable() {
+    void testNoSuchPreparerExceptionStringThrowable() {
         Throwable cause = new Throwable();
         NoSuchPreparerException exception = new NoSuchPreparerException("my message", cause);
         assertEquals("my message", exception.getMessage());

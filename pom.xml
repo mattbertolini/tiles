@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*
  * $Id$
@@ -22,18 +22,10 @@
  */
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
-    <parent>
-        <artifactId>tiles-master</artifactId>
-        <groupId>org.apache.tiles</groupId>
-        <version>7</version>
-        <relativePath />
-    </parent>
-
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.tiles</groupId>
     <artifactId>tiles-parent</artifactId>
-    <version>3.1-SNAPSHOT</version>
+    <version>4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Tiles 3</name>
     <description>Tiles 3: A framework for page composition.</description>
@@ -77,6 +69,14 @@
     </distributionManagement>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.14.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.tiles</groupId>
                 <artifactId>tiles-api</artifactId>
@@ -171,7 +171,7 @@
             <dependency>
                 <groupId>org.mvel</groupId>
                 <artifactId>mvel2</artifactId>
-                <version>2.3.2.Final</version>
+                <version>2.5.2.Final</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -192,27 +192,15 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.7</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.easymock</groupId>
                 <artifactId>easymock</artifactId>
-                <version>3.0</version>
+                <version>5.6.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.shale</groupId>
                 <artifactId>shale-test</artifactId>
                 <version>1.0.5</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.easymock</groupId>
-                <artifactId>easymockclassextension</artifactId>
-                <version>3.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -244,7 +232,22 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.14.1</version>
+                    <configuration>
+                        <release>17</release>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.5.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.5.0</version>
                     <configuration>
                         <archive>
                             <manifestFile>${tiles.manifestfile}</manifestFile>
@@ -258,7 +261,7 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>2.3.7</version>
+                    <version>5.1.9</version>
                     <inherited>true</inherited>
                 </plugin>
             </plugins>
@@ -323,7 +326,13 @@
         <tiles.autotag.version>1.1.0</tiles.autotag.version>
     </properties>
 
-    <dependencies />
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <profiles>
         <profile>

@@ -21,22 +21,22 @@
 
 package org.apache.tiles.definition.digester;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DigesterDefinitionsReaderException}.
  *
  * @version $Rev$ $Date$
  */
-public class DigesterDefinitionsReaderExceptionTest {
+class DigesterDefinitionsReaderExceptionTest {
 
     /**
      * Test method for {@link DigesterDefinitionsReaderException#DigesterDefinitionsReaderException()}.
      */
     @Test
-    public void testDigesterDefinitionsReaderException() {
+    void testDigesterDefinitionsReaderException() {
         DigesterDefinitionsReaderException exception = new DigesterDefinitionsReaderException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +46,7 @@ public class DigesterDefinitionsReaderExceptionTest {
      * Test method for {@link DigesterDefinitionsReaderException#DigesterDefinitionsReaderException(java.lang.String)}.
      */
     @Test
-    public void testDigesterDefinitionsReaderExceptionString() {
+    void testDigesterDefinitionsReaderExceptionString() {
         DigesterDefinitionsReaderException exception = new DigesterDefinitionsReaderException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +56,7 @@ public class DigesterDefinitionsReaderExceptionTest {
      * Test method for {@link DigesterDefinitionsReaderException#DigesterDefinitionsReaderException(Throwable)}.
      */
     @Test
-    public void testDigesterDefinitionsReaderExceptionThrowable() {
+    void testDigesterDefinitionsReaderExceptionThrowable() {
         Throwable cause = new Throwable();
         DigesterDefinitionsReaderException exception = new DigesterDefinitionsReaderException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +67,7 @@ public class DigesterDefinitionsReaderExceptionTest {
      * Test method for {@link DigesterDefinitionsReaderException#DigesterDefinitionsReaderException(String, Throwable)}.
      */
     @Test
-    public void testDigesterDefinitionsReaderExceptionStringThrowable() {
+    void testDigesterDefinitionsReaderExceptionStringThrowable() {
         Throwable cause = new Throwable();
         DigesterDefinitionsReaderException exception = new DigesterDefinitionsReaderException("my message", cause);
         assertEquals("my message", exception.getMessage());

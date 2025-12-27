@@ -21,22 +21,24 @@
 package org.apache.tiles.renderer;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.render.CannotRenderException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DefinitionRenderer}.
  *
  * @version $Rev$ $Date$
  */
-public class DefinitionRendererTest {
+class DefinitionRendererTest {
 
     /**
      * The renderer.
@@ -49,8 +51,8 @@ public class DefinitionRendererTest {
     private TilesContainer container;
 
     /** {@inheritDoc} */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         container = createMock(TilesContainer.class);
         renderer = new DefinitionRenderer(container);
     }
@@ -62,7 +64,7 @@ public class DefinitionRendererTest {
      * @throws IOException If something goes wrong during rendition.
      */
     @Test
-    public void testWrite() throws IOException {
+    void testWrite() throws IOException {
         Request requestContext = createMock(Request.class);
         container.render("my.definition", requestContext);
         replay(requestContext, container);
@@ -76,15 +78,12 @@ public class DefinitionRendererTest {
      *
      * @throws IOException If something goes wrong during rendition.
      */
-    @Test(expected = CannotRenderException.class)
-    public void testRenderException() throws IOException {
+    @Test
+    void testRenderException() throws IOException {
         Request requestContext = createMock(Request.class);
         replay(requestContext, container);
-        try {
-            renderer.render(null, requestContext);
-        } finally {
-            verify(requestContext, container);
-        }
+        assertThrows(CannotRenderException.class, () -> renderer.render(null, requestContext));
+        verify(requestContext, container);
     }
 
     /**
@@ -93,7 +92,7 @@ public class DefinitionRendererTest {
      * .
      */
     @Test
-    public void testIsRenderable() {
+    void testIsRenderable() {
         Request requestContext = createMock(Request.class);
         expect(container.isValidDefinition("my.definition", requestContext)).andReturn(Boolean.TRUE);
         replay(requestContext, container);

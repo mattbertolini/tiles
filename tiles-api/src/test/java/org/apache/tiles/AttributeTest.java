@@ -22,29 +22,28 @@ package org.apache.tiles;
 
 import static org.apache.tiles.CompareUtil.*;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.tiles.request.Request;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link Attribute}.
  *
  * @version $Rev$ $Date$
  */
-public class AttributeTest {
+class AttributeTest {
 
 
     /**
      * Tests {@link Attribute#createTemplateAttribute(String)}.
      */
     @Test
-    public void testCreateTemplateAttribute1() {
+    void testCreateTemplateAttribute1() {
         Attribute attribute = Attribute.createTemplateAttribute("/my/template.jsp");
         assertEquals("/my/template.jsp", attribute.getValue());
         assertEquals("template", attribute.getRenderer());
@@ -54,7 +53,7 @@ public class AttributeTest {
      * Tests {@link Attribute#createTemplateAttributeWithExpression(String)}.
      */
     @Test
-    public void testCreateTemplateAttribute2() {
+    void testCreateTemplateAttribute2() {
         Attribute attribute = Attribute.createTemplateAttributeWithExpression("my.expression");
         assertEquals("template", attribute.getRenderer());
         assertEquals("my.expression", attribute.getExpressionObject().getExpression());
@@ -65,7 +64,7 @@ public class AttributeTest {
      * Tests {@link Attribute#Attribute()}.
      */
     @Test
-    public void testAttribute() {
+    void testAttribute() {
         Attribute attribute = new Attribute();
         assertNull(attribute.getValue());
     }
@@ -74,7 +73,7 @@ public class AttributeTest {
      * Tests {@link Attribute#Attribute(Object)}.
      */
     @Test
-    public void testAttributeObject() {
+    void testAttributeObject() {
         Attribute attribute = new Attribute("my.value");
         assertEquals("my.value", attribute.getValue());
         assertNull(attribute.getRenderer());
@@ -84,7 +83,7 @@ public class AttributeTest {
      * Tests {@link Attribute#Attribute(Object, String)}.
      */
     @Test
-    public void testAttributeObjectString() {
+    void testAttributeObjectString() {
         Attribute attribute = new Attribute("my.value", "role1,role2");
         assertEquals("my.value", attribute.getValue());
         assertNull(attribute.getRenderer());
@@ -98,7 +97,7 @@ public class AttributeTest {
      * Tests {@link Attribute#Attribute(Object, Expression, String, String)}.
      */
     @Test
-    public void testAttributeComplete() {
+    void testAttributeComplete() {
         Expression expression = new Expression("my.expression", "MYLANG");
         Attribute attribute = new Attribute("my.value", expression, "role1,role2", "myrenderer");
         assertEquals("my.value", attribute.getValue());
@@ -115,7 +114,7 @@ public class AttributeTest {
      * Tests {@link Attribute#Attribute(Attribute)}.
      */
     @Test
-    public void testAttributeCopy() {
+    void testAttributeCopy() {
         Expression expression = new Expression("my.expression", "MYLANG");
         Attribute attribute = new Attribute("my.value", expression, "role1,role2", "myrenderer");
         attribute = new Attribute(attribute);
@@ -143,7 +142,7 @@ public class AttributeTest {
      * Tests {@link Attribute#equals(Object)}.
      */
     @Test
-    public void testEquals() {
+    void testEquals() {
         Expression expression = new Expression("my.expression", "MYLANG");
         Attribute attribute = new Attribute("my.value", expression, "role1,role2", "myrenderer");
         Attribute attribute2 = new Attribute(attribute);
@@ -165,7 +164,7 @@ public class AttributeTest {
      * Tests {@link Attribute#getRole()} and {@link Attribute#setRole(String)}.
      */
     @Test
-    public void testGetRole() {
+    void testGetRole() {
         Attribute attribute = new Attribute("my.value");
         assertNull(attribute.getRole());
         Set<String> roles = new LinkedHashSet<String>();
@@ -180,7 +179,7 @@ public class AttributeTest {
      * Tests {@link Attribute#hashCode()}.
      */
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         Expression expression = new Expression("my.expression", "MYLANG");
         Attribute attribute = new Attribute("my.value", expression, "role1,role2", "myrenderer");
         Set<String> roles = new HashSet<String>();
@@ -195,7 +194,7 @@ public class AttributeTest {
      * Tests {@link Attribute#toString()}.
      */
     @Test
-    public void testToString() {
+    void testToString() {
         Expression expression = new Expression("my.expression", "MYLANG");
         Attribute attribute = new Attribute("my.value", expression, "role1,role2", "myrenderer");
         Set<String> roles = new HashSet<String>();
@@ -210,7 +209,7 @@ public class AttributeTest {
      * Test method for {@link org.apache.tiles.Attribute#inherit(org.apache.tiles.Attribute)}.
      */
     @Test
-    public void testInherit() {
+    void testInherit() {
         Attribute attribute = new Attribute(null, (Expression) null, null, (String) null);
         Attribute parentAttribute = new Attribute("value", Expression
                 .createExpression("expression", "language"), "role", "renderer");
@@ -235,7 +234,7 @@ public class AttributeTest {
      * Tests {@link Attribute#clone()}.
      */
     @Test
-    public void testClone() {
+    void testClone() {
         Expression expression = new Expression("my.expression", "MYLANG");
         Attribute attribute = new Attribute("my.value", expression, "role1,role2", "myrenderer");
         attribute = attribute.clone();
@@ -253,7 +252,7 @@ public class AttributeTest {
      * Tests {@link Attribute#createTemplateAttribute(String, String, String, String)}.
      */
     @Test
-    public void testCreateTemplateAttribute() {
+    void testCreateTemplateAttribute() {
         Attribute attribute = Attribute.createTemplateAttribute("myTemplate",
                 "MYLANG:myExpression", "myType", "myRole");
         assertEquals("myTemplate", attribute.getValue());
@@ -269,7 +268,7 @@ public class AttributeTest {
      * Tests {@link Attribute#isPermitted(Request)}.
      */
     @Test
-    public void testIsPermitted() {
+    void testIsPermitted() {
         Attribute attribute = new Attribute("myvalue");
         Request requestContext = createMock(Request.class);
         expect(requestContext.isUserInRole("first")).andReturn(Boolean.TRUE)
@@ -281,12 +280,10 @@ public class AttributeTest {
         Set<String> roles = new HashSet<String>();
         roles.add("first");
         attribute.setRoles(roles);
-        assertTrue("The role is not permitted", attribute.isPermitted(
-                requestContext));
+        assertTrue(attribute.isPermitted(requestContext), "The role is not permitted");
         roles.clear();
         roles.add("second");
-        assertFalse("The role is not permitted", attribute.isPermitted(
-                requestContext));
+        assertFalse(attribute.isPermitted(requestContext), "The role is not permitted");
         verify(requestContext);
     }
 }

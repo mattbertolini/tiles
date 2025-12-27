@@ -22,21 +22,22 @@
 package org.apache.tiles.compat.preparer;
 
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 
 import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.PreparerException;
 import org.apache.tiles.request.DispatchRequest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link UrlPreparer}.
  *
  * @version $Rev$ $Date$
  */
-public class UrlPreparerTest {
+class UrlPreparerTest {
 
     /**
      * The preparer to test.
@@ -46,8 +47,8 @@ public class UrlPreparerTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         preparer = new UrlPreparer("/my/url.do");
     }
 
@@ -58,7 +59,7 @@ public class UrlPreparerTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testExecute() throws IOException {
+    void testExecute() throws IOException {
         DispatchRequest requestContext = createMock(DispatchRequest.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
 
@@ -74,8 +75,8 @@ public class UrlPreparerTest {
      * org.apache.tiles.request.Request, org.apache.tiles.AttributeContext)}.
      * @throws IOException If something goes wrong.
      */
-    @Test(expected = PreparerException.class)
-    public void testExecuteException() throws IOException {
+    @Test
+    void testExecuteException() throws IOException {
         DispatchRequest requestContext = createMock(DispatchRequest.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
 
@@ -84,7 +85,7 @@ public class UrlPreparerTest {
 
         replay(requestContext, attributeContext);
         try {
-            preparer.execute(requestContext, attributeContext);
+            assertThrows(PreparerException.class, () -> preparer.execute(requestContext, attributeContext));
         } finally {
             verify(requestContext, attributeContext);
         }

@@ -21,19 +21,19 @@
 
 package org.apache.tiles;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link ListAttribute}.
  *
  * @version $Rev$ $Date$
  */
-public class ListAttributeTest {
+class ListAttributeTest {
 
     /**
      * The list size.
@@ -44,7 +44,7 @@ public class ListAttributeTest {
      * Test method for {@link org.apache.tiles.ListAttribute#hashCode()}.
      */
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         ListAttribute attribute = new ListAttribute();
         List<Attribute> list = new ArrayList<Attribute>();
         list.add(new Attribute("value1"));
@@ -58,7 +58,7 @@ public class ListAttributeTest {
      * Test method for {@link org.apache.tiles.ListAttribute#equals(java.lang.Object)}.
      */
     @Test
-    public void testEqualsObject() {
+    void testEqualsObject() {
         ListAttribute attribute = new ListAttribute();
         List<Attribute> list = new ArrayList<Attribute>();
         list.add(new Attribute("value1"));
@@ -79,7 +79,7 @@ public class ListAttributeTest {
      * Test method for {@link org.apache.tiles.ListAttribute#ListAttribute(java.util.List)}.
      */
     @Test
-    public void testListAttributeListOfAttribute() {
+    void testListAttributeListOfAttribute() {
         List<Attribute> attributes = new ArrayList<Attribute>();
         attributes.add(new Attribute("value1"));
         attributes.add(new Attribute("value2"));
@@ -91,7 +91,7 @@ public class ListAttributeTest {
      * Test method for {@link org.apache.tiles.ListAttribute#ListAttribute(org.apache.tiles.ListAttribute)}.
      */
     @Test
-    public void testListAttributeListAttribute() {
+    void testListAttributeListAttribute() {
         ListAttribute attribute = new ListAttribute();
         List<Attribute> list = new ArrayList<Attribute>();
         list.add(new Attribute("value1"));
@@ -107,7 +107,7 @@ public class ListAttributeTest {
      * Test method for {@link org.apache.tiles.ListAttribute#setValue(java.util.List)}.
      */
     @Test
-    public void testSetValue() {
+    void testSetValue() {
         ListAttribute attribute = new ListAttribute();
         List<Attribute> list = new ArrayList<Attribute>();
         list.add(new Attribute("value1"));
@@ -120,7 +120,7 @@ public class ListAttributeTest {
      * Test method for {@link org.apache.tiles.ListAttribute#add(org.apache.tiles.Attribute)}.
      */
     @Test
-    public void testAdd() {
+    void testAdd() {
         List<Attribute> list = new ArrayList<Attribute>();
         Attribute attribute1 = new Attribute("value1");
         list.add(attribute1);
@@ -140,7 +140,7 @@ public class ListAttributeTest {
      * Test method for {@link org.apache.tiles.ListAttribute#setInherit(boolean)}.
      */
     @Test
-    public void testSetInherit() {
+    void testSetInherit() {
         ListAttribute attribute = new ListAttribute();
         attribute.setInherit(true);
         assertTrue(attribute.isInherit());
@@ -152,7 +152,7 @@ public class ListAttributeTest {
      * Test method for {@link org.apache.tiles.ListAttribute#inherit(org.apache.tiles.ListAttribute)}.
      */
     @Test
-    public void testInherit() {
+    void testInherit() {
         List<Attribute> list = new ArrayList<Attribute>();
         Attribute attribute1 = new Attribute("value1");
         list.add(attribute1);
@@ -174,7 +174,7 @@ public class ListAttributeTest {
      * Test method for {@link org.apache.tiles.ListAttribute#clone()}.
      */
     @Test
-    public void testClone() {
+    void testClone() {
         ListAttribute attribute = new ListAttribute();
         List<Attribute> list = new ArrayList<Attribute>();
         list.add(new Attribute("value1"));

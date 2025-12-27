@@ -21,22 +21,24 @@
 
 package org.apache.tiles.velocity;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests {@link TilesVelocityException}.
  *
  * @version $Rev$ $Date$
  */
-public class TilesVelocityExceptionTest {
+class TilesVelocityExceptionTest {
 
     /**
      * Test method for {@link TilesVelocityException#TilesVelocityException()}.
      */
     @Test
-    public void testTilesVelocityException() {
+    void testTilesVelocityException() {
         TilesVelocityException exception = new TilesVelocityException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +48,7 @@ public class TilesVelocityExceptionTest {
      * Test method for {@link TilesVelocityException#TilesVelocityException(java.lang.String)}.
      */
     @Test
-    public void testTilesVelocityExceptionString() {
+    void testTilesVelocityExceptionString() {
         TilesVelocityException exception = new TilesVelocityException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +58,7 @@ public class TilesVelocityExceptionTest {
      * Test method for {@link TilesVelocityException#TilesVelocityException(java.lang.Throwable)}.
      */
     @Test
-    public void testTilesVelocityExceptionThrowable() {
+    void testTilesVelocityExceptionThrowable() {
         Throwable cause = new Throwable();
         TilesVelocityException exception = new TilesVelocityException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +69,7 @@ public class TilesVelocityExceptionTest {
      * Test method for {@link TilesVelocityException#TilesVelocityException(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testTilesVelocityExceptionStringThrowable() {
+    void testTilesVelocityExceptionStringThrowable() {
         Throwable cause = new Throwable();
         TilesVelocityException exception = new TilesVelocityException("my message", cause);
         assertEquals("my message", exception.getMessage());

@@ -21,22 +21,22 @@
 
 package org.apache.tiles.factory;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link TilesContainerFactoryException}.
  *
  * @version $Rev$ $Date$
  */
-public class TilesContainerFactoryExceptionTest {
+class TilesContainerFactoryExceptionTest {
 
     /**
      * Test method for {@link TilesContainerFactoryException#TilesContainerFactoryException()}.
      */
     @Test
-    public void testTilesContainerFactoryException() {
+    void testTilesContainerFactoryException() {
         TilesContainerFactoryException exception = new TilesContainerFactoryException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +46,7 @@ public class TilesContainerFactoryExceptionTest {
      * Test method for {@link TilesContainerFactoryException#TilesContainerFactoryException(java.lang.String)}.
      */
     @Test
-    public void testTilesContainerFactoryExceptionString() {
+    void testTilesContainerFactoryExceptionString() {
         TilesContainerFactoryException exception = new TilesContainerFactoryException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +56,7 @@ public class TilesContainerFactoryExceptionTest {
      * Test method for {@link TilesContainerFactoryException#TilesContainerFactoryException(java.lang.Throwable)}.
      */
     @Test
-    public void testTilesContainerFactoryExceptionThrowable() {
+    void testTilesContainerFactoryExceptionThrowable() {
         Throwable cause = new Throwable();
         TilesContainerFactoryException exception = new TilesContainerFactoryException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +67,7 @@ public class TilesContainerFactoryExceptionTest {
      * Test method for {@link TilesContainerFactoryException#TilesContainerFactoryException(String, Throwable)}.
      */
     @Test
-    public void testTilesContainerFactoryExceptionStringThrowable() {
+    void testTilesContainerFactoryExceptionStringThrowable() {
         Throwable cause = new Throwable();
         TilesContainerFactoryException exception = new TilesContainerFactoryException("my message", cause);
         assertEquals("my message", exception.getMessage());

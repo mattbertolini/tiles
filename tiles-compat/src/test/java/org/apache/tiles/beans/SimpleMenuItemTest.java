@@ -20,17 +20,17 @@
  */
 package org.apache.tiles.beans;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests {@link SimpleMenuItem}.
  *
  * @version $Rev$ $Date$
  */
-public class SimpleMenuItemTest {
+class SimpleMenuItemTest {
 
     /**
      * The item to test.
@@ -40,8 +40,8 @@ public class SimpleMenuItemTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         item = new SimpleMenuItem();
     }
 
@@ -49,7 +49,7 @@ public class SimpleMenuItemTest {
      * Test method for {@link org.apache.tiles.beans.SimpleMenuItem#setValue(java.lang.String)}.
      */
     @Test
-    public void testSetValue() {
+    void testSetValue() {
         item.setValue("value");
         assertEquals("value", item.getValue());
     }
@@ -58,7 +58,7 @@ public class SimpleMenuItemTest {
      * Test method for {@link org.apache.tiles.beans.SimpleMenuItem#setLink(java.lang.String)}.
      */
     @Test
-    public void testSetLink() {
+    void testSetLink() {
         item.setLink("value");
         assertEquals("value", item.getLink());
     }
@@ -67,7 +67,7 @@ public class SimpleMenuItemTest {
      * Test method for {@link org.apache.tiles.beans.SimpleMenuItem#setIcon(java.lang.String)}.
      */
     @Test
-    public void testSetIcon() {
+    void testSetIcon() {
         item.setIcon("value");
         assertEquals("value", item.getIcon());
     }
@@ -76,7 +76,7 @@ public class SimpleMenuItemTest {
      * Test method for {@link org.apache.tiles.beans.SimpleMenuItem#setTooltip(java.lang.String)}.
      */
     @Test
-    public void testSetTooltip() {
+    void testSetTooltip() {
         item.setTooltip("value");
         assertEquals("value", item.getTooltip());
     }
@@ -85,14 +85,12 @@ public class SimpleMenuItemTest {
      * Test method for {@link org.apache.tiles.beans.SimpleMenuItem#toString()}.
      */
     @Test
-    public void testToString() {
+    void testToString() {
         item.setIcon("icon");
         item.setLink("link");
         item.setTooltip("tooltip");
         item.setValue("value");
-        assertEquals(
-                "SimpleMenuItem[value=value, link=link, tooltip=tooltip, icon=icon, ]",
-                item.toString());
+        assertEquals("SimpleMenuItem[value=value, link=link, tooltip=tooltip, icon=icon, ]", item.toString());
     }
 
 }

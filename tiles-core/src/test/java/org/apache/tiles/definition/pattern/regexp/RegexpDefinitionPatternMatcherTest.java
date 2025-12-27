@@ -21,12 +21,12 @@
 
 package org.apache.tiles.definition.pattern.regexp;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
 import org.apache.tiles.definition.pattern.DefinitionPatternMatcher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link RegexpDefinitionPatternMatcher}.
@@ -34,15 +34,15 @@ import org.junit.Test;
  * @version $Rev$ $Date$
  * @since 2.2.0
  */
-public class RegexpDefinitionPatternMatcherTest {
+class RegexpDefinitionPatternMatcherTest {
 
     /**
      * Test method for
-     * {@link org.apache.tiles.definition.pattern.RegexpPatternDefinitionResolver
+     * {@link org.apache.tiles.definition.pattern.regexp.RegexpDefinitionPatternMatcher
      * #resolveDefinition(java.lang.String, java.lang.Object)}.
      */
     @Test
-    public void testResolveDefinition() {
+    void testResolveDefinition() {
         Definition def = new Definition();
         def.setName("testDef(.*)\\.message(.*)");
         def.setTemplateAttribute(Attribute.createTemplateAttribute("/test{1}.jsp"));

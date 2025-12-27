@@ -21,8 +21,11 @@
 package org.apache.tiles.definition.dao;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -45,15 +48,15 @@ import org.apache.tiles.request.ApplicationResource;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.locale.PostfixedApplicationResource;
 import org.apache.tiles.request.locale.URLApplicationResource;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link BaseLocaleUrlDefinitionDAO}.
  *
  * @version $Rev$ $Date$
  */
-public class BaseLocaleUrlDefinitionDAOTest {
+class BaseLocaleUrlDefinitionDAOTest {
 
     private static final class MutableApplicationResource extends PostfixedApplicationResource {
         private long lastModified = System.currentTimeMillis();
@@ -104,7 +107,7 @@ public class BaseLocaleUrlDefinitionDAOTest {
      * Sets up the test.
      * @throws IOException
      */
-    @Before
+    @BeforeEach
     public void setUp() throws IOException {
         resource = new MutableApplicationResource("org/apache/tiles/config/temp-defs.xml");
         applicationContext = createMock(ApplicationContext.class);
@@ -141,12 +144,12 @@ public class BaseLocaleUrlDefinitionDAOTest {
         replay(context);
 
         Definition definition = dao.getDefinition("rewrite.test", null);
-        assertNotNull("rewrite.test definition not found.", definition);
-        assertEquals("Incorrect initial template value", "/test.jsp", definition.getTemplateAttribute().getValue());
+        assertNotNull(definition, "rewrite.test definition not found.");
+        assertEquals("/test.jsp", definition.getTemplateAttribute().getValue(), "Incorrect initial template value");
 
         RefreshMonitor reloadable = dao;
         dao.loadDefinitionsFromResource(resource);
-        assertEquals("Factory should be fresh.", false, reloadable.refreshRequired());
+        assertFalse(reloadable.refreshRequired(), "Factory should be fresh.");
 
         // Make sure the system actually updates the timestamp.
         Thread.sleep(SLEEP_MILLIS);
@@ -159,7 +162,7 @@ public class BaseLocaleUrlDefinitionDAOTest {
                 + "<put-attribute name=\"testparm\" value=\"testval\"/>" + "</definition>" //
                 + "</tiles-definitions>");
 
-        assertEquals("Factory should be stale.", true, reloadable.refreshRequired());
+        assertTrue(reloadable.refreshRequired(), "Factory should be stale.");
 
         verify(context, dao);
     }

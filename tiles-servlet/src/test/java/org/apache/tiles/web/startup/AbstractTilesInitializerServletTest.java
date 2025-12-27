@@ -20,7 +20,7 @@
  */
 package org.apache.tiles.web.startup;
 
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
 
 import java.util.Enumeration;
 
@@ -30,22 +30,21 @@ import javax.servlet.ServletException;
 
 import org.apache.tiles.request.servlet.ServletApplicationContext;
 import org.apache.tiles.startup.TilesInitializer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link AbstractTilesInitializerServlet}.
  *
  * @version $Rev$ $Date$
  */
-public class AbstractTilesInitializerServletTest {
+class AbstractTilesInitializerServletTest {
 
     /**
      * Test method for {@link org.apache.tiles.web.startup.AbstractTilesInitializerServlet#init()}.
      * @throws ServletException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testInit() throws ServletException {
+    void testInit() throws ServletException {
         AbstractTilesInitializerServlet servlet = createMockBuilder(AbstractTilesInitializerServlet.class).createMock();
         TilesInitializer initializer = createMock(TilesInitializer.class);
         ServletConfig config = createMock(ServletConfig.class);

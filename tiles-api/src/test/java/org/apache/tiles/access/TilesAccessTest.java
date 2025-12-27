@@ -20,13 +20,13 @@
  */
 package org.apache.tiles.access;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.easymock.EasyMock.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.apache.tiles.NoSuchContainerException;
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.request.ApplicationContext;
@@ -37,21 +37,21 @@ import org.apache.tiles.request.Request;
  *
  * @version $Rev$ $Date$
  */
-public class TilesAccessTest {
+class TilesAccessTest {
 
     /**
      * Tests {@link TilesAccess#setContainer(ApplicationContext, TilesContainer)}.
      */
     @Test
-    public void testSetContainer() {
+    void testSetContainer() {
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
         Map<String, Object> attribs = new HashMap<String, Object>();
         expect(context.getApplicationScope()).andReturn(attribs);
         replay(context, container);
         TilesAccess.setContainer(context, container);
-        assertEquals(attribs.size(), 1);
-        assertEquals(attribs.get(TilesAccess.CONTAINER_ATTRIBUTE), container);
+        assertEquals(1, attribs.size());
+        assertEquals(container, attribs.get(TilesAccess.CONTAINER_ATTRIBUTE));
         verify(context, container);
     }
 
@@ -59,7 +59,7 @@ public class TilesAccessTest {
      * Tests {@link TilesAccess#setContainer(ApplicationContext, TilesContainer, String)}.
      */
     @Test
-    public void testSetContainerWithKey() {
+    void testSetContainerWithKey() {
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
         Map<String, Object> attribs = new HashMap<String, Object>();
@@ -82,7 +82,7 @@ public class TilesAccessTest {
      * Tests {@link TilesAccess#getContainer(ApplicationContext)}.
      */
     @Test
-    public void testGetContainer() {
+    void testGetContainer() {
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
         Map<String, Object> attribs = new HashMap<String, Object>();
@@ -98,7 +98,7 @@ public class TilesAccessTest {
      * Tests {@link TilesAccess#getContainer(TilesApplicationContext, String))}.
      */
     @Test
-    public void testGetContainerWithKey() {
+    void testGetContainerWithKey() {
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
         Map<String, Object> attribs = new HashMap<String, Object>();
@@ -117,7 +117,7 @@ public class TilesAccessTest {
      * {@link ServletUtil#setCurrentContainer(ServletRequest, String)}.
      */
     @Test
-    public void testSetCurrentContainer() {
+    void testSetCurrentContainer() {
         Request request = createMock(Request.class);
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
@@ -138,8 +138,8 @@ public class TilesAccessTest {
      * Tests
      * {@link ServletUtil#setCurrentContainer(ServletRequest, String)}.
      */
-    @Test(expected = NoSuchContainerException.class)
-    public void testSetCurrentContainerException() {
+    @Test
+    void testSetCurrentContainerException() {
         Request request = createMock(Request.class);
         ApplicationContext context = createMock(ApplicationContext.class);
         Map<String, Object> attribs = new HashMap<String, Object>();
@@ -148,7 +148,7 @@ public class TilesAccessTest {
         expect(context.getApplicationScope()).andReturn(attribs).anyTimes();
         replay(request, context);
         try {
-            TilesAccess.setCurrentContainer(request, "myKey");
+            assertThrows(NoSuchContainerException.class, () -> TilesAccess.setCurrentContainer(request, "myKey"));
         } finally {
             verify(request, context);
         }
@@ -159,7 +159,7 @@ public class TilesAccessTest {
      * {@link ServletUtil#setCurrentContainer(ServletRequest, TilesContainer)}.
      */
     @Test
-    public void testSetCurrentContainerWithContainer() {
+    void testSetCurrentContainerWithContainer() {
         Request request = createMock(Request.class);
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
@@ -180,8 +180,8 @@ public class TilesAccessTest {
      * Tests
      * {@link ServletUtil#setCurrentContainer(ServletRequest, TilesContainer)}.
      */
-    @Test(expected = NullPointerException.class)
-    public void testSetCurrentContainerWithContainerException() {
+    @Test
+    void testSetCurrentContainerWithContainerException() {
         Request request = createMock(Request.class);
         ApplicationContext context = createMock(ApplicationContext.class);
         Map<String, Object> attribs = new HashMap<String, Object>();
@@ -190,7 +190,7 @@ public class TilesAccessTest {
 
         replay(request, context);
         try {
-            TilesAccess.setCurrentContainer(request, (TilesContainer) null);
+            assertThrows(NullPointerException.class, () -> TilesAccess.setCurrentContainer(request, (TilesContainer) null));
         } finally {
             verify(request, context);
         }
@@ -200,7 +200,7 @@ public class TilesAccessTest {
      * Tests {@link ServletUtil#getCurrentContainer(ServletRequest)}.
      */
     @Test
-    public void testGetCurrentContainer() {
+    void testGetCurrentContainer() {
         Request request = createMock(Request.class);
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);
@@ -222,7 +222,7 @@ public class TilesAccessTest {
      * Tests {@link ServletUtil#getCurrentContainer(ServletRequest)}.
      */
     @Test
-    public void testGetCurrentContainerDefault() {
+    void testGetCurrentContainerDefault() {
         Request request = createMock(Request.class);
         ApplicationContext context = createMock(ApplicationContext.class);
         TilesContainer container = createMock(TilesContainer.class);

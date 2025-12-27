@@ -21,7 +21,6 @@
 package org.apache.tiles.web.util;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -39,16 +38,16 @@ import org.apache.tiles.AttributeContext;
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.servlet.ServletRequest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link TilesDecorationFilter}.
  *
  * @version $Rev$ $Date$
  */
-public class TilesDecorationFilterTest {
+class TilesDecorationFilterTest {
 
     /**
      * The filter configuration.
@@ -69,9 +68,8 @@ public class TilesDecorationFilterTest {
      * Sets up the test.
      * @throws ServletException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
-    @Before
-    public void setUp() throws ServletException {
+    @BeforeEach
+    void setUp() throws ServletException {
         config = createMock(FilterConfig.class);
         servletContext = createMock(ServletContext.class);
         Enumeration<String> names = createMock(Enumeration.class);
@@ -97,8 +95,8 @@ public class TilesDecorationFilterTest {
     /**
      * Tears down the test.
      */
-    @After
-    public void tearDown() {
+    @AfterEach
+    void tearDown() {
         verify(config, servletContext);
     }
 
@@ -107,9 +105,8 @@ public class TilesDecorationFilterTest {
      * @throws ServletException If something goes wrong
      * @throws IOException If something goes wrong.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testDoFilter() throws IOException, ServletException {
+    void testDoFilter() throws IOException, ServletException {
         HttpServletRequest request = createMock(HttpServletRequest.class);
         HttpServletResponse response = createMock(HttpServletResponse.class);
         FilterChain chain = createMock(FilterChain.class);

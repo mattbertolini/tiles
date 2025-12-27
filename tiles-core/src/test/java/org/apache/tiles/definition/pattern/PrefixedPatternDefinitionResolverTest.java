@@ -21,7 +21,7 @@
 
 package org.apache.tiles.definition.pattern;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.easymock.EasyMock.*;
 
 import java.util.ArrayList;
@@ -31,20 +31,20 @@ import java.util.Map;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link PrefixedPatternDefinitionResolver}.
  *
  * @version $Rev$ $Date$
  */
-public class PrefixedPatternDefinitionResolverTest {
+class PrefixedPatternDefinitionResolverTest {
 
     /**
      * Test method for {@link PrefixedPatternDefinitionResolver#addDefinitionsAsPatternMatchers(List, Map)}.
      */
     @Test
-    public void testAddDefinitionsAsPatternMatchers() {
+    void testAddDefinitionsAsPatternMatchers() {
         DefinitionPatternMatcherFactory factory1 = createMock(DefinitionPatternMatcherFactory.class);
         DefinitionPatternMatcherFactory factory2 = createMock(DefinitionPatternMatcherFactory.class);
         DefinitionPatternMatcher matcher1 = createMock(DefinitionPatternMatcher.class);

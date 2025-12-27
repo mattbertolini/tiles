@@ -21,18 +21,18 @@
 
 package org.apache.tiles.definition.pattern.wildcard;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.apache.tiles.Definition;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link WildcardDefinitionPatternMatcherFactory}.
  *
  * @version $Rev$ $Date$
  */
-public class WildcardDefinitionPatternMatcherFactoryTest {
+class WildcardDefinitionPatternMatcherFactoryTest {
 
     /**
      * The object to test.
@@ -42,8 +42,8 @@ public class WildcardDefinitionPatternMatcherFactoryTest {
     /**
      * Sets up the object to test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         factory = new WildcardDefinitionPatternMatcherFactory();
     }
 
@@ -53,7 +53,7 @@ public class WildcardDefinitionPatternMatcherFactoryTest {
      * .
      */
     @Test
-    public void testCreateDefinitionPatternMatcher() {
+    void testCreateDefinitionPatternMatcher() {
         assertTrue(factory.createDefinitionPatternMatcher("myPattern",
                 new Definition()) instanceof WildcardDefinitionPatternMatcher);
     }
@@ -62,7 +62,7 @@ public class WildcardDefinitionPatternMatcherFactoryTest {
      * Test method for {@link WildcardDefinitionPatternMatcherFactory#isPatternRecognized(String)}.
      */
     @Test
-    public void testIsPatternRecognized() {
+    void testIsPatternRecognized() {
         assertTrue(factory.isPatternRecognized("my*pattern"));
         assertFalse(factory.isPatternRecognized("mypattern"));
     }

@@ -20,21 +20,22 @@
  */
 package org.apache.tiles.ognl;
 
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Map;
 
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link ScopePropertyAccessor}.
  *
  * @version $Rev$ $Date$
  */
-public class ScopePropertyAccessorTest {
+class ScopePropertyAccessorTest {
 
     /**
      * The accessor to test.
@@ -44,8 +45,8 @@ public class ScopePropertyAccessorTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         accessor = new ScopePropertyAccessor();
     }
 
@@ -54,7 +55,7 @@ public class ScopePropertyAccessorTest {
      */
     @SuppressWarnings("unchecked")
     @Test
-    public void testGetProperty() {
+    void testGetProperty() {
         Request request = createMock(Request.class);
         Map<String, Object> oneScope = createMock(Map.class);
 
@@ -71,7 +72,7 @@ public class ScopePropertyAccessorTest {
      */
     @SuppressWarnings("unchecked")
     @Test
-    public void testGetSourceAccessor() {
+    void testGetSourceAccessor() {
         Request request = createMock(Request.class);
         @SuppressWarnings("unused")
         Map<String, Object> oneScope = createMock(Map.class);
@@ -86,7 +87,7 @@ public class ScopePropertyAccessorTest {
      * Test method for {@link ScopePropertyAccessor#getSourceSetter(OgnlContext, Object, Object)}.
      */
     @Test
-    public void testGetSourceSetter() {
+    void testGetSourceSetter() {
         assertNull(accessor.getSourceSetter(null, null, "whatever"));
     }
 
@@ -94,7 +95,7 @@ public class ScopePropertyAccessorTest {
      * Test method for {@link ScopePropertyAccessor#setProperty(Map, Object, Object, Object)}.
      */
     @Test
-    public void testSetProperty() {
+    void testSetProperty() {
         accessor.setProperty(null, null, "whatever", "whateverValue");
     }
 

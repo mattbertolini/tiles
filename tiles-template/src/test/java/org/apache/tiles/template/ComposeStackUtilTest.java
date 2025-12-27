@@ -22,7 +22,9 @@
 package org.apache.tiles.template;
 
 import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.util.ArrayDeque;
 import java.util.Date;
@@ -31,15 +33,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.tiles.request.Request;
-import org.apache.tiles.template.ComposeStackUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link ComposeStackUtil}.
  *
  * @version $Rev$ $Date$
  */
-public class ComposeStackUtilTest {
+class ComposeStackUtilTest {
 
     /**
      * An integer value.
@@ -56,7 +57,7 @@ public class ComposeStackUtilTest {
      * #findAncestorWithClass(java.util.Stack, java.lang.Class)}.
      */
     @Test
-    public void testFindAncestorWithClass() {
+    void testFindAncestorWithClass() {
         Deque<Object> composeStack = new ArrayDeque<Object>();
         Integer integerValue = new Integer(1);
         Long longValue = new Long(LONG_VALUE);

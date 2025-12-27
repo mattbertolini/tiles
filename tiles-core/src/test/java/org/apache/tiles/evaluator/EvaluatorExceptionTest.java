@@ -21,22 +21,22 @@
 
 package org.apache.tiles.evaluator;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link EvaluationException}.
  *
  * @version $Rev$ $Date$
  */
-public class EvaluatorExceptionTest {
+class EvaluatorExceptionTest {
 
     /**
      * Test method for {@link EvaluationException#EvaluationException()}.
      */
     @Test
-    public void testEvaluationException() {
+    void testEvaluationException() {
         EvaluationException exception = new EvaluationException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -46,7 +46,7 @@ public class EvaluatorExceptionTest {
      * Test method for {@link EvaluationException#EvaluationException(java.lang.String)}.
      */
     @Test
-    public void testEvaluationExceptionString() {
+    void testEvaluationExceptionString() {
         EvaluationException exception = new EvaluationException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -56,7 +56,7 @@ public class EvaluatorExceptionTest {
      * Test method for {@link EvaluationException#EvaluationException(java.lang.Throwable)}.
      */
     @Test
-    public void testEvaluationExceptionThrowable() {
+    void testEvaluationExceptionThrowable() {
         Throwable cause = new Throwable();
         EvaluationException exception = new EvaluationException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -67,7 +67,7 @@ public class EvaluatorExceptionTest {
      * Test method for {@link EvaluationException#EvaluationException(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testEvaluationExceptionStringThrowable() {
+    void testEvaluationExceptionStringThrowable() {
         Throwable cause = new Throwable();
         EvaluationException exception = new EvaluationException("my message", cause);
         assertEquals("my message", exception.getMessage());

@@ -20,24 +20,23 @@
  */
 package org.apache.tiles.freemarker;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
 import freemarker.ext.beans.BeanModel;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests {@link SharedVariableFactory}.
  *
  * @version $Rev$ $Date$
  */
-public class TilesSharedVariableFactoryTest {
+class TilesSharedVariableFactoryTest {
 
     /**
      * Test method for {@link org.apache.tiles.freemarker.TilesSharedVariableFactory#create()}.
      */
     @Test
-    public void testCreate() {
+    void testCreate() {
         TilesSharedVariableFactory factory = new TilesSharedVariableFactory();
         assertTrue(factory.create() instanceof BeanModel);
     }

@@ -21,8 +21,10 @@
 
 package org.apache.tiles.velocity.template;
 
-import static org.junit.Assert.*;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -35,12 +37,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.velocity.context.Context;
 import org.apache.velocity.context.InternalContextAdapter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link AbstractDefaultToStringRenderable}.
  */
-public class AbstractDefaultToStringRenderableTest {
+class AbstractDefaultToStringRenderableTest {
 
     /**
      * Test method for {@link org.apache.tiles.velocity.template.AbstractDefaultToStringRenderable
@@ -48,7 +50,7 @@ public class AbstractDefaultToStringRenderableTest {
      * java.util.Map, javax.servlet.http.HttpServletResponse, javax.servlet.http.HttpServletRequest)}.
      */
     @Test
-    public void testAbstractDefaultToStringRenderable() {
+    void testAbstractDefaultToStringRenderable() {
         Context velociContext = createMock(Context.class);
         HttpServletRequest request = createMock(HttpServletRequest.class);
         HttpServletResponse response = createMock(HttpServletResponse.class);
@@ -68,7 +70,7 @@ public class AbstractDefaultToStringRenderableTest {
      * Test method for {@link org.apache.tiles.velocity.template.AbstractDefaultToStringRenderable#toString()}.
      */
     @Test
-    public void testToString() {
+    void testToString() {
         Context velociContext = createMock(Context.class);
         HttpServletRequest request = createMock(HttpServletRequest.class);
         HttpServletResponse response = createMock(HttpServletResponse.class);
@@ -80,7 +82,7 @@ public class AbstractDefaultToStringRenderableTest {
                 params, response, request);
 
         assertEquals("Hello!", renderable.toString());
-        assertTrue(renderable.getWriter() instanceof StringWriter);
+        assertInstanceOf(StringWriter.class, renderable.getWriter());
         assertNull(renderable.getInternalContextAdapter());
         verify(velociContext, request, response);
     }

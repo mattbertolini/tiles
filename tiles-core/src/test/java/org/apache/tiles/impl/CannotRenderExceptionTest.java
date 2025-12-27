@@ -21,23 +21,24 @@
 
 package org.apache.tiles.impl;
 
-import static org.junit.Assert.*;
-
 import org.apache.tiles.request.render.CannotRenderException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests {@link CannotRenderException}.
  *
  * @version $Rev$ $Date$
  */
-public class CannotRenderExceptionTest {
+class CannotRenderExceptionTest {
 
     /**
      * Test method for {@link CannotRenderException#CannotRenderException()}.
      */
     @Test
-    public void testCannotRenderException() {
+    void testCannotRenderException() {
         CannotRenderException exception = new CannotRenderException();
         assertNull(exception.getMessage());
         assertNull(exception.getCause());
@@ -47,7 +48,7 @@ public class CannotRenderExceptionTest {
      * Test method for {@link CannotRenderException#CannotRenderException(java.lang.String)}.
      */
     @Test
-    public void testCannotRenderExceptionString() {
+    void testCannotRenderExceptionString() {
         CannotRenderException exception = new CannotRenderException("my message");
         assertEquals("my message", exception.getMessage());
         assertNull(exception.getCause());
@@ -57,7 +58,7 @@ public class CannotRenderExceptionTest {
      * Test method for {@link CannotRenderException#CannotRenderException(java.lang.Throwable)}.
      */
     @Test
-    public void testCannotRenderExceptionThrowable() {
+    void testCannotRenderExceptionThrowable() {
         Throwable cause = new Throwable();
         CannotRenderException exception = new CannotRenderException(cause);
         assertEquals(cause.toString(), exception.getMessage());
@@ -68,7 +69,7 @@ public class CannotRenderExceptionTest {
      * Test method for {@link CannotRenderException#CannotRenderException(java.lang.String, java.lang.Throwable)}.
      */
     @Test
-    public void testCannotRenderExceptionStringThrowable() {
+    void testCannotRenderExceptionStringThrowable() {
         Throwable cause = new Throwable();
         CannotRenderException exception = new CannotRenderException("my message", cause);
         assertEquals("my message", exception.getMessage());

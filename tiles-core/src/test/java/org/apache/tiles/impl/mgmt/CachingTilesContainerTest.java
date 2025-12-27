@@ -21,8 +21,7 @@
 package org.apache.tiles.impl.mgmt;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,15 +30,15 @@ import org.apache.tiles.Definition;
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.definition.NoSuchDefinitionException;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link CachingTilesContainer}.
  *
  * @version $Rev$ $Date$
  */
-public class CachingTilesContainerTest {
+class CachingTilesContainerTest {
 
     /**
      * The default name of the attribute in which storing custom definitions.
@@ -60,8 +59,8 @@ public class CachingTilesContainerTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         wrapped = createMock(TilesContainer.class);
         container = new CachingTilesContainer(wrapped);
     }
@@ -71,9 +70,8 @@ public class CachingTilesContainerTest {
      * {@link CachingTilesContainer#CachingTilesContainer(TilesContainer, String)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testCachingTilesContainerTilesContainerString() {
+    void testCachingTilesContainerTilesContainerString() {
         TilesContainer wrapped = createMock(TilesContainer.class);
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
@@ -96,9 +94,8 @@ public class CachingTilesContainerTest {
      * {@link org.apache.tiles.impl.mgmt.CachingTilesContainer#CachingTilesContainer(TilesContainer, String)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testCachingTilesContainer() {
+    void testCachingTilesContainer() {
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -122,9 +119,8 @@ public class CachingTilesContainerTest {
      * {@link CachingTilesContainer#getDefinition(String, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetDefinition() {
+    void testGetDefinition() {
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -145,9 +141,8 @@ public class CachingTilesContainerTest {
      * {@link CachingTilesContainer#getDefinition(String, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testGetDefinitionContainer() {
+    void testGetDefinitionContainer() {
         Request request = createMock(Request.class);
         Map<String, Object> scope = createMock(Map.class);
         Definition definition = createMock(Definition.class);
@@ -168,9 +163,8 @@ public class CachingTilesContainerTest {
      * {@link org.apache.tiles.impl.mgmt.CachingTilesContainer#isValidDefinition(String, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testIsValidDefinition() {
+    void testIsValidDefinition() {
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -191,9 +185,8 @@ public class CachingTilesContainerTest {
      * {@link org.apache.tiles.impl.mgmt.CachingTilesContainer#isValidDefinition(String, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testIsValidDefinitionContainer() {
+    void testIsValidDefinitionContainer() {
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -214,9 +207,8 @@ public class CachingTilesContainerTest {
      * {@link CachingTilesContainer#register(Definition, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testRegister() {
+    void testRegister() {
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -246,9 +238,8 @@ public class CachingTilesContainerTest {
      * {@link CachingTilesContainer#register(Definition, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testRegisterInheritance() {
+    void testRegisterInheritance() {
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -291,9 +282,8 @@ public class CachingTilesContainerTest {
      * {@link CachingTilesContainer#register(Definition, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
-    @Test(expected = NoSuchDefinitionException.class)
-    public void testRegisterInheritanceFail() {
+    @Test
+    void testRegisterInheritanceFail() {
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -316,7 +306,7 @@ public class CachingTilesContainerTest {
 
         replay(wrapped, request, definitions, scope, definition);
         try {
-            container.register(definition, request);
+            assertThrows(NoSuchDefinitionException.class, () -> container.register(definition, request));
         } finally {
             verify(wrapped, request, definitions, scope, definition);
         }
@@ -327,9 +317,8 @@ public class CachingTilesContainerTest {
      * {@link CachingTilesContainer#register(Definition, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testRegisterCreateDefinitions() {
+    void testRegisterCreateDefinitions() {
         Request request = createMock(Request.class);
         Map<String, Object> scope = createMock(Map.class);
         Definition definition = createMock(Definition.class);
@@ -355,9 +344,8 @@ public class CachingTilesContainerTest {
      * {@link org.apache.tiles.impl.mgmt.CachingTilesContainer#render(String, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testRender() {
+    void testRender() {
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -379,9 +367,8 @@ public class CachingTilesContainerTest {
      * {@link org.apache.tiles.impl.mgmt.CachingTilesContainer#render(String, Request)}
      * .
      */
-    @SuppressWarnings("unchecked")
-    @Test(expected = NoSuchDefinitionException.class)
-    public void testRenderFail() {
+    @Test
+    void testRenderFail() {
         Request request = createMock(Request.class);
         Map<String, Definition> definitions = createMock(Map.class);
         Map<String, Object> scope = createMock(Map.class);
@@ -394,7 +381,7 @@ public class CachingTilesContainerTest {
 
         replay(wrapped, request, definitions, scope);
         try {
-            container.render("definition", request);
+            assertThrows(NoSuchDefinitionException.class, () -> container.render("definition", request));
         } finally {
             verify(wrapped, request, definitions, scope);
         }

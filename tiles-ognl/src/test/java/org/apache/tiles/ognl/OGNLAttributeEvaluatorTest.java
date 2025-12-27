@@ -22,8 +22,8 @@ package org.apache.tiles.ognl;
 
 import java.util.Arrays;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,16 +37,16 @@ import org.apache.tiles.Expression;
 import org.apache.tiles.evaluator.EvaluationException;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link OGNLAttributeEvaluator}.
  *
  * @version $Rev$ $Date$$
  */
-public class OGNLAttributeEvaluatorTest {
+class OGNLAttributeEvaluatorTest {
 
     /**
      * The evaluator to test.
@@ -68,8 +68,8 @@ public class OGNLAttributeEvaluatorTest {
      *
      * @throws OgnlException If something goes wrong.
      */
-    @Before
-    public void setUp() throws OgnlException {
+    @BeforeEach
+    void setUp() throws OgnlException {
         PropertyAccessor objectPropertyAccessor = OgnlRuntime.getPropertyAccessor(Object.class);
         PropertyAccessor applicationContextPropertyAccessor =
             new NestedObjectDelegatePropertyAccessor<Request>(
@@ -110,8 +110,8 @@ public class OGNLAttributeEvaluatorTest {
     /**
      * Tears down the test.
      */
-    @After
-    public void tearDown() {
+    @AfterEach
+    void tearDown() {
         verify(request, applicationContext);
     }
 
@@ -123,82 +123,82 @@ public class OGNLAttributeEvaluatorTest {
     public void testEvaluate() {
         Attribute attribute = new Attribute();
         attribute.setExpressionObject(new Expression("requestScope.object1"));
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                attribute, request));
+        assertEquals("value", evaluator.evaluate(
+                attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("sessionScope.object2"));
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("applicationScope.object3"));
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("object1"));
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                attribute, request));
+        assertEquals("value", evaluator.evaluate(
+                attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("object2"));
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("object3"));
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("paulaBean.paula"));
-        assertEquals("The value is not correct", "Brillant", evaluator
-                .evaluate(attribute, request));
+        assertEquals("Brillant", evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("'String literal'"));
-        assertEquals("The value is not correct", "String literal", evaluator
-                .evaluate(attribute, request));
+        assertEquals("String literal", evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setValue(new Integer(2));
-        assertEquals("The value is not correct", new Integer(2), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Integer(2), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setValue("object1");
-        assertEquals("The value has been evaluated", "object1", evaluator
-                .evaluate(attribute, request));
+        assertEquals("object1", evaluator
+                .evaluate(attribute, request), "The value has been evaluated");
     }
 
     /**
      * Tests {@link OGNLAttributeEvaluator#evaluate(String, Request)}.
      */
     @Test
-    public void testEvaluateString() {
+    void testEvaluateString() {
         String expression = "requestScope.object1";
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                expression, request));
+        assertEquals("value", evaluator.evaluate(
+                expression, request), "The value is not correct");
         expression = "sessionScope.object2";
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "applicationScope.object3";
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "object1";
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                expression, request));
+        assertEquals("value", evaluator.evaluate(
+                expression, request), "The value is not correct");
         expression = "object2";
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "object3";
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "paulaBean.paula";
-        assertEquals("The value is not correct", "Brillant", evaluator
-                .evaluate(expression, request));
+        assertEquals("Brillant", evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "'String literal'";
-        assertEquals("The value is not correct", "String literal", evaluator
-                .evaluate(expression, request));
+        assertEquals("String literal", evaluator
+                .evaluate(expression, request), "The value is not correct");
     }
 
     /**
      * Tests {@link OGNLAttributeEvaluator#evaluate(String, Request)}.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void testEvaluateNull() {
-        evaluator.evaluate((String) null, request);
+    @Test
+    void testEvaluateNull() {
+        assertThrows(IllegalArgumentException.class, () -> evaluator.evaluate((String) null, request));
     }
 
     /**
      * Tests {@link OGNLAttributeEvaluator#evaluate(String, Request)}.
      */
-    @Test(expected = EvaluationException.class)
-    public void testEvaluateOgnlException() {
-        evaluator.evaluate("wrong|||!!!!yes###", request);
+    @Test
+    void testEvaluateOgnlException() {
+        assertThrows(EvaluationException.class, () -> evaluator.evaluate("wrong|||!!!!yes###", request));
     }
 
     /**

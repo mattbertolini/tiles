@@ -20,28 +20,27 @@
  */
 package org.apache.tiles.locale.impl;
 
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.util.Locale;
 import java.util.Map;
 
 import org.apache.tiles.request.Request;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link DefaultLocaleResolver}.
  *
  * @version $Rev$ $Date$
  */
-public class DefaultLocaleResolverTest {
+class DefaultLocaleResolverTest {
 
     /**
      * Test method for {@link DefaultLocaleResolver#resolveLocale(Request)}.
      */
-    @SuppressWarnings("unchecked")
     @Test
-    public void testResolveLocale() {
+    void testResolveLocale() {
         Request request = createMock(Request.class);
         Map<String, Object> sessionScope = createMock(Map.class);
         Locale locale = Locale.ITALY;

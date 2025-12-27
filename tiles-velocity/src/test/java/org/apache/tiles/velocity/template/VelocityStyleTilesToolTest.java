@@ -24,11 +24,11 @@ package org.apache.tiles.velocity.template;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
-import static org.easymock.classextension.EasyMock.createMock;
-import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -50,8 +50,8 @@ import org.apache.tiles.request.velocity.VelocityRequest;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.context.InternalContextAdapter;
 import org.apache.velocity.runtime.Renderable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link VelocityStyleTilesTool}.
@@ -59,7 +59,7 @@ import org.junit.Test;
  * @version $Rev$ $Date$
  * @since 2.2.0
  */
-public class VelocityStyleTilesToolTest {
+class VelocityStyleTilesToolTest {
 
     /**
      * The tool to test.
@@ -91,8 +91,8 @@ public class VelocityStyleTilesToolTest {
      *
      * @since 2.2.0
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         tool = new VelocityStyleTilesTool();
         request = createMock(HttpServletRequest.class);
         response = createMock(HttpServletResponse.class);
@@ -104,7 +104,7 @@ public class VelocityStyleTilesToolTest {
      * Test method for {@link org.apache.tiles.velocity.template.VelocityStyleTilesTool#get(java.lang.String)}.
      */
     @Test
-    public void testGetAttribute() {
+    void testGetAttribute() {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
@@ -134,7 +134,7 @@ public class VelocityStyleTilesToolTest {
      * Test method for {@link org.apache.tiles.velocity.template.VelocityStyleTilesTool#createAttribute()}.
      */
     @Test
-    public void testCreateAttribute() {
+    void testCreateAttribute() {
         replay(velocityContext, request, response, servletContext);
         initializeTool();
         Attribute attribute =  tool.createAttribute();
@@ -149,7 +149,7 @@ public class VelocityStyleTilesToolTest {
      * #clone(org.apache.tiles.Attribute)}.
      */
     @Test
-    public void testCloneAttribute() {
+    void testCloneAttribute() {
         Attribute attribute = new Attribute("myValue", Expression
                 .createExpression("myExpression", null), "myRole",
                 "myRendererName");
@@ -165,7 +165,7 @@ public class VelocityStyleTilesToolTest {
      * #createTemplateAttribute(java.lang.String)}.
      */
     @Test
-    public void testCreateTemplateAttribute() {
+    void testCreateTemplateAttribute() {
         replay(velocityContext, request, response, servletContext);
         initializeTool();
         Attribute attribute = tool.createTemplateAttribute("myTemplate");
@@ -180,7 +180,7 @@ public class VelocityStyleTilesToolTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testRenderAttribute() throws IOException {
+    void testRenderAttribute() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         InternalContextAdapter internalContextAdapter = createMock(InternalContextAdapter.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
@@ -213,7 +213,7 @@ public class VelocityStyleTilesToolTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testRenderDefinition() throws IOException {
+    void testRenderDefinition() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         InternalContextAdapter internalContextAdapter = createMock(InternalContextAdapter.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
@@ -244,7 +244,7 @@ public class VelocityStyleTilesToolTest {
      * @throws IOException If something goes wrong.
      */
     @Test
-    public void testRenderAttributeContext() throws IOException {
+    void testRenderAttributeContext() throws IOException {
         TilesContainer container = createMock(TilesContainer.class);
         InternalContextAdapter internalContextAdapter = createMock(InternalContextAdapter.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
@@ -274,7 +274,7 @@ public class VelocityStyleTilesToolTest {
      * Test method for {@link org.apache.tiles.velocity.template.VelocityStyleTilesTool#startAttributeContext()}.
      */
     @Test
-    public void testStartAttributeContext() {
+    void testStartAttributeContext() {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
@@ -303,7 +303,7 @@ public class VelocityStyleTilesToolTest {
      * Test method for {@link org.apache.tiles.velocity.template.VelocityStyleTilesTool#endAttributeContext()}.
      */
     @Test
-    public void testEndAttributeContext() {
+    void testEndAttributeContext() {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
@@ -331,7 +331,7 @@ public class VelocityStyleTilesToolTest {
      * Test method for {@link org.apache.tiles.velocity.template.VelocityStyleTilesTool#getAttributeContext()}.
      */
     @Test
-    public void testGetAttributeContext() {
+    void testGetAttributeContext() {
         TilesContainer container = createMock(TilesContainer.class);
         AttributeContext attributeContext = createMock(AttributeContext.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
@@ -361,7 +361,7 @@ public class VelocityStyleTilesToolTest {
      * #setCurrentContainer(java.lang.String)}.
      */
     @Test
-    public void testSetCurrentContainer() {
+    void testSetCurrentContainer() {
         TilesContainer container = createMock(TilesContainer.class);
         ApplicationContext applicationContext = createMock(ApplicationContext.class);
         Map<String, Object> applicationScope = new HashMap<String, Object>();
@@ -387,7 +387,7 @@ public class VelocityStyleTilesToolTest {
      * Test method for {@link org.apache.tiles.velocity.template.VelocityStyleTilesTool#toString()}.
      */
     @Test
-    public void testToString() {
+    void testToString() {
         assertEquals("", tool.toString());
     }
 

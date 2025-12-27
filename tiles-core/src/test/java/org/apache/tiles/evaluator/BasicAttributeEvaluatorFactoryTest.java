@@ -21,25 +21,25 @@
 
 package org.apache.tiles.evaluator;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.easymock.EasyMock.*;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Expression;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link BasicAttributeEvaluatorFactory}.
  *
  * @version $Rev$ $Date$
  */
-public class BasicAttributeEvaluatorFactoryTest {
+class BasicAttributeEvaluatorFactoryTest {
 
     /**
      * Test method for {@link BasicAttributeEvaluatorFactory#getAttributeEvaluator(String)}.
      */
     @Test
-    public void testGetAttributeEvaluatorString() {
+    void testGetAttributeEvaluatorString() {
         AttributeEvaluator defaultEvaluator = createMock(AttributeEvaluator.class);
         AttributeEvaluator evaluator1 = createMock(AttributeEvaluator.class);
         AttributeEvaluator evaluator2 = createMock(AttributeEvaluator.class);
@@ -57,7 +57,7 @@ public class BasicAttributeEvaluatorFactoryTest {
      * Test method for {@link BasicAttributeEvaluatorFactory#getAttributeEvaluator(Attribute)}.
      */
     @Test
-    public void testGetAttributeEvaluatorAttribute() {
+    void testGetAttributeEvaluatorAttribute() {
         AttributeEvaluator defaultEvaluator = createMock(AttributeEvaluator.class);
         AttributeEvaluator evaluator1 = createMock(AttributeEvaluator.class);
         AttributeEvaluator evaluator2 = createMock(AttributeEvaluator.class);

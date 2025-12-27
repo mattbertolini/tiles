@@ -21,8 +21,8 @@
 
 package org.apache.tiles.extras.module;
 
-import static org.junit.Assert.*;
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,14 +31,14 @@ import javax.servlet.ServletContext;
 
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.startup.TilesInitializer;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link ModularTilesInitializer}.
  *
  * @version $Rev$ $Date$
  */
-public class ModularTilesInitializerTest {
+class ModularTilesInitializerTest {
 
     /**
      * Tests {@link ModularTilesInitializer#initialize(ApplicationContext)}
@@ -47,7 +47,7 @@ public class ModularTilesInitializerTest {
      * @throws MalformedURLException Never thrown.
      */
     @Test
-    public void testInitialize() throws MalformedURLException {
+    void testInitialize() throws MalformedURLException {
         ApplicationContext preliminaryContext = createMock(ApplicationContext.class);
         ServletContext servletContext = createMock(ServletContext.class);
         URL manifestUrl = getClass().getResource("/FAKE-MANIFEST.MF");

@@ -22,14 +22,15 @@ package org.apache.tiles.mvel;
 
 import java.util.Arrays;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.tiles.context.TilesRequestContextHolder;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mvel2.UnresolveablePropertyException;
 import org.mvel2.integration.VariableResolver;
 import org.mvel2.integration.VariableResolverFactory;
@@ -40,7 +41,7 @@ import org.mvel2.integration.VariableResolverFactory;
  *
  * @version $Rev$ $Date$
  */
-public class ReadOnlyVariableResolverFactoryTest {
+class ReadOnlyVariableResolverFactoryTest {
 
     /**
      * The Tiles request.
@@ -60,8 +61,8 @@ public class ReadOnlyVariableResolverFactoryTest {
     /**
      * Sets up the object.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         request = createMock(Request.class);
         expect(request.getAvailableScopes()).andReturn(
                 Arrays.asList(new String[]{"request", "session", "application"})).anyTimes();
@@ -74,11 +75,11 @@ public class ReadOnlyVariableResolverFactoryTest {
     /**
      * Test method for {@link ScopeVariableResolverFactory#createVariable(String, Object)}.
      */
-    @Test(expected = UnsupportedOperationException.class)
-    public void testCreateVariableStringObject() {
+    @Test
+    void testCreateVariableStringObject() {
         replay(factory, request, applicationContext);
         try {
-            factory.createVariable("myName", "myValue");
+            assertThrows(UnsupportedOperationException.class, () -> factory.createVariable("myName", "myValue"));
         } finally {
             verify(factory, request, applicationContext);
         }
@@ -88,7 +89,7 @@ public class ReadOnlyVariableResolverFactoryTest {
      * Test method for {@link ScopeVariableResolverFactory#createVariable(String, Object)}.
      */
     @Test
-    public void testCreateVariableStringObjectNextFactory() {
+    void testCreateVariableStringObjectNextFactory() {
         VariableResolverFactory nextFactory = createMock(VariableResolverFactory.class);
         VariableResolver resolver = createMock(VariableResolver.class);
 
@@ -103,11 +104,11 @@ public class ReadOnlyVariableResolverFactoryTest {
     /**
      * Test method for {@link ScopeVariableResolverFactory#createVariable(String, Object, Class)}.
      */
-    @Test(expected = UnsupportedOperationException.class)
-    public void testCreateVariableStringObjectClassOfQ() {
+    @Test
+    void testCreateVariableStringObjectClassOfQ() {
         replay(factory, request, applicationContext);
         try {
-            factory.createVariable("myName", "myValue", String.class);
+            assertThrows(UnsupportedOperationException.class, () -> factory.createVariable("myName", "myValue", String.class));
         } finally {
             verify(factory, request, applicationContext);
         }
@@ -117,7 +118,7 @@ public class ReadOnlyVariableResolverFactoryTest {
      * Test method for {@link ScopeVariableResolverFactory#createVariable(String, Object, Class)}.
      */
     @Test
-    public void testCreateVariableStringObjectClassNextFactory() {
+    void testCreateVariableStringObjectClassNextFactory() {
         VariableResolverFactory nextFactory = createMock(VariableResolverFactory.class);
         VariableResolver resolver = createMock(VariableResolver.class);
 
@@ -133,7 +134,7 @@ public class ReadOnlyVariableResolverFactoryTest {
      * Test method for {@link ScopeVariableResolverFactory#isResolveable(String)}.
      */
     @Test
-    public void testIsResolveable() {
+    void testIsResolveable() {
         expect(factory.isTarget("whatever")).andReturn(true);
 
         replay(factory, request, applicationContext);
@@ -145,7 +146,7 @@ public class ReadOnlyVariableResolverFactoryTest {
      * Test method for {@link ScopeVariableResolverFactory#getVariableResolver(String)}.
      */
     @Test
-    public void testGetVariableResolver() {
+    void testGetVariableResolver() {
         VariableResolverFactory nextFactory = createMock(VariableResolverFactory.class);
         VariableResolver nextResolver = createMock(VariableResolver.class);
         VariableResolver requestResolver = createMock(VariableResolver.class);
@@ -174,8 +175,8 @@ public class ReadOnlyVariableResolverFactoryTest {
     /**
      * Test method for {@link ScopeVariableResolverFactory#getVariableResolver(String)}.
      */
-    @Test(expected = UnresolveablePropertyException.class)
-    public void testGetVariableResolverNotResolvable() {
+    @Test
+    void testGetVariableResolverNotResolvable() {
         VariableResolverFactory nextFactory = createMock(VariableResolverFactory.class);
 
         expect(factory.isTarget("other")).andReturn(false).anyTimes();
@@ -184,7 +185,7 @@ public class ReadOnlyVariableResolverFactoryTest {
         replay(factory, request, applicationContext, nextFactory);
         try {
             factory.setNextFactory(nextFactory);
-            factory.getVariableResolver("other");
+            assertThrows(UnresolveablePropertyException.class, () -> factory.getVariableResolver("other"));
         } finally {
             verify(factory, request, applicationContext, nextFactory);
         }

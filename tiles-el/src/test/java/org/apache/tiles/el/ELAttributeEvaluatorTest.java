@@ -32,21 +32,23 @@ import javax.el.ListELResolver;
 import javax.el.MapELResolver;
 import javax.el.ResourceBundleELResolver;
 
-import junit.framework.TestCase;
-
 import org.apache.el.ExpressionFactoryImpl;
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Expression;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
 import org.easymock.EasyMock;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests {@link ELAttributeEvaluator}.
  *
  * @version $Rev$ $Date$
  */
-public class ELAttributeEvaluatorTest extends TestCase {
+public class ELAttributeEvaluatorTest {
 
     /**
      * The evaluator to test.
@@ -59,9 +61,8 @@ public class ELAttributeEvaluatorTest extends TestCase {
     private Request request;
 
     /** {@inheritDoc} */
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @BeforeEach
+    void setUp() throws Exception {
         evaluator = new ELAttributeEvaluator();
         Map<String, Object> requestScope = new HashMap<String, Object>();
         Map<String, Object> sessionScope = new HashMap<String, Object>();
@@ -106,69 +107,71 @@ public class ELAttributeEvaluatorTest extends TestCase {
      * Tests
      * {@link ELAttributeEvaluator#evaluate(Attribute, Request)}.
      */
-    public void testEvaluate() {
+    @Test
+    void testEvaluate() {
         Attribute attribute = new Attribute();
         attribute.setExpressionObject(new Expression("${requestScope.object1}"));
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                attribute, request));
+        assertEquals("value", evaluator.evaluate(
+                attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("${sessionScope.object2}"));
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("${applicationScope.object3}"));
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("${object1}"));
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                attribute, request));
+        assertEquals("value", evaluator.evaluate(
+                attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("${object2}"));
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("${object3}"));
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("${paulaBean.paula}"));
-        assertEquals("The value is not correct", "Brillant", evaluator
-                .evaluate(attribute, request));
+        assertEquals("Brillant", evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("String literal"));
-        assertEquals("The value is not correct", "String literal", evaluator
-                .evaluate(attribute, request));
+        assertEquals("String literal", evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setValue(new Integer(2));
-        assertEquals("The value is not correct", new Integer(2), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Integer(2), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setValue("${object1}");
-        assertEquals("The value has been evaluated", "${object1}", evaluator
-                .evaluate(attribute, request));
+        assertEquals("${object1}", evaluator
+                .evaluate(attribute, request), "The value has been evaluated");
     }
 
     /**
      * Tests
      * {@link ELAttributeEvaluator#evaluate(String, Request)}.
      */
-    public void testEvaluateString() {
+    @Test
+    void testEvaluateString() {
         String expression = "${requestScope.object1}";
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                expression, request));
+        assertEquals("value", evaluator.evaluate(
+                expression, request), "The value is not correct");
         expression = "${sessionScope.object2}";
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "${applicationScope.object3}";
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "${object1}";
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                expression, request));
+        assertEquals("value", evaluator.evaluate(
+                expression, request), "The value is not correct");
         expression = "${object2}";
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "${object3}";
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "${paulaBean.paula}";
-        assertEquals("The value is not correct", "Brillant", evaluator
-                .evaluate(expression, request));
+        assertEquals("Brillant", evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "String literal";
-        assertEquals("The value is not correct", expression, evaluator
-                .evaluate(expression, request));
+        assertEquals(expression, evaluator
+                .evaluate(expression, request), "The value is not correct");
     }
 
     /**

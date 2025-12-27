@@ -21,8 +21,9 @@
 package org.apache.tiles.mvel;
 
 import java.util.Arrays;
-import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,8 +33,8 @@ import org.apache.tiles.Expression;
 import org.apache.tiles.context.TilesRequestContextHolder;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mvel2.integration.VariableResolverFactory;
 
 /**
@@ -41,7 +42,7 @@ import org.mvel2.integration.VariableResolverFactory;
  *
  * @version $Rev$ $Date$$
  */
-public class MVELAttributeEvaluatorTest {
+class MVELAttributeEvaluatorTest {
 
     /**
      * The evaluator to test.
@@ -61,8 +62,8 @@ public class MVELAttributeEvaluatorTest {
     /**
      * Sets up the test.
      */
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         TilesRequestContextHolder requestHolder = new TilesRequestContextHolder();
         VariableResolverFactory variableResolverFactory = new ScopeVariableResolverFactory(
                 requestHolder);
@@ -99,9 +100,9 @@ public class MVELAttributeEvaluatorTest {
     /**
      * Tests {@link MVELAttributeEvaluator#evaluate(String, Request)}.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void testEvaluateNull() {
-        evaluator.evaluate((String) null, request);
+    @Test
+    void testEvaluateNull() {
+        assertThrows(IllegalArgumentException.class, () -> evaluator.evaluate((String) null, request));
         verify(request, applicationContext);
     }
 
@@ -110,38 +111,38 @@ public class MVELAttributeEvaluatorTest {
      * {@link MVELAttributeEvaluator#evaluate(Attribute, Request)}.
      */
     @Test
-    public void testEvaluate() {
+    void testEvaluate() {
         Attribute attribute = new Attribute();
         attribute.setExpressionObject(new Expression("requestScope.object1"));
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                attribute, request));
+        assertEquals("value", evaluator.evaluate(
+                attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("sessionScope.object2"));
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("applicationScope.object3"));
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("object1"));
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                attribute, request));
+        assertEquals("value", evaluator.evaluate(
+                attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("object2"));
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("object3"));
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("paulaBean.paula"));
-        assertEquals("The value is not correct", "Brillant", evaluator
-                .evaluate(attribute, request));
+        assertEquals("Brillant", evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setExpressionObject(new Expression("'String literal'"));
-        assertEquals("The value is not correct", "String literal", evaluator
-                .evaluate(attribute, request));
+        assertEquals("String literal", evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setValue(new Integer(2));
-        assertEquals("The value is not correct", new Integer(2), evaluator
-                .evaluate(attribute, request));
+        assertEquals(new Integer(2), evaluator
+                .evaluate(attribute, request), "The value is not correct");
         attribute.setValue("object1");
-        assertEquals("The value has been evaluated", "object1", evaluator
-                .evaluate(attribute, request));
+        assertEquals("object1", evaluator
+                .evaluate(attribute, request), "The value has been evaluated");
         verify(request, applicationContext);
     }
 
@@ -149,31 +150,31 @@ public class MVELAttributeEvaluatorTest {
      * Tests {@link MVELAttributeEvaluator#evaluate(String, Request)}.
      */
     @Test
-    public void testEvaluateString() {
+    void testEvaluateString() {
         String expression = "requestScope.object1";
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                expression, request));
+        assertEquals("value", evaluator.evaluate(
+                expression, request), "The value is not correct");
         expression = "sessionScope.object2";
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "applicationScope.object3";
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "object1";
-        assertEquals("The value is not correct", "value", evaluator.evaluate(
-                expression, request));
+        assertEquals("value", evaluator.evaluate(
+                expression, request), "The value is not correct");
         expression = "object2";
-        assertEquals("The value is not correct", new Integer(1), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Integer(1), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "object3";
-        assertEquals("The value is not correct", new Float(2.0), evaluator
-                .evaluate(expression, request));
+        assertEquals(new Float(2.0), evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "paulaBean.paula";
-        assertEquals("The value is not correct", "Brillant", evaluator
-                .evaluate(expression, request));
+        assertEquals("Brillant", evaluator
+                .evaluate(expression, request), "The value is not correct");
         expression = "'String literal'";
-        assertEquals("The value is not correct", "String literal", evaluator
-                .evaluate(expression, request));
+        assertEquals("String literal", evaluator
+                .evaluate(expression, request), "The value is not correct");
         verify(request, applicationContext);
     }
 
@@ -182,7 +183,7 @@ public class MVELAttributeEvaluatorTest {
      * http://thedailywtf.com/Articles/The_Brillant_Paula_Bean.aspx I hope that
      * there is no copyright on it.
      */
-    public static class PaulaBean {
+    static class PaulaBean {
 
         /**
          * Paula is brillant, really.
