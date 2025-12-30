@@ -21,145 +21,140 @@
  * under the License.
  */
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 
-   <parent>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-test-pom</artifactId>
-      <version>4.0.0-SNAPSHOT</version>
-   </parent>
+    <parent>
+        <groupId>org.apache.tiles</groupId>
+        <artifactId>tiles-test-pom</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
 
-   <modelVersion>4.0.0</modelVersion>
-   <artifactId>tiles-test</artifactId>
-   <packaging>war</packaging>
-   <name>Tiles - Apps - Test</name>
-   <description>Tiles Test web application: tests Tiles functionality.
-   </description>
-  <properties>
-      <!-- decrease this whenever possible -->
-      <checkstyle.maxAllowedViolations>8</checkstyle.maxAllowedViolations>
-  </properties>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>tiles-test</artifactId>
+    <packaging>war</packaging>
+    <name>Tiles - Apps - Test</name>
+    <description>Tiles Test web application: tests Tiles functionality.
+    </description>
+    <properties>
+        <!-- decrease this whenever possible -->
+        <checkstyle.maxAllowedViolations>8</checkstyle.maxAllowedViolations>
+    </properties>
 
-   <dependencies>
-      <dependency>
-         <groupId>org.apache.tiles</groupId>
-         <artifactId>tiles-test-common</artifactId>
-         <version>${project.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>org.apache.tiles</groupId>
-         <artifactId>tiles-test-alt</artifactId>
-         <version>${project.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>org.apache.tiles</groupId>
-         <artifactId>tiles-test-db</artifactId>
-         <version>${project.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>org.apache.tiles</groupId>
-         <artifactId>tiles-extras</artifactId>
-         <version>${project.version}</version>
-      </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-test-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-test-alt</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-test-db</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-extras</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-jdk14</artifactId>
-        <scope>compile</scope>
-      </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <scope>compile</scope>
+        </dependency>
 
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-        <scope>compile</scope>
-      </dependency>
-       <dependency>
-           <groupId>jakarta.servlet</groupId>
-           <artifactId>jakarta.servlet-api</artifactId>
-           <scope>provided</scope>
-       </dependency>
-       <dependency>
-           <groupId>jakarta.servlet.jsp</groupId>
-           <artifactId>jakarta.servlet.jsp-api</artifactId>
-           <scope>provided</scope>
-       </dependency>
-      <dependency>
-         <groupId>javax.servlet</groupId>
-         <artifactId>jstl</artifactId>
-         <version>1.2</version>
-         <scope>runtime</scope>
-      </dependency>
-      <dependency>
-        <groupId>hsqldb</groupId>
-        <artifactId>hsqldb</artifactId>
-        <version>1.8.0.10</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-io</groupId>
-        <artifactId>commons-io</artifactId>
-        <version>1.4</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-jdbc</artifactId>
-        <version>3.2.0.RELEASE</version>
-        <exclusions>
-          <exclusion>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-          <groupId>org.apache.portals.pluto</groupId>
-          <artifactId>pluto-taglib</artifactId>
-          <version>2.0.0</version>
-          <scope>provided</scope>
-      </dependency>
-   </dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>3.2.0.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.portals.pluto</groupId>
+            <artifactId>pluto-taglib</artifactId>
+            <version>2.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
-   <build>
-       <plugins>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-war-plugin</artifactId>
-              <version>3.5.1</version>
-              <configuration>
-                  <webResources>
-                      <resource>
-                          <directory>.</directory>
-                          <targetPath>META-INF</targetPath>
-                          <includes>
-                              <include>LICENSE.txt</include>
-                              <include>NOTICE.txt</include>
-                          </includes>
-                      </resource>
-                  </webResources>
-                  <archive>
-                      <manifest>
-                          <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                          <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                      </manifest>
-                      <manifestEntries>
-                          <Tiles-Initializer>org.apache.tiles.test.init.TestTilesInitializer</Tiles-Initializer>
-                      </manifestEntries>
-                  </archive>
-               </configuration>
-           </plugin>
-           <plugin>
-               <groupId>org.codehaus.cargo</groupId>
-               <artifactId>cargo-maven2-plugin</artifactId>
-               <version>1.0.5</version>
-               <configuration>
-                   <container>
-                       <containerId>jetty7x</containerId>
-                       <type>embedded</type>
-                   </container>
-               </configuration>
-           </plugin>
-       </plugins>
-     <finalName>${project.artifactId}</finalName>
-   </build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>.</directory>
+                            <targetPath>META-INF</targetPath>
+                            <includes>
+                                <include>LICENSE.txt</include>
+                                <include>NOTICE.txt</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                    <archive>
+                        <manifest>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Tiles-Initializer>org.apache.tiles.test.init.TestTilesInitializer</Tiles-Initializer>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.0.5</version>
+                <configuration>
+                    <container>
+                        <containerId>jetty7x</containerId>
+                        <type>embedded</type>
+                    </container>
+                </configuration>
+            </plugin>
+        </plugins>
+        <finalName>${project.artifactId}</finalName>
+    </build>
 
     <profiles>
         <profile>
@@ -203,10 +198,10 @@
                                 <configuration>
                                     <tasks>
                                         <copy todir="${project.build.directory}/${project.artifactId}/selenium/core">
-                                            <fileset dir="${project.build.directory}/selenium/core" />
+                                            <fileset dir="${project.build.directory}/selenium/core"/>
                                         </copy>
                                         <copy todir="${project.build.directory}/${project.artifactId}/selenium/tests">
-                                            <fileset dir="src/test/selenium" />
+                                            <fileset dir="src/test/selenium"/>
                                         </copy>
                                     </tasks>
                                 </configuration>
@@ -238,7 +233,7 @@
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven2-plugin</artifactId>
-                         <configuration>
+                        <configuration>
                             <container>
                                 <containerId>jetty7x</containerId>
                                 <type>embedded</type>
@@ -261,7 +256,7 @@
                                 </goals>
                             </execution>
                         </executions>
-                   </plugin>
+                    </plugin>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>selenium-maven-plugin</artifactId>
@@ -343,11 +338,17 @@
                                 </goals>
                                 <configuration>
                                     <tasks>
-                                        <taskdef resource="hostedqatasks" classpathref="maven.plugin.classpath" />
-                                        <upload file="${project.build.directory}/${project.build.finalName}.war" account="tiles" email="${tiles.hostedqa.email}" password="${tiles.hostedqa.password}" resourceId="${hostedqa.resourceId}" />
+                                        <taskdef resource="hostedqatasks" classpathref="maven.plugin.classpath"/>
+                                        <upload file="${project.build.directory}/${project.build.finalName}.war"
+                                                account="tiles" email="${tiles.hostedqa.email}"
+                                                password="${tiles.hostedqa.password}"
+                                                resourceId="${hostedqa.resourceId}"/>
 
-                                        <playsuite clientConfigs="${hostedqa.clientConfigs}" appConfigs="${hostedqa.appConfigs}" account="tiles" email="${tiles.hostedqa.email}" password="${tiles.hostedqa.password}">
-                                            <fileSet dir="${basedir}/src/test/selenium" excludes="TestSuite.html" />
+                                        <playsuite clientConfigs="${hostedqa.clientConfigs}"
+                                                   appConfigs="${hostedqa.appConfigs}" account="tiles"
+                                                   email="${tiles.hostedqa.email}"
+                                                   password="${tiles.hostedqa.password}">
+                                            <fileSet dir="${basedir}/src/test/selenium" excludes="TestSuite.html"/>
                                         </playsuite>
                                     </tasks>
                                 </configuration>
@@ -413,7 +414,9 @@
                                     <goal>upload</goal>
                                 </goals>
                                 <configuration>
-                                    <fromDir>${settings.localRepository}/org/apache/tiles/tiles-test/${project.version}</fromDir>
+                                    <fromDir>
+                                        ${settings.localRepository}/org/apache/tiles/tiles-test/${project.version}
+                                    </fromDir>
                                     <includes>tiles-test-${project.version}.war*</includes>
                                     <toDir>${project.version}</toDir>
                                     <serverId>tiles.build</serverId>

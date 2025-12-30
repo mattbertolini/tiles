@@ -135,6 +135,11 @@
                 <version>3.4.10</version>
             </dependency>
             <dependency>
+                <groupId>org.mvel</groupId>
+                <artifactId>mvel2</artifactId>
+                <version>2.5.2.Final</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-digester3</artifactId>
                 <version>3.2</version>
@@ -214,11 +219,7 @@
                 </exclusions>
             </dependency>
 
-            <dependency>
-                <groupId>org.mvel</groupId>
-                <artifactId>mvel2</artifactId>
-                <version>2.5.2.Final</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.apache.tiles</groupId>
                 <artifactId>tiles-request-api</artifactId>
