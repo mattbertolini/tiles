@@ -51,7 +51,7 @@
             </ul>
             <p>You will find the generated JARs under:</p>
             <ul>
-            <li>{autotag-dir}/maven-autotag-plugin/target/maven-autotag-plugin-${version}.jar</li>
+            <li>{autotag-dir}/tiles-autotag-maven-plugin/target/tiles-autotag-maven-plugin-${version}.jar</li>
             <li>{autotag-dir}/tiles-autotag-core/target/tiles-autotag-core-${version}.jar</li>
             <li>{autotag-dir}/tiles-autotag-core-runtime/target/tiles-autotag-core-runtime-${version}.jar</li>
             <li>{autotag-dir}/tiles-autotag-freemarker/target/tiles-autotag-freemarker-${version}.jar</li>

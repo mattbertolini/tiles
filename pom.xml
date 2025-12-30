@@ -27,8 +27,8 @@
     <artifactId>tiles-parent</artifactId>
     <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Tiles 3</name>
-    <description>Tiles 3: A framework for page composition.</description>
+    <name>Tiles</name>
+    <description>Tiles: A framework for page composition.</description>
     <url>http://tiles.apache.org/framework/</url>
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/tiles/framework/trunk/</connection>
@@ -38,24 +38,37 @@
 
     <ciManagement />
 
+    <properties>
+        <maven.javadoc.failOnError>false</maven.javadoc.failOnError> <!-- remove with master-8 -->
+        <tiles.osgi.symbolicName>org.apache.${project.artifactId}</tiles.osgi.symbolicName>
+        <tiles.osgi.export>org.apache.tiles.*;version=${project.version}</tiles.osgi.export>
+        <tiles.osgi.import>*</tiles.osgi.import>
+        <tiles.osgi.dynamicImport />
+        <tiles.osgi.private />
+        <tiles.manifestfile>target/osgi/MANIFEST.MF</tiles.manifestfile>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <tiles.request.version>${project.version}</tiles.request.version> <!-- TODO: Remove this and rely on the property directly -->
+        <tiles.autotag.version>${project.version}</tiles.autotag.version>
+    </properties>
+
     <modules>
+        <module>assembly</module>
         <module>tiles-api</module>
         <module>tiles-autotag</module>
+        <module>tiles-compat</module>
         <module>tiles-core</module>
-        <module>tiles-template</module>
-        <module>tiles-servlet</module>
-        <module>tiles-jsp</module>
-        <module>tiles-freemarker</module>
-<!--        <module>tiles-velocity</module>-->
         <module>tiles-el</module>
+        <module>tiles-extras</module>
+        <module>tiles-freemarker</module>
+        <module>tiles-jsp</module>
         <module>tiles-mvel</module>
         <module>tiles-ognl</module>
-        <module>tiles-compat</module>
-        <module>tiles-extras</module>
-        <module>assembly</module>
-        <module>tiles-test-pom</module>
-        <module>tiles-spring</module>
         <module>tiles-request</module>
+        <module>tiles-servlet</module>
+        <module>tiles-spring</module>
+        <module>tiles-template</module>
+        <module>tiles-test-pom</module>
+<!--        <module>tiles-velocity</module>-->
     </modules>
 
     <issueManagement>
@@ -80,6 +93,13 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>6.0.23</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>5.14.1</version>
@@ -95,6 +115,11 @@
             <dependency>
                 <groupId>org.apache.tiles</groupId>
                 <artifactId>tiles-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-extras</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -322,19 +347,6 @@
 
         <defaultGoal>install</defaultGoal>
     </build>
-
-    <properties>
-        <maven.javadoc.failOnError>false</maven.javadoc.failOnError> <!-- remove with master-8 -->
-        <tiles.osgi.symbolicName>org.apache.${project.artifactId}</tiles.osgi.symbolicName>
-        <tiles.osgi.export>org.apache.tiles.*;version=${project.version}</tiles.osgi.export>
-        <tiles.osgi.import>*</tiles.osgi.import>
-        <tiles.osgi.dynamicImport />
-        <tiles.osgi.private />
-        <tiles.manifestfile>target/osgi/MANIFEST.MF</tiles.manifestfile>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tiles.request.version>${project.version}</tiles.request.version> <!-- TODO: Remove this and rely on the property directly -->
-        <tiles.autotag.version>${project.version}</tiles.autotag.version>
-    </properties>
 
     <dependencies>
         <dependency>

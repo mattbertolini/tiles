@@ -41,7 +41,6 @@
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-extras</artifactId>
-            <version>4.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tiles</groupId>
@@ -50,22 +49,19 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>6.0.23</version>
+
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>6.0.23</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>6.0.23</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>6.0.23</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -87,7 +83,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>6.0.23</version>
             <scope>test</scope>
         </dependency>
         <dependency>
