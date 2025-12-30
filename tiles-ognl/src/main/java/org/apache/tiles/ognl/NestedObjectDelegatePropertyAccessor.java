@@ -21,8 +21,6 @@
 
 package org.apache.tiles.ognl;
 
-import java.util.Map;
-
 import ognl.OgnlContext;
 import ognl.OgnlException;
 import ognl.PropertyAccessor;
@@ -44,14 +42,14 @@ public class NestedObjectDelegatePropertyAccessor<T> implements
      *
      * @since 2.2.0
      */
-    private NestedObjectExtractor<T> nestedObjectExtractor;
+    private final NestedObjectExtractor<T> nestedObjectExtractor;
 
     /**
      * The delegated property accessor.
      *
      * @since 2.2.0
      */
-    private PropertyAccessor propertyAccessor;
+    private final PropertyAccessor propertyAccessor;
 
     /**
      * Constructor.
@@ -69,7 +67,7 @@ public class NestedObjectDelegatePropertyAccessor<T> implements
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
-    public Object getProperty(@SuppressWarnings("rawtypes") Map context, Object target, Object name)
+    public Object getProperty(OgnlContext context, Object target, Object name)
             throws OgnlException {
         return propertyAccessor.getProperty(context, nestedObjectExtractor
                 .getNestedObject((T) target), name);
@@ -77,7 +75,7 @@ public class NestedObjectDelegatePropertyAccessor<T> implements
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
-    public void setProperty(@SuppressWarnings("rawtypes") Map context, Object target, Object name,
+    public void setProperty(OgnlContext context, Object target, Object name,
             Object value) throws OgnlException {
         propertyAccessor.setProperty(context, nestedObjectExtractor
                 .getNestedObject((T) target), name, value);

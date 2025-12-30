@@ -52,10 +52,10 @@ class AnyScopePropertyAccessorTest {
     }
 
     /**
-     * Test method for {@link AnyScopePropertyAccessor#getProperty(java.util.Map, java.lang.Object, java.lang.Object)}.
+     * Test method for {@link AnyScopePropertyAccessor#getProperty(ognl.OgnlContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
-    void testGetProperty() {
+     void testGetProperty() {
         Request request = createMock(Request.class);
         Map<String, Object> oneScope = createMock(Map.class);
         Map<String, Object> twoScope = createMock(Map.class);
@@ -79,7 +79,7 @@ class AnyScopePropertyAccessorTest {
     }
 
     /**
-     * Test method for {@link AnyScopePropertyAccessor#getSourceAccessor(OgnlContext, Object, Object)}.
+     * Test method for {@link AnyScopePropertyAccessor#getSourceAccessor(ognl.OgnlContext, Object, Object)}.
      */
     @Test
     void testGetSourceAccessor() {
@@ -104,7 +104,7 @@ class AnyScopePropertyAccessorTest {
     }
 
     /**
-     * Test method for {@link AnyScopePropertyAccessor#getSourceSetter(OgnlContext, Object, Object)}.
+     * Test method for {@link AnyScopePropertyAccessor#getSourceSetter(ognl.OgnlContext, Object, Object)}.
      */
     @Test
     void testGetSourceSetter() {
@@ -129,7 +129,7 @@ class AnyScopePropertyAccessorTest {
     }
 
     /**
-     * Test method for {@link AnyScopePropertyAccessor#setProperty(Map, Object, Object, Object)}.
+     * Test method for {@link AnyScopePropertyAccessor#setProperty(ognl.OgnlContext, Object, Object, Object)}.
      */
     @Test
     void testSetProperty() {
