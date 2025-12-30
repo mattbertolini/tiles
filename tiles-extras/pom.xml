@@ -87,11 +87,11 @@
       <artifactId>tiles-freemarker</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-velocity</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.apache.tiles</groupId>-->
+<!--      <artifactId>tiles-velocity</artifactId>-->
+<!--      <version>${project.version}</version>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>org.apache.tiles</groupId>
       <artifactId>tiles-el</artifactId>
@@ -119,17 +119,22 @@
       <version>12.0.1</version>
     </dependency>
 
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
+      <dependency>
+          <groupId>jakarta.servlet</groupId>
+          <artifactId>jakarta.servlet-api</artifactId>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>jakarta.el</groupId>
+          <artifactId>jakarta.el-api</artifactId>
+          <scope>provided</scope>
+      </dependency>
 
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>jsp-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
+      <dependency>
+          <groupId>jakarta.servlet.jsp</groupId>
+          <artifactId>jakarta.servlet.jsp-api</artifactId>
+          <scope>test</scope>
+      </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -159,6 +164,12 @@
       <artifactId>easymock</artifactId>
       <scope>test</scope>
     </dependency>
+
+      <dependency>
+          <groupId>org.freemarker</groupId>
+          <artifactId>freemarker</artifactId>
+          <scope>test</scope>
+      </dependency>
 
   </dependencies>
 </project>

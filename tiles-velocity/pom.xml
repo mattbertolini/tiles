@@ -41,7 +41,7 @@
     <plugins>
       <plugin>
         <groupId>org.apache.tiles.autotag.plugin</groupId>
-        <artifactId>maven-autotag-plugin</artifactId>
+        <artifactId>tiles-autotag-maven-plugin</artifactId>
         <version>${tiles.autotag.version}</version>
         <executions>
             <execution>

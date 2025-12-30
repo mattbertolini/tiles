@@ -20,9 +20,9 @@
  */
 package org.apache.tiles.el;
 
-import javax.el.ELResolver;
-import javax.el.ExpressionFactory;
-import javax.el.ValueExpression;
+import jakarta.el.ELResolver;
+import jakarta.el.ExpressionFactory;
+import jakarta.el.ValueExpression;
 
 import org.apache.tiles.evaluator.AbstractAttributeEvaluator;
 import org.apache.tiles.request.ApplicationContext;

@@ -72,7 +72,7 @@
       </plugin>
       <plugin>
         <groupId>org.apache.tiles.autotag.plugin</groupId>
-        <artifactId>maven-autotag-plugin</artifactId>
+        <artifactId>tiles-autotag-maven-plugin</artifactId>
         <version>${tiles.autotag.version}</version>
         <executions>
             <execution>
@@ -143,16 +143,16 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>jsp-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
+      <dependency>
+          <groupId>jakarta.servlet</groupId>
+          <artifactId>jakarta.servlet-api</artifactId>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>jakarta.servlet.jsp</groupId>
+          <artifactId>jakarta.servlet.jsp-api</artifactId>
+          <scope>provided</scope>
+      </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -163,6 +163,12 @@
       <artifactId>easymock</artifactId>
       <scope>test</scope>
     </dependency>
+
+      <dependency>
+          <groupId>jakarta.el</groupId>
+          <artifactId>jakarta.el-api</artifactId>
+          <scope>test</scope>
+      </dependency>
 
     <dependency>
       <groupId>org.apache.shale</groupId>

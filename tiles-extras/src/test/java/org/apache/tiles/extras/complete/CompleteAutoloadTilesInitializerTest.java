@@ -24,7 +24,7 @@ package org.apache.tiles.extras.complete;
 import static org.easymock.EasyMock.*;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.servlet.wildcard.WildcardServletApplicationContext;

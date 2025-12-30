@@ -18,7 +18,7 @@ package org.springframework.web.servlet.view.tiles3;
 
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.tiles.locale.impl.DefaultLocaleResolver;
 import org.apache.tiles.request.Request;

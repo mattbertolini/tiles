@@ -23,8 +23,7 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.apache.tiles</groupId>
-  <artifactId>tiles-template</artifactId>
+    <artifactId>tiles-template</artifactId>
   <name>Tiles - Template Technologies Support</name>
   <description>Common code for integration of Tiles for different templating technologies.</description>
   <parent>
@@ -40,7 +39,7 @@
     <plugins>
       <plugin>
         <groupId>org.apache.tiles.autotag.plugin</groupId>
-        <artifactId>maven-autotag-plugin</artifactId>
+        <artifactId>tiles-autotag-maven-plugin</artifactId>
         <version>${tiles.autotag.version}</version>
         <executions>
             <execution>

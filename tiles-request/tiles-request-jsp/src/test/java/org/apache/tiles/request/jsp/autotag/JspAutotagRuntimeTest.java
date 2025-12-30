@@ -1,0 +1,102 @@
+/*
+ * $Id$
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.apache.tiles.request.jsp.autotag;
+
+import org.apache.tiles.autotag.core.runtime.ModelBody;
+import org.apache.tiles.request.ApplicationAccess;
+import org.apache.tiles.request.ApplicationContext;
+import org.apache.tiles.request.Request;
+import org.apache.tiles.request.jsp.JspRequest;
+import org.junit.jupiter.api.Test;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.jsp.JspContext;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.JspFragment;
+import jakarta.servlet.jsp.tagext.JspTag;
+
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+class JspAutotagRuntimeTest {
+    @Test
+    void testCreateRequest() {
+        JspFragment jspBody = createMock(JspFragment.class);
+        PageContext pageContext = createMock(PageContext.class);
+        JspTag parent = createMock(JspTag.class);
+        ApplicationContext applicationContext = createMock(ApplicationContext.class);
+        HttpServletRequest httpServletRequest = createMock(HttpServletRequest.class);
+        HttpServletResponse httpServletResponse = createMock(HttpServletResponse.class);
+        expect(pageContext.getAttribute(
+                ApplicationAccess.APPLICATION_CONTEXT_ATTRIBUTE,
+                PageContext.APPLICATION_SCOPE)).andReturn(applicationContext);
+        expect(pageContext.getRequest()).andReturn(httpServletRequest);
+        expect(pageContext.getResponse()).andReturn(httpServletResponse);
+        replay(jspBody, pageContext, parent, applicationContext, httpServletRequest, httpServletResponse);
+        JspAutotagRuntime runtime = new JspAutotagRuntime();
+        runtime.setJspBody(jspBody);
+        runtime.setJspContext(pageContext);
+        runtime.setParent(parent);
+        runtime.doTag();
+        Request jspRequest = runtime.createRequest();
+        assertInstanceOf(JspRequest.class, jspRequest);
+        verify(jspBody, pageContext, parent, applicationContext, httpServletRequest, httpServletResponse);
+    }
+
+    @Test
+    void testCreateModelBody() {
+        JspFragment jspBody = createMock(JspFragment.class);
+        JspContext jspContext = createMock(JspContext.class);
+        JspTag parent = createMock(JspTag.class);
+        JspWriter writer = createMock(JspWriter.class);
+        expect(jspContext.getOut()).andReturn(writer);
+        replay(jspBody, jspContext, parent, writer);
+        JspAutotagRuntime runtime = new JspAutotagRuntime();
+        runtime.setJspBody(jspBody);
+        runtime.setJspContext(jspContext);
+        runtime.setParent(parent);
+        runtime.doTag();
+        ModelBody jspModelBody = runtime.createModelBody();
+        assertInstanceOf(JspModelBody.class, jspModelBody);
+        verify(jspBody, jspContext, parent, writer);
+    }
+
+    @Test
+    void testGetParameter() {
+        JspFragment jspBody = createMock(JspFragment.class);
+        JspContext jspContext = createMock(JspContext.class);
+        JspTag parent = createMock(JspTag.class);
+        replay(jspBody, jspContext, parent);
+        JspAutotagRuntime runtime = new JspAutotagRuntime();
+        runtime.setJspBody(jspBody);
+        runtime.setJspContext(jspContext);
+        runtime.setParent(parent);
+        runtime.doTag();
+        assertThrows(UnsupportedOperationException.class, () -> runtime.getParameter("test", Object.class, null));
+        verify(jspBody, jspContext, parent);
+    }
+}

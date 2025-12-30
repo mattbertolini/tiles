@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import org.apache.tiles.definition.DefinitionsFactoryException;
 import org.apache.tiles.request.ApplicationContext;

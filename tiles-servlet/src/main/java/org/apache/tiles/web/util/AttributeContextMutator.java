@@ -22,7 +22,7 @@ package org.apache.tiles.web.util;
 
 import org.apache.tiles.AttributeContext;
 
-import javax.servlet.ServletRequest;
+import jakarta.servlet.ServletRequest;
 
 /**
  * It represents an object able to manipulate a <code>AttributeContext</code>.

@@ -26,12 +26,12 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Map;
 
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.tiles.request.ApplicationAccess;
 import org.apache.tiles.AttributeContext;
@@ -141,7 +141,7 @@ class TilesDecorationFilterTest {
 
         @Override
         public void mutate(AttributeContext context,
-                javax.servlet.ServletRequest request) {
+                jakarta.servlet.ServletRequest request) {
             // Does nothing.
         }
     }

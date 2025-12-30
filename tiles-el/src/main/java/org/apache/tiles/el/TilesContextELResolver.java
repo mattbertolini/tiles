@@ -23,8 +23,8 @@ package org.apache.tiles.el;
 import java.beans.FeatureDescriptor;
 import java.util.Iterator;
 
-import javax.el.ELContext;
-import javax.el.ELResolver;
+import jakarta.el.ELContext;
+import jakarta.el.ELResolver;
 
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
