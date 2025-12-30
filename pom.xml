@@ -21,33 +21,38 @@
  * under the License.
  */
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.apache.tiles</groupId>
     <artifactId>tiles-parent</artifactId>
     <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
     <name>Tiles</name>
     <description>Tiles: A framework for page composition.</description>
     <url>http://tiles.apache.org/framework/</url>
+
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/tiles/framework/trunk/</connection>
         <developerConnection>scm:svn:https://svn.apache.org/repos/asf/tiles/framework/trunk/</developerConnection>
         <url>http://svn.apache.org/viewvc/tiles/framework/trunk/</url>
     </scm>
 
-    <ciManagement />
+    <ciManagement/>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.javadoc.failOnError>false</maven.javadoc.failOnError> <!-- remove with master-8 -->
         <tiles.osgi.symbolicName>org.apache.${project.artifactId}</tiles.osgi.symbolicName>
         <tiles.osgi.export>org.apache.tiles.*;version=${project.version}</tiles.osgi.export>
         <tiles.osgi.import>*</tiles.osgi.import>
-        <tiles.osgi.dynamicImport />
-        <tiles.osgi.private />
+        <tiles.osgi.dynamicImport/>
+        <tiles.osgi.private/>
         <tiles.manifestfile>target/osgi/MANIFEST.MF</tiles.manifestfile>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tiles.request.version>${project.version}</tiles.request.version> <!-- TODO: Remove this and rely on the property directly -->
+        <tiles.request.version>${project.version}
+        </tiles.request.version> <!-- TODO: Remove this and rely on the property directly -->
         <tiles.autotag.version>${project.version}</tiles.autotag.version>
     </properties>
 
@@ -68,7 +73,7 @@
         <module>tiles-spring</module>
         <module>tiles-template</module>
         <module>tiles-test-pom</module>
-<!--        <module>tiles-velocity</module>-->
+        <!--        <module>tiles-velocity</module>-->
     </modules>
 
     <issueManagement>
@@ -83,6 +88,7 @@
             <url>scp://people.apache.org/www/tiles.apache.org/framework</url>
         </site>
     </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -105,6 +111,16 @@
                 <version>5.14.1</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>5.6.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.34</version>
             </dependency>
 
             <dependency>
@@ -192,11 +208,6 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <dependency>
-                <groupId>org.freemarker</groupId>
-                <artifactId>freemarker</artifactId>
-                <version>2.3.34</version>
-            </dependency>
 
             <dependency>
                 <groupId>ognl</groupId>
@@ -208,45 +219,16 @@
                 <artifactId>mvel2</artifactId>
                 <version>2.5.2.Final</version>
             </dependency>
+
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>2.5</version>
-                <scope>provided</scope>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.6</version>
             </dependency>
             <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>jsp-api</artifactId>
-                <version>2.1</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>javax.el</groupId>
-                <artifactId>el-api</artifactId>
-                <version>1.0</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.easymock</groupId>
-                <artifactId>easymock</artifactId>
-                <version>5.6.0</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.shale</groupId>
-                <artifactId>shale-test</artifactId>
-                <version>1.0.5</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-            	<groupId>org.slf4j</groupId>
-            	<artifactId>slf4j-api</artifactId>
-            	<version>1.7.6</version>
-            </dependency>
-            <dependency>
-            	<groupId>org.slf4j</groupId>
-            	<artifactId>slf4j-jdk14</artifactId>
-            	<version>1.7.6</version>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-jdk14</artifactId>
+                <version>1.7.6</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -256,9 +238,9 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-            	<groupId>org.apache.tiles</groupId>
-            	<artifactId>tiles-request-api</artifactId>
-            	<version>${tiles.request.version}</version>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-request-api</artifactId>
+                <version>${tiles.request.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -339,7 +321,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
-                    <releaseProfiles>apache-release</releaseProfiles><!-- xxx tiles still uses "release" instead of "apache-release" -->
+                    <releaseProfiles>apache-release
+                    </releaseProfiles><!-- xxx tiles still uses "release" instead of "apache-release" -->
                     <goals>deploy site-deploy</goals>
                 </configuration>
             </plugin>
