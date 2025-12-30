@@ -20,10 +20,10 @@
  */
 package org.apache.tiles.web.util;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.tiles.AttributeContext;
 import org.apache.tiles.TilesContainer;
@@ -136,7 +136,7 @@ public class TilesDispatchServlet extends HttpServlet {
     class DefaultMutator implements AttributeContextMutator {
 
         /** {@inheritDoc} */
-        public void mutate(AttributeContext context, javax.servlet.ServletRequest request) {
+        public void mutate(AttributeContext context, jakarta.servlet.ServletRequest request) {
             // noop;
         }
     }

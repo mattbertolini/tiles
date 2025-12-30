@@ -33,7 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.el.ELContext;
+import jakarta.el.ELContext;
 
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;

@@ -63,10 +63,9 @@
        <artifactId>tiles-test-common</artifactId>
        <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
-    </dependency>
+      <dependency>
+          <groupId>jakarta.servlet</groupId>
+          <artifactId>jakarta.servlet-api</artifactId>
+      </dependency>
   </dependencies>
 </project>

@@ -36,10 +36,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.el.ExpressionFactory;
-import javax.servlet.ServletContext;
-import javax.servlet.jsp.JspApplicationContext;
-import javax.servlet.jsp.JspFactory;
+import jakarta.el.ExpressionFactory;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.jsp.JspApplicationContext;
+import jakarta.servlet.jsp.JspFactory;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
@@ -62,8 +62,6 @@ import org.apache.tiles.request.render.DispatchRenderer;
 import org.apache.tiles.request.render.Renderer;
 import org.apache.tiles.request.render.StringRenderer;
 import org.apache.tiles.request.servlet.ServletApplicationContext;
-import org.apache.tiles.request.velocity.render.VelocityRenderer;
-import org.apache.velocity.tools.view.VelocityView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -111,7 +109,6 @@ class CompleteAutoloadTilesContainerFactoryTest {
      * TilesContainer, evaluator.AttributeEvaluatorFactory)}
      * .
      */
-    @SuppressWarnings("deprecation")
     @Test
     void testRegisterAttributeRenderers() {
         BasicRendererFactory rendererFactory = createMock(BasicRendererFactory.class);
@@ -124,23 +121,23 @@ class CompleteAutoloadTilesContainerFactoryTest {
         rendererFactory.registerRenderer(eq("template"), isA(DispatchRenderer.class));
         rendererFactory.registerRenderer(eq("definition"), isA(DefinitionRenderer.class));
         rendererFactory.registerRenderer(eq("freemarker"), isA(FreemarkerRenderer.class));
-        rendererFactory.registerRenderer(eq("velocity"), isA(VelocityRenderer.class));
+//        rendererFactory.registerRenderer(eq("velocity"), isA(VelocityRenderer.class));
         rendererFactory.registerRenderer(eq("mustache"), isA(MustacheRenderer.class));
 
         expect(applicationContext.getContext()).andReturn(servletContext).anyTimes();
-        expect(servletContext.getInitParameter(VelocityView.PROPERTIES_KEY)).andReturn(null);
-        expect(servletContext.getInitParameter(VelocityView.TOOLS_KEY)).andReturn(null);
-        expect(servletContext.getAttribute(VelocityView.TOOLS_KEY)).andReturn(null);
-        expect(servletContext.getResourceAsStream("/WEB-INF/velocity.properties")).andReturn(
-                getClass().getResourceAsStream("/velocity.properties"));
-        expect(servletContext.getResourceAsStream("/WEB-INF/VM_global_library.vm")).andReturn(
-                getClass().getResourceAsStream("/VM_global_library.vm"));
-        expect(servletContext.getResourceAsStream("/WEB-INF/tools.xml")).andReturn(
-                getClass().getResourceAsStream("/tools.xml"));
-        expect(servletContext.getResourceAsStream(VelocityView.DEPRECATED_USER_TOOLS_PATH)).andReturn(null);
+//        expect(servletContext.getInitParameter(VelocityView.PROPERTIES_KEY)).andReturn(null);
+//        expect(servletContext.getInitParameter(VelocityView.TOOLS_KEY)).andReturn(null);
+//        expect(servletContext.getAttribute(VelocityView.TOOLS_KEY)).andReturn(null);
+//        expect(servletContext.getResourceAsStream("/WEB-INF/velocity.properties")).andReturn(
+//                getClass().getResourceAsStream("/velocity.properties"));
+//        expect(servletContext.getResourceAsStream("/WEB-INF/VM_global_library.vm")).andReturn(
+//                getClass().getResourceAsStream("/VM_global_library.vm"));
+//        expect(servletContext.getResourceAsStream("/WEB-INF/tools.xml")).andReturn(
+//                getClass().getResourceAsStream("/tools.xml"));
+//        expect(servletContext.getResourceAsStream(VelocityView.DEPRECATED_USER_TOOLS_PATH)).andReturn(null);
         servletContext.log((String) anyObject());
         expectLastCall().anyTimes();
-        expect(servletContext.getRealPath("/")).andReturn(null);
+//        expect(servletContext.getRealPath("/")).andReturn(null);
 
         replay(rendererFactory, applicationContext, container, attributeEvaluatorFactory, servletContext);
         factory.registerAttributeRenderers(rendererFactory, applicationContext, container, attributeEvaluatorFactory);
@@ -161,14 +158,14 @@ class CompleteAutoloadTilesContainerFactoryTest {
         Renderer stringRenderer = createMock(Renderer.class);
         Renderer templateRenderer = createMock(Renderer.class);
         Renderer definitionRenderer = createMock(Renderer.class);
-        Renderer velocityRenderer = createMock(Renderer.class);
+//        Renderer velocityRenderer = createMock(Renderer.class);
         Renderer freemarkerRenderer = createMock(Renderer.class);
         Renderer mustacheRenderer = createMock(Renderer.class);
 
         expect(rendererFactory.getRenderer("string")).andReturn(stringRenderer);
         expect(rendererFactory.getRenderer("template")).andReturn(templateRenderer);
         expect(rendererFactory.getRenderer("definition")).andReturn(definitionRenderer);
-        expect(rendererFactory.getRenderer("velocity")).andReturn(velocityRenderer);
+//        expect(rendererFactory.getRenderer("velocity")).andReturn(velocityRenderer);
         expect(rendererFactory.getRenderer("freemarker")).andReturn(freemarkerRenderer);
         expect(rendererFactory.getRenderer("mustache")).andReturn(mustacheRenderer);
 

@@ -40,12 +40,13 @@
 
     <modules>
         <module>tiles-api</module>
+        <module>tiles-autotag</module>
         <module>tiles-core</module>
         <module>tiles-template</module>
         <module>tiles-servlet</module>
         <module>tiles-jsp</module>
         <module>tiles-freemarker</module>
-        <module>tiles-velocity</module>
+<!--        <module>tiles-velocity</module>-->
         <module>tiles-el</module>
         <module>tiles-mvel</module>
         <module>tiles-ognl</module>
@@ -54,6 +55,7 @@
         <module>assembly</module>
         <module>tiles-test-pom</module>
         <module>tiles-spring</module>
+        <module>tiles-request</module>
     </modules>
 
     <issueManagement>
@@ -70,6 +72,13 @@
     </distributionManagement>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>jakarta.platform</groupId>
+                <artifactId>jakarta.jakartaee-bom</artifactId>
+                <version>10.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -161,7 +170,7 @@
             <dependency>
                 <groupId>org.freemarker</groupId>
                 <artifactId>freemarker</artifactId>
-                <version>2.3.15</version>
+                <version>2.3.34</version>
             </dependency>
 
             <dependency>
@@ -323,8 +332,8 @@
         <tiles.osgi.private />
         <tiles.manifestfile>target/osgi/MANIFEST.MF</tiles.manifestfile>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <tiles.request.version>1.0.7</tiles.request.version>
-        <tiles.autotag.version>1.1.0</tiles.autotag.version>
+        <tiles.request.version>${project.version}</tiles.request.version> <!-- TODO: Remove this and rely on the property directly -->
+        <tiles.autotag.version>${project.version}</tiles.autotag.version>
     </properties>
 
     <dependencies>

@@ -21,20 +21,19 @@
 
 package org.apache.tiles.extras.complete;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import javax.el.ArrayELResolver;
-import javax.el.BeanELResolver;
-import javax.el.CompositeELResolver;
-import javax.el.ELResolver;
-import javax.el.ListELResolver;
-import javax.el.MapELResolver;
-import javax.el.ResourceBundleELResolver;
+import jakarta.el.ArrayELResolver;
+import jakarta.el.BeanELResolver;
+import jakarta.el.CompositeELResolver;
+import jakarta.el.ELResolver;
+import jakarta.el.ListELResolver;
+import jakarta.el.MapELResolver;
+import jakarta.el.ResourceBundleELResolver;
 
 import ognl.OgnlException;
 import ognl.OgnlRuntime;
@@ -83,9 +82,6 @@ import org.apache.tiles.request.mustache.MustacheRenderer;
 import org.apache.tiles.request.render.BasicRendererFactory;
 import org.apache.tiles.request.render.ChainedDelegateRenderer;
 import org.apache.tiles.request.render.Renderer;
-import org.apache.tiles.request.servlet.ServletUtil;
-import org.apache.tiles.request.velocity.render.VelocityRenderer;
-import org.apache.tiles.request.velocity.render.VelocityRendererBuilder;
 import org.mvel2.integration.VariableResolverFactory;
 
 /**
@@ -150,9 +146,9 @@ public class CompleteAutoloadTilesContainerFactory extends BasicTilesContainerFa
                         "tiles," + TilesSharedVariableFactory.class.getName()).build();
         rendererFactory.registerRenderer(FREEMARKER_RENDERER_NAME, freemarkerRenderer);
 
-        VelocityRenderer velocityRenderer = VelocityRendererBuilder.createInstance()
-                .setApplicationContext(applicationContext).build();
-        rendererFactory.registerRenderer(VELOCITY_RENDERER_NAME, velocityRenderer);
+//        VelocityRenderer velocityRenderer = VelocityRendererBuilder.createInstance()
+//                .setApplicationContext(applicationContext).build();
+//        rendererFactory.registerRenderer(VELOCITY_RENDERER_NAME, velocityRenderer);
 
         MustacheRenderer mustacheRenderer = new MustacheRenderer();
         mustacheRenderer.setAcceptPattern(Pattern.compile(".+\\.mustache"));
@@ -167,7 +163,7 @@ public class CompleteAutoloadTilesContainerFactory extends BasicTilesContainerFa
 
         ChainedDelegateRenderer retValue = new ChainedDelegateRenderer();
         retValue.addAttributeRenderer(rendererFactory.getRenderer(DEFINITION_RENDERER_NAME));
-        retValue.addAttributeRenderer(rendererFactory.getRenderer(VELOCITY_RENDERER_NAME));
+//        retValue.addAttributeRenderer(rendererFactory.getRenderer(VELOCITY_RENDERER_NAME));
         retValue.addAttributeRenderer(rendererFactory.getRenderer(FREEMARKER_RENDERER_NAME));
         retValue.addAttributeRenderer(rendererFactory.getRenderer(MUSTACHE_RENDERER_NAME));
         retValue.addAttributeRenderer(rendererFactory.getRenderer(TEMPLATE_RENDERER_NAME));
