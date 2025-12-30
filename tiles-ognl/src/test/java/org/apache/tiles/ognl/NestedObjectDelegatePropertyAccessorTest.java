@@ -39,14 +39,14 @@ import org.junit.jupiter.api.Test;
 class NestedObjectDelegatePropertyAccessorTest {
 
     /**
-     * Test method for {@link NestedObjectDelegatePropertyAccessor#getProperty(java.util.Map, Object, Object)}.
+     * Test method for {@link NestedObjectDelegatePropertyAccessor#getProperty(OgnlContext, Object, Object)}.
      * @throws OgnlException If something goes wrong.
      */
     @Test
     void testGetProperty() throws OgnlException {
         NestedObjectExtractor<Integer> nestedObjectExtractor = createMock(NestedObjectExtractor.class);
         PropertyAccessor propertyAccessor = createMock(PropertyAccessor.class);
-        Map<String, Object> context = createMock(Map.class);
+        OgnlContext context = createMock(OgnlContext.class);
         expect(propertyAccessor.getProperty(context, "nested", "property")).andReturn("value");
         expect(nestedObjectExtractor.getNestedObject(1)).andReturn("nested");
 
@@ -58,14 +58,14 @@ class NestedObjectDelegatePropertyAccessorTest {
     }
 
     /**
-     * Test method for {@link NestedObjectDelegatePropertyAccessor#setProperty(java.util.Map, Object, Object, Object)}.
+     * Test method for {@link NestedObjectDelegatePropertyAccessor#setProperty(OgnlContext, Object, Object, Object)}.
      * @throws OgnlException If something goes wrong.
      */
     @Test
     void testSetProperty() throws OgnlException {
         NestedObjectExtractor<Integer> nestedObjectExtractor = createMock(NestedObjectExtractor.class);
         PropertyAccessor propertyAccessor = createMock(PropertyAccessor.class);
-        Map<String, Object> context = createMock(Map.class);
+        OgnlContext context = createMock(OgnlContext.class);
         propertyAccessor.setProperty(context, "nested", "property", "value");
         expect(nestedObjectExtractor.getNestedObject(1)).andReturn("nested");
 

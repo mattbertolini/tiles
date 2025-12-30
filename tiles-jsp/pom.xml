@@ -21,166 +21,162 @@
  * under the License.
  */
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 
-  <parent>
-    <groupId>org.apache.tiles</groupId>
-    <artifactId>tiles-parent</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
-  </parent>
-
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>tiles-jsp</artifactId>
-  <packaging>jar</packaging>
-  <name>Tiles - JSP support</name>
-  <description>Tiles JSP support: Classes and tag libraries to use Tiles in a
-  JSP environment.</description>
-
-  <properties>
-      <tiles.osgi.symbolicName>org.apache.tiles.jsp</tiles.osgi.symbolicName>
-  </properties>
-
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <excludes>
-          <exclude>LICENSE.txt</exclude>
-          <exclude>NOTICE.txt</exclude>
-        </excludes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>LICENSE.txt</include>
-          <include>NOTICE.txt</include>
-        </includes>
-        <targetPath>META-INF</targetPath>
-      </resource>
-    </resources>
-
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-          <configuration>
-          <archive>
-            <manifest>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.tiles.autotag.plugin</groupId>
-        <artifactId>tiles-autotag-maven-plugin</artifactId>
-        <version>${tiles.autotag.version}</version>
-        <executions>
-            <execution>
-                <goals>
-                    <goal>generate-jsp</goal>
-                </goals>
-                <configuration>
-                    <taglibURI>http://tiles.apache.org/tags-tiles</taglibURI>
-                    <packageName>org.apache.tiles.jsp.taglib</packageName>
-                    <requestClass>org.apache.tiles.request.Request</requestClass>
-                    <jspRuntime>org.apache.tiles.request.jsp.autotag.JspAutotagRuntime</jspRuntime>
-                </configuration>
-            </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>net.sourceforge.maven-taglib</groupId>
-        <artifactId>maven-taglib-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <parseHtml>true</parseHtml>
-          <srcDir>${project.build.outputDirectory}/META-INF/tld</srcDir>
-        </configuration>
-      </plugin>
-    </plugins>
-
-  </build>
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>net.sourceforge.maven-taglib</groupId>
-        <artifactId>maven-taglib-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <parseHtml>true</parseHtml>
-          <srcDir>${project.build.outputDirectory}/META-INF/tld</srcDir>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
-
-
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-servlet</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-template</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-jdk14</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-      <dependency>
-          <groupId>jakarta.servlet</groupId>
-          <artifactId>jakarta.servlet-api</artifactId>
-          <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>jakarta.servlet.jsp</groupId>
-          <artifactId>jakarta.servlet.jsp-api</artifactId>
-          <scope>provided</scope>
-      </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.easymock</groupId>
-      <artifactId>easymock</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-      <dependency>
-          <groupId>jakarta.el</groupId>
-          <artifactId>jakarta.el-api</artifactId>
-          <scope>test</scope>
-      </dependency>
-
-    <dependency>
-      <groupId>org.apache.shale</groupId>
-      <artifactId>shale-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
+    <parent>
         <groupId>org.apache.tiles</groupId>
-        <artifactId>tiles-request-jsp</artifactId>
-        <version>${tiles.request.version}</version>
-    </dependency>
-  </dependencies>
+        <artifactId>tiles-parent</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>tiles-jsp</artifactId>
+    <packaging>jar</packaging>
+    <name>Tiles - JSP support</name>
+    <description>Tiles JSP support: Classes and tag libraries to use Tiles in a
+        JSP environment.
+    </description>
+
+    <properties>
+        <tiles.osgi.symbolicName>org.apache.tiles.jsp</tiles.osgi.symbolicName>
+    </properties>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>LICENSE.txt</exclude>
+                    <exclude>NOTICE.txt</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>LICENSE.txt</include>
+                    <include>NOTICE.txt</include>
+                </includes>
+                <targetPath>META-INF</targetPath>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tiles.autotag.plugin</groupId>
+                <artifactId>tiles-autotag-maven-plugin</artifactId>
+                <version>${tiles.autotag.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-jsp</goal>
+                        </goals>
+                        <configuration>
+                            <taglibURI>http://tiles.apache.org/tags-tiles</taglibURI>
+                            <packageName>org.apache.tiles.jsp.taglib</packageName>
+                            <requestClass>org.apache.tiles.request.Request</requestClass>
+                            <jspRuntime>org.apache.tiles.request.jsp.autotag.JspAutotagRuntime</jspRuntime>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.sourceforge.maven-taglib</groupId>
+                <artifactId>maven-taglib-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <parseHtml>true</parseHtml>
+                    <srcDir>${project.build.outputDirectory}/META-INF/tld</srcDir>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>net.sourceforge.maven-taglib</groupId>
+                <artifactId>maven-taglib-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <parseHtml>true</parseHtml>
+                    <srcDir>${project.build.outputDirectory}/META-INF/tld</srcDir>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-template</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-request-jsp</artifactId>
+            <version>${tiles.request.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
