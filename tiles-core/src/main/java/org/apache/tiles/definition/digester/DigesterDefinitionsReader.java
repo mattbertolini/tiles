@@ -27,8 +27,8 @@ import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.commons.digester.Digester;
-import org.apache.commons.digester.Rule;
+import org.apache.commons.digester3.Digester;
+import org.apache.commons.digester3.Rule;
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Definition;
 import org.apache.tiles.Expression;
@@ -143,7 +143,7 @@ public class DigesterDefinitionsReader implements DefinitionsReader {
      *
      * @since 2.1.2
      */
-    public static class FillDefinitionRule extends Rule {
+    public class FillDefinitionRule extends Rule {
 
         /** {@inheritDoc} */
         @Override
@@ -175,7 +175,7 @@ public class DigesterDefinitionsReader implements DefinitionsReader {
      *
      * @since 2.1.0
      */
-    public static class FillAttributeRule extends Rule {
+    public class FillAttributeRule extends Rule {
 
         /** {@inheritDoc} */
         @Override
@@ -196,7 +196,7 @@ public class DigesterDefinitionsReader implements DefinitionsReader {
      *
      * @since 2.1.0
      */
-    public static class PutAttributeRule extends Rule {
+    public class PutAttributeRule extends Rule {
 
         /** {@inheritDoc} */
         @Override
