@@ -1,4 +1,3 @@
-<!--
 /*
  * $Id$
  *
@@ -19,12 +18,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
--->
-<html>
-<head>
-    <title>DB configuration for Tiles test webapp</title>
-</head>
-<body>
-A configuration based on a DBMS of the Tiles test webapp.
-</body>
-</html>
+/**
+ * <h1>DB configuration for Tiles test webapp</h1>
+ *
+ * <p>A configuration based on a DBMS of the Tiles test webapp.</p>
+ */
+package org.apache.tiles.test.db;

@@ -55,7 +55,7 @@ public class TestTilesContainerFactory extends CompleteAutoloadTilesContainerFac
     /** {@inheritDoc} */
     @Override
     protected List<ApplicationResource> getSources(ApplicationContext applicationContext) {
-        List<ApplicationResource> urls = new ArrayList<ApplicationResource>();
+        List<ApplicationResource> urls = new ArrayList<>();
         urls.addAll(applicationContext
                 .getResources("/WEB-INF/**/tiles-defs*.xml"));
         urls.add(applicationContext.getResource(

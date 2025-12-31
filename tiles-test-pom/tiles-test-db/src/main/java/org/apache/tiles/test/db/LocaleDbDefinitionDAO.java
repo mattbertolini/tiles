@@ -77,7 +77,6 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
     private final DefinitionRowMapper definitionRowMapper = new DefinitionRowMapper();
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     public Definition getDefinition(String name, Locale locale) {
         List<Map<String, Object>> customizations = null;
         Long customizationId = null, parentCustomizationId = null;
@@ -113,7 +112,6 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
      * @param locale The locale.
      * @return The definition.
      */
-    @SuppressWarnings("unchecked")
     protected DbDefinition getDefinition(String name, Long baseCustomizationId,
             Long baseParentCustomizationId, @SuppressWarnings("unused") Locale locale) {
         DbDefinition definition = null;
@@ -168,7 +166,7 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
     /**
      * A definition with the new property "id".
      */
-    private static class DbDefinition extends Definition {
+    public static class DbDefinition extends Definition {
 
         /**
          * The id of the definition.
@@ -205,10 +203,10 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
     /**
      * Maps a row of a {@link ResultSet} to a {@link Definition}.
      */
-    private static final class DefinitionRowMapper implements RowMapper {
+    private static final class DefinitionRowMapper implements RowMapper<DbDefinition> {
 
         /** {@inheritDoc} */
-        public Object mapRow(ResultSet rs, int row) throws SQLException {
+        public DbDefinition mapRow(ResultSet rs, int row) throws SQLException {
             DbDefinition definition = new DbDefinition();
             definition.setId(numberToLong((Number) rs.getObject("ID")));
             definition.setName(rs.getString("NAME"));
@@ -225,12 +223,12 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
      * Maps a row of a {@link ResultSet} to an {@link Attribute}. It stores the
      * attributes directly in their definition.
      */
-    private static final class AttributeRowMapper implements RowMapper {
+    private static final class AttributeRowMapper implements RowMapper<Attribute> {
 
         /**
          * The definition in which the attributes will be stored.
          */
-        private Definition definition;
+        private final Definition definition;
 
         /**
          * Constructor.
@@ -243,7 +241,7 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
         }
 
         /** {@inheritDoc} */
-        public Object mapRow(ResultSet rs, int row) throws SQLException {
+        public Attribute mapRow(ResultSet rs, int row) throws SQLException {
             Attribute attribute = new Attribute();
             attribute.setRenderer(rs.getString("TYPE"));
             attribute.setValue(rs.getString("VALUE"));
