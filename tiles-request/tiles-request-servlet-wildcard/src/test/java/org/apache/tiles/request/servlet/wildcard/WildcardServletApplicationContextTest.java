@@ -20,13 +20,12 @@
  */
 package org.apache.tiles.request.servlet.wildcard;
 
+import jakarta.servlet.ServletContext;
 import org.apache.tiles.request.locale.URLApplicationResource;
-import org.easymock.EasyMock;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import jakarta.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -36,6 +35,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -69,7 +72,7 @@ class WildcardServletApplicationContextTest {
     /** {@inheritDoc} */
     @BeforeEach
     void setUp() {
-        servletContext = EasyMock.createMock(ServletContext.class);
+        servletContext = createMock(ServletContext.class);
         original = Thread.currentThread().getContextClassLoader();
         try {
             Thread.currentThread().setContextClassLoader(new MockClassLoader());
@@ -96,18 +99,18 @@ class WildcardServletApplicationContextTest {
         HashSet<URL> set = new HashSet<URL>();
         URL u = new URL("file://tiles/test.properties");
         set.add(u);
-        EasyMock.expect(servletContext.getResource(url)).andReturn(u)
+        expect(servletContext.getResource(url)).andReturn(u)
                 .anyTimes();
         File dir = new File(".");
-        EasyMock.expect(servletContext.getResource("/WEB-INF/")).andReturn(
+        expect(servletContext.getResource("/WEB-INF/")).andReturn(
                 dir.toURI().toURL()).anyTimes();
         URL pomUrl = new URL("file://tiles/pom.xml");
-        EasyMock.expect(servletContext.getResource("/WEB-INF/pom.xml"))
+        expect(servletContext.getResource("/WEB-INF/pom.xml"))
                 .andReturn(pomUrl).anyTimes();
         Set<String> elementSet = new HashSet<String>();
         elementSet.add("/WEB-INF/pom.xml");
-        EasyMock.expect(servletContext.getResourcePaths("/WEB-INF/")).andReturn(elementSet).anyTimes();
-        EasyMock.replay(servletContext);
+        expect(servletContext.getResourcePaths("/WEB-INF/")).andReturn(elementSet).anyTimes();
+        replay(servletContext);
 
         assertEquals(new URLApplicationResource(u.toExternalForm(), u), context.getResource(url));
         assertEquals(new URLApplicationResource(pomUrl.toExternalForm(), pomUrl), context.getResource("/WEB-INF/*.xml"));
@@ -116,13 +119,13 @@ class WildcardServletApplicationContextTest {
 
         assertEquals(1, context.getResources(
                 "classpath*:/org/apache/tiles/request/servlet/wildcard/*Test.class").size());
-        EasyMock.verify(servletContext);
+        verify(servletContext);
     }
 
     /**
-     * An mock class loader.
+     * A mock class loader.
      */
-    public class MockClassLoader extends ClassLoader {
+    public static class MockClassLoader extends ClassLoader {
 
         /**
          * A vector of resources.
