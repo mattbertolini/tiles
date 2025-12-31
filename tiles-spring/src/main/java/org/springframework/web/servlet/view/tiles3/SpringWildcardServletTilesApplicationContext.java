@@ -29,9 +29,9 @@ import org.apache.tiles.request.ApplicationResource;
 import org.apache.tiles.request.locale.URLApplicationResource;
 import org.apache.tiles.request.servlet.ServletApplicationContext;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.support.ServletContextResourcePatternResolver;

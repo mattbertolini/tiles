@@ -36,7 +36,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
  *
  * @author Nicolas Le Bas
  * @since 3.2
- * @see org.apache.tiles.definition.UrlDefinitionsFactory#LOCALE_RESOLVER_IMPL_PROPERTY
+ * @see org.apache.tiles.definition.LocaleDefinitionsFactory#LOCALE_RESOLVER_IMPL_PROPERTY
  */
 public class SpringLocaleResolver extends DefaultLocaleResolver {
 

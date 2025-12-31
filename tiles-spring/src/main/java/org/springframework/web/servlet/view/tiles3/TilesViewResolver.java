@@ -18,7 +18,7 @@ package org.springframework.web.servlet.view.tiles3;
 
 import org.apache.tiles.request.render.Renderer;
 
-import org.springframework.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
