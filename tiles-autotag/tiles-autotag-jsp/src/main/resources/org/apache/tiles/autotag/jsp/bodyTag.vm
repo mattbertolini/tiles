@@ -99,7 +99,6 @@ public class ${clazz.tagClassPrefix}Tag extends SimpleTagSupport {
             ${parameter.name},
 #end
             request#if(${clazz.hasBody()}), modelBody#end
-
         );
     }
 }

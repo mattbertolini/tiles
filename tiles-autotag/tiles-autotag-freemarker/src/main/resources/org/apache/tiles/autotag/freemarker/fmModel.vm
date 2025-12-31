@@ -76,7 +76,6 @@ public class ${clazz.tagClassPrefix}FMModel implements TemplateDirectiveModel {
             runtime.getParameter("${parameter.exportedName}", ${stringTool.getClassToCast(${parameter.type})}.class, $stringTool.getDefaultValue(${parameter.type}, ${parameter.defaultValue})),
 #end
                 request#if(${clazz.hasBody()}), modelBody#end
-
         );
     }
 }

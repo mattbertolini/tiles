@@ -39,10 +39,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests {@link TagClassGenerator}.
+ * Tests {@link FMModelGenerator}.
  *
  * @version $Rev$ $Date$
  */
@@ -51,7 +52,7 @@ class FMModelGeneratorTest {
     public static final String REQUEST_CLASS = "org.apache.tiles.autotag.freemarker.test.Request";
 
     /**
-     * Test method for {@link TagClassGenerator#generate(File, String, TemplateSuite, TemplateClass, java.util.Map)}.
+     * Test method for {@link FMModelGenerator#generate(File, String, TemplateSuite, TemplateClass, java.util.Map)}.
      * @throws Exception If something goes wrong.
      */
     @Test
@@ -93,15 +94,14 @@ class FMModelGeneratorTest {
         generator.generate(locator, "org.apache.tiles.autotag.freemarker.test", suite, clazz, null,
                            "org.apache.tiles.autotag.freemarker.test.Runtime", REQUEST_CLASS);
 
-        InputStream expected = getClass()
-                .getResourceAsStream(
-                        "/org/apache/tiles/autotag/freemarker/test/DoStuffFMModel.javat");
+        File expectedFile = new File(getClass()
+                .getResource(
+                        "/org/apache/tiles/autotag/freemarker/test/DoStuffFMModel.javat").toURI());
         File effectiveFile = new File(tempDir, "/org/apache/tiles/autotag/freemarker/test/DoStuffFMModel.java");
         assertTrue(effectiveFile.exists());
         InputStream effective = new FileInputStream(effectiveFile);
-        assertTrue(IOUtils.contentEquals(effective, expected));
+        assertThat(effectiveFile).hasSameTextualContentAs(expectedFile);
         effective.close();
-        expected.close();
 
         suite.addTemplateClass(clazz);
         params = new ArrayList<TemplateParameter>();
@@ -128,7 +128,7 @@ class FMModelGeneratorTest {
         generator.generate(locator, "org.apache.tiles.autotag.freemarker.test", suite, clazz, null,
                            "org.apache.tiles.autotag.freemarker.test.Runtime", REQUEST_CLASS);
 
-        expected = getClass()
+        InputStream expected = getClass()
                 .getResourceAsStream(
                         "/org/apache/tiles/autotag/freemarker/test/DoStuffNoBodyFMModel.javat");
         effectiveFile = new File(tempDir, "/org/apache/tiles/autotag/freemarker/test/DoStuffNoBodyFMModel.java");

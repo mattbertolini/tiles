@@ -198,7 +198,7 @@ class AbstractTemplateSuiteGeneratorTest {
         expect(generator.getFilename(packageName, suite, parameters)).andReturn("myfile.txt");
         String sampleVmPath = "/sample.vm";
         expect(generator.getTemplatePath(packageName, suite, parameters)).andReturn(sampleVmPath);
-        expect(velocityEngine.getTemplate("/sample.vm")).andThrow(new Exception());
+        expect(velocityEngine.getTemplate("/sample.vm")).andThrow(new ResourceNotFoundException("message"));
 
         replay(velocityEngine, generator, suite, template, parameters);
         assertThrows(AutotagRuntimeException.class, () -> generator.generate(locator, packageName, suite, parameters));
@@ -228,7 +228,7 @@ class AbstractTemplateSuiteGeneratorTest {
         expect(generator.getTemplatePath(packageName, suite, parameters)).andReturn(sampleVmPath);
         expect(velocityEngine.getTemplate("/sample.vm")).andReturn(template);
         template.merge(isA(VelocityContext.class), isA(Writer.class));
-        expectLastCall().andThrow(new IOException());
+        expectLastCall().andThrow(new ParseErrorException("message"));
 
         replay(velocityEngine, generator, suite, template, parameters);
         assertThrows(AutotagRuntimeException.class, () -> generator.generate(locator, packageName, suite, parameters));

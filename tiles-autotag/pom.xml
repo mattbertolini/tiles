@@ -89,11 +89,6 @@ under the License.
                 <artifactId>tiles-autotag-core-runtime</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
-                <version>1.6.3</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

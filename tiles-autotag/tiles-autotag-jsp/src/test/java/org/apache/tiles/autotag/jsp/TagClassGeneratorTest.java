@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -97,13 +98,12 @@ class TagClassGeneratorTest {
         generator.generate(locator, "org.apache.tiles.autotag.jsp.test", suite, clazz, parameters,
                            "org.apache.tiles.autotag.jsp.test.Runtime", REQUEST_CLASS);
 
-        InputStream expected = getClass().getResourceAsStream("/org/apache/tiles/autotag/jsp/test/DoStuffTag.java");
+        File expectedFile = new File(getClass().getResource("/org/apache/tiles/autotag/jsp/test/DoStuffTag.java").toURI());
         File effectiveFile = new File(tempDir, "/org/apache/tiles/autotag/jsp/test/DoStuffTag.java");
         assertTrue(effectiveFile.exists());
         InputStream effective = new FileInputStream(effectiveFile);
-        assertTrue(IOUtils.contentEquals(effective, expected));
+        assertThat(effectiveFile).hasSameTextualContentAs(expectedFile);
         effective.close();
-        expected.close();
 
         suite.addTemplateClass(clazz);
         params = new ArrayList<TemplateParameter>();
@@ -130,7 +130,7 @@ class TagClassGeneratorTest {
         generator.generate(locator, "org.apache.tiles.autotag.jsp.test", suite, clazz, parameters,
                            "org.apache.tiles.autotag.jsp.test.Runtime", REQUEST_CLASS);
 
-        expected = getClass().getResourceAsStream("/org/apache/tiles/autotag/jsp/test/DoStuffNoBodyTag.java");
+        InputStream expected = getClass().getResourceAsStream("/org/apache/tiles/autotag/jsp/test/DoStuffNoBodyTag.java");
         effectiveFile = new File(tempDir, "/org/apache/tiles/autotag/jsp/test/DoStuffNoBodyTag.java");
         assertTrue(effectiveFile.exists());
         effective = new FileInputStream(effectiveFile);

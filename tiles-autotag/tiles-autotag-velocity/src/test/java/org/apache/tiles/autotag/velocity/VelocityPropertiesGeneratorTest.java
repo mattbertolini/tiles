@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -116,13 +117,12 @@ class VelocityPropertiesGeneratorTest {
 
         generator.generate(locator, "org.apache.tiles.autotag.velocity.test", suite, null);
 
-        InputStream expected = getClass().getResourceAsStream("/velocity.properties.test");
+        File expectedFile = new File(getClass().getResource("/velocity.properties.test").toURI());
         File effectiveFile = new File(tempDir, "META-INF/velocity.properties");
         assertTrue(effectiveFile.exists());
         InputStream effective = new FileInputStream(effectiveFile);
-        assertTrue(IOUtils.contentEquals(effective, expected));
+        assertThat(effectiveFile).hasSameTextualContentAs(expectedFile);
         effective.close();
-        expected.close();
 
         FileUtils.deleteDirectory(tempDir);
     }
