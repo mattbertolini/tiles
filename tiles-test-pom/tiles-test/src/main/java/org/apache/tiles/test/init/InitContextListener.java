@@ -21,21 +21,21 @@
 
 package org.apache.tiles.test.init;
 
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
+import org.apache.commons.io.IOUtils;
+import org.apache.tiles.test.exception.TilesTestRuntimeException;
+import org.hsqldb.jdbc.JDBCDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import jakarta.servlet.ServletContextEvent;
-import jakarta.servlet.ServletContextListener;
-import javax.sql.DataSource;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.tiles.test.exception.TilesTestRuntimeException;
-import org.hsqldb.jdbc.jdbcDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Initializes the data source of the DB.
@@ -69,7 +69,7 @@ public class InitContextListener implements ServletContextListener {
      * @return The data source.
      */
     private DataSource createDataSource() {
-        jdbcDataSource dataSource = new jdbcDataSource();
+        JDBCDataSource dataSource = new JDBCDataSource();
         dataSource.setDatabase("jdbc:hsqldb:mem:tiles");
         dataSource.setUser("sa");
         dataSource.setPassword("");
@@ -86,7 +86,7 @@ public class InitContextListener implements ServletContextListener {
                 "/org/apache/tiles/test/db/schema.sql");
         String text;
         try {
-            text = IOUtils.toString(stream);
+            text = IOUtils.toString(stream, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new TilesTestRuntimeException("Cannot read schema SQL text", e);
         } finally {

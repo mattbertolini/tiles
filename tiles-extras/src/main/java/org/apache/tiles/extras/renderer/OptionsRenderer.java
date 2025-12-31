@@ -20,16 +20,8 @@
  */
 package org.apache.tiles.extras.renderer;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.LoadingCache;
 import org.apache.tiles.Attribute;
 import org.apache.tiles.ListAttribute;
 import org.apache.tiles.access.TilesAccess;
@@ -38,6 +30,12 @@ import org.apache.tiles.request.Request;
 import org.apache.tiles.request.render.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Provides a custom "options" syntax for attributes.
@@ -71,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * <p/>
  * The attribute found and rendered is cached so to improve performance on subsequent lookups.
  * The default cache time-to-live is {@value #DEFAULT_CACHE_LIFE}, specified by {@link #DEFAULT_CACHE_LIFE}.
- * It can be customised by setting the system property {@value #CACHE_LIFE_PROPERTY}, see {@link #CACHE_LIFE_PROPERTY}.
+ * It can be customised by setting the system property {@link #CACHE_LIFE_PROPERTY}, see {@link #CACHE_LIFE_PROPERTY}.
  * Setting it to zero will disable the cache.
  */
 public final class OptionsRenderer implements Renderer {
@@ -118,7 +116,7 @@ public final class OptionsRenderer implements Renderer {
                         "list-attribute name=\"" + match + "\" must have minimum one attribute");
             }
 
-            for (Attribute option : (List<Attribute>) fallbacks.getValue()) {
+            for (Attribute option : fallbacks.getValue()) {
                 String template = path.replaceFirst(Pattern.quote(matcher.group()), (String) option.getValue());
                 done = renderAttempt(template, request);
                 if (done) { break; }
@@ -170,20 +168,16 @@ public final class OptionsRenderer implements Renderer {
         private static final ConcurrentMap<String,Boolean> TEMPLATE_EXISTS;
 
         static {
-            LOG.info("cache_ttl_ms=" + CACHE_LIFE);
+            LOG.info("cache_ttl_ms={}", CACHE_LIFE);
 
-            LoadingCache<String,Boolean> builder = CacheBuilder
+            LoadingCache<String,Boolean> builder = Caffeine
                     .newBuilder()
                     .expireAfterWrite(CACHE_LIFE, TimeUnit.MILLISECONDS)
-                    .build(
-                        new CacheLoader<String, Boolean>() {
-                            @Override
-                            public Boolean load(String key) {
+                    .build(key -> {
                                 throw new UnsupportedOperationException(
                                         "illegal TEMPLATE_EXISTS.get(\"" + key
                                         + "\") before TEMPLATE_EXISTS.containsKey(\"" + key + "\")");
-                            }
-                        });
+                            });
 
             TEMPLATE_EXISTS = builder.asMap();
         }

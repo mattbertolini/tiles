@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*
  * $Id$
@@ -21,155 +21,150 @@
  * under the License.
  */
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <parent>
-    <groupId>org.apache.tiles</groupId>
-    <artifactId>tiles-parent</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
-  </parent>
+    <parent>
+        <groupId>org.apache.tiles</groupId>
+        <artifactId>tiles-parent</artifactId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
 
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>tiles-extras</artifactId>
-  <packaging>jar</packaging>
-  <name>Tiles - Extras</name>
-  <description>Extras for Tiles, including non-standard, non-generic, non-identifiable components that may be useful for Tiles users.
-  </description>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>tiles-extras</artifactId>
+    <packaging>jar</packaging>
+    <name>Tiles - Extras</name>
+    <description>Extras for Tiles, including non-standard, non-generic, non-identifiable components that may be useful
+        for Tiles users.
+    </description>
 
-  <properties>
-  	<tiles.osgi.symbolicName>org.apache.tiles.extras</tiles.osgi.symbolicName>
-      <!-- decrease this whenever possible -->
-      <checkstyle.maxAllowedViolations>21</checkstyle.maxAllowedViolations>
-  </properties>
+    <properties>
+        <tiles.osgi.symbolicName>org.apache.tiles.extras</tiles.osgi.symbolicName>
+        <!-- decrease this whenever possible -->
+        <checkstyle.maxAllowedViolations>21</checkstyle.maxAllowedViolations>
+    </properties>
 
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <excludes>
-          <exclude>LICENSE.txt</exclude>
-          <exclude>NOTICE.txt</exclude>
-        </excludes>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>LICENSE.txt</include>
-          <include>NOTICE.txt</include>
-        </includes>
-        <targetPath>META-INF</targetPath>
-      </resource>
-    </resources>
-  </build>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>LICENSE.txt</exclude>
+                    <exclude>NOTICE.txt</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>LICENSE.txt</include>
+                    <include>NOTICE.txt</include>
+                </includes>
+                <targetPath>META-INF</targetPath>
+            </resource>
+        </resources>
+    </build>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-request-servlet-wildcard</artifactId>
-      <version>${tiles.request.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-request-mustache</artifactId>
-      <version>${tiles.request.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-jsp</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-freemarker</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.apache.tiles</groupId>-->
-<!--      <artifactId>tiles-velocity</artifactId>-->
-<!--      <version>${project.version}</version>-->
-<!--    </dependency>-->
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-el</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-mvel</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-ognl</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-compat</artifactId>
-      <version>${project.version}</version>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-request-servlet-wildcard</artifactId>
+            <version>${tiles.request.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-request-mustache</artifactId>
+            <version>${tiles.request.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-freemarker</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-el</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-mvel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-ognl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-compat</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
-    <dependency>
-      <artifactId>guava</artifactId>
-      <groupId>com.google.guava</groupId>
-      <version>12.0.1</version>
-    </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-      <dependency>
-          <groupId>jakarta.servlet</groupId>
-          <artifactId>jakarta.servlet-api</artifactId>
-          <scope>provided</scope>
-      </dependency>
-      <dependency>
-          <groupId>jakarta.el</groupId>
-          <artifactId>jakarta.el-api</artifactId>
-          <scope>provided</scope>
-      </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-      <dependency>
-          <groupId>jakarta.servlet.jsp</groupId>
-          <artifactId>jakarta.servlet.jsp-api</artifactId>
-          <scope>test</scope>
-      </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <scope>test</scope>
-    </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-jdk14</artifactId>
-      <scope>test</scope>
-    </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-    <dependency>
-      <groupId>org.easymock</groupId>
-      <artifactId>easymock</artifactId>
-      <scope>test</scope>
-    </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-      <dependency>
-          <groupId>org.freemarker</groupId>
-          <artifactId>freemarker</artifactId>
-          <scope>test</scope>
-      </dependency>
-
-  </dependencies>
+    </dependencies>
 </project>
