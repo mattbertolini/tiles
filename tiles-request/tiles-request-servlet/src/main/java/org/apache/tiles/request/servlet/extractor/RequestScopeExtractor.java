@@ -35,7 +35,7 @@ public class RequestScopeExtractor implements AttributeExtractor {
     /**
      * The servlet request.
      */
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     /**
      * Constructor.

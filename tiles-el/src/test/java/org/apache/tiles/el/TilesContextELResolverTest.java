@@ -20,11 +20,13 @@
  */
 package org.apache.tiles.el;
 
-import static org.easymock.EasyMock.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import jakarta.el.ELContext;
+import jakarta.el.ELResolver;
+import org.apache.tiles.request.ApplicationContext;
+import org.apache.tiles.request.Request;
+import org.apache.tiles.request.reflect.ClassUtil;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.beans.FeatureDescriptor;
 import java.beans.PropertyDescriptor;
@@ -32,15 +34,15 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import jakarta.el.ELContext;
-import jakarta.el.ELResolver;
-
-import org.apache.tiles.request.ApplicationContext;
-import org.apache.tiles.request.Request;
-import org.apache.tiles.request.reflect.ClassUtil;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests {@link TilesContextELResolver}.
@@ -70,7 +72,7 @@ class TilesContextELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextELResolver#getCommonPropertyType(javax.el.ELContext, java.lang.Object)}.
+     * {@link TilesContextELResolver#getCommonPropertyType(jakarta.el.ELContext, java.lang.Object)}.
      */
     @Test
     void testGetCommonPropertyTypeELContextObject() {
@@ -84,12 +86,12 @@ class TilesContextELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextELResolver#getFeatureDescriptors(javax.el.ELContext, java.lang.Object)}.
+     * {@link TilesContextELResolver#getFeatureDescriptors(jakarta.el.ELContext, java.lang.Object)}.
      */
     @Test
     void testGetFeatureDescriptorsELContextObject() {
         replay(beanElResolver);
-        assertNull(resolver.getFeatureDescriptors(null, new Integer(1)));
+        assertNull(resolver.getFeatureDescriptors(null, 1));
         Map<String, PropertyDescriptor> expected = new LinkedHashMap<String, PropertyDescriptor>();
         ClassUtil.collectBeanInfo(Request.class, expected);
         ClassUtil.collectBeanInfo(ApplicationContext.class, expected);
@@ -121,7 +123,7 @@ class TilesContextELResolverTest {
         expectLastCall().times(2);
 
         replay(beanElResolver, elContext, request, applicationContext);
-        assertNull(resolver.getType(elContext, new Integer(1), "whatever"));
+        assertNull(resolver.getType(elContext, 1, "whatever"));
         assertEquals(Boolean.class, resolver.getType(elContext, null, "responseCommitted"));
         assertEquals(Map.class, resolver.getType(elContext, null, "initParams"));
         verify(beanElResolver, elContext, request, applicationContext);
@@ -146,7 +148,7 @@ class TilesContextELResolverTest {
         expectLastCall().times(2);
 
         replay(beanElResolver, elContext, request, applicationContext, map);
-        assertNull(resolver.getValue(elContext, new Integer(1), "whatever"));
+        assertNull(resolver.getValue(elContext, 1, "whatever"));
         assertEquals(true, resolver.getValue(elContext, null, "responseCommitted"));
         assertEquals(map, resolver.getValue(elContext, null, "initParams"));
         verify(beanElResolver, elContext, request, applicationContext, map);
@@ -154,7 +156,7 @@ class TilesContextELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextELResolver#isReadOnly(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
+     * {@link TilesContextELResolver#isReadOnly(jakarta.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
     void testIsReadOnly() {
@@ -167,7 +169,7 @@ class TilesContextELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextELResolver#isReadOnly(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
+     * {@link TilesContextELResolver#isReadOnly(jakarta.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
     void testIsReadOnlyNPE() {

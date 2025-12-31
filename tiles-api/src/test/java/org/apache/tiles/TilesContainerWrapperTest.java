@@ -20,15 +20,21 @@
  */
 package org.apache.tiles;
 
-import static org.easymock.EasyMock.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.IOException;
-
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests {@link TilesContainerWrapper}.
@@ -96,10 +102,10 @@ class TilesContainerWrapperTest {
         Request request = createMock(Request.class);
         Attribute attribute = createMock(Attribute.class);
 
-        expect(container.evaluate(attribute, request)).andReturn(new Integer(1));
+        expect(container.evaluate(attribute, request)).andReturn(1);
 
         replay(container, request, attribute);
-        assertEquals(new Integer(1), wrapper.evaluate(attribute, request));
+        assertEquals(1, wrapper.evaluate(attribute, request));
         verify(container, request, attribute);
     }
 
@@ -206,6 +212,7 @@ class TilesContainerWrapperTest {
 
     /**
      * Test method for {@link TilesContainerWrapper#render(Attribute, Request)}.
+     *
      * @throws IOException If something goes wrong.
      */
     @Test

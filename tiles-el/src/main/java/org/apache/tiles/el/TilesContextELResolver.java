@@ -42,7 +42,7 @@ public class TilesContextELResolver extends ELResolver {
     /**
      * Internal bean resolver to resolve beans in any context.
      */
-    private ELResolver beanElResolver;
+    private final ELResolver beanElResolver;
 
     /**
      * Constructor.
@@ -56,7 +56,7 @@ public class TilesContextELResolver extends ELResolver {
     /**
      * The beaninfos about {@link Request} and {@link ApplicationContext}.
      */
-    private CombinedBeanInfo requestBeanInfo = new CombinedBeanInfo(
+    private final CombinedBeanInfo requestBeanInfo = new CombinedBeanInfo(
             Request.class, ApplicationContext.class);
 
     /** {@inheritDoc} */
@@ -71,6 +71,7 @@ public class TilesContextELResolver extends ELResolver {
     }
 
     /** {@inheritDoc} */
+    @Deprecated
     @Override
     public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context,
             Object base) {

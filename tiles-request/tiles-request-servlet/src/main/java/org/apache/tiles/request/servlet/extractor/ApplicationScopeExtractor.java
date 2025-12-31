@@ -36,7 +36,7 @@ public class ApplicationScopeExtractor implements AttributeExtractor {
     /**
      * The servlet context.
      */
-    private ServletContext context;
+    private final ServletContext context;
 
     /**
      * Constructor.
@@ -57,7 +57,6 @@ public class ApplicationScopeExtractor implements AttributeExtractor {
         context.removeAttribute(name);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Enumeration<String> getKeys() {
         return context.getAttributeNames();

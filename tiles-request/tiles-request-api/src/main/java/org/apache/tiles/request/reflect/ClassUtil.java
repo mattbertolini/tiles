@@ -20,13 +20,14 @@
  */
 package org.apache.tiles.request.reflect;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -94,8 +95,8 @@ public final class ClassUtil {
             classLoader = ClassUtil.class.getClassLoader();
         }
         try {
-            Class<? extends Object> namedClass = getClass(className, Object.class);
-            return namedClass.newInstance();
+            Class<?> namedClass = getClass(className, Object.class);
+            return namedClass.getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
             if (returnNull) {
                 return null;
@@ -110,6 +111,18 @@ public final class ClassUtil {
                     "Unable to instantiate factory class: '"
                             + className
                             + "'. Make sure that this class has a default constructor",
+                    e);
+        } catch (InvocationTargetException e) {
+            throw new CannotInstantiateObjectException(
+                    "Unable to instantiate factory class: '"
+                            + className
+                            + "'. Invoked constructor threw an exception",
+                    e);
+        } catch (NoSuchMethodException e) {
+            throw new CannotInstantiateObjectException(
+                    "Unable to instantiate factory class: '"
+                            + className
+                            + "'. Unable to find a default constructor",
                     e);
         }
     }
@@ -129,7 +142,7 @@ public final class ClassUtil {
             info = Introspector.getBeanInfo(clazz);
         } catch (Exception ex) {
             if (log.isDebugEnabled()) {
-                log.debug("Cannot inspect class " + clazz, ex);
+                log.debug("Cannot inspect class {}", clazz, ex);
             }
         }
         if (info == null) {

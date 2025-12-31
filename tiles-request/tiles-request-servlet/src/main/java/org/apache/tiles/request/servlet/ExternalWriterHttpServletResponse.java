@@ -21,10 +21,10 @@
 
 package org.apache.tiles.request.servlet;
 
-import java.io.PrintWriter;
-
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServletResponseWrapper;
+
+import java.io.PrintWriter;
 
 /**
  * Wraps an HTTP response and overrides its print writer.
@@ -37,7 +37,7 @@ public class ExternalWriterHttpServletResponse extends
     /**
      * The print writer to use, instead of the response's one.
      */
-    private PrintWriter writer;
+    private final PrintWriter writer;
 
     /**
      * Constructor.

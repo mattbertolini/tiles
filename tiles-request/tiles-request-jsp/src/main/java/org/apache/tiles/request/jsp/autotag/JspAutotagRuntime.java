@@ -27,6 +27,7 @@ import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.autotag.core.runtime.AutotagRuntime;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.jsp.JspRequest;
+import org.apache.tiles.request.jsp.JspUtil;
 
 /**
  * A Runtime for implementing JSP tag libraries.
@@ -43,7 +44,7 @@ public class JspAutotagRuntime extends SimpleTagSupport implements AutotagRuntim
     @Override
     public Request createRequest() {
         JspContext pageContext = getJspContext();
-        return JspRequest.createServletJspRequest(org.apache.tiles.request.jsp.JspUtil.getApplicationContext(pageContext),
+        return JspRequest.createServletJspRequest(JspUtil.getApplicationContext(pageContext),
                                                   (PageContext) pageContext);
     }
 

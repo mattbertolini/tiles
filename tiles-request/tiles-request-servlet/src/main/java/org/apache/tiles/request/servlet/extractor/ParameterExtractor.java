@@ -20,11 +20,10 @@
  */
 package org.apache.tiles.request.servlet.extractor;
 
-import java.util.Enumeration;
-
 import jakarta.servlet.http.HttpServletRequest;
-
 import org.apache.tiles.request.attribute.HasKeys;
+
+import java.util.Enumeration;
 
 /**
  * Extract parameters from the request.
@@ -36,7 +35,7 @@ public class ParameterExtractor implements HasKeys<String> {
     /**
      * The servlet request.
      */
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     /**
      * Constructor.
@@ -47,7 +46,6 @@ public class ParameterExtractor implements HasKeys<String> {
         this.request = request;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Enumeration<String> getKeys() {
         return request.getParameterNames();

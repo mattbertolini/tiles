@@ -57,6 +57,7 @@ public class ScopeELResolver extends ELResolver {
     }
 
     /** {@inheritDoc} */
+    @Deprecated
     @Override
     public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context,
             Object base) {

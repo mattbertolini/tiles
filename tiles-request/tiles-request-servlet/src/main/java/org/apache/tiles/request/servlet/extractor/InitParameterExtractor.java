@@ -35,7 +35,7 @@ public class InitParameterExtractor implements HasKeys<String> {
     /**
      * The servlet context.
      */
-    private ServletContext context;
+    private final ServletContext context;
 
     /**
      * Constructor.

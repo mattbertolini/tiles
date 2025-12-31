@@ -62,12 +62,12 @@ public class ServletRequest extends AbstractClientRequest {
     /**
      * The request object to use.
      */
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
     /**
      * The response object to use.
      */
-    private HttpServletResponse response;
+    private final HttpServletResponse response;
 
     /**
      * The response output stream, lazily initialized.
@@ -138,7 +138,7 @@ public class ServletRequest extends AbstractClientRequest {
     public Map<String, String> getHeader() {
 
         if ((header == null) && (request != null)) {
-            header = new ReadOnlyEnumerationMap<String>(new HeaderExtractor(request, null));
+            header = new ReadOnlyEnumerationMap<>(new HeaderExtractor(request, null));
         }
         return (header);
 
@@ -169,7 +169,7 @@ public class ServletRequest extends AbstractClientRequest {
     public Map<String, String> getParam() {
 
         if ((param == null) && (request != null)) {
-            param = new ReadOnlyEnumerationMap<String>(new ParameterExtractor(request));
+            param = new ReadOnlyEnumerationMap<>(new ParameterExtractor(request));
         }
         return (param);
 
@@ -177,7 +177,6 @@ public class ServletRequest extends AbstractClientRequest {
 
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     public Map<String, String[]> getParamValues() {
         return request.getParameterMap();
     }

@@ -41,7 +41,7 @@ public class KeySet implements Set<String> {
     /**
      * The request to read.
      */
-    private HasKeys<?> request;
+    private final HasKeys<?> request;
 
     /**
      * Constructor.

@@ -27,7 +27,7 @@ import java.util.Locale;
 
 /**
  * A (localized) resource accessible through the ApplicationContext.
- * Typically this is a file inside the web application's war.
+ * Typically, this is a file inside the web application's war.
  *
  * @version $Rev$ $Date$
  */
