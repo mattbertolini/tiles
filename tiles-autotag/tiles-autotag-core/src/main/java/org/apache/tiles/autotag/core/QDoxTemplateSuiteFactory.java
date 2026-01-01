@@ -20,12 +20,12 @@
  */
 package org.apache.tiles.autotag.core;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.thoughtworks.qdox.JavaProjectBuilder;
+import com.thoughtworks.qdox.model.DocletTag;
+import com.thoughtworks.qdox.model.JavaAnnotation;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
+import com.thoughtworks.qdox.model.JavaParameter;
 import org.apache.tiles.autotag.core.runtime.ModelBody;
 import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.apache.tiles.autotag.model.TemplateClass;
@@ -34,13 +34,12 @@ import org.apache.tiles.autotag.model.TemplateParameter;
 import org.apache.tiles.autotag.model.TemplateSuite;
 import org.apache.tiles.autotag.model.TemplateSuiteFactory;
 
-import com.thoughtworks.qdox.JavaDocBuilder;
-import com.thoughtworks.qdox.model.Annotation;
-import com.thoughtworks.qdox.model.DocletTag;
-import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaMethod;
-import com.thoughtworks.qdox.model.JavaParameter;
-import com.thoughtworks.qdox.model.Type;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Creates a template suite using QDox.
@@ -57,7 +56,7 @@ public class QDoxTemplateSuiteFactory implements TemplateSuiteFactory {
     /**
      * The Javadoc builder.
      */
-    private JavaDocBuilder builder;
+    private final JavaProjectBuilder builder;
 
     /**
      * The name of the suite.
@@ -80,7 +79,7 @@ public class QDoxTemplateSuiteFactory implements TemplateSuiteFactory {
      * @param sourceFiles All the source files to parse.
      */
     public QDoxTemplateSuiteFactory(File... sourceFiles) {
-        builder = new JavaDocBuilder();
+        builder = new JavaProjectBuilder();
         try {
             for (File file : sourceFiles) {
                 builder.addSource(file);
@@ -97,7 +96,8 @@ public class QDoxTemplateSuiteFactory implements TemplateSuiteFactory {
      * @param urls All the URLs of source files to parse.
      */
     public QDoxTemplateSuiteFactory(URL... urls) {
-        builder = new JavaDocBuilder();
+        builder = new JavaProjectBuilder();
+        builder.setEncoding(StandardCharsets.UTF_8.name());
         try {
             for (URL url : urls) {
                 builder.addSource(url);
@@ -137,7 +137,7 @@ public class QDoxTemplateSuiteFactory implements TemplateSuiteFactory {
 
     @Override
     public TemplateSuite createTemplateSuite() {
-        List<TemplateClass> classes = new ArrayList<TemplateClass>();
+        List<TemplateClass> classes = new ArrayList<>();
         for (JavaClass clazz : builder.getClasses()) {
             String tagClassPrefix = getTagClassPrefix(clazz);
             if (tagClassPrefix != null) {
@@ -174,7 +174,7 @@ public class QDoxTemplateSuiteFactory implements TemplateSuiteFactory {
                 && simpleClassName.length() > TEMPLATE_SUFFIX.length()) {
             tagName = simpleClassName.substring(0, 1).toUpperCase()
                     + simpleClassName.substring(1, simpleClassName.length()
-                            - TEMPLATE_SUFFIX.length());
+                    - TEMPLATE_SUFFIX.length());
         } else {
             tagName = null;
         }
@@ -188,23 +188,23 @@ public class QDoxTemplateSuiteFactory implements TemplateSuiteFactory {
      * @return The template method descriptor.
      */
     private TemplateMethod createMethod(JavaMethod method) {
-        List<TemplateParameter> params = new ArrayList<TemplateParameter>();
+        List<TemplateParameter> params = new ArrayList<>();
         for (JavaParameter parameter : method.getParameters()) {
             String exportedName = parameter.getName();
             boolean required = false;
             String defaultValue = null;
-            Annotation[] annotations = parameter.getAnnotations();
-            if (annotations != null && annotations.length > 0) {
+            List<JavaAnnotation> annotations = parameter.getAnnotations();
+            if (annotations != null && !annotations.isEmpty()) {
                 boolean found = false;
-                for (int i = 0; i < annotations.length && !found; i++) {
-                    if (Parameter.class.getName().equals(annotations[i].getType().getFullyQualifiedName())) {
+                for (int i = 0; i < annotations.size() && !found; i++) {
+                    if (Parameter.class.getName().equals(annotations.get(i).getType().getFullyQualifiedName())) {
                         found = true;
-                        String candidateName = (String) annotations[i].getNamedParameter("name");
+                        String candidateName = (String) annotations.get(i).getNamedParameter("name");
                         if (candidateName != null && candidateName.length() > 2) {
                             exportedName = candidateName.substring(1, candidateName.length() - 1);
                         }
-                        required = "true".equals(annotations[i].getNamedParameter("required"));
-                        candidateName = (String) annotations[i].getNamedParameter("defaultValue");
+                        required = "true".equals(annotations.get(i).getNamedParameter("required"));
+                        candidateName = (String) annotations.get(i).getNamedParameter("defaultValue");
                         if (candidateName != null && candidateName.length() > 2) {
                             defaultValue = candidateName.substring(1, candidateName.length() - 1);
                         }
@@ -221,12 +221,12 @@ public class QDoxTemplateSuiteFactory implements TemplateSuiteFactory {
         TemplateMethod templateMethod = new TemplateMethod(method.getName(),
                 params);
         templateMethod.setDocumentation(method.getComment());
-        DocletTag[] tags = method.getTagsByName("param");
+        List<DocletTag> tags = method.getTagsByName("param");
         for (DocletTag tag : tags) {
-            String[] tagParams = tag.getParameters();
-            if (tagParams.length > 0) {
+            List<String> tagParams = tag.getParameters();
+            if (!tagParams.isEmpty()) {
                 TemplateParameter templateParameter = templateMethod
-                        .getParameterByName(tagParams[0]);
+                        .getParameterByName(tagParams.get(0));
                 if (templateParameter != null) {
                     String tagValue = tag.getValue();
                     int pos = tagValue.indexOf(" ");
@@ -245,26 +245,26 @@ public class QDoxTemplateSuiteFactory implements TemplateSuiteFactory {
      * @return <code>true</code> if it is an execute method.
      */
     private boolean isFeasible(JavaMethod method) {
-        Type returns = method.getReturns();
+        JavaClass returns = method.getReturns();
         if ("execute".equals(method.getName()) && returns != null
                 && "void".equals(returns.getFullyQualifiedName())
                 && method.isPublic() && !method.isStatic()
-                && !method.isAbstract() && !method.isConstructor()) {
-            JavaParameter[] params = method.getParameters();
-            if (params.length > 0) {
-                JavaParameter param = params[params.length - 1];
+                && !method.isAbstract()) {
+            List<JavaParameter> params = method.getParameters();
+            if (!params.isEmpty()) {
+                JavaParameter param = params.get(params.size() - 1);
                 if (requestClass.equals(
                         param.getType().getFullyQualifiedName())) {
                     return true;
                 }
             }
-            if (params.length >= 2) {
-                JavaParameter param1 = params[params.length - 2];
-                JavaParameter param2 = params[params.length - 1];
+            if (params.size() >= 2) {
+                JavaParameter param1 = params.get(params.size() - 2);
+                JavaParameter param2 = params.get(params.size() - 1);
                 if (requestClass.equals(
                         param1.getType().getFullyQualifiedName())
                         && ModelBody.class.getName().equals(
-                                param2.getType().getFullyQualifiedName())) {
+                        param2.getType().getFullyQualifiedName())) {
                     return true;
                 }
             }
