@@ -24,6 +24,7 @@ import jakarta.el.ArrayELResolver;
 import jakarta.el.BeanELResolver;
 import jakarta.el.CompositeELResolver;
 import jakarta.el.ELManager;
+import jakarta.el.ELResolver;
 import jakarta.el.ListELResolver;
 import jakarta.el.MapELResolver;
 import jakarta.el.ResourceBundleELResolver;
@@ -138,8 +139,7 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
     @Nullable
     private TilesInitializer tilesInitializer;
 
-    @Nullable
-    private String[] definitions;
+    private String @Nullable [] definitions;
 
     private boolean checkRefresh = false;
 
@@ -433,7 +433,10 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
             add(new ScopeELResolver());
             add(new TilesContextELResolver(new TilesContextBeanELResolver()));
             add(new TilesContextBeanELResolver());
-            add(ELManager.getExpressionFactory().getStreamELResolver());
+            ELResolver streamELResolver = ELManager.getExpressionFactory().getStreamELResolver();
+            if (streamELResolver != null) {
+                add(streamELResolver);
+            }
             add(new StaticFieldELResolver());
             add(new MapELResolver(false));
             add(new ResourceBundleELResolver());
