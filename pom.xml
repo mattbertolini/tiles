@@ -144,6 +144,11 @@
                 <version>0.9.14</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-jasper-el</artifactId>
+                <version>10.1.50</version>
+            </dependency>
+            <dependency>
                 <groupId>ognl</groupId>
                 <artifactId>ognl</artifactId>
                 <version>3.4.10</version>

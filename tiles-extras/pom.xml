@@ -152,5 +152,10 @@
             <artifactId>freemarker</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jasper-el</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

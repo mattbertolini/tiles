@@ -30,11 +30,13 @@ import java.util.regex.Pattern;
 import jakarta.el.ArrayELResolver;
 import jakarta.el.BeanELResolver;
 import jakarta.el.CompositeELResolver;
+import jakarta.el.ELManager;
 import jakarta.el.ELResolver;
 import jakarta.el.ListELResolver;
 import jakarta.el.MapELResolver;
 import jakarta.el.ResourceBundleELResolver;
 
+import jakarta.el.StaticFieldELResolver;
 import ognl.OgnlException;
 import ognl.OgnlRuntime;
 import ognl.PropertyAccessor;
@@ -238,15 +240,20 @@ public class CompleteAutoloadTilesContainerFactory extends BasicTilesContainerFa
         evaluator.setExpressionFactory(efFactory.getExpressionFactory());
         ELResolver elResolver = new CompositeELResolver() {
             {
-                BeanELResolver beanElResolver = new BeanELResolver(false);
                 add(new ScopeELResolver());
-                add(new TilesContextELResolver(beanElResolver));
+                add(new TilesContextELResolver(new BeanELResolver(false)));
                 add(new TilesContextBeanELResolver());
-                add(new ArrayELResolver(false));
-                add(new ListELResolver(false));
+                ELResolver streamELResolver = ELManager.getExpressionFactory().getStreamELResolver();
+                if (streamELResolver != null) {
+                    add(streamELResolver);
+                }
+                add(new StaticFieldELResolver());
                 add(new MapELResolver(false));
                 add(new ResourceBundleELResolver());
-                add(beanElResolver);
+                add(new ListELResolver(false));
+                add(new ArrayELResolver(false));
+//                add(new RecordElResolver()); TODO: Add support for record types in EL when on Jakarta EE 11
+                add(new BeanELResolver(false));
             }
         };
         evaluator.setResolver(elResolver);

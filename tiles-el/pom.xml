@@ -131,7 +131,6 @@
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-jasper-el</artifactId>
-      <version>10.1.50</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
