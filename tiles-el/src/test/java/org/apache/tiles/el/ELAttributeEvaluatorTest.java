@@ -27,20 +27,24 @@ import java.util.Map;
 import jakarta.el.ArrayELResolver;
 import jakarta.el.BeanELResolver;
 import jakarta.el.CompositeELResolver;
+import jakarta.el.ELManager;
 import jakarta.el.ELResolver;
 import jakarta.el.ListELResolver;
 import jakarta.el.MapELResolver;
 import jakarta.el.ResourceBundleELResolver;
 
+import jakarta.el.StaticFieldELResolver;
 import org.apache.el.ExpressionFactoryImpl;
 import org.apache.tiles.Attribute;
 import org.apache.tiles.Expression;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.easymock.EasyMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -71,33 +75,37 @@ public class ELAttributeEvaluatorTest {
         sessionScope.put("object2", new Integer(1));
         applicationScope.put("object3", new Float(2.0));
         requestScope.put("paulaBean", new PaulaBean());
-        request = EasyMock.createMock(Request.class);
-        EasyMock.expect(request.getContext("request")).andReturn(requestScope)
+        request = createMock(Request.class);
+        expect(request.getContext("request")).andReturn(requestScope)
                 .anyTimes();
-        EasyMock.expect(request.getContext("session")).andReturn(sessionScope)
+        expect(request.getContext("session")).andReturn(sessionScope)
                 .anyTimes();
-        EasyMock.expect(request.getContext("application")).andReturn(
+        expect(request.getContext("application")).andReturn(
                 applicationScope).anyTimes();
-        EasyMock.expect(request.getAvailableScopes()).andReturn(
+        expect(request.getAvailableScopes()).andReturn(
                 Arrays.asList(new String[] { "request", "session", "application" })).anyTimes();
-        ApplicationContext applicationContext = EasyMock
-                .createMock(ApplicationContext.class);
-        EasyMock.expect(request.getApplicationContext()).andReturn(
+        ApplicationContext applicationContext = createMock(ApplicationContext.class);
+        expect(request.getApplicationContext()).andReturn(
                 applicationContext).anyTimes();
-        EasyMock.replay(request, applicationContext);
+        replay(request, applicationContext);
 
         evaluator.setExpressionFactory(new ExpressionFactoryImpl());
         ELResolver elResolver = new CompositeELResolver() {
             {
-                BeanELResolver beanElResolver = new BeanELResolver(false);
                 add(new ScopeELResolver());
-                add(new TilesContextELResolver(beanElResolver));
+                add(new TilesContextELResolver(new BeanELResolver(false)));
                 add(new TilesContextBeanELResolver());
-                add(new ArrayELResolver(false));
-                add(new ListELResolver(false));
+                ELResolver streamELResolver = ELManager.getExpressionFactory().getStreamELResolver();
+                if (streamELResolver != null) {
+                    add(streamELResolver);
+                }
+                add(new StaticFieldELResolver());
                 add(new MapELResolver(false));
                 add(new ResourceBundleELResolver());
-                add(beanElResolver);
+                add(new ListELResolver(false));
+                add(new ArrayELResolver(false));
+//                add(new RecordElResolver()); TODO: Add support for record types in EL when on Jakarta EE 11
+                add(new BeanELResolver(false));
             }
         };
         evaluator.setResolver(elResolver);
