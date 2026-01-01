@@ -76,7 +76,6 @@
             <plugin>
                 <groupId>org.apache.tiles.autotag.plugin</groupId>
                 <artifactId>tiles-autotag-maven-plugin</artifactId>
-                <version>${tiles.autotag.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -176,7 +175,6 @@
         <dependency>
             <groupId>org.apache.tiles</groupId>
             <artifactId>tiles-request-jsp</artifactId>
-            <version>${tiles.request.version}</version>
         </dependency>
     </dependencies>
 

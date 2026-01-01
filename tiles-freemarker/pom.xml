@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*
  * $Id$
@@ -21,79 +21,84 @@
  * under the License.
  */
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <artifactId>tiles-freemarker</artifactId>
-  <name>Tiles - FreeMarker Support</name>
-  <description>Support for FreeMarker in Apache Tiles. For more read http://tiles.apache.org/framework/tutorial/integration/freemarker.html</description>
-  <parent>
-      <artifactId>tiles-parent</artifactId>
-      <groupId>org.apache.tiles</groupId>
-      <version>4.0.0-SNAPSHOT</version>
-      <relativePath>../tiles-parent</relativePath>
-  </parent>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.tiles.autotag.plugin</groupId>
-        <artifactId>tiles-autotag-maven-plugin</artifactId>
-        <version>${tiles.autotag.version}</version>
-        <executions>
-            <execution>
-                <goals>
-                    <goal>generate-freemarker</goal>
-                </goals>
-                <configuration>
-                    <packageName>org.apache.tiles.freemarker.template</packageName>
-                    <requestClass>org.apache.tiles.request.Request</requestClass>
-                    <freemarkerRuntime>org.apache.tiles.request.freemarker.autotag.FreemarkerAutotagRuntime</freemarkerRuntime>
-                </configuration>
-            </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
-      <dependency>
-          <groupId>org.apache.tiles</groupId>
-          <artifactId>tiles-servlet</artifactId>
-      </dependency>
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-template</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
+    <name>Tiles - FreeMarker Support</name>
+    <description>Support for FreeMarker in Apache Tiles. For more read
+        http://tiles.apache.org/framework/tutorial/integration/freemarker.html
+    </description>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-jdk14</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-        <groupId>org.easymock</groupId>
-        <artifactId>easymock</artifactId>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
+    <parent>
+        <artifactId>tiles-parent</artifactId>
         <groupId>org.apache.tiles</groupId>
-        <artifactId>tiles-request-freemarker</artifactId>
-        <version>${tiles.request.version}</version>
-    </dependency>
-  </dependencies>
+        <version>4.0.0-SNAPSHOT</version>
+        <relativePath>../tiles-parent</relativePath>
+    </parent>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tiles.autotag.plugin</groupId>
+                <artifactId>tiles-autotag-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-freemarker</goal>
+                        </goals>
+                        <configuration>
+                            <packageName>org.apache.tiles.freemarker.template</packageName>
+                            <requestClass>org.apache.tiles.request.Request</requestClass>
+                            <freemarkerRuntime>org.apache.tiles.request.freemarker.autotag.FreemarkerAutotagRuntime
+                            </freemarkerRuntime>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-template</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-request-freemarker</artifactId>
+        </dependency>
+    </dependencies>
 </project>

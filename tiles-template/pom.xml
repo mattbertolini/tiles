@@ -41,7 +41,6 @@
       <plugin>
         <groupId>org.apache.tiles.autotag.plugin</groupId>
         <artifactId>tiles-autotag-maven-plugin</artifactId>
-        <version>${tiles.autotag.version}</version>
         <executions>
             <execution>
                 <goals>
@@ -93,7 +92,6 @@
     <dependency>
         <groupId>org.apache.tiles</groupId>
         <artifactId>tiles-autotag-core-runtime</artifactId>
-        <version>${tiles.autotag.version}</version>
     </dependency>
   </dependencies>
 </project>
