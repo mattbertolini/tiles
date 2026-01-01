@@ -12,4 +12,10 @@ This is a fork of Apache Tiles. It does the following:
 * Updates to Junit 5
 * Updating dependencies to latest versions
 
+TODO:
+
+* Change Group ID
+* Re-package away from org.apache and org.springframework
+* CI pipeline
+
 This is not for production use.
