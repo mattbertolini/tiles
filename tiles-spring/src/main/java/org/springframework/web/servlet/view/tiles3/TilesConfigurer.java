@@ -23,9 +23,11 @@ import java.util.List;
 import jakarta.el.ArrayELResolver;
 import jakarta.el.BeanELResolver;
 import jakarta.el.CompositeELResolver;
+import jakarta.el.ELManager;
 import jakarta.el.ListELResolver;
 import jakarta.el.MapELResolver;
 import jakarta.el.ResourceBundleELResolver;
+import jakarta.el.StaticFieldELResolver;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.jsp.JspFactory;
 
@@ -431,10 +433,13 @@ public class TilesConfigurer implements ServletContextAware, InitializingBean, D
             add(new ScopeELResolver());
             add(new TilesContextELResolver(new TilesContextBeanELResolver()));
             add(new TilesContextBeanELResolver());
-            add(new ArrayELResolver(false));
-            add(new ListELResolver(false));
+            add(ELManager.getExpressionFactory().getStreamELResolver());
+            add(new StaticFieldELResolver());
             add(new MapELResolver(false));
             add(new ResourceBundleELResolver());
+            add(new ListELResolver(false));
+            add(new ArrayELResolver(false));
+//            add(new RecordElResolver()); TODO: Add support for record types in EL when on Jakarta EE 11
             add(new BeanELResolver(false));
         }
     }
