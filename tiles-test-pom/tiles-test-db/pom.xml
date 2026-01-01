@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*
  * $Id$
@@ -21,47 +21,49 @@
  * under the License.
  */
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>tiles-test-pom</artifactId>
-    <groupId>org.apache.tiles</groupId>
-    <version>4.0.0-SNAPSHOT</version>
-  </parent>
-  <artifactId>tiles-test-db</artifactId>
-  <name>Tiles - Test webapp database configuration</name>
-  <description>Tiles configuration that uses a database.</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>tiles-test-pom</artifactId>
+        <groupId>org.apache.tiles</groupId>
+        <version>4.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>tiles-test-db</artifactId>
+    <name>Tiles - Test webapp database configuration</name>
+    <description>Tiles configuration that uses a database.</description>
 
-  <dependencies>
-    <dependency>
-       <groupId>org.apache.tiles</groupId>
-       <artifactId>tiles-test-common</artifactId>
-       <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-test-common</artifactId>
+            <!-- tiles-test-common is not in BOM file so a version is needed here -->
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+    </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifestFile>${tiles.manifestfile}</manifestFile>
-            <manifest>
-              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-            </manifest>
-            <manifestEntries>
-              <Tiles-Initializer>org.apache.tiles.test.db.TestDbTilesInitializer</Tiles-Initializer>
-            </manifestEntries>
-          </archive>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestFile>${tiles.manifestfile}</manifestFile>
+                        <manifest>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Tiles-Initializer>org.apache.tiles.test.db.TestDbTilesInitializer</Tiles-Initializer>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
