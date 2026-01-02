@@ -20,11 +20,8 @@
  */
 package org.apache.tiles.ognl;
 
-import java.util.Map;
-
 import ognl.OgnlContext;
 import ognl.PropertyAccessor;
-
 import org.apache.tiles.request.Request;
 
 /**

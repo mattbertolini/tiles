@@ -44,7 +44,7 @@ public class UseAttributeTag extends SimpleTagSupport {
     /**
      * The template model.
      */
-    private ImportAttributeModel model = new ImportAttributeModel();
+    private final ImportAttributeModel model = new ImportAttributeModel();
 
     /**
      * The id of the imported scripting variable.

@@ -32,7 +32,7 @@ public final class LocaleUtil {
     /**
      * The "null" Locale, i.e. a Locale that points to no real locale.
      *
-     * @deprecated use Locale.ROOT instead.
+     * @deprecated use {@link Locale#ROOT} instead.
      */
     @Deprecated
     public static final Locale NULL_LOCALE = Locale.ROOT;
@@ -41,6 +41,7 @@ public final class LocaleUtil {
      * Private constructor to avoid instantiation.
      */
     private LocaleUtil() {
+        // Utility class. Do nothing
     }
 
     /**

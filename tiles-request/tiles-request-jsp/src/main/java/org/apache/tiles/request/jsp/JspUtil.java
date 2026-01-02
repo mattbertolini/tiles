@@ -37,6 +37,7 @@ public final class JspUtil {
      * Constructor.
      */
     private JspUtil() {
+        // Utility class. Do nothing.
     }
 
     /**

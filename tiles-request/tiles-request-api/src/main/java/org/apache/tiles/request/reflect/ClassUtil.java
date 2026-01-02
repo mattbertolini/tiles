@@ -41,6 +41,7 @@ public final class ClassUtil {
      * Constructor, private to avoid instantiation.
      */
     private ClassUtil() {
+        // Utility class. Do nothing
     }
 
     /**

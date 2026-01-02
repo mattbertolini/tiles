@@ -42,6 +42,7 @@ public final class ServletUtil {
      * Constructor.
      */
     private ServletUtil() {
+        // Utility class. Do nothing
     }
 
     /**
