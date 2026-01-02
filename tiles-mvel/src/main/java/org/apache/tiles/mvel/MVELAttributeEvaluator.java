@@ -38,14 +38,14 @@ public class MVELAttributeEvaluator extends AbstractAttributeEvaluator {
     /**
      * Holds the Tiles request context of the current thread.
      */
-    private TilesRequestContextHolder requestHolder;
+    private final TilesRequestContextHolder requestHolder;
 
     /**
      * Resolves variables when starting from the root.
      *
      * @since 2.2.0
      */
-    private VariableResolverFactory variableResolverFactory;
+    private final VariableResolverFactory variableResolverFactory;
 
     /**
      * Constructor.
@@ -66,7 +66,11 @@ public class MVELAttributeEvaluator extends AbstractAttributeEvaluator {
         if (expression == null) {
             throw new IllegalArgumentException("The expression parameter cannot be null");
         }
-        requestHolder.setTilesRequestContext(request);
-        return MVEL.eval(expression, variableResolverFactory);
+        try {
+            requestHolder.setTilesRequestContext(request);
+            return MVEL.eval(expression, variableResolverFactory);
+        } finally {
+            requestHolder.clearTilesRequestContext();
+        }
     }
 }

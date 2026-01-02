@@ -34,7 +34,7 @@ public class TilesRequestContextHolder {
     /**
      * The Tiles request context holder.
      */
-    private ThreadLocal<Request> requestHolder = new ThreadLocal<Request>();
+    private final ThreadLocal<Request> requestHolder = new ThreadLocal<>();
 
     /**
      * Sets the Tiles request context to use.
@@ -54,5 +54,14 @@ public class TilesRequestContextHolder {
      */
     public Request getTilesRequestContext() {
         return requestHolder.get();
+    }
+
+    /**
+     * Clears the Tiles request context. Make sure to call this when finished with the request.
+     *
+     * @since 4.0.0
+     */
+    public void clearTilesRequestContext() {
+        requestHolder.remove();
     }
 }
