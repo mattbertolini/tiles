@@ -88,10 +88,6 @@ under the License.
         </plugins>
     </build>
 
-    <properties>
-        <maven.javadoc.failOnError>false</maven.javadoc.failOnError> <!-- remove with master-8 -->
-    </properties>
-
     <profiles>
         <profile>
             <id>apache-release</id>
