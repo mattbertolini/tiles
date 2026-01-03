@@ -135,6 +135,7 @@ public class ServletRequest extends AbstractClientRequest {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, String> getHeader() {
 
         if ((header == null) && (request != null)) {
@@ -145,6 +146,7 @@ public class ServletRequest extends AbstractClientRequest {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Addable<String> getResponseHeaders() {
 
         if ((responseHeaders == null) && (response != null)) {
@@ -155,6 +157,7 @@ public class ServletRequest extends AbstractClientRequest {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, String[]> getHeaderValues() {
 
         if ((headerValues == null) && (request != null)) {
@@ -166,6 +169,7 @@ public class ServletRequest extends AbstractClientRequest {
 
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, String> getParam() {
 
         if ((param == null) && (request != null)) {
@@ -177,6 +181,7 @@ public class ServletRequest extends AbstractClientRequest {
 
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, String[]> getParamValues() {
         return request.getParameterMap();
     }
@@ -220,6 +225,7 @@ public class ServletRequest extends AbstractClientRequest {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void doForward(String path) throws IOException {
         if (response.isCommitted()) {
             doInclude(path);
@@ -230,6 +236,7 @@ public class ServletRequest extends AbstractClientRequest {
 
 
     /** {@inheritDoc} */
+    @Override
     public void doInclude(String path) throws IOException {
         RequestDispatcher rd = request.getRequestDispatcher(path);
 
@@ -269,6 +276,7 @@ public class ServletRequest extends AbstractClientRequest {
     }
 
     /** {@inheritDoc} */
+    @Override
     public OutputStream getOutputStream() throws IOException {
         if (outputStream == null) {
             outputStream = response.getOutputStream();
@@ -277,11 +285,13 @@ public class ServletRequest extends AbstractClientRequest {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Writer getWriter() throws IOException {
         return getPrintWriter();
     }
 
     /** {@inheritDoc} */
+    @Override
     public PrintWriter getPrintWriter() throws IOException {
         if (writer == null) {
             writer = response.getWriter();
@@ -290,16 +300,19 @@ public class ServletRequest extends AbstractClientRequest {
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isResponseCommitted() {
         return response.isCommitted();
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setContentType(String contentType) {
         response.setContentType(contentType);
     }
 
     /** {@inheritDoc} */
+    @Override
     public Locale getRequestLocale() {
         return request.getLocale();
     }
@@ -313,6 +326,7 @@ public class ServletRequest extends AbstractClientRequest {
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isUserInRole(String role) {
         return request.isUserInRole(role);
     }
