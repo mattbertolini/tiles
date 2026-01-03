@@ -113,6 +113,7 @@ under the License.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-publish-plugin</artifactId>
+                <version>3.3.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/tiles/site/staging/tiles-request</pubScmUrl>
