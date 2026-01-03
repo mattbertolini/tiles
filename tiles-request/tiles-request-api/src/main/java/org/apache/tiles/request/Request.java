@@ -39,10 +39,10 @@ import org.apache.tiles.request.attribute.Addable;
 public interface Request {
 
     /** the name of the (mandatory) "application" scope */
-    static String APPLICATION_SCOPE = "application";
+    String APPLICATION_SCOPE = "application";
 
     /** the name of the "request" context */
-    static String REQUEST_SCOPE = "request";
+    String REQUEST_SCOPE = "request";
 
     /**
      * Return an immutable Map that maps header names to the first (or only)
