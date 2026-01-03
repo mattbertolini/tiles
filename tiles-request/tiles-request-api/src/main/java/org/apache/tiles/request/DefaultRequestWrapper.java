@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -42,7 +41,7 @@ public class DefaultRequestWrapper implements RequestWrapper {
     /**
      * The wrapper request context object.
      */
-    private Request context;
+    private final Request context;
 
     /**
      * Constructor.
@@ -55,76 +54,91 @@ public class DefaultRequestWrapper implements RequestWrapper {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Request getWrappedRequest() {
         return context;
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, String> getHeader() {
         return context.getHeader();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, String[]> getHeaderValues() {
         return context.getHeaderValues();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Addable<String> getResponseHeaders() {
         return context.getResponseHeaders();
     }
 
     /** {@inheritDoc} */
+    @Override
     public ApplicationContext getApplicationContext() {
         return context.getApplicationContext();
     }
 
     /** {@inheritDoc} */
+    @Override
     public OutputStream getOutputStream() throws IOException {
         return context.getOutputStream();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Writer getWriter() throws IOException {
         return context.getWriter();
     }
 
     /** {@inheritDoc} */
+    @Override
     public PrintWriter getPrintWriter() throws IOException {
         return context.getPrintWriter();
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isResponseCommitted() {
         return context.isResponseCommitted();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, String> getParam() {
         return context.getParam();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, String[]> getParamValues() {
         return context.getParamValues();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Locale getRequestLocale() {
         return context.getRequestLocale();
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isUserInRole(String role) {
         return context.isUserInRole(role);
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, Object> getContext(String scope) {
         return context.getContext(scope);
     }
 
     /** {@inheritDoc} */
+    @Override
     public List<String> getAvailableScopes() {
         return context.getAvailableScopes();
     }
