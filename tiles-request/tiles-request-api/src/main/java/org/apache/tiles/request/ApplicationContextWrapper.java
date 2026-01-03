@@ -27,15 +27,13 @@ import java.util.Map;
 
 /**
  * Delegate for ease of customization.
- *
- * @version $Rev: 933750 $ $Date: 2010-04-13 21:16:06 +0200 (Tue, 13 Apr 2010) $
  */
 public class ApplicationContextWrapper implements ApplicationContext {
 
     /**
      * The original context.
      */
-    private ApplicationContext context;
+    private final ApplicationContext context;
 
     /**
      * Constructor.
@@ -55,32 +53,50 @@ public class ApplicationContextWrapper implements ApplicationContext {
         return context;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Map<String, Object> getApplicationScope() {
         return context.getApplicationScope();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Object getContext() {
         return context.getContext();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Map<String, String> getInitParams() {
         return context.getInitParams();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public ApplicationResource getResource(String localePath) {
         return context.getResource(localePath);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public ApplicationResource getResource(ApplicationResource base, Locale locale) {
         return context.getResource(base, locale);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Collection<ApplicationResource> getResources(String path) {
         return context.getResources(path);
     }
