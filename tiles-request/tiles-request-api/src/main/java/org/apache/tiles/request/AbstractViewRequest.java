@@ -30,7 +30,7 @@ import java.io.IOException;
  *
  * @version $Rev$ $Date$
  */
-public class AbstractViewRequest extends DispatchRequestWrapper {
+public abstract class AbstractViewRequest extends DispatchRequestWrapper {
 
     /**
      * Constructor.
