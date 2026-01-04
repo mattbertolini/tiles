@@ -122,7 +122,7 @@ class TilesDecorationFilterTest {
         expect(applicationScope.get("key")).andReturn(container);
         expect(container.getAttributeContext(isA(ServletRequest.class))).andReturn(attributeContext);
         request.setAttribute("org.apache.tiles.decoration.PREVENT:tokenKey", true);
-        expect(request.getAttribute("javax.servlet.include.servlet_path")).andReturn(null);
+        expect(request.getAttribute("jakarta.servlet.include.servlet_path")).andReturn(null);
         expect(request.getServletPath()).andReturn("/tiles");
         container.render(eq("definitionKey"), isA(ServletRequest.class));
         chain.doFilter(request, response);
