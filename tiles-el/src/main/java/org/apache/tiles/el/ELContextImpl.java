@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -21,15 +19,15 @@
 
 package org.apache.tiles.el;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
 import jakarta.el.ELContext;
 import jakarta.el.ELResolver;
 import jakarta.el.FunctionMapper;
 import jakarta.el.ValueExpression;
 import jakarta.el.VariableMapper;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Implementation of ELContext.<br>
@@ -70,14 +68,16 @@ public class ELContextImpl extends ELContext {
 
         /** {@inheritDoc} */
         @Override
-        public ValueExpression setVariable(String variable,
-                ValueExpression expression) {
+        public ValueExpression setVariable(String variable, ValueExpression expression) {
             if (vars == null) {
-                vars = new HashMap<String, ValueExpression>();
+                vars = new HashMap<>();
             }
-            return vars.put(variable, expression);
+            if (expression == null) {
+                return vars.remove(variable);
+            } else {
+                return vars.put(variable, expression);
+            }
         }
-
     }
 
     /**
