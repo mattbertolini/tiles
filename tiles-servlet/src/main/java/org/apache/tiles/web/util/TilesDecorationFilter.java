@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -28,6 +26,7 @@ import java.util.Map;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletResponse;
@@ -43,6 +42,7 @@ import org.apache.tiles.request.Request;
 import org.apache.tiles.request.reflect.CannotInstantiateObjectException;
 import org.apache.tiles.request.reflect.ClassUtil;
 import org.apache.tiles.request.servlet.ServletRequest;
+import org.apache.tiles.request.servlet.ServletUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -194,8 +194,7 @@ public class TilesDecorationFilter implements Filter {
                 String mask = parm.substring("definition(".length());
                 mask = mask.substring(0, mask.lastIndexOf("*)"));
                 map.put(mask, value);
-                log.info("Mapping all requests matching '" + mask
-                        + "*' to definition '" + value + "'");
+                log.info("Mapping all requests matching '{}*' to definition '{}'", mask, value);
             }
         }
         return map;
@@ -218,12 +217,10 @@ public class TilesDecorationFilter implements Filter {
         // This is used to ensure that filters mapped to wild cards do not infinately
         // loop.
         if (!isPreventTokenPresent(req)) {
-            ApplicationContext applicationContext = org.apache.tiles.request.servlet.ServletUtil
-                    .getApplicationContext(servletContext);
+            ApplicationContext applicationContext = ServletUtil.getApplicationContext(servletContext);
             Request request = new ServletRequest(applicationContext,
                     (HttpServletRequest) req, (HttpServletResponse) res);
-            TilesContainer container = TilesAccess.getContainer(applicationContext,
-                    containerKey);
+            TilesContainer container = TilesAccess.getContainer(applicationContext, containerKey);
             mutator.mutate(container.getAttributeContext(request), req);
             if (preventDecorationToken != null) {
                 req.setAttribute(preventDecorationToken, Boolean.TRUE);
@@ -262,7 +259,7 @@ public class TilesDecorationFilter implements Filter {
      */
     private String getRequestBase(jakarta.servlet.ServletRequest request) {
         // Included Path
-        String include = (String) request.getAttribute("javax.servlet.include.servlet_path");
+        String include = (String) request.getAttribute(RequestDispatcher.INCLUDE_SERVLET_PATH);
         if (include != null) {
             return include;
         }
