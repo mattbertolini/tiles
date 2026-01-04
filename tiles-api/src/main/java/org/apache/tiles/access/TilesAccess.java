@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -20,8 +18,6 @@
  */
 package org.apache.tiles.access;
 
-import java.util.Map;
-
 import org.apache.tiles.NoSuchContainerException;
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.request.ApplicationContext;
@@ -29,11 +25,11 @@ import org.apache.tiles.request.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+
 
 /**
  * Provides static access to the tiles container.
- *
- * @version $Rev$ $Date$
  */
 public final class TilesAccess {
 
@@ -47,6 +43,7 @@ public final class TilesAccess {
      * Constructor, private to avoid instantiation.
      */
     private TilesAccess() {
+        // Do nothing
     }
 
     /**
@@ -85,12 +82,12 @@ public final class TilesAccess {
 
         if (container == null) {
             if (log.isInfoEnabled()) {
-                log.info("Removing TilesContext for context: " + context.getClass().getName());
+                log.info("Removing TilesContext for context: {}", context.getClass().getName());
             }
             context.getApplicationScope().remove(key);
         } else {
             if (log.isInfoEnabled()) {
-                log.info("Publishing TilesContext for context: " + context.getClass().getName());
+                log.info("Publishing TilesContext for context: {}", context.getClass().getName());
             }
             context.getApplicationScope().put(key, container);
         }
