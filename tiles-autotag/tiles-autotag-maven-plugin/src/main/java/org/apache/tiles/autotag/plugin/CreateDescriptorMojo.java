@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -36,19 +34,10 @@ package org.apache.tiles.autotag.plugin;
  * limitations under the License.
  */
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import com.thoughtworks.xstream.XStream;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -58,7 +47,15 @@ import org.apache.tiles.autotag.model.TemplateSuite;
 import org.codehaus.plexus.util.Scanner;
 import org.sonatype.plexus.build.incremental.BuildContext;
 
-import com.thoughtworks.xstream.XStream;
+import javax.inject.Inject;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Creates a descriptor for the template model in XML format.
@@ -110,7 +107,7 @@ public class CreateDescriptorMojo extends AbstractMojo {
 	@Parameter(property = "project", required = true, readonly = true)
     MavenProject project;
 
-	@Component
+    @Inject
     BuildContext buildContext;
 
     /** {@inheritDoc} */
@@ -156,7 +153,6 @@ public class CreateDescriptorMojo extends AbstractMojo {
 
 	private void addResourceDirectory(String directory) {
 		boolean addResource = true;
-		@SuppressWarnings("unchecked")
 		List<Resource> resources = project.getResources();
 		for(Resource resource: resources) {
 			if(directory.equals(resource.getDirectory())) {
@@ -178,10 +174,10 @@ public class CreateDescriptorMojo extends AbstractMojo {
     private Scanner getSourceInclusionScanner() {
     	Scanner scanner = buildContext.newScanner( sourceDirectory );
         if (includes == null) {
-            includes = new HashSet<String>();
+            includes = new HashSet<>();
         }
         if (excludes == null) {
-            excludes = new HashSet<String>();
+            excludes = new HashSet<>();
         }
 
         if (includes.isEmpty()) {
