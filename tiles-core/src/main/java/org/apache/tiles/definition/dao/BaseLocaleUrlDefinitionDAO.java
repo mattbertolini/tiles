@@ -108,6 +108,7 @@ public abstract class BaseLocaleUrlDefinitionDAO implements
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean refreshRequired() {
         boolean status = false;
 

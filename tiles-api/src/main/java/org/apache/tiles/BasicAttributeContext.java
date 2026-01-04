@@ -121,26 +121,31 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Attribute getTemplateAttribute() {
         return templateAttribute;
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setTemplateAttribute(Attribute templateAttribute) {
         this.templateAttribute = templateAttribute;
     }
 
     /** {@inheritDoc} */
+    @Override
     public String getPreparer() {
         return preparer;
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setPreparer(String url) {
         this.preparer = url;
     }
 
     /** {@inheritDoc} */
+    @Override
     public void inheritCascadedAttributes(AttributeContext context) {
         if (context instanceof BasicAttributeContext) {
             copyCascadedAttributes((BasicAttributeContext) context);
@@ -157,6 +162,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void inherit(AttributeContext parent) {
         if (parent instanceof BasicAttributeContext) {
             inherit((BasicAttributeContext) parent);
@@ -229,6 +235,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
      * @param newAttributes Attributes to add.
      * @since 2.1.0
      */
+    @Override
     public void addAll(Map<String, Attribute> newAttributes) {
         if (newAttributes == null) {
             return;
@@ -251,6 +258,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
      * @param defaultAttributes Attributes to add.
      * @since 2.1.0
      */
+    @Override
     public void addMissing(Map<String, Attribute> defaultAttributes) {
         if (defaultAttributes == null) {
             return;
@@ -276,6 +284,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Attribute getAttribute(String name) {
         Attribute retValue = null;
         if (attributes != null) {
@@ -290,6 +299,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Attribute getLocalAttribute(String name) {
         if (attributes == null) {
             return null;
@@ -299,6 +309,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Attribute getCascadedAttribute(String name) {
         if (cascadedAttributes == null) {
             return null;
@@ -308,6 +319,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Set<String> getLocalAttributeNames() {
         if (attributes != null && !attributes.isEmpty()) {
             return attributes.keySet();
@@ -316,6 +328,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Set<String> getCascadedAttributeNames() {
         if (cascadedAttributes != null && !cascadedAttributes.isEmpty()) {
             return cascadedAttributes.keySet();
@@ -324,6 +337,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void putAttribute(String name, Attribute value) {
         if (attributes == null) {
             attributes = new HashMap<String, Attribute>();
@@ -333,6 +347,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void putAttribute(String name, Attribute value, boolean cascade) {
         Map<String, Attribute> mapToUse;
         if (cascade) {
@@ -350,6 +365,7 @@ public class BasicAttributeContext implements AttributeContext, Serializable {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void clear() {
         templateAttribute = null;
         preparer = null;

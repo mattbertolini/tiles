@@ -34,6 +34,7 @@ public class RegexpDefinitionPatternMatcherFactory implements
         DefinitionPatternMatcherFactory {
 
     /** {@inheritDoc} */
+    @Override
     public DefinitionPatternMatcher createDefinitionPatternMatcher(
             String pattern, Definition definition) {
         return new RegexpDefinitionPatternMatcher(pattern, definition);

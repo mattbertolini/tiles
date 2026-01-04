@@ -45,6 +45,7 @@ public class JspExpressionFactoryFactory implements ExpressionFactoryFactory,
     protected ServletContext servletContext;
 
     /** {@inheritDoc} */
+    @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
         Object context = applicationContext.getContext();
         if (context instanceof ServletContext) {
@@ -57,6 +58,7 @@ public class JspExpressionFactoryFactory implements ExpressionFactoryFactory,
     }
 
     /** {@inheritDoc} */
+    @Override
     public ExpressionFactory getExpressionFactory() {
         return JspFactory.getDefaultFactory().getJspApplicationContext(
                 servletContext).getExpressionFactory();

@@ -33,8 +33,9 @@ import org.apache.tiles.request.Request;
 public class AttributeViewPreparer implements ViewPreparer {
 
     /** {@inheritDoc} */
+    @Override
     public void execute(Request tilesContext,
-            AttributeContext attributeContext) {
+                        AttributeContext attributeContext) {
         attributeContext.putAttribute(
             "body",
             new Attribute("This is the value added by the AttributeViewPreparer"));

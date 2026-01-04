@@ -51,6 +51,7 @@ public class TilesContextBeanVariableResolverFactory extends
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isTarget(String name) {
         Request request = requestHolder.getTilesRequestContext();
         for (String scope : request.getAvailableScopes()) {
@@ -80,6 +81,7 @@ public class TilesContextBeanVariableResolverFactory extends
         }
 
         /** {@inheritDoc} */
+        @Override
         @SuppressWarnings("rawtypes")
         public Class getType() {
             Object value = getValue();
@@ -90,6 +92,7 @@ public class TilesContextBeanVariableResolverFactory extends
         }
 
         /** {@inheritDoc} */
+        @Override
         public Object getValue() {
             Request request = requestHolder.getTilesRequestContext();
             for (String scope : request.getAvailableScopes()) {

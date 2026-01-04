@@ -59,6 +59,7 @@ public class WebappClassTemplateLoader implements TemplateLoader {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Object findTemplateSource(String name) throws IOException {
         Object retValue = webappTemplateLoader.findTemplateSource(name);
         if (retValue == null) {
@@ -68,16 +69,19 @@ public class WebappClassTemplateLoader implements TemplateLoader {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void closeTemplateSource(Object templateSource) throws IOException {
         webappTemplateLoader.closeTemplateSource(templateSource);
     }
 
     /** {@inheritDoc} */
+    @Override
     public long getLastModified(Object templateSource) {
         return webappTemplateLoader.getLastModified(templateSource);
     }
 
     /** {@inheritDoc} */
+    @Override
     public Reader getReader(Object templateSource, String encoding)
             throws IOException {
         return webappTemplateLoader.getReader(templateSource, encoding);

@@ -48,6 +48,7 @@ public abstract class AbstractPatternDefinitionResolver<T> implements
         new HashMap<T, List<DefinitionPatternMatcher>>();
 
     /** {@inheritDoc} */
+    @Override
     public Definition resolveDefinition(String name, T customizationKey) {
         Definition retValue = null;
         if (localePatternPaths.containsKey(customizationKey)) {
@@ -58,8 +59,9 @@ public abstract class AbstractPatternDefinitionResolver<T> implements
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, Definition> storeDefinitionPatterns(Map<String, Definition> localeDefsMap,
-            T customizationKey) {
+                                                           T customizationKey) {
         List<DefinitionPatternMatcher> lpaths = localePatternPaths
                 .get(customizationKey);
         if (lpaths == null) {

@@ -58,6 +58,7 @@ public class ScopeVariableResolverFactory extends
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isTarget(String name) {
         Request request = requestHolder.getTilesRequestContext();
         if (name.endsWith("Scope")) {
@@ -90,12 +91,14 @@ public class ScopeVariableResolverFactory extends
         }
 
         /** {@inheritDoc} */
+        @Override
         @SuppressWarnings("rawtypes")
         public Class getType() {
             return Map.class;
         }
 
         /** {@inheritDoc} */
+        @Override
         public Object getValue() {
             Request request = requestHolder.getTilesRequestContext();
             return request.getContext(name.substring(0, name.length() - SCOPE_SUFFIX_LENGTH));

@@ -43,12 +43,14 @@ public class WildcardDefinitionPatternMatcherFactory implements
     private WildcardHelper wildcardHelper = new WildcardHelper();
 
     /** {@inheritDoc} */
+    @Override
     public DefinitionPatternMatcher createDefinitionPatternMatcher(
             String pattern, Definition definition) {
         return new WildcardDefinitionPatternMatcher(pattern, definition, wildcardHelper);
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isPatternRecognized(String candidatePattern) {
         return candidatePattern.indexOf('*') >= 0;
     }

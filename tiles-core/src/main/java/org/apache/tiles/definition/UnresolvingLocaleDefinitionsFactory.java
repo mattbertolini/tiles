@@ -78,8 +78,9 @@ public class UnresolvingLocaleDefinitionsFactory implements DefinitionsFactory {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Definition getDefinition(String name,
-            Request tilesContext) {
+                                    Request tilesContext) {
         Locale locale = null;
 
         if (tilesContext != null) {

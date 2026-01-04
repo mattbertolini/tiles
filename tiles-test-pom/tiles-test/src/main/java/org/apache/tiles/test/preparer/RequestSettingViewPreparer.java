@@ -35,6 +35,7 @@ import org.apache.tiles.request.Request;
 public class RequestSettingViewPreparer implements ViewPreparer {
 
     /** {@inheritDoc} */
+    @Override
     public void execute(Request tilesContext,
             AttributeContext attributeContext) {
         Map<String, Object> requestScope = tilesContext.getContext("request");

@@ -56,6 +56,7 @@ public class ModularTilesInitializer implements TilesInitializer {
     private List<TilesInitializer> initializers;
 
     /** {@inheritDoc} */
+    @Override
     public void initialize(ApplicationContext preliminaryContext) {
         ApplicationContext applicationContext = new WildcardServletApplicationContext(
                 (ServletContext) preliminaryContext.getContext());
@@ -67,6 +68,7 @@ public class ModularTilesInitializer implements TilesInitializer {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void destroy() {
         for (TilesInitializer initializer : initializers) {
             initializer.destroy();

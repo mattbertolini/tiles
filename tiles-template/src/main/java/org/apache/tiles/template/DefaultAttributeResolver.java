@@ -36,6 +36,7 @@ import org.apache.tiles.request.Request;
 public class DefaultAttributeResolver implements AttributeResolver {
 
     /** {@inheritDoc} */
+    @Override
     public Attribute computeAttribute(TilesContainer container, Attribute attribute,
             String name, String role, boolean ignore,
             Object defaultValue, String defaultValueRole, String defaultValueType, Request request) {

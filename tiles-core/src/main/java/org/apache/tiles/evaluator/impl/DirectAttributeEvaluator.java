@@ -33,6 +33,7 @@ import org.apache.tiles.request.Request;
 public class DirectAttributeEvaluator extends AbstractAttributeEvaluator {
 
     /** {@inheritDoc} */
+    @Override
     public Object evaluate(String expression, Request request) {
         return expression;
     }

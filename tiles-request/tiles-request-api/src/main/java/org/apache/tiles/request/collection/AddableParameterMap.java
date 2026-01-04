@@ -49,11 +49,13 @@ public class AddableParameterMap extends ReadOnlyEnumerationMap<String> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Set<Map.Entry<String, String>> entrySet() {
         return new AddableParameterEntrySet();
     }
 
     /** {@inheritDoc} */
+    @Override
     public String put(String key, String value) {
         String oldValue = request.getValue(key);
         request.setValue(key, value);
@@ -62,6 +64,7 @@ public class AddableParameterMap extends ReadOnlyEnumerationMap<String> {
 
 
     /** {@inheritDoc} */
+    @Override
     public void putAll(Map<? extends String, ? extends String> map) {
         for (Map.Entry<? extends String, ? extends String> entry : map
                 .entrySet()) {

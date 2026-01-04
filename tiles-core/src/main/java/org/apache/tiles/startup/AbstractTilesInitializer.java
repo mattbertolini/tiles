@@ -57,6 +57,7 @@ public abstract class AbstractTilesInitializer implements TilesInitializer {
     private TilesContainer container;
 
     /** {@inheritDoc} */
+    @Override
     public void initialize(ApplicationContext applicationContext) {
         this.applicationContext = createTilesApplicationContext(applicationContext);
         ApplicationAccess.register(applicationContext);
@@ -66,6 +67,7 @@ public abstract class AbstractTilesInitializer implements TilesInitializer {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void destroy() {
         TilesAccess.setContainer(applicationContext, null,
                 getContainerKey(applicationContext));

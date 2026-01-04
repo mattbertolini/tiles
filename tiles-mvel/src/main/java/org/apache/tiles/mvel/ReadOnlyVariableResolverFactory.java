@@ -52,6 +52,7 @@ public abstract class ReadOnlyVariableResolverFactory extends
     }
 
     /** {@inheritDoc} */
+    @Override
     public VariableResolver createVariable(String name, Object value) {
         if (nextFactory != null) {
             return nextFactory.createVariable(name, value);
@@ -60,8 +61,9 @@ public abstract class ReadOnlyVariableResolverFactory extends
     }
 
     /** {@inheritDoc} */
+    @Override
     public VariableResolver createVariable(String name, Object value,
-            Class<?> type) {
+                                           Class<?> type) {
         variableResolvers = new HashMap<String, VariableResolver>();
         if (nextFactory != null) {
             return nextFactory.createVariable(name, value, type);
@@ -70,6 +72,7 @@ public abstract class ReadOnlyVariableResolverFactory extends
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isResolveable(String name) {
         return isTarget(name) || isNextResolveable(name);
     }
@@ -125,21 +128,25 @@ public abstract class ReadOnlyVariableResolverFactory extends
         }
 
         /** {@inheritDoc} */
+        @Override
         public int getFlags() {
             return 0;
         }
 
         /** {@inheritDoc} */
+        @Override
         public String getName() {
             return name;
         }
 
         /** {@inheritDoc} */
+        @Override
         public void setStaticType(@SuppressWarnings("rawtypes") Class type) {
             // Does nothing for the moment.
         }
 
         /** {@inheritDoc} */
+        @Override
         public void setValue(Object value) {
             throw new UnsupportedOperationException("This resolver is read-only");
         }

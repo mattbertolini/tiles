@@ -56,6 +56,7 @@ public class ScopeMap extends ReadOnlyEnumerationMap<Object> {
 
 
     /** {@inheritDoc} */
+    @Override
     public void clear() {
         Enumeration<String> keys = context.getKeys();
         while (keys.hasMoreElements()) {
@@ -64,16 +65,19 @@ public class ScopeMap extends ReadOnlyEnumerationMap<Object> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Set<Map.Entry<String, Object>> entrySet() {
         return new ScopeEntrySet();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Set<String> keySet() {
         return new RemovableKeySet(context);
     }
 
     /** {@inheritDoc} */
+    @Override
     public Object put(String key, Object value) {
         String skey = key(key);
         Object previous = context.getValue(skey);
@@ -82,6 +86,7 @@ public class ScopeMap extends ReadOnlyEnumerationMap<Object> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void putAll(Map<? extends String, ? extends Object> map) {
         Iterator<? extends String> keys = map.keySet().iterator();
         while (keys.hasNext()) {
@@ -91,6 +96,7 @@ public class ScopeMap extends ReadOnlyEnumerationMap<Object> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Object remove(Object key) {
         String skey = key(key);
         Object previous = context.getValue(skey);

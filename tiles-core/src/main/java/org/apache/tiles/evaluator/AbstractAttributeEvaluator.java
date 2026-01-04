@@ -34,6 +34,7 @@ import org.apache.tiles.request.Request;
 public abstract class AbstractAttributeEvaluator implements AttributeEvaluator {
 
     /** {@inheritDoc} */
+    @Override
     public Object evaluate(Attribute attribute, Request request) {
         if (attribute == null) {
             throw new IllegalArgumentException("The attribute cannot be null");

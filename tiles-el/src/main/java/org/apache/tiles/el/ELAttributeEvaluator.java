@@ -91,6 +91,7 @@ public class ELAttributeEvaluator extends AbstractAttributeEvaluator {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Object evaluate(String expression, Request request) {
         ELContextImpl context = new ELContextImpl(resolver);
         context.putContext(Request.class, request);

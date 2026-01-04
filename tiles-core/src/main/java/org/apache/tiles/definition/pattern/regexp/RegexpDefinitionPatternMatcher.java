@@ -59,6 +59,7 @@ public class RegexpDefinitionPatternMatcher implements DefinitionPatternMatcher 
     }
 
     /** {@inheritDoc} */
+    @Override
     public Definition createDefinition(String definitionName) {
         Definition retValue = null;
         Matcher matcher = pattern.matcher(definitionName);

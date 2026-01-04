@@ -54,6 +54,7 @@ public class RollingVectorEnumeration<E> implements Enumeration<E> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean hasMoreElements() {
         if (elements == null) {
             elements = vector.elements();
@@ -63,6 +64,7 @@ public class RollingVectorEnumeration<E> implements Enumeration<E> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public E nextElement() {
         E retValue = elements.nextElement();
 

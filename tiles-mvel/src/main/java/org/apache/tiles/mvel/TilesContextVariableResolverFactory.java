@@ -60,6 +60,7 @@ public class TilesContextVariableResolverFactory extends
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isTarget(String name) {
         return requestBeanInfo.getMappedDescriptors(Request.class).containsKey(
                 name)
@@ -109,12 +110,14 @@ public class TilesContextVariableResolverFactory extends
         }
 
         /** {@inheritDoc} */
+        @Override
         @SuppressWarnings("rawtypes")
         public Class getType() {
             return descriptor.getPropertyType();
         }
 
         /** {@inheritDoc} */
+        @Override
         public Object getValue() {
             Method method = descriptor.getReadMethod();
             try {
@@ -165,12 +168,14 @@ public class TilesContextVariableResolverFactory extends
         }
 
         /** {@inheritDoc} */
+        @Override
         @SuppressWarnings("rawtypes")
         public Class getType() {
             return descriptor.getPropertyType();
         }
 
         /** {@inheritDoc} */
+        @Override
         public Object getValue() {
             Method method = descriptor.getReadMethod();
             try {

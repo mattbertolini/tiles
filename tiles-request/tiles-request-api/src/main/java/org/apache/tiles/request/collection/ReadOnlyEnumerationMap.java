@@ -56,18 +56,21 @@ public class ReadOnlyEnumerationMap<V> implements Map<String, V> {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
 
     /** {@inheritDoc} */
+    @Override
     public boolean containsKey(Object key) {
         return (request.getValue(key(key)) != null);
     }
 
 
     /** {@inheritDoc} */
+    @Override
     @SuppressWarnings("unchecked")
     public boolean containsValue(Object value) {
         V realValue = (V) value;
@@ -81,54 +84,63 @@ public class ReadOnlyEnumerationMap<V> implements Map<String, V> {
 
 
     /** {@inheritDoc} */
+    @Override
     public Set<Map.Entry<String, V>> entrySet() {
         return new ReadOnlyEnumerationMapEntrySet();
     }
 
 
     /** {@inheritDoc} */
+    @Override
     public V get(Object key) {
         return (request.getValue(key(key)));
     }
 
 
     /** {@inheritDoc} */
+    @Override
     public boolean isEmpty() {
         return !request.getKeys().hasMoreElements();
     }
 
 
     /** {@inheritDoc} */
+    @Override
     public Set<String> keySet() {
         return new KeySet(request);
     }
 
 
     /** {@inheritDoc} */
+    @Override
     public V put(String key, V value) {
         throw new UnsupportedOperationException();
     }
 
 
     /** {@inheritDoc} */
+    @Override
     public void putAll(Map<? extends String, ? extends V> map) {
         throw new UnsupportedOperationException();
     }
 
 
     /** {@inheritDoc} */
+    @Override
     public V remove(Object key) {
         throw new UnsupportedOperationException();
     }
 
 
     /** {@inheritDoc} */
+    @Override
     public int size() {
         return enumerationSize(request.getKeys());
     }
 
 
     /** {@inheritDoc} */
+    @Override
     public Collection<V> values() {
         return new ReadOnlyEnumerationMapValuesCollection();
     }

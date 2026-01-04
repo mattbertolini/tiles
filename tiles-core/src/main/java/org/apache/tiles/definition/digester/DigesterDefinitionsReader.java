@@ -298,6 +298,7 @@ public class DigesterDefinitionsReader implements DefinitionsReader {
      * @throws DefinitionsFactoryException If the source is invalid or
      *          an error occurs when reading definitions.
      */
+    @Override
     public Map<String, Definition> read(Object source) {
         // This is an instance variable instead of a local variable because
         // we want to be able to call the addDefinition method to populate it.
@@ -418,16 +419,19 @@ public class DigesterDefinitionsReader implements DefinitionsReader {
     private static class ThrowingErrorHandler implements ErrorHandler {
 
         /** {@inheritDoc} */
+        @Override
         public void warning(SAXParseException exception) throws SAXException {
             throw exception;
         }
 
         /** {@inheritDoc} */
+        @Override
         public void error(SAXParseException exception) throws SAXException {
             throw exception;
         }
 
         /** {@inheritDoc} */
+        @Override
         public void fatalError(SAXParseException exception) throws SAXException {
             throw exception;
         }

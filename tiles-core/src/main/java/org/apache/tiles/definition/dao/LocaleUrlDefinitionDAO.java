@@ -57,12 +57,14 @@ public class LocaleUrlDefinitionDAO extends BaseLocaleUrlDefinitionDAO {
      * The inheritance of the definition must not be resolved.
      * @since 2.1.0
      */
+    @Override
     public Definition getDefinition(String name, Locale customizationKey) {
         Map<String, Definition> defsMap = getDefinitions(customizationKey);
         return defsMap.get(name);
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, Definition> getDefinitions(Locale customizationKey) {
         ArrayList<Locale> postfixes = computeLocales(customizationKey);
         Map<String, Definition> localeDefsMap = new HashMap<String, Definition>();

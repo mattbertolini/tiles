@@ -91,12 +91,14 @@ public class CachingLocaleUrlDefinitionDAO extends BaseLocaleUrlDefinitionDAO
     }
 
     /** {@inheritDoc} */
+    @Override
     public void setPatternDefinitionResolver(
             PatternDefinitionResolver<Locale> definitionResolver) {
         this.definitionResolver = definitionResolver;
     }
 
     /** {@inheritDoc} */
+    @Override
     public Definition getDefinition(String name, Locale customizationKey) {
         Definition retValue = null;
         if (customizationKey == null) {
@@ -121,6 +123,7 @@ public class CachingLocaleUrlDefinitionDAO extends BaseLocaleUrlDefinitionDAO
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, Definition> getDefinitions(Locale customizationKey) {
         if (customizationKey == null) {
             customizationKey = Locale.ROOT;

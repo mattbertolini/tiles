@@ -62,6 +62,7 @@ public class SimpleMenuItem implements MenuItem, Serializable {
      *
      * @param value The value of the item.
      */
+    @Override
     public void setValue(String value) {
         this.value = value;
     }
@@ -71,6 +72,7 @@ public class SimpleMenuItem implements MenuItem, Serializable {
      *
      * @return The value of the item.
      */
+    @Override
     public String getValue() {
         return value;
     }
@@ -80,6 +82,7 @@ public class SimpleMenuItem implements MenuItem, Serializable {
      *
      * @param link The link.
      */
+    @Override
     public void setLink(String link) {
         this.link = link;
     }
@@ -89,6 +92,7 @@ public class SimpleMenuItem implements MenuItem, Serializable {
      *
      * @return The link.
      */
+    @Override
     public String getLink() {
         return link;
     }
@@ -98,6 +102,7 @@ public class SimpleMenuItem implements MenuItem, Serializable {
      *
      * @param icon The icon URL.
      */
+    @Override
     public void setIcon(String icon) {
         this.icon = icon;
     }
@@ -107,6 +112,7 @@ public class SimpleMenuItem implements MenuItem, Serializable {
      *
      * @return The icon URL.
      */
+    @Override
     public String getIcon() {
         return icon;
     }
@@ -116,6 +122,7 @@ public class SimpleMenuItem implements MenuItem, Serializable {
      *
      * @param tooltip The tooltip text.
      */
+    @Override
     public void setTooltip(String tooltip) {
         this.tooltip = tooltip;
     }
@@ -125,6 +132,7 @@ public class SimpleMenuItem implements MenuItem, Serializable {
      *
      * @return The tooltip text.
      */
+    @Override
     public String getTooltip() {
         return tooltip;
     }

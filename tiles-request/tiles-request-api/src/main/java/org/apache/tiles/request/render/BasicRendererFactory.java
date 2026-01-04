@@ -45,10 +45,11 @@ public class BasicRendererFactory implements RendererFactory {
      * Constructor.
      */
     public BasicRendererFactory() {
-        renderers = new HashMap<String, Renderer>();
+        renderers = new HashMap<>();
     }
 
     /** {@inheritDoc} */
+    @Override
     public Renderer getRenderer(String name) {
         Renderer retValue;
         if (name != null) {

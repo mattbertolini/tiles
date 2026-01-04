@@ -43,13 +43,15 @@ public class SecurityWrappingFilter implements Filter {
     public static final String GOOD_ROLE = "goodrole";
 
     /** {@inheritDoc} */
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // No operation
     }
 
     /** {@inheritDoc} */
+    @Override
     public void doFilter(ServletRequest servletRequest,
-            ServletResponse servletResponse, FilterChain filterChain)
+                         ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest wrappedRequest = new SecurityWrapperHttpServletRequest(
                 (HttpServletRequest) servletRequest);
@@ -57,6 +59,7 @@ public class SecurityWrappingFilter implements Filter {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void destroy() {
         // No operation
     }

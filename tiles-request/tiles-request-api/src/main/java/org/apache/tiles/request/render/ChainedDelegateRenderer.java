@@ -74,6 +74,7 @@ public class ChainedDelegateRenderer implements Renderer {
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isRenderable(String value, Request request) {
         for (Renderer renderer : renderers) {
             if (renderer.isRenderable(value, request)) {

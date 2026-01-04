@@ -20,12 +20,10 @@
  */
 package org.apache.tiles.request.render;
 
-
-
 /**
  * <p>
  * Factory interface used to create/retrieve instances of the
- * {@link AttributeRenderer} interface.
+ * {@link Renderer} interface.
  * </p>
  *
  * <p>

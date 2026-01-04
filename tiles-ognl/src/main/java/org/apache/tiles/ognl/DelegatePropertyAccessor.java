@@ -53,6 +53,7 @@ public class DelegatePropertyAccessor<T> implements PropertyAccessor {
     }
 
     /** {@inheritDoc} */
+    @Override
     @SuppressWarnings("unchecked")
     public Object getProperty(OgnlContext context, Object target, Object name)
             throws OgnlException {
@@ -61,6 +62,7 @@ public class DelegatePropertyAccessor<T> implements PropertyAccessor {
     }
 
     /** {@inheritDoc} */
+    @Override
     @SuppressWarnings("unchecked")
     public void setProperty(OgnlContext context, Object target, Object name,
             Object value) throws OgnlException {
@@ -69,6 +71,7 @@ public class DelegatePropertyAccessor<T> implements PropertyAccessor {
     }
 
     /** {@inheritDoc} */
+    @Override
     @SuppressWarnings("unchecked")
     public String getSourceAccessor(OgnlContext context, Object target,
             Object index) {
@@ -77,6 +80,7 @@ public class DelegatePropertyAccessor<T> implements PropertyAccessor {
     }
 
     /** {@inheritDoc} */
+    @Override
     @SuppressWarnings("unchecked")
     public String getSourceSetter(OgnlContext context, Object target,
             Object index) {

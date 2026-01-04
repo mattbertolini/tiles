@@ -65,8 +65,9 @@ class CompatibilityPreparerFactoryTest {
      */
     public static final class MockViewPreparer implements ViewPreparer {
         /** {@inheritDoc} */
+        @Override
         public void execute(Request tilesContext,
-                AttributeContext attributeContext) {
+                            AttributeContext attributeContext) {
             // Nothing here.
         }
     }

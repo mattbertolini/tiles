@@ -72,11 +72,13 @@ public class ServletApplicationContext implements ApplicationContext {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Object getContext() {
         return servletContext;
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, Object> getApplicationScope() {
 
         if ((applicationScope == null) && (servletContext != null)) {
@@ -87,6 +89,7 @@ public class ServletApplicationContext implements ApplicationContext {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, String> getInitParams() {
 
         if ((initParam == null) && (servletContext != null)) {
@@ -97,6 +100,7 @@ public class ServletApplicationContext implements ApplicationContext {
     }
 
     /** {@inheritDoc} */
+    @Override
     public ApplicationResource getResource(String localePath) {
         try {
             URL url = servletContext.getResource(localePath);
@@ -111,6 +115,7 @@ public class ServletApplicationContext implements ApplicationContext {
     }
 
     /** {@inheritDoc} */
+    @Override
     public ApplicationResource getResource(ApplicationResource base, Locale locale) {
         try {
             URL url = servletContext.getResource(base.getLocalePath(locale));
@@ -125,6 +130,7 @@ public class ServletApplicationContext implements ApplicationContext {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Collection<ApplicationResource> getResources(String path) {
         List<ApplicationResource> resources = new ArrayList<>();
         resources.add(getResource(path));

@@ -79,6 +79,7 @@ public class FreemarkerRenderer implements Renderer {
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isRenderable(String path, Request request) {
         return path != null && path.startsWith("/") && path.endsWith(".ftl");
     }

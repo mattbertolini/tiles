@@ -41,6 +41,7 @@ public class StringRenderer implements Renderer {
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isRenderable(String value, Request request) {
         return value != null;
     }

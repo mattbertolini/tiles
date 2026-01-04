@@ -60,6 +60,7 @@ public class DefinitionRenderer implements Renderer {
     }
 
     /** {@inheritDoc} */
+    @Override
     public boolean isRenderable(String path, Request request) {
         return path != null && container.isValidDefinition(path, request);
     }

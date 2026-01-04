@@ -114,6 +114,7 @@ public class CreateDescriptorMojo extends AbstractMojo {
     BuildContext buildContext;
 
     /** {@inheritDoc} */
+    @Override
     public void execute() throws MojoExecutionException {
         try {
             String[] fileNames = getSourceInclusionScanner().getIncludedFiles();

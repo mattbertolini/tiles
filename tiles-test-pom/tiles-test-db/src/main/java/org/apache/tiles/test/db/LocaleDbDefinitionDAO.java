@@ -77,6 +77,7 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
     private final DefinitionRowMapper definitionRowMapper = new DefinitionRowMapper();
 
     /** {@inheritDoc} */
+    @Override
     public Definition getDefinition(String name, Locale locale) {
         List<Map<String, Object>> customizations = null;
         Long customizationId = null, parentCustomizationId = null;
@@ -98,6 +99,7 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
     }
 
     /** {@inheritDoc} */
+    @Override
     public Map<String, Definition> getDefinitions(Locale locale) {
         throw new UnsupportedOperationException(
                 "Currently the 'getDefinitions' method is not supported");
@@ -206,6 +208,7 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
     private static final class DefinitionRowMapper implements RowMapper<DbDefinition> {
 
         /** {@inheritDoc} */
+        @Override
         public DbDefinition mapRow(ResultSet rs, int row) throws SQLException {
             DbDefinition definition = new DbDefinition();
             definition.setId(numberToLong((Number) rs.getObject("ID")));
@@ -241,6 +244,7 @@ public class LocaleDbDefinitionDAO extends JdbcDaoSupport implements
         }
 
         /** {@inheritDoc} */
+        @Override
         public Attribute mapRow(ResultSet rs, int row) throws SQLException {
             Attribute attribute = new Attribute();
             attribute.setRenderer(rs.getString("TYPE"));

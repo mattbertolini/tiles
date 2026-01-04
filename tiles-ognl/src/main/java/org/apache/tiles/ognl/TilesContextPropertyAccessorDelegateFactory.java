@@ -88,8 +88,9 @@ public class TilesContextPropertyAccessorDelegateFactory implements
     }
 
     /** {@inheritDoc} */
+    @Override
     public PropertyAccessor getPropertyAccessor(String propertyName,
-            Request request) {
+                                                Request request) {
         PropertyAccessor retValue;
         if (propertyName.endsWith("Scope")) {
             String scopeName = propertyName.substring(0, propertyName.length()

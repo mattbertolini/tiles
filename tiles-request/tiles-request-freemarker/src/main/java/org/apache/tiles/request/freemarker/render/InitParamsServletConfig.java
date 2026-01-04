@@ -60,21 +60,25 @@ public class InitParamsServletConfig implements ServletConfig {
     }
 
     /** {@inheritDoc} */
+    @Override
     public String getInitParameter(String name) {
         return params.get(name);
     }
 
     /** {@inheritDoc} */
+    @Override
     public Enumeration<String> getInitParameterNames() {
         return Collections.enumeration(params.keySet());
     }
 
     /** {@inheritDoc} */
+    @Override
     public ServletContext getServletContext() {
         return org.apache.tiles.request.servlet.ServletUtil.getServletContext(applicationContext);
     }
 
     /** {@inheritDoc} */
+    @Override
     public String getServletName() {
         return "FreeMarker Attribute Renderer";
     }

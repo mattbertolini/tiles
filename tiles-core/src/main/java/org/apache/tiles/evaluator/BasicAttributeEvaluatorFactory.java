@@ -74,6 +74,7 @@ public class BasicAttributeEvaluatorFactory implements
     }
 
     /** {@inheritDoc} */
+    @Override
     public AttributeEvaluator getAttributeEvaluator(String language) {
         AttributeEvaluator retValue = language2evaluator.get(language);
         if (retValue == null) {
@@ -83,6 +84,7 @@ public class BasicAttributeEvaluatorFactory implements
     }
 
     /** {@inheritDoc} */
+    @Override
     public AttributeEvaluator getAttributeEvaluator(Attribute attribute) {
         Expression expression = attribute.getExpressionObject();
         if (expression != null) {

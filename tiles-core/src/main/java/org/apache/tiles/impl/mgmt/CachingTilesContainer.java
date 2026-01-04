@@ -81,8 +81,9 @@ public class CachingTilesContainer extends TilesContainerWrapper implements Muta
      * @throws org.apache.tiles.definition.DefinitionsFactoryException If
      * something goes wrong when obtaining a main definition.
      */
+    @Override
     public Definition getDefinition(String definition,
-            Request request) {
+                                    Request request) {
         Definition retValue = null;
         retValue = getCustomDefinition(definition, request);
         if (retValue == null) {

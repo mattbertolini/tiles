@@ -51,6 +51,7 @@ public class InitContextListener implements ServletContextListener {
             .getLogger(InitContextListener.class);
 
     /** {@inheritDoc} */
+    @Override
     public void contextInitialized(ServletContextEvent event) {
         DataSource dataSource = createDataSource();
         event.getServletContext().setAttribute("dataSource", dataSource);
@@ -59,6 +60,7 @@ public class InitContextListener implements ServletContextListener {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void contextDestroyed(ServletContextEvent event) {
         // Do nothing
     }

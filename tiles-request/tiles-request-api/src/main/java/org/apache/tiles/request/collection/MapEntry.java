@@ -71,6 +71,7 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      *
      * @return The entry key
      */
+    @Override
     public K getKey() {
         return key;
     }
@@ -81,6 +82,7 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      *
      * @return The entry key
      */
+    @Override
     public V getValue() {
         return value;
     }
@@ -93,6 +95,7 @@ public class MapEntry<K, V> implements Map.Entry<K, V> {
      * @return The old entry value
      * @throws UnsupportedOperationException If the entry cannot be modified
      */
+    @Override
     public V setValue(V val) {
         if (modifiable) {
             V oldVal = this.value;

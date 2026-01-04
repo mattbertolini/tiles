@@ -84,11 +84,13 @@ class ModularTilesInitializerTest {
         private static boolean destroyed = false;
 
         /** {@inheritDoc} */
+        @Override
         public void initialize(ApplicationContext preliminaryContext) {
             initialized = true;
         }
 
         /** {@inheritDoc} */
+        @Override
         public void destroy() {
             destroyed = true;
         }
@@ -112,11 +114,13 @@ class ModularTilesInitializerTest {
         private static boolean destroyed = false;
 
         /** {@inheritDoc} */
+        @Override
         public void initialize(ApplicationContext preliminaryContext) {
             initialized = true;
         }
 
         /** {@inheritDoc} */
+        @Override
         public void destroy() {
             destroyed = true;
         }

@@ -70,6 +70,7 @@ public class WildcardDefinitionPatternMatcher implements
     }
 
     /** {@inheritDoc} */
+    @Override
     public Definition createDefinition(String definitionName) {
         List<String> vars = wildcardHelper.match(definitionName, pattern);
         Definition d = null;

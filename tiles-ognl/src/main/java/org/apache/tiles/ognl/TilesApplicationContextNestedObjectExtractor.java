@@ -34,6 +34,7 @@ public class TilesApplicationContextNestedObjectExtractor implements
         NestedObjectExtractor<Request> {
 
     /** {@inheritDoc} */
+    @Override
     public ApplicationContext getNestedObject(Request obj) {
         return obj.getApplicationContext();
     }

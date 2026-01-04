@@ -98,6 +98,7 @@ public abstract class AbstractGenerateMojo extends AbstractMojo {
 	OutputLocator resourcesOutputLocator;
 	
     /** {@inheritDoc} */
+    @Override
     public void execute() throws MojoExecutionException {
         try {
         	TemplateSuite suite;

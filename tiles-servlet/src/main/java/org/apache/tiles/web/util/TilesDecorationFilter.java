@@ -142,6 +142,7 @@ public class TilesDecorationFilter implements Filter {
     private ServletContext servletContext;
 
     /** {@inheritDoc} */
+    @Override
     public void init(FilterConfig config) throws ServletException {
         filterConfig = config;
         servletContext = filterConfig.getServletContext();
@@ -201,6 +202,7 @@ public class TilesDecorationFilter implements Filter {
     }
 
     /** {@inheritDoc} */
+    @Override
     public void destroy() {
         filterConfig = null;
     }
@@ -209,6 +211,7 @@ public class TilesDecorationFilter implements Filter {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void doFilter(jakarta.servlet.ServletRequest req, ServletResponse res, FilterChain filterChain)
             throws IOException, ServletException {
         // If the request contains the prevent token, we must not reapply the definition.
@@ -275,6 +278,7 @@ public class TilesDecorationFilter implements Filter {
     class DefaultMutator implements AttributeContextMutator {
 
         /** {@inheritDoc} */
+        @Override
         public void mutate(AttributeContext ctx, jakarta.servlet.ServletRequest req) {
             Attribute attr = new Attribute();
             attr.setRenderer("template");

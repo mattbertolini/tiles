@@ -72,6 +72,7 @@ class BasicPreparerFactoryTest {
     public static class MockViewPreparer implements ViewPreparer {
 
         /** {@inheritDoc} */
+        @Override
         public void execute(Request tilesContext,
                             AttributeContext attributeContext) {
         }
