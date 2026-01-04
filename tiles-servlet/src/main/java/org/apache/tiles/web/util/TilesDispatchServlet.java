@@ -18,6 +18,7 @@
  */
 package org.apache.tiles.web.util;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -107,7 +108,7 @@ public class TilesDispatchServlet extends HttpServlet {
      * @return The definition name to render.
      */
     protected String getDefinitionName(HttpServletRequest request) {
-        String path = (String) request.getAttribute("javax.servlet.include.servlet_path");
+        String path = (String) request.getAttribute(RequestDispatcher.INCLUDE_SERVLET_PATH);
         if (path == null) {
             path = request.getServletPath();
         }
