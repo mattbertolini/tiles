@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -32,6 +30,7 @@ import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.reflect.ClassUtil;
 import org.apache.tiles.request.servlet.ServletRequest;
+import org.apache.tiles.request.servlet.ServletUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,17 +89,13 @@ public class TilesDispatchServlet extends HttpServlet {
     /** {@inheritDoc} */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) {
-
-        ApplicationContext applicationContext = org.apache.tiles.request.servlet.ServletUtil
-                .getApplicationContext(getServletContext());
-        Request request = new ServletRequest(applicationContext,
-                req, res);
-        TilesContainer container = TilesAccess.getContainer(applicationContext,
-                containerKey);
+        ApplicationContext applicationContext = ServletUtil.getApplicationContext(getServletContext());
+        Request request = new ServletRequest(applicationContext, req, res);
+        TilesContainer container = TilesAccess.getContainer(applicationContext, containerKey);
         mutator.mutate(container.getAttributeContext(request), req);
         String definition = getDefinitionName(req);
         if (log.isDebugEnabled()) {
-            log.info("Dispatching to tile '" + definition + "'");
+            log.info("Dispatching to tile '{}'", definition);
         }
         container.render(definition, request);
     }
@@ -133,7 +128,7 @@ public class TilesDispatchServlet extends HttpServlet {
     /**
      * Default no-op mutator.
      */
-    class DefaultMutator implements AttributeContextMutator {
+    static class DefaultMutator implements AttributeContextMutator {
 
         /** {@inheritDoc} */
         @Override
