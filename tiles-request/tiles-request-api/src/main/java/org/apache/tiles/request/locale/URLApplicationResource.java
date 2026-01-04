@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -69,18 +67,16 @@ public class URLApplicationResource extends PostfixedApplicationResource {
      *  <li><a href="http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/sun/net/www/protocol/ftp">ftp</a></li>
      *  <li><a href="http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/sun/net/www/protocol/http">http</a></li>
      *  <li><a href="http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/sun/net/www/protocol/https">https</a></li>
-     *  <li><a href="http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/sun/net/www/protocol/mailto">mailto</a></li>
-     *  <li><a href="http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/687fd7c7986d/src/share/classes/sun/net/www/protocol/netdoc">netdoc</a></li>
      * </ul>
-     * It's possible, that your environment provides additional remote protocols because of following reasons:
+     * It's possible that your environment provides additional remote protocols because of the following reasons:
      * <ul>
      *     <li>your application server adds more remote protocols, see its documentation for further details.</li>
-     *     <li>your application supplies custom remote protocols trough its own {@link java.net.URLStreamHandlerFactory}
+     *     <li>your application supplies custom remote protocols through its own {@link java.net.URLStreamHandlerFactory}
      *     (see following excellent <a href="https://stackoverflow.com/questions/26363573/registering-and-using-a-custom-java-net-url-protocol">explanation</a>
      *     for getting an idea how to do this)</li>
      * </ul>
      * If you need to use such extra remote protocols in Tiles, you may enhance the set via system property {@code tiles.remoteProtocols}. Suppose
-     * you need to add your custom remote protocols "foo" and "bar". To do so, add following parameter to the command line (use ";" as separator):
+     * you need to add your custom remote protocols "foo" and "bar". To do so, add the following parameter to the command line (use ";" as separator):
      * <pre>
      *     -Dtiles.remoteProtocols=foo;bar
      * </pre>
@@ -89,12 +85,10 @@ public class URLApplicationResource extends PostfixedApplicationResource {
      * @return Unmodifiable set of remote protocols, never {@code null}
      */
     static Set<String> initRemoteProtocols() {
-        Set<String> remoteProtocols = new HashSet<String>();
+        Set<String> remoteProtocols = new HashSet<>();
         remoteProtocols.add("ftp");
         remoteProtocols.add("http");
         remoteProtocols.add("https");
-        remoteProtocols.add("mailto");
-        remoteProtocols.add("netdoc");
 
         String protocolsProp = getProperty(REMOTE_PROTOCOLS_PROPERTY);
         if (protocolsProp != null) {
@@ -151,7 +145,7 @@ public class URLApplicationResource extends PostfixedApplicationResource {
         try {
             return url.openConnection();
         } catch (IOException e) {
-            // If the url points to a local resource but it cannot be
+            // If the url points to a local resource, but it cannot be
             // opened, then the resource actually does not exist. In this
             // case throw a FileNotFoundException
             if (local) {
@@ -192,8 +186,7 @@ public class URLApplicationResource extends PostfixedApplicationResource {
             if (connection instanceof JarURLConnection) {
                 return ((JarURLConnection) connection).getJarEntry().getTime();
             } else {
-                long result = connection.getLastModified();
-                return result;
+                return connection.getLastModified();
             }
         }
     }
