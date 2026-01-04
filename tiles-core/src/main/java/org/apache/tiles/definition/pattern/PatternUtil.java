@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -21,6 +19,11 @@
 
 package org.apache.tiles.definition.pattern;
 
+import org.apache.tiles.Attribute;
+import org.apache.tiles.Definition;
+import org.apache.tiles.Expression;
+import org.apache.tiles.ListAttribute;
+
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -31,15 +34,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.tiles.Attribute;
-import org.apache.tiles.Definition;
-import org.apache.tiles.Expression;
-import org.apache.tiles.ListAttribute;
-
 /**
  * Utilities for pattern matching and substitution.
  *
- * @version $Rev$ $Date$
  * @since 2.2.0
  */
 public final class PatternUtil {
@@ -52,12 +49,13 @@ public final class PatternUtil {
 
     /** Pattern to find {.*} occurrences that do not match {[0-9]+} so to prevent MessageFormat from crashing.
      */
-    private static final Pattern INVALID_FORMAT_ELEMENT = Pattern.compile("\\{[^}0-9]+\\}");
+    private static final Pattern INVALID_FORMAT_ELEMENT = Pattern.compile("\\{[^}0-9]+}");
 
     /**
      * Private constructor to avoid instantiation.
      */
     private PatternUtil() {
+        // Utility class. Do nothing
     }
 
     /**
@@ -122,7 +120,7 @@ public final class PatternUtil {
      * @since 2.2.1
      */
     public static <K, V> Map<K, V> createExtractedMap(Map<K, V> map, Set<K> keys) {
-        Map<K, V> retValue = new LinkedHashMap<K, V>();
+        Map<K, V> retValue = new LinkedHashMap<>();
         for (K key : keys) {
             retValue.put(key, map.get(key));
         }
@@ -195,8 +193,8 @@ public final class PatternUtil {
         ListAttribute nuListAttr = new ListAttribute();
         nuListAttr.setInherit(listAttr.isInherit());
         List<Attribute> nuItems = nuListAttr.getValue();
-        for (Object item : listAttr.getValue()) {
-            Attribute child = (Attribute) item;
+        for (Attribute item : listAttr.getValue()) {
+            Attribute child = item;
             child = replaceVarsInAttribute(child, vars);
             nuItems.add(child);
         }
@@ -215,7 +213,7 @@ public final class PatternUtil {
         if (st != null && st.indexOf('{') >= 0) {
 
             // replace them with markers
-            List<String> originals = new ArrayList<String>();
+            List<String> originals = new ArrayList<>();
             for(Matcher m = INVALID_FORMAT_ELEMENT.matcher(st); m.find() ; m = INVALID_FORMAT_ELEMENT.matcher(st)) {
                 originals.add(m.group());
                 st = m.replaceFirst("INVALID_FORMAT_ELEMENT");
