@@ -42,9 +42,7 @@ import static java.util.Collections.unmodifiableSet;
 /**
  * A {@link PostfixedApplicationResource} that can be accessed through a URL.
  *
- * @version $Rev$ $Date$
  */
-
 public class URLApplicationResource extends PostfixedApplicationResource {
     /**
      * System parameter to specify additional remote protocols. If a url has a remote protocol, then any
@@ -197,11 +195,11 @@ public class URLApplicationResource extends PostfixedApplicationResource {
         return "Resource " + getLocalePath() + " at " + url.toString();
     }
 
-    protected URL getURL(){
+    protected URL getURL() {
         return url;
     }
 
-    protected File getFile(){
+    protected File getFile() {
         return file;
     }
 }
