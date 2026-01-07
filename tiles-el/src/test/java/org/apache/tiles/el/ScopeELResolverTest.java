@@ -20,25 +20,21 @@
  */
 package org.apache.tiles.el;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.beans.FeatureDescriptor;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import jakarta.el.ELContext;
-
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 /**
@@ -73,30 +69,8 @@ class ScopeELResolverTest {
     }
 
     /**
-     * Tests {@link ScopeELResolver#getFeatureDescriptors(ELContext, Object)}.
-     */
-    @Test
-    void testGetFeatureDescriptors() {
-        ELContext elContext = createMock(ELContext.class);
-        Request request = createMock(Request.class);
-
-        expect(elContext.getContext(Request.class)).andReturn(request);
-        expect(request.getAvailableScopes()).andReturn(Arrays.asList(new String[] {"one", "two"}));
-
-        replay(elContext, request);
-        Assertions.assertFalse(resolver.getFeatureDescriptors(elContext, new Integer(1)).hasNext());
-        Iterator<FeatureDescriptor> descriptors = resolver.getFeatureDescriptors(elContext, null);
-        FeatureDescriptor descriptor = descriptors.next();
-        Assertions.assertEquals("oneScope", descriptor.getName());
-        descriptor = descriptors.next();
-        Assertions.assertEquals("twoScope", descriptor.getName());
-        Assertions.assertFalse(descriptors.hasNext());
-        verify(elContext, request);
-    }
-
-    /**
      * Test method for
-     * {@link ScopeELResolver#getType(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
+     * {@link ScopeELResolver#getType(jakarta.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
     void testGetType() {
@@ -114,7 +88,7 @@ class ScopeELResolverTest {
 
     /**
      * Test method for
-     * {@link ScopeELResolver#getValue(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
+     * {@link ScopeELResolver#getValue(jakarta.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
     void testGetValue() {

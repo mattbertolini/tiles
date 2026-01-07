@@ -31,6 +31,7 @@ import jakarta.el.ELManager;
 import jakarta.el.ELResolver;
 import jakarta.el.ListELResolver;
 import jakarta.el.MapELResolver;
+import jakarta.el.RecordELResolver;
 import jakarta.el.ResourceBundleELResolver;
 
 import jakarta.el.StaticFieldELResolver;
@@ -104,7 +105,7 @@ public class ELAttributeEvaluatorTest {
                 add(new ResourceBundleELResolver());
                 add(new ListELResolver(false));
                 add(new ArrayELResolver(false));
-//                add(new RecordElResolver()); TODO: Add support for record types in EL when on Jakarta EE 11
+                add(new RecordELResolver());
                 add(new BeanELResolver(false));
             }
         };

@@ -24,14 +24,9 @@ import jakarta.el.ELContext;
 import jakarta.el.ELResolver;
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
-import org.apache.tiles.request.reflect.ClassUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.beans.FeatureDescriptor;
-import java.beans.PropertyDescriptor;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.easymock.EasyMock.createMock;
@@ -81,27 +76,6 @@ class TilesContextELResolverTest {
         assertEquals(String.class, clazz, "The class is not correct");
         clazz = resolver.getCommonPropertyType(null, "Base object");
         assertNull(clazz, "The class for non root objects must be null");
-        verify(beanElResolver);
-    }
-
-    /**
-     * Test method for
-     * {@link TilesContextELResolver#getFeatureDescriptors(jakarta.el.ELContext, java.lang.Object)}.
-     */
-    @Test
-    void testGetFeatureDescriptorsELContextObject() {
-        replay(beanElResolver);
-        assertNull(resolver.getFeatureDescriptors(null, 1));
-        Map<String, PropertyDescriptor> expected = new LinkedHashMap<String, PropertyDescriptor>();
-        ClassUtil.collectBeanInfo(Request.class, expected);
-        ClassUtil.collectBeanInfo(ApplicationContext.class, expected);
-        Iterator<FeatureDescriptor> featureIt = resolver.getFeatureDescriptors(
-                null, null);
-        Iterator<? extends FeatureDescriptor> expectedIt = expected.values().iterator();
-        while (featureIt.hasNext() && expectedIt.hasNext()) {
-            assertEquals(expectedIt.next(), featureIt.next(), "The feature is not the same");
-        }
-        assertTrue(!featureIt.hasNext() && !expectedIt.hasNext(), "The feature descriptors are not of the same size");
         verify(beanElResolver);
     }
 

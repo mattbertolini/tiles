@@ -20,16 +20,11 @@
  */
 package org.apache.tiles.el;
 
-import java.beans.FeatureDescriptor;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import jakarta.el.ELContext;
 import jakarta.el.ELResolver;
-
 import org.apache.tiles.request.Request;
+
+import java.util.Map;
 
 /**
  * Resolves beans in request, session and application scope.
@@ -48,21 +43,6 @@ public class TilesContextBeanELResolver extends ELResolver {
         }
 
         return String.class;
-    }
-
-    /** {@inheritDoc} */
-    @Deprecated
-    @Override
-    public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context,
-            Object base) {
-        List<FeatureDescriptor> list = new ArrayList<FeatureDescriptor>();
-
-        Request request = (Request) context
-                .getContext(Request.class);
-        for (String scope : request.getAvailableScopes()) {
-            collectBeanInfo(request.getContext(scope), list);
-        }
-        return list.iterator();
     }
 
     /** {@inheritDoc} */
@@ -111,33 +91,6 @@ public class TilesContextBeanELResolver extends ELResolver {
     public void setValue(ELContext context, Object base, Object property,
             Object value) {
         // Does nothing for the moment.
-    }
-
-    /**
-     * Collects bean infos from a map's values and filling a list.
-     *
-     * @param map The map containing the bean to be inspected.
-     * @param list The list to fill.
-     * @since 2.2.1
-     */
-    protected void collectBeanInfo(Map<String, ? extends Object> map,
-            List<FeatureDescriptor> list) {
-        if (map == null || map.isEmpty()) {
-            return;
-        }
-
-        for (Map.Entry<String, ? extends Object> entry : map.entrySet()) {
-            FeatureDescriptor descriptor = new FeatureDescriptor();
-            descriptor.setDisplayName(entry.getKey());
-            descriptor.setExpert(false);
-            descriptor.setHidden(false);
-            descriptor.setName(entry.getKey());
-            descriptor.setPreferred(true);
-            descriptor.setShortDescription("");
-            descriptor.setValue("type", String.class);
-            descriptor.setValue("resolvableAtDesignTime", Boolean.FALSE);
-            list.add(descriptor);
-        }
     }
 
     /**

@@ -20,17 +20,11 @@
  */
 package org.apache.tiles.el;
 
-import java.beans.FeatureDescriptor;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import jakarta.el.ELContext;
 import jakarta.el.ELResolver;
-
 import org.apache.tiles.request.Request;
+
+import java.util.Map;
 
 /**
  * Resolves beans in request, session and application scope.
@@ -54,36 +48,6 @@ public class ScopeELResolver extends ELResolver {
         }
 
         return Map.class;
-    }
-
-    /** {@inheritDoc} */
-    @Deprecated
-    @Override
-    public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context,
-            Object base) {
-        if (base != null) {
-            List<FeatureDescriptor> retValue = Collections.emptyList();
-            return retValue.iterator();
-        }
-
-        List<FeatureDescriptor> list = new ArrayList<FeatureDescriptor>();
-
-        Request request = (Request) context
-                .getContext(Request.class);
-        for (String scope : request.getAvailableScopes()) {
-            FeatureDescriptor descriptor = new FeatureDescriptor();
-            descriptor.setDisplayName(scope + "Scope");
-            descriptor.setExpert(false);
-            descriptor.setHidden(false);
-            descriptor.setName(scope + "Scope");
-            descriptor.setPreferred(true);
-            descriptor.setShortDescription("");
-            descriptor.setValue("type", Map.class);
-            descriptor.setValue("resolvableAtDesignTime", Boolean.FALSE);
-            list.add(descriptor);
-        }
-
-        return list.iterator();
     }
 
     /** {@inheritDoc} */

@@ -20,26 +20,25 @@
  */
 package org.apache.tiles.el;
 
-import static org.easymock.EasyMock.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.beans.FeatureDescriptor;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import jakarta.el.ELContext;
-
 import org.apache.tiles.request.ApplicationContext;
 import org.apache.tiles.request.Request;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests {@link TilesContextBeanELResolver}.
@@ -63,7 +62,7 @@ class TilesContextBeanELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextBeanELResolver#getCommonPropertyType(javax.el.ELContext, java.lang.Object)}.
+     * {@link TilesContextBeanELResolver#getCommonPropertyType(jakarta.el.ELContext, java.lang.Object)}.
      */
     @Test
     void testGetCommonPropertyType() {
@@ -75,67 +74,7 @@ class TilesContextBeanELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextBeanELResolver#getFeatureDescriptors(javax.el.ELContext, java.lang.Object)}.
-     */
-    @Test
-    void testGetFeatureDescriptors() {
-        Map<String, Object> requestScope = new HashMap<String, Object>();
-        Map<String, Object> sessionScope = new HashMap<String, Object>();
-        Map<String, Object> applicationScope = new HashMap<String, Object>();
-        requestScope.put("object1", "value");
-        sessionScope.put("object2", new Integer(1));
-        applicationScope.put("object3", new Float(2.0));
-        Request request = createMock(Request.class);
-        expect(request.getContext("request")).andReturn(requestScope)
-                .anyTimes();
-        expect(request.getContext("session")).andReturn(sessionScope)
-                .anyTimes();
-        ApplicationContext applicationContext = createMock(ApplicationContext.class);
-        expect(request.getContext("application")).andReturn(
-                applicationScope).anyTimes();
-        expect(request.getAvailableScopes()).andReturn(
-                Arrays.asList(new String[] { "request", "session", "application" }))
-                .anyTimes();
-        replay(request, applicationContext);
-
-        ELContext context = new ELContextImpl(resolver);
-        context.putContext(Request.class, request);
-        context.putContext(ApplicationContext.class, applicationContext);
-
-        List<FeatureDescriptor> expected = new ArrayList<FeatureDescriptor>();
-        resolver.collectBeanInfo(requestScope, expected);
-        resolver.collectBeanInfo(sessionScope, expected);
-        resolver.collectBeanInfo(applicationScope, expected);
-        Iterator<FeatureDescriptor> featureIt = resolver.getFeatureDescriptors(
-                context, null);
-        Iterator<FeatureDescriptor> expectedIt = expected.iterator();
-        while (featureIt.hasNext() && expectedIt.hasNext()) {
-            FeatureDescriptor expectedDescriptor = expectedIt.next();
-            FeatureDescriptor descriptor = featureIt.next();
-            assertEquals(expectedDescriptor
-                    .getDisplayName(), descriptor.getDisplayName(), "The feature is not the same");
-            assertEquals(expectedDescriptor
-                    .getName(), descriptor.getName(), "The feature is not the same");
-            assertEquals(expectedDescriptor
-                    .getShortDescription(), descriptor.getShortDescription(), "The feature is not the same");
-            assertEquals(expectedDescriptor
-                    .getValue("type"), descriptor.getValue("type"), "The feature is not the same");
-            assertEquals(expectedDescriptor
-                    .getValue("resolvableAtDesignTime"), descriptor
-                    .getValue("resolvableAtDesignTime"), "The feature is not the same");
-            assertEquals(expectedDescriptor
-                    .isExpert(), descriptor.isExpert(), "The feature is not the same");
-            assertEquals(expectedDescriptor
-                    .isHidden(), descriptor.isHidden(), "The feature is not the same");
-            assertEquals(expectedDescriptor
-                    .isPreferred(), descriptor.isPreferred(), "The feature is not the same");
-        }
-        Assertions.assertTrue(!featureIt.hasNext() && !expectedIt.hasNext(), "The feature descriptors are not of the same size");
-    }
-
-    /**
-     * Test method for
-     * {@link TilesContextBeanELResolver#getType(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
+     * {@link TilesContextBeanELResolver#getType(jakarta.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
     void testGetType() {
@@ -175,7 +114,7 @@ class TilesContextBeanELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextBeanELResolver#getValue(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
+     * {@link TilesContextBeanELResolver#getValue(jakarta.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
     void testGetValue() {
@@ -213,7 +152,7 @@ class TilesContextBeanELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextBeanELResolver#isReadOnly(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
+     * {@link TilesContextBeanELResolver#isReadOnly(jakarta.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
     void testIsReadOnlyELContextObjectObject() {
@@ -224,7 +163,7 @@ class TilesContextBeanELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextBeanELResolver#isReadOnly(javax.el.ELContext, java.lang.Object, java.lang.Object)}.
+     * {@link TilesContextBeanELResolver#isReadOnly(jakarta.el.ELContext, java.lang.Object, java.lang.Object)}.
      */
     @Test
     void testIsReadOnlyNPE() {
@@ -242,7 +181,7 @@ class TilesContextBeanELResolverTest {
 
     /**
      * Test method for
-     * {@link TilesContextBeanELResolver#findObjectByProperty(javax.el.ELContext, java.lang.Object)}.
+     * {@link TilesContextBeanELResolver#findObjectByProperty(jakarta.el.ELContext, java.lang.Object)}.
      */
     @Test
     void testFindObjectByProperty() {
@@ -289,13 +228,5 @@ class TilesContextBeanELResolverTest {
                 map, "object1"), "The value is not correct");
         assertNull(resolver.getObject(map, "object2"), "The value is not null");
         assertNull(resolver.getObject(null, "object1"), "The value is not null");
-    }
-
-    /**
-     * Tests {@link TilesContextBeanELResolver#collectBeanInfo(Map, List)}.
-     */
-    @Test
-    void testCollectBeanInfoEmpty() {
-        resolver.collectBeanInfo(null, null);
     }
 }
