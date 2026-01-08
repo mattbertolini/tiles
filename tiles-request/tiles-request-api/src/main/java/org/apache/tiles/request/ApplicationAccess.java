@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -20,24 +18,21 @@
  */
 package org.apache.tiles.request;
 
-
 /**
  * Entry point to get information about the application.
- *
- * @version $Rev: 1064782 $ $Date: 2011-01-28 18:08:52 +0100 (Fri, 28 Jan 2011) $
  */
 public final class ApplicationAccess {
 
     /**
      * The attribute name that will be used to store the application context itself.
      */
-    public static final String APPLICATION_CONTEXT_ATTRIBUTE =
-        ApplicationContext.class.getName() + ".ATTRIBUTE";
+    public static final String APPLICATION_CONTEXT_ATTRIBUTE = ApplicationContext.class.getName() + ".ATTRIBUTE";
 
     /**
      * Constructor.
      */
     private ApplicationAccess() {
+        // Do nothing
     }
 
     /**
@@ -47,8 +42,6 @@ public final class ApplicationAccess {
      * @param applicationContext The application context to register.
      */
     public static void register(ApplicationContext applicationContext) {
-        applicationContext.getApplicationScope().put(
-                APPLICATION_CONTEXT_ATTRIBUTE, applicationContext);
+        applicationContext.getApplicationScope().put(APPLICATION_CONTEXT_ATTRIBUTE, applicationContext);
     }
-
 }
