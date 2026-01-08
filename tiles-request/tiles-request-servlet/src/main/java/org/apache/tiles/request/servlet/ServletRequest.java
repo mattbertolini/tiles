@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -20,6 +18,21 @@
  */
 package org.apache.tiles.request.servlet;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.tiles.request.AbstractClientRequest;
+import org.apache.tiles.request.ApplicationContext;
+import org.apache.tiles.request.attribute.Addable;
+import org.apache.tiles.request.collection.HeaderValuesMap;
+import org.apache.tiles.request.collection.ReadOnlyEnumerationMap;
+import org.apache.tiles.request.collection.ScopeMap;
+import org.apache.tiles.request.servlet.extractor.HeaderExtractor;
+import org.apache.tiles.request.servlet.extractor.ParameterExtractor;
+import org.apache.tiles.request.servlet.extractor.RequestScopeExtractor;
+import org.apache.tiles.request.servlet.extractor.SessionScopeExtractor;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -30,26 +43,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import org.apache.tiles.request.AbstractClientRequest;
-import org.apache.tiles.request.ApplicationContext;
-import org.apache.tiles.request.attribute.Addable;
-import org.apache.tiles.request.collection.HeaderValuesMap;
-import org.apache.tiles.request.collection.ReadOnlyEnumerationMap;
-import org.apache.tiles.request.collection.ScopeMap;
-import org.apache.tiles.request.servlet.extractor.ParameterExtractor;
-import org.apache.tiles.request.servlet.extractor.RequestScopeExtractor;
-import org.apache.tiles.request.servlet.extractor.HeaderExtractor;
-import org.apache.tiles.request.servlet.extractor.SessionScopeExtractor;
-
 /**
  * Servlet-based implementation of the TilesApplicationContext interface.
- *
- * @version $Rev$ $Date$
  */
 public class ServletRequest extends AbstractClientRequest {
 
@@ -126,8 +121,7 @@ public class ServletRequest extends AbstractClientRequest {
      * @param request The request object.
      * @param response The response object.
      */
-    public ServletRequest(
-            ApplicationContext applicationContext,
+    public ServletRequest(ApplicationContext applicationContext,
             HttpServletRequest request, HttpServletResponse response) {
         super(applicationContext);
         this.request = request;
@@ -137,48 +131,39 @@ public class ServletRequest extends AbstractClientRequest {
     /** {@inheritDoc} */
     @Override
     public Map<String, String> getHeader() {
-
-        if ((header == null) && (request != null)) {
+        if (header == null && request != null) {
             header = new ReadOnlyEnumerationMap<>(new HeaderExtractor(request, null));
         }
-        return (header);
-
+        return header;
     }
 
     /** {@inheritDoc} */
     @Override
     public Addable<String> getResponseHeaders() {
-
-        if ((responseHeaders == null) && (response != null)) {
+        if (responseHeaders == null && response != null) {
             responseHeaders = new HeaderExtractor(null, response);
         }
-        return (responseHeaders);
-
+        return responseHeaders;
     }
 
     /** {@inheritDoc} */
     @Override
     public Map<String, String[]> getHeaderValues() {
-
-        if ((headerValues == null) && (request != null)) {
+        if (headerValues == null && request != null) {
             headerValues = new HeaderValuesMap(new HeaderExtractor(request, response));
         }
-        return (headerValues);
+        return headerValues;
 
     }
-
 
     /** {@inheritDoc} */
     @Override
     public Map<String, String> getParam() {
-
-        if ((param == null) && (request != null)) {
+        if (param == null && request != null) {
             param = new ReadOnlyEnumerationMap<>(new ParameterExtractor(request));
         }
-        return (param);
-
+        return param;
     }
-
 
     /** {@inheritDoc} */
     @Override
@@ -188,11 +173,11 @@ public class ServletRequest extends AbstractClientRequest {
 
     @Override
     public Map<String, Object> getContext(String scope) {
-        if(REQUEST_SCOPE.equals(scope)){
+        if(REQUEST_SCOPE.equals(scope)) {
             return getRequestScope();
-        }else if("session".equals(scope)){
+        } else if("session".equals(scope)) {
             return getSessionScope();
-        }else if(APPLICATION_SCOPE.equals(scope)){
+        } else if(APPLICATION_SCOPE.equals(scope)) {
             return getApplicationScope();
         }
         throw new IllegalArgumentException(scope + " does not exist. Call getAvailableScopes() first to check.");
@@ -200,23 +185,19 @@ public class ServletRequest extends AbstractClientRequest {
 
     /** {@inheritDoc} */
     public Map<String, Object> getRequestScope() {
-
-        if ((requestScope == null) && (request != null)) {
+        if (requestScope == null && request != null) {
             requestScope = new ScopeMap(new RequestScopeExtractor(request));
         }
-        return (requestScope);
+        return requestScope;
 
     }
 
-
     /** {@inheritDoc} */
     public Map<String, Object> getSessionScope() {
-
-        if ((sessionScope == null) && (request != null)) {
+        if (sessionScope == null && request != null) {
             sessionScope = new ScopeMap(new SessionScopeExtractor(request));
         }
-        return (sessionScope);
-
+        return sessionScope;
     }
 
     @Override
@@ -233,7 +214,6 @@ public class ServletRequest extends AbstractClientRequest {
             forward(path);
         }
     }
-
 
     /** {@inheritDoc} */
     @Override
