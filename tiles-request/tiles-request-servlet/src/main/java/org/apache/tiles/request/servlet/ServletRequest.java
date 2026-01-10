@@ -88,7 +88,7 @@ public class ServletRequest extends AbstractClientRequest {
 
 
     /**
-     * <p>The lazily instantitated <code>Map</code> of header name-values
+     * <p>The lazily instantiated <code>Map</code> of header name-values
      * combinations (immutable).</p>
      */
     private Map<String, String[]> headerValues = null;
@@ -173,11 +173,11 @@ public class ServletRequest extends AbstractClientRequest {
 
     @Override
     public Map<String, Object> getContext(String scope) {
-        if(REQUEST_SCOPE.equals(scope)) {
+        if (REQUEST_SCOPE.equals(scope)) {
             return getRequestScope();
-        } else if("session".equals(scope)) {
+        } else if ("session".equals(scope)) {
             return getSessionScope();
-        } else if(APPLICATION_SCOPE.equals(scope)) {
+        } else if (APPLICATION_SCOPE.equals(scope)) {
             return getApplicationScope();
         }
         throw new IllegalArgumentException(scope + " does not exist. Call getAvailableScopes() first to check.");
