@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -53,7 +51,6 @@ import org.slf4j.LoggerFactory;
  * override the container
  *
  * @since 2.0
- * @version $Rev$ $Date$
  */
 public class BasicTilesContainer implements TilesContainer,
         AttributeEvaluatorFactoryAware {
@@ -309,11 +306,11 @@ public class BasicTilesContainer implements TilesContainer,
      */
     @SuppressWarnings("unchecked")
     protected Deque<AttributeContext> getContextStack(Request tilesContext) {
-        Map<String, Object> requestScope = tilesContext.getContext("request");
+        Map<String, Object> requestScope = tilesContext.getContext(Request.REQUEST_SCOPE);
         Deque<AttributeContext> contextStack = (Deque<AttributeContext>) requestScope
                 .get(ATTRIBUTE_CONTEXT_STACK);
         if (contextStack == null) {
-            contextStack = new LinkedList<AttributeContext>();
+            contextStack = new LinkedList<>();
             requestScope.put(ATTRIBUTE_CONTEXT_STACK, contextStack);
         }
 

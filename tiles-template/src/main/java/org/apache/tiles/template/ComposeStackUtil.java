@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -30,7 +28,6 @@ import org.apache.tiles.request.Request;
 /**
  * Utilities to work with compose stacks.
  *
- * @version $Rev$ $Date$
  * @since 3.0.0
  */
 public final class ComposeStackUtil {
@@ -74,7 +71,7 @@ public final class ComposeStackUtil {
      */
     @SuppressWarnings("unchecked")
     public static Deque<Object> getComposeStack(Request request) {
-        Map<String, Object> requestScope = request.getContext("request");
+        Map<String, Object> requestScope = request.getContext(Request.REQUEST_SCOPE);
         Deque<Object> composeStack = (Deque<Object>) requestScope
                 .get(COMPOSE_STACK_ATTRIBUTE_NAME);
         if (composeStack == null) {

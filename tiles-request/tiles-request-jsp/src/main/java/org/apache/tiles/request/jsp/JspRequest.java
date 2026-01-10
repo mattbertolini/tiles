@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -45,8 +43,6 @@ import org.apache.tiles.request.servlet.ServletUtil;
 /**
  * Context implementation used for executing tiles within a
  * jsp tag library.
- *
- * @version $Rev$ $Date$
  */
 public class JspRequest extends AbstractViewRequest {
 
@@ -145,11 +141,10 @@ public class JspRequest extends AbstractViewRequest {
      * @return The page scope.
      */
     public Map<String, Object> getPageScope() {
-        if ((pageScope == null) && (pageContext != null)) {
-            pageScope = new ScopeMap(new ScopeExtractor(pageContext,
-                    PageContext.PAGE_SCOPE));
+        if (pageScope == null && pageContext != null) {
+            pageScope = new ScopeMap(new ScopeExtractor(pageContext, PageContext.PAGE_SCOPE));
         }
-        return (pageScope);
+        return pageScope;
     }
 
     /**
@@ -158,11 +153,10 @@ public class JspRequest extends AbstractViewRequest {
      * @return The request scope.
      */
     public Map<String, Object> getRequestScope() {
-        if ((requestScope == null) && (pageContext != null)) {
-            requestScope = new ScopeMap(new ScopeExtractor(pageContext,
-                    PageContext.REQUEST_SCOPE));
+        if (requestScope == null && pageContext != null) {
+            requestScope = new ScopeMap(new ScopeExtractor(pageContext, PageContext.REQUEST_SCOPE));
         }
-        return (requestScope);
+        return requestScope;
     }
 
     /**
@@ -171,10 +165,10 @@ public class JspRequest extends AbstractViewRequest {
      * @return The session scope.
      */
     public Map<String, Object> getSessionScope() {
-        if ((sessionScope == null) && (pageContext != null)) {
+        if (sessionScope == null && pageContext != null) {
             sessionScope = new ScopeMap(new SessionScopeExtractor(pageContext));
         }
-        return (sessionScope);
+        return sessionScope;
     }
 
     /**
@@ -183,11 +177,10 @@ public class JspRequest extends AbstractViewRequest {
      * @return The application scope.
      */
     public Map<String, Object> getApplicationScope() {
-        if ((applicationScope == null) && (pageContext != null)) {
-            applicationScope = new ScopeMap(new ScopeExtractor(pageContext,
-                    PageContext.APPLICATION_SCOPE));
+        if (applicationScope == null && pageContext != null) {
+            applicationScope = new ScopeMap(new ScopeExtractor(pageContext, PageContext.APPLICATION_SCOPE));
         }
-        return (applicationScope);
+        return applicationScope;
     }
 
     /**
@@ -201,13 +194,13 @@ public class JspRequest extends AbstractViewRequest {
 
     @Override
     public Map<String, Object> getContext(String scope) {
-        if("page".equals(scope)){
+        if ("page".equals(scope)) {
             return getPageScope();
-        }else if(REQUEST_SCOPE.equals(scope)){
+        } else if(REQUEST_SCOPE.equals(scope)) {
             return getRequestScope();
-        }else if("session".equals(scope)){
+        } else if ("session".equals(scope)) {
             return getSessionScope();
-        }else if(APPLICATION_SCOPE.equals(scope)){
+        } else if (APPLICATION_SCOPE.equals(scope)) {
             return getApplicationScope();
         }
         throw new IllegalArgumentException(scope + " does not exist. Call getAvailableScopes() first to check.");

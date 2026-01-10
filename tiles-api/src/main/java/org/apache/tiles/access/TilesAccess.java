@@ -133,7 +133,7 @@ public final class TilesAccess {
         ApplicationContext applicationContext = request.getApplicationContext();
         TilesContainer container = getContainer(applicationContext, key);
         if (container != null) {
-            request.getContext("request").put(CURRENT_CONTAINER_ATTRIBUTE_NAME, container);
+            request.getContext(Request.REQUEST_SCOPE).put(CURRENT_CONTAINER_ATTRIBUTE_NAME, container);
         } else {
             throw new NoSuchContainerException("The container with the key '"
                     + key + "' cannot be found");
@@ -150,7 +150,7 @@ public final class TilesAccess {
     public static void setCurrentContainer(Request request,
             TilesContainer container) {
         if (container != null) {
-            request.getContext("request").put(CURRENT_CONTAINER_ATTRIBUTE_NAME, container);
+            request.getContext(Request.REQUEST_SCOPE).put(CURRENT_CONTAINER_ATTRIBUTE_NAME, container);
         } else {
             throw new NullPointerException("The container cannot be null");
         }
@@ -165,7 +165,7 @@ public final class TilesAccess {
      */
     public static TilesContainer getCurrentContainer(Request request) {
         ApplicationContext context = request.getApplicationContext();
-        Map<String, Object> requestScope = request.getContext("request");
+        Map<String, Object> requestScope = request.getContext(Request.REQUEST_SCOPE);
         TilesContainer container = (TilesContainer) requestScope.get(CURRENT_CONTAINER_ATTRIBUTE_NAME);
         if (container == null) {
             container = getContainer(context);

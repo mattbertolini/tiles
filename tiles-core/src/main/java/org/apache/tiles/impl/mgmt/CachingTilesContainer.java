@@ -1,6 +1,4 @@
 /*
- * $Id$
- *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -33,8 +31,6 @@ import org.apache.tiles.request.Request;
 /**
  * Manages custom and configured definitions, so they can be used by the
  * container, instead of using a simple {@link org.apache.tiles.definition.DefinitionsFactory}.
- *
- * @version $Rev$ $Date$
  */
 public class CachingTilesContainer extends TilesContainerWrapper implements MutableTilesContainer {
 
@@ -179,9 +175,8 @@ public class CachingTilesContainer extends TilesContainerWrapper implements Muta
      * @return A map that connects a definition name to a definition.
      */
     @SuppressWarnings("unchecked")
-    private Map<String, Definition> getDefinitions(
-            Request request) {
-        return (Map<String, Definition>) request.getContext("request")
+    private Map<String, Definition> getDefinitions(Request request) {
+        return (Map<String, Definition>) request.getContext(Request.REQUEST_SCOPE)
                 .get(definitionsAttributeName);
     }
 
@@ -196,11 +191,10 @@ public class CachingTilesContainer extends TilesContainerWrapper implements Muta
     private Map<String, Definition> getOrCreateDefinitions(
             Request request) {
         Map<String, Definition> definitions =
-            (Map<String, Definition>) request.getContext("request").get(definitionsAttributeName);
+            (Map<String, Definition>) request.getContext(Request.REQUEST_SCOPE).get(definitionsAttributeName);
         if (definitions == null) {
-            definitions = new HashMap<String, Definition>();
-            request.getContext("request")
-                    .put(definitionsAttributeName, definitions);
+            definitions = new HashMap<>();
+            request.getContext(Request.REQUEST_SCOPE).put(definitionsAttributeName, definitions);
         }
 
         return definitions;
@@ -213,8 +207,7 @@ public class CachingTilesContainer extends TilesContainerWrapper implements Muta
      * @return The unique definition name to be used to store the definition.
      * @since 2.1.0
      */
-    private String getNextUniqueDefinitionName(
-            Map<String, Definition> definitions) {
+    private String getNextUniqueDefinitionName(Map<String, Definition> definitions) {
         String candidate;
         int anonymousDefinitionIndex = 1;
 

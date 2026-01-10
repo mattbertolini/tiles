@@ -39,10 +39,10 @@ public abstract class AbstractSpringPreparerFactory implements PreparerFactory {
 
     @Override
     public ViewPreparer getPreparer(String name, Request context) {
-        WebApplicationContext webApplicationContext = (WebApplicationContext) context.getContext("request").get(
+        WebApplicationContext webApplicationContext = (WebApplicationContext) context.getContext(Request.REQUEST_SCOPE).get(
                 DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE);
         if (webApplicationContext == null) {
-            webApplicationContext = (WebApplicationContext) context.getContext("application").get(
+            webApplicationContext = (WebApplicationContext) context.getContext(Request.APPLICATION_SCOPE).get(
                     WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
             if (webApplicationContext == null) {
                 throw new IllegalStateException("No WebApplicationContext found: no ContextLoaderListener registered?");
